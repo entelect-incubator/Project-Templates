@@ -1,0 +1,367 @@
+# Copilot Instructions
+
+This file contains guidelines for GitHub Copilot to follow when generating code for this project.
+
+## General Guidelines
+
+1. Follow CODE_STANDARDS.md for all code suggestions
+2. Prioritize code readability and maintainability
+3. Always include proper error handling
+4. Add logging for important operations
+5. Suggest tests alongside code implementations
+6. Respect SOLID principles
+7. Avoid code duplication (DRY)
+8. Don't suggest unnecessary complexity (YAGNI)
+
+## Language-Specific Guidelines
+
+### .NET/C# Guidelines
+
+**Naming Conventions**
+- Classes: PascalCase (e.g., `UserService`)
+- Interfaces: IPascalCase (e.g., `IUserRepository`)
+- Private fields: _camelCase (e.g., `_userRepository`)
+- Methods: PascalCase (e.g., `GetUserAsync`)
+- Constants: PascalCase (e.g., `MaxRetryAttempts`)
+
+**Async Operations**
+- Always use `async/await` pattern
+- Method names ending with `Async` (e.g., `GetUserAsync`)
+- Return `Task` or `Task<T>` for async methods
+
+**Error Handling**
+- Use specific exception types
+- Log exceptions with context
+- Never silently catch and ignore exceptions
+- Example:
+  ```csharp
+  try
+  {
+      // Operation
+  }
+  catch (SpecificException ex)
+  {
+      _logger.LogWarning(ex, "Context about what failed");
+      throw;
+  }
+  catch (Exception ex)
+  {
+      _logger.LogError(ex, "Unexpected error");
+      throw new ApplicationException("User-friendly message", ex);
+  }
+  ```
+
+**Dependency Injection**
+- Inject dependencies through constructor
+- Use readonly fields for dependencies
+- Favor abstractions over concrete types
+- Example:
+  ```csharp
+  public class UserService
+  {
+      private readonly IUserRepository _userRepository;
+      private readonly ILogger<UserService> _logger;
+
+      public UserService(IUserRepository userRepository, ILogger<UserService> logger)
+      {
+          _userRepository = userRepository;
+          _logger = logger;
+      }
+  }
+  ```
+
+**Validation**
+- Use FluentValidation for complex validation
+- Validate at API boundaries
+- Return appropriate HTTP status codes
+- Example:
+  ```csharp
+  public class CreateUserValidator : AbstractValidator<CreateUserCommand>
+  {
+      public CreateUserValidator()
+      {
+          RuleFor(x => x.Email)
+              .NotEmpty().WithMessage("Email is required")
+              .EmailAddress().WithMessage("Email must be valid");
+      }
+  }
+  ```
+
+**Database**
+- Use DbUp for migrations (not Entity Framework migrations)
+- Store migration scripts in: `Infrastructure/Data/Migrations/`
+- Use PostgreSQL syntax
+- Name migrations: `YYYYMMDD_HHmmss_DescriptiveName.sql`
+- Example:
+  ```sql
+  -- Migration: 20250104_140000_CreateUsersTable.sql
+  CREATE TABLE users (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      email VARCHAR(255) NOT NULL UNIQUE,
+      first_name VARCHAR(255) NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+  );
+  ```
+
+**Testing**
+- Write unit tests for business logic
+- Use NUnit for test framework
+- Use Moq for mocking
+- Use FluentAssertions for clear assertions
+- Follow AAA pattern (Arrange, Act, Assert)
+- Test naming: `MethodName_Condition_ExpectedResult`
+- Aim for >80% coverage of business logic
+- Example:
+  ```csharp
+  [Test]
+  public async Task CreateUser_WithValidEmail_SucceedsAsync()
+  {
+      // Arrange
+      var command = new CreateUserCommand { Email = "test@example.com" };
+      
+      // Act
+      var result = await _handler.Handle(command, CancellationToken.None);
+      
+      // Assert
+      Assert.That(result.Id, Is.Not.Null);
+  }
+  ```
+
+**Logging**
+- Use structured logging with context
+- Log at appropriate levels (Debug, Info, Warning, Error)
+- Never log sensitive data
+- Include operation IDs for tracing
+- Example:
+  ```csharp
+  _logger.LogInformation("User created: {UserId} by {RequesterId}",
+      newUser.Id, currentUserId);
+  ```
+
+### TypeScript/React Guidelines
+
+**Naming Conventions**
+- Components: PascalCase (e.g., `UserCard.tsx`)
+- Hooks: useHookName (e.g., `useAuth.ts`)
+- Utilities: camelCase (e.g., `validators.ts`)
+- Constants: UPPER_SNAKE_CASE (e.g., `MAX_RETRY_ATTEMPTS`)
+- Variables: camelCase (e.g., `userName`)
+
+**Type Safety**
+- Always define TypeScript interfaces
+- Use explicit return types
+- Avoid `any` type
+- Enable strict mode in tsconfig
+- Example:
+  ```typescript
+  interface User {
+      id: string;
+      name: string;
+      email: string;
+  }
+
+  async function fetchUser(id: string): Promise<User> {
+      // Implementation
+  }
+  ```
+
+**Component Structure**
+- Functional components with React.FC
+- Define props interface
+- Keep components focused and small
+- Example:
+  ```typescript
+  interface UserCardProps {
+      user: User;
+      onEdit?: (user: User) => void;
+  }
+
+  export const UserCard: React.FC<UserCardProps> = ({ user, onEdit }) => {
+      return (
+          <div>
+              {/* JSX */}
+          </div>
+      );
+  };
+  ```
+
+**Error Handling**
+- Create custom error classes
+- Handle API errors gracefully
+- Provide user-friendly error messages
+- Log errors with context
+- Example:
+  ```typescript
+  class ApiError extends Error {
+      constructor(
+          public statusCode: number,
+          public message: string
+      ) {
+          super(message);
+      }
+  }
+
+  async function fetchUser(id: string): Promise<User> {
+      try {
+          const response = await fetch(`/api/users/${id}`);
+          if (!response.ok) {
+              throw new ApiError(response.status, 'Failed to fetch user');
+          }
+          return response.json();
+      } catch (error) {
+          logger.error('User fetch failed', error);
+          throw error;
+      }
+  }
+  ```
+
+**Testing**
+- Use Vitest for unit tests
+- Use React Testing Library for component tests
+- Use Playwright for E2E tests
+- Test behavior, not implementation
+- Test complex components and helpers only
+- Example:
+  ```typescript
+  describe('UserCard', () => {
+      it('should display user information', () => {
+          const user: User = { id: '1', name: 'John', email: 'john@example.com' };
+          render(<UserCard user={user} />);
+          
+          expect(screen.getByText('John')).toBeInTheDocument();
+      });
+  });
+  ```
+
+**Hooks**
+- Keep hooks small and focused
+- Document hook purpose and parameters
+- Example:
+  ```typescript
+  interface UseAuthReturn {
+      isAuthenticated: boolean;
+      user: User | null;
+      login: (email: string, password: string) => Promise<void>;
+      logout: () => void;
+  }
+
+  export function useAuth(): UseAuthReturn {
+      // Implementation
+  }
+  ```
+
+## API Design
+
+**REST Endpoints**
+- Use RESTful conventions
+- Meaningful resource names
+- HTTP verbs: GET, POST, PUT, DELETE
+- Version your APIs if needed
+
+**Request/Response Format**
+- Consistent JSON format
+- Proper HTTP status codes
+- Include error details in responses
+- Example:
+  ```typescript
+  // Request
+  POST /api/users
+  {
+      "email": "user@example.com",
+      "firstName": "John"
+  }
+
+  // Success Response
+  {
+      "id": "uuid",
+      "email": "user@example.com",
+      "firstName": "John",
+      "createdAt": "2025-01-04T12:00:00Z"
+  }
+
+  // Error Response
+  {
+      "statusCode": 400,
+      "message": "Validation failed",
+      "errors": [
+          {"field": "email", "message": "Email is invalid"}
+      ]
+  }
+  ```
+
+## Performance Considerations
+
+- Use appropriate data structures
+- Avoid unnecessary API calls
+- Implement pagination for large datasets
+- Use caching where appropriate
+- Consider async operations
+- Monitor performance metrics
+
+## Security Guidelines
+
+- Never log sensitive data (passwords, tokens)
+- Validate input on both client and server
+- Use HTTPS for all API calls
+- Implement proper authentication/authorization
+- Sanitize user input
+- Use environment variables for secrets
+
+## Code Organization
+
+- Group related functionality together
+- Keep files focused and small (< 300 lines)
+- Use clear folder structure
+- Separate concerns (API, business logic, UI)
+- Extract reusable utilities and hooks
+
+## Documentation
+
+- Add JSDoc comments for complex functions
+- Document component props
+- Include usage examples in README
+- Update CHANGELOG for significant changes
+- Keep documentation in sync with code
+
+## Suggested Patterns
+
+### .NET Patterns
+- CQRS with MediatR
+- Repository pattern for data access
+- Dependency injection with Microsoft.Extensions.DependencyInjection
+- Middleware for cross-cutting concerns
+- Fluent validation for complex rules
+
+### React Patterns
+- Custom hooks for logic reuse
+- Context API or Redux for state management
+- Component composition for reusability
+- Higher-order components where appropriate
+- Render props for component behavior sharing
+
+## What NOT to Do
+
+❌ Don't suggest code that violates SOLID principles
+❌ Don't generate duplicate code (suggest refactoring instead)
+❌ Don't suggest unnecessary complexity
+❌ Don't ignore error handling
+❌ Don't skip logging for important operations
+❌ Don't suggest hardcoded values
+❌ Don't implement features not requested (YAGNI)
+❌ Don't suggest insecure code
+
+## Questions or Conflicts?
+
+When in doubt:
+1. Refer to CODE_STANDARDS.md
+2. Favor readability over cleverness
+3. Follow existing code patterns
+4. Ask for clarification on requirements
+5. Suggest alternatives if something doesn't fit the guidelines
+
+---
+
+**Last Updated:** November 4, 2025
+**Version:** 1.0
+
+Follow these guidelines to maintain consistency and quality across the codebase!

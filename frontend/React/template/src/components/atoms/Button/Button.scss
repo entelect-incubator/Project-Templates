@@ -1,0 +1,176 @@
+/**
+ * Button Component Styles
+ * Comprehensive button styling with variants and states
+ */
+
+.btn {
+  /* Base styles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  white-space: nowrap;
+
+  /* Focus state for accessibility */
+  &:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Icons */
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &--left {
+      margin-left: -0.25rem;
+    }
+
+    &--right {
+      margin-right: -0.25rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Loading state */
+  &--loading {
+    pointer-events: none;
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .btn__icon {
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  /* Variants */
+  &--primary {
+    background-color: var(--primary-500);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: var(--primary-600);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--primary-700);
+    }
+  }
+
+  &--secondary {
+    background-color: var(--gray-200);
+    color: var(--gray-900);
+
+    &:hover:not(:disabled) {
+      background-color: var(--gray-300);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--gray-400);
+    }
+  }
+
+  &--danger {
+    background-color: var(--danger-500);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: var(--danger-600);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--danger-700);
+    }
+  }
+
+  &--success {
+    background-color: var(--success-500);
+    color: white;
+
+    &:hover:not(:disabled) {
+      background-color: var(--success-600);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--success-700);
+    }
+  }
+
+  &--warning {
+    background-color: var(--warning-500);
+    color: var(--gray-900);
+
+    &:hover:not(:disabled) {
+      background-color: var(--warning-600);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--warning-700);
+    }
+  }
+
+  &--ghost {
+    background-color: transparent;
+    color: var(--primary-600);
+    border: 1px solid var(--primary-200);
+
+    &:hover:not(:disabled) {
+      background-color: var(--primary-50);
+    }
+
+    &:active:not(:disabled) {
+      background-color: var(--primary-100);
+    }
+  }
+
+  /* Sizes */
+  &--xs {
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+  }
+
+  &--sm {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+
+  &--md {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  &--lg {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  /* Full width */
+  &--fullwidth {
+    width: 100%;
+  }
+}

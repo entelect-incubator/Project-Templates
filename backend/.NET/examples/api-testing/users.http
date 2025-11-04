@@ -1,0 +1,144 @@
+### User Registration
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "firstName": "John",
+  "lastName": "Doe",
+  "password": "SecurePassword123!"
+}
+
+### Response: {{userId}} and {{token}} saved
+
+### User Login
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "SecurePassword123!"
+}
+
+### Response: {{token}} saved
+
+### Get Current User Profile
+GET http://localhost:5000/api/users/me
+Authorization: Bearer {{token}}
+
+### Get User by ID
+GET http://localhost:5000/api/users/{{userId}}
+Authorization: Bearer {{token}}
+
+### Update User Profile
+PUT http://localhost:5000/api/users/{{userId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstName": "Jonathan",
+  "lastName": "Doe"
+}
+
+### Change Password
+POST http://localhost:5000/api/users/{{userId}}/change-password
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "currentPassword": "SecurePassword123!",
+  "newPassword": "NewSecurePassword456!"
+}
+
+### Deactivate Account
+POST http://localhost:5000/api/users/{{userId}}/deactivate
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "password": "SecurePassword123!"
+}
+
+### List All Users (Admin only)
+GET http://localhost:5000/api/users
+Authorization: Bearer {{adminToken}}
+
+### Search Users by Email
+GET http://localhost:5000/api/users/search?email=john
+Authorization: Bearer {{adminToken}}
+
+### Register with Duplicate Email (Should return 409)
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "password": "AnotherPassword123!"
+}
+
+### Login with Wrong Password (Should return 401)
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "password": "WrongPassword"
+}
+
+### Register with Invalid Email (Should return 400)
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+  "email": "not-an-email",
+  "firstName": "Invalid",
+  "lastName": "User",
+  "password": "Password123!"
+}
+
+### Register with Weak Password (Should return 400)
+POST http://localhost:5000/api/users/register
+Content-Type: application/json
+
+{
+  "email": "weak@example.com",
+  "firstName": "Weak",
+  "lastName": "User",
+  "password": "weak"
+}
+
+### Access Protected Endpoint without Auth (Should return 401)
+GET http://localhost:5000/api/users/{{userId}}
+
+### Access with Expired Token (Should return 401)
+GET http://localhost:5000/api/users/{{userId}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIn0.dozjgNryP4J3jVmNHl0w5N_XgL0n3I9PlFUP0THsR8U
+
+### Request Password Reset
+POST http://localhost:5000/api/users/password-reset/request
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com"
+}
+
+### Reset Password with Token
+POST http://localhost:5000/api/users/password-reset/confirm
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "token": "{{resetToken}}",
+  "newPassword": "ResetPassword123!"
+}
+
+### Verify Email
+POST http://localhost:5000/api/users/email-verification/confirm
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "token": "{{verificationToken}}"
+}

@@ -1,0 +1,176 @@
+/**
+ * App Component Styles
+ * Global application layout and styling
+ */
+
+@import '@/styles/globals.scss';
+
+// ============================================================================
+// App Container
+// ============================================================================
+
+.app-container {
+  @include flex-column;
+  min-height: 100vh;
+  background-color: $color-gray-50;
+}
+
+// ============================================================================
+// Header
+// ============================================================================
+
+.app-header {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+  color: white;
+  padding: $spacing-2xl $spacing-xl;
+  box-shadow: $shadow-md;
+  text-align: center;
+
+  &__content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    margin-bottom: $spacing-md;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &__subtitle {
+    font-size: $font-size-lg;
+    margin: 0;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 768px) {
+    padding: $spacing-xl $spacing-md;
+
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__subtitle {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+// ============================================================================
+// Main Content
+// ============================================================================
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  padding: $spacing-2xl $spacing-lg;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: $spacing-xl $spacing-md;
+  }
+
+  @media (max-width: 480px) {
+    padding: $spacing-lg $spacing-sm;
+  }
+}
+
+// ============================================================================
+// Footer
+// ============================================================================
+
+.app-footer {
+  background-color: $color-gray-800;
+  color: $color-gray-300;
+  padding: $spacing-xl;
+  text-align: center;
+  border-top: 1px solid $color-gray-700;
+  margin-top: auto;
+
+  p {
+    margin: 0;
+    font-size: $font-size-sm;
+  }
+
+  @media (max-width: 768px) {
+    padding: $spacing-lg;
+  }
+}
+
+// ============================================================================
+// Error Boundary Styles
+// ============================================================================
+
+.error-boundary-container {
+  @include flex-center;
+  min-height: 100vh;
+  padding: $spacing-xl;
+  background-color: $color-gray-50;
+}
+
+.error-boundary-content {
+  @include card;
+  max-width: 500px;
+  width: 100%;
+  padding: $spacing-2xl;
+  text-align: center;
+}
+
+.error-boundary-icon {
+  font-size: 4rem;
+  margin-bottom: $spacing-lg;
+}
+
+.error-boundary-title {
+  font-size: $font-size-2xl;
+  margin-bottom: $spacing-md;
+  color: $color-danger;
+}
+
+.error-boundary-message {
+  font-size: $font-size-base;
+  color: $color-gray-600;
+  margin-bottom: $spacing-lg;
+}
+
+.error-boundary-details {
+  margin: $spacing-lg 0;
+  text-align: left;
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: $spacing-md;
+    user-select: none;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+.error-boundary-stack {
+  background-color: $color-gray-100;
+  border: 1px solid $color-gray-300;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: $font-size-xs;
+  color: $color-gray-800;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.error-boundary-button {
+  @include button-base;
+  background-color: $color-primary;
+  color: white;
+  margin-top: $spacing-md;
+
+  &:hover:not(:disabled) {
+    background-color: $color-primary-dark;
+  }
+}

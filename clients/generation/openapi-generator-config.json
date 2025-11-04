@@ -1,0 +1,63 @@
+{
+	"runtime": "Net80",
+	"documentGenerator": {
+		"fromDocument": {
+			"url": "http://localhost:5000/openapi/v1.json",
+			"output": null
+		}
+	},
+	"codeGenerators": {
+		"openApiToTypeScriptClient": {
+			"className": "TodoApiClient",
+			"moduleName": "TodoApiClient",
+			"namespace": "TodoApi",
+			"typeScriptVersion": 5.0,
+			"template": "Angular",
+			"promiseType": "Promise",
+			"httpClass": "HttpClient",
+			"useSingletonProvider": true,
+			"injectionTokenType": "InjectionToken",
+			"addCloneMethods": false,
+			"addDefaultValueProperties": true,
+			"argumentType": "Unspecified",
+			"arrayType": "Array",
+			"arrayBaseType": "Array",
+			"classStyle": "Class",
+			"dateTimeType": "Date",
+			"dateType": "Date",
+			"dictHashtableType": "Dictionary",
+			"dictType": "Dictionary",
+			"enumNameGeneratorType": "CSharp",
+			"enumStyle": "Enum",
+			"exportTypes": true,
+			"extensionCode": null,
+			"generateCancelToken": false,
+			"generateClientClasses": true,
+			"generateClientInterfaces": false,
+			"generateDtoTypes": true,
+			"generateOptionalParameters": false,
+			"generateResponseClasses": true,
+			"nullableReferenceTypes": true,
+			"handleReferences": false,
+			"importRequiredTypes": true,
+			"jsonConversionCode": "New",
+			"includeHttpClientCreationMethod": false,
+			"modelBaseClass": null,
+			"queryNullValue": "",
+			"replaceForPropertyName": null,
+			"serviceHost": null,
+			"servicePort": null,
+			"singletonJsonSerializerSettings": false,
+			"sortByName": false,
+			"templateDirectory": null,
+			"typeNameGenerator": "CSharp",
+			"unitTestFrameworkVersion": "6.0",
+			"useGetBaseUrlMethod": false,
+			"useHttpClientCreationMethod": false,
+			"useJsonSerialization": true,
+			"useTransformationMethod": false,
+			"useXmlDocumentation": true,
+			"output": null
+		}
+	}
+}

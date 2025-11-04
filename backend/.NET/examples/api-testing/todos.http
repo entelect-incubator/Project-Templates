@@ -1,0 +1,95 @@
+### Create a Todo
+POST http://localhost:5000/api/todos
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Complete project documentation",
+  "description": "Write comprehensive docs for new feature"
+}
+
+### Response saved as {{todoId}}
+
+### List Todos
+GET http://localhost:5000/api/todos?page=1&pageSize=10
+Authorization: Bearer {{token}}
+
+### Get Single Todo
+GET http://localhost:5000/api/todos/{{todoId}}
+Authorization: Bearer {{token}}
+
+### Update Todo (Mark as Complete)
+PUT http://localhost:5000/api/todos/{{todoId}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Complete project documentation",
+  "description": "Write comprehensive docs for new feature",
+  "completed": true
+}
+
+### Delete Todo
+DELETE http://localhost:5000/api/todos/{{todoId}}
+Authorization: Bearer {{token}}
+
+### Get Non-Existent Todo (Should return 404)
+GET http://localhost:5000/api/todos/00000000-0000-0000-0000-000000000000
+Authorization: Bearer {{token}}
+
+### Create Todo with Missing Title (Should return 400)
+POST http://localhost:5000/api/todos
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "description": "Missing title field"
+}
+
+### Create Todo with Very Long Title (Validation test)
+POST http://localhost:5000/api/todos
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "This is an extremely long title that exceeds the maximum allowed length for a todo item to test validation and ensure the API properly rejects invalid input according to business rules and requirements",
+  "description": "Test long title validation"
+}
+
+### List Todos with Pagination
+GET http://localhost:5000/api/todos?page=2&pageSize=5
+Authorization: Bearer {{token}}
+
+### List Todos without Auth (Should return 401)
+GET http://localhost:5000/api/todos
+
+### Create Todo with Invalid JSON (Should return 400)
+POST http://localhost:5000/api/todos
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Valid title",
+  "invalid json here"
+}
+
+### Filter Todos by Status
+GET http://localhost:5000/api/todos?completed=false
+Authorization: Bearer {{token}}
+
+### Search Todos by Title
+GET http://localhost:5000/api/todos/search?query=project
+Authorization: Bearer {{token}}
+
+### Get Todos Count
+GET http://localhost:5000/api/todos/count
+Authorization: Bearer {{token}}
+
+### Bulk Delete Todos
+DELETE http://localhost:5000/api/todos
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "ids": ["{{todoId}}", "{{todoId2}}"]
+}

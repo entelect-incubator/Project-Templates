@@ -1,0 +1,258 @@
+@import '@/styles/globals.scss';
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+  backdrop-filter: blur(2px);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    backdrop-filter: none;
+  }
+}
+
+/* Modal Container */
+.modal {
+  background-color: var(--color-background);
+  border-radius: var(--border-radius-lg);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: slideUp 0.3s ease-out;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+
+  /* Size variants */
+  &--sm {
+    width: 90%;
+    max-width: 384px; /* 24rem */
+  }
+
+  &--md {
+    width: 90%;
+    max-width: 512px; /* 32rem */
+  }
+
+  &--lg {
+    width: 90%;
+    max-width: 640px; /* 40rem */
+  }
+
+  &--xl {
+    width: 90%;
+    max-width: 896px; /* 56rem */
+  }
+
+  @media (max-width: 640px) {
+    &--sm,
+    &--md,
+    &--lg,
+    &--xl {
+      width: calc(100% - 2rem);
+      max-width: none;
+    }
+  }
+}
+
+/* Modal Header */
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+/* Modal Title */
+.modal__title {
+  font-size: var(--typography-heading-4-size);
+  font-weight: 600;
+  line-height: var(--typography-heading-4-line-height);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
+}
+
+/* Modal Close Button */
+.modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: var(--border-radius-md);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: var(--color-neutral-100);
+    color: var(--color-text-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &:active {
+    background-color: var(--color-neutral-200);
+  }
+}
+
+/* Modal Body */
+.modal__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-4);
+  color: var(--color-text-primary);
+  font-size: var(--typography-body-1-size);
+  line-height: var(--typography-body-1-line-height);
+
+  /* Custom scrollbar for better UX */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-border);
+    border-radius: 4px;
+
+    &:hover {
+      background-color: var(--color-text-secondary);
+    }
+  }
+}
+
+/* Modal Footer */
+.modal__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+  flex-wrap: wrap;
+
+  /* Alignment variants */
+  &--left {
+    justify-content: flex-start;
+  }
+
+  &--center {
+    justify-content: center;
+  }
+
+  &--right {
+    justify-content: flex-end;
+  }
+
+  &--between {
+    justify-content: space-between;
+  }
+
+  button {
+    margin: 0;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility - Focus visible ring */
+.modal {
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .modal-overlay {
+    background-color: transparent;
+  }
+
+  .modal {
+    box-shadow: none;
+    border: 1px solid var(--color-border);
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .modal__close {
+    &:hover,
+    &:focus {
+      background-color: var(--color-neutral-800);
+    }
+
+    &:active {
+      background-color: var(--color-neutral-700);
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+	"name": "openapi-client-generation",
+	"version": "1.0.0",
+	"description": "OpenAPI TypeScript client generation scripts for React frontend",
+	"private": true,
+	"scripts": {
+		"generate": "npm run generate:react",
+		"generate:react": "cross-platform-scripts generate:react",
+		"generate:react:win": "generate-react-client.bat",
+		"generate:react:unix": "bash ./generate-react-client.sh",
+		"generate:dotnet": "nswag run openapi-generator-config.json",
+		"setup": "npm install -g @nswag/cli"
+	},
+	"devDependencies": {
+		"@nswag/cli": "^13.20.0"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"keywords": [
+		"openapi",
+		"nswag",
+		"typescript",
+		"client-generation",
+		"react"
+	]
+}

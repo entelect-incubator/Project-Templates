@@ -1,0 +1,63 @@
+{
+	"runtime": "Net80",
+	"documentGenerator": {
+		"fromDocument": {
+			"url": "http://localhost:5000/openapi/v1.json",
+			"output": null
+		}
+	},
+	"codeGenerators": {
+		"openApiToTypeScriptClient": {
+			"className": "TodoApiClient",
+			"moduleName": "@/api/generated/client",
+			"namespace": "TodoApi",
+			"typeScriptVersion": 5.0,
+			"template": "Fetch",
+			"promiseType": "Promise",
+			"httpClass": "Fetch",
+			"useSingletonProvider": false,
+			"injectionTokenType": null,
+			"addCloneMethods": false,
+			"addDefaultValueProperties": true,
+			"argumentType": "Unspecified",
+			"arrayType": "Array",
+			"arrayBaseType": "Array",
+			"classStyle": "Class",
+			"dateTimeType": "Date",
+			"dateType": "Date",
+			"dictHashtableType": "Record",
+			"dictType": "Record",
+			"enumNameGeneratorType": "TypeScript",
+			"enumStyle": "Enum",
+			"exportTypes": true,
+			"extensionCode": null,
+			"generateCancelToken": true,
+			"generateClientClasses": true,
+			"generateClientInterfaces": false,
+			"generateDtoTypes": true,
+			"generateOptionalParameters": true,
+			"generateResponseClasses": false,
+			"nullableReferenceTypes": true,
+			"handleReferences": false,
+			"importRequiredTypes": true,
+			"jsonConversionCode": "New",
+			"includeHttpClientCreationMethod": false,
+			"modelBaseClass": null,
+			"queryNullValue": "",
+			"replaceForPropertyName": null,
+			"serviceHost": null,
+			"servicePort": null,
+			"singletonJsonSerializerSettings": false,
+			"sortByName": false,
+			"templateDirectory": null,
+			"typeNameGenerator": "TypeScript",
+			"unitTestFrameworkVersion": "6.0",
+			"useGetBaseUrlMethod": false,
+			"useHttpClientCreationMethod": false,
+			"useJsonSerialization": true,
+			"useTransformationMethod": false,
+			"useXmlDocumentation": true,
+			"output": "../generated/react/src/api/generated.ts"
+		}
+	}
+}

@@ -1,103 +1,274 @@
- <img align="left" width="116" height="116" src="logo.png" />
- 
- # .NET Template
- 
+<img align="left" width="116" height="116" src="logo.png" />
+
+# Project Templates - Polyglot Scaffolding for Greenfield Projects
+
 <br/>
 
-This is a solution template for creating a backend framework following the principles of Clean Architecture. It provides a layered structure that promotes separation of concerns and modularity, allowing for easier maintenance, scalability, and reusability. The template is designed to be used as a starting point for creating .NET applications and can be reused by different people.
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-## Technologies
+A comprehensive, modern, and scalable collection of **production-ready templates** for building full-stack applications. This repository provides curated architectural patterns and best practices for multiple technology stacks, enabling teams to quickly bootstrap new projects with confidence and consistency.
 
-The solution template incorporates the following technologies:
+Whether you're building a backend API, frontend application, or full-stack solution, **Project Templates** offers battle-tested architectures that promote clean code, maintainability, and scalability from day one.
 
--   .NET 9
--   Entity Framework Core 9
--   MediatR
--   FeatureManagement
--   Rate limiting
--   FluentValidation
--   Polly
--   NSwag
--   NUnit, FluentAssertions, Moq
+## 🎯 Why Project Templates?
 
-## Getting Started
+- **🏗️ Production-Ready Architectures** - Multiple architectural patterns (Layered, Clean, Vertical Slice) for different use cases
+- **🛠️ Polyglot Support** - Templates for .NET, React, and more—all in one place
+- **📚 Best Practices** - Industry-standard patterns and technologies curated from real-world experience
+- **🚀 Quick Start** - Clone a template and start developing immediately with a solid foundation
+- **📖 Well-Documented** - Comprehensive documentation and examples included with each template
+- **🤝 Community Driven** - Contributions and feedback from experienced developers
+- **⚡ Scalable Design** - Architectures that grow with your application
 
-There are 3 different architectural pattern templates to choose from
+## 📁 Repository Structure
 
-1. Layered Architecture - [![Layered Architecture](https://github.com/entelect-incubator/.NET-Template/actions/workflows/layered-clean.yml/badge.svg)](https://github.com/entelect-incubator/.NET-Template/actions/workflows/layered-clean.yml) - [![Layered Architecture with DataAccess](https://github.com/entelect-incubator/.NET-Template/actions/workflows/layered.yml/badge.svg)](https://github.com/entelect-incubator/.NET-Template/actions/workflows/layered.yml)
-    1. Clean Template - Commands and Queries include DbContext directly because DbContext is a UnitOfWork and DbSets are Repositories. _Recommended version_
-    2. Template with DataAccess Layer to separate Database logic from your business logic.
-2. Clean Architecture - [![Clean Architecture](https://github.com/entelect-incubator/.NET-Template/actions/workflows/clean.yml/badge.svg)](https://github.com/entelect-incubator/.NET-Template/actions/workflows/clean.yml)
-3. Vertical Slice Architecture _New_ - [![Vertical Slice Architecture](https://github.com/entelect-incubator/.NET-Template/actions/workflows/vertical-slice.yml/badge.svg)](https://github.com/entelect-incubator/.NET-Template/actions/workflows/vertical-slice.yml)
+```
+project-templates/
+├── backend/
+│   ├── .NET/
+│   │   ├── 1.LayeredArchitecture/
+│   │   ├── 2.CleanArchitecture/
+│   │   └── 3.VerticalSliceArchitecture/
+│   └── [More languages coming soon]
+├── frontend/
+│   ├── React/
+│   └── [More frameworks coming soon]
+├── ARCHITECTURE.md          # Detailed architecture patterns
+├── GETTING_STARTED.md       # Quick start guide
+├── CONTRIBUTING.md          # Contribution guidelines
+└── README.md                # This file
+```
 
-To get started with the solution template, follow these steps:
+## 🚀 Quick Start
 
--   [ ] Install the latest .NET 9 SDK
--   [ ] Create a folder for your solution and copy the clean code solution into it.
--   [ ] Rename the Solution File on the new solution folder for your project.
+### Choose Your Technology Stack
 
-## **Overview**
+#### Backend - .NET
 
-Several key benefits to think of when you are choosing a pattern.
+**3 Architectural Patterns Available:**
 
-1. **Modularity and Separation of Concerns:** The system is divided into well-defined layers, allowing for modular development and clear separation of functionalities. This enhances code maintainability and facilitates easier troubleshooting and updates.
+1. **Layered Architecture** [![Status](https://github.com/entelect-incubator/Project-Templates/actions/workflows/layered-clean.yml/badge.svg)](https://github.com/entelect-incubator/Project-Templates/actions/workflows/layered-clean.yml)
+   - **Clean Template** - DbContext as UnitOfWork, DbSets as Repositories *(Recommended)*
+   - **Template with DataAccess Layer** - Separate database logic from business logic
 
-2. **Scalability:** As each layer serves a specific purpose, scaling the system becomes more manageable. It allows for the addition or modification of layers without affecting the entire structure, making it easier to adapt to changing project requirements.
+2. **Clean Architecture** [![Status](https://github.com/entelect-incubator/Project-Templates/actions/workflows/clean.yml/badge.svg)](https://github.com/entelect-incubator/Project-Templates/actions/workflows/clean.yml)
+   - Strict separation of concerns with clear dependency direction
+   - Best for large, complex projects with long-term maintenance requirements
 
-3. **Reusability:** Components within each layer can be reused across different parts of the system or in other projects, reducing development time and effort. This promotes a more efficient and cost-effective development process.
+3. **Vertical Slice Architecture** [![Status](https://github.com/entelect-incubator/Project-Templates/actions/workflows/vertical-slice.yml/badge.svg)](https://github.com/entelect-incubator/Project-Templates/actions/workflows/vertical-slice.yml)
+   - End-to-end feature slices across all layers
+   - Perfect for agile, iterative development with rapid feature delivery
 
-4. **Interoperability:** Layers can communicate through standardized interfaces, promoting interoperability. This allows for the integration of new technologies or updates in specific layers without disrupting the entire system.
+**Getting Started with .NET:**
 
-5. **Collaborative Development:** Different teams can work on specific layers simultaneously, fostering parallel development and collaboration. This accelerates the overall project timeline and facilitates specialization within the development team.
+```bash
+# 1. Install .NET 9 SDK
+# https://dotnet.microsoft.com/download
 
-6. **Maintainability:** With a clear structure and modular design, debugging and maintenance become more straightforward. Changes or updates to one layer are less likely to impact others, simplifying the maintenance process over the system's lifecycle.
+# 2. Clone the template you prefer
+cp -r backend/.NET/1.LayeredArchitecture ./your-project
 
-7. **Adaptability to Change:** Layered architecture is inherently adaptable to changes in technology or project requirements. The independence of layers enables easier upgrades or replacements, ensuring the system remains flexible and responsive to evolving needs.
+# 3. Navigate to the project
+cd your-project
 
-## **Architecture Patterns Overview**
+# 4. Follow the backend/.NET README for setup instructions
+```
 
-### **Layered Architecture**
+See [backend/.NET/README.md](backend/.NET/README.md) for detailed .NET setup and architecture documentation.
 
-Layered architecture organizes a system into distinct, modular layers, each responsible for specific functions, fostering separation of concerns. This design promotes scalability, maintainability, and reusability, making it an excellent choice for projects as it enhances agility and facilitates collaborative development, allowing teams to focus on individual layers without compromising the overall system integrity.
+#### Frontend - React
 
-#### **Advantages of choosing Layered instead of Clean**
+*React templates coming soon - offering production-ready architectural patterns for React applications*
 
-While clean architecture offers a more rigorous and structured approach, layered architecture may be a pragmatic choice when prioritizing simplicity, quick adoption, and flexibility in technology selection for specific project needs.
+### Technologies
 
-### **Clean Architecture**
+#### .NET Stack
 
-Clean Architecture, pioneered by software architecture expert Robert C. Martin, is a design philosophy that prioritizes separation of concerns, maintainability, and testability. Enforcing a clear and hierarchical structure minimizes dependencies and allows for interchangeable components within distinct layers. Clean Architecture promotes long-term scalability, adaptability to changing requirements, and a robust foundation for building systems that are easy to understand, extend, and maintain.
+- **.NET 9** - Latest .NET runtime and language features
+- **Entity Framework Core 9** - Modern ORM for data access
+- **MediatR** - CQRS implementation
+- **Feature Management** - Feature flags and toggle management
+- **Rate Limiting** - API throttling and protection
+- **FluentValidation** - Declarative validation rules
+- **Polly** - Resilience and transient fault handling
+- **NSwag** - OpenAPI/Swagger integration
+- **NUnit, FluentAssertions, Moq** - Testing framework stack
 
-#### **Advantages of choosing this Clean instead of Layered**
+#### React Stack (Coming Soon)
 
-While Layered Architecture provides simplicity and ease of adoption, Clean Architecture is a compelling choice when prioritizing strict architectural boundaries, testability, and a high degree of independence between components, which can be especially valuable in large, complex, or evolving projects.
+- React 18+
+- TypeScript
+- Redux or Context API
+- Tailwind CSS
+- Jest & React Testing Library
+- Vite or Next.js
 
-### **Vertical Slice Architecture**
+## 📚 Architecture Patterns
 
-Vertical Slice Architecture, often associated with Domain-Driven Design and microservices, advocates for building end-to-end slices of functionality across all layers of the application stack. Unlike traditional horizontal layering, this approach emphasizes delivering a full, working feature set through the entire technology stack. Vertical Slice Architecture fosters a holistic understanding of business features, encourages cross-functional collaboration, and accelerates iterative development by providing a complete user experience with each implemented slice. This methodology promotes rapid feedback loops, enabling teams to iterate quickly and deliver value incrementally.
+### Layered Architecture
 
-#### **Advantages of choosing Vertical Slice**
+**Best For:** Applications where simplicity and rapid adoption are priorities
 
-1. **Holistic Understanding:** By building end-to-end slices of functionality, developers gain a comprehensive understanding of how their code impacts the entire application. This holistic perspective enhances their ability to make informed decisions and promotes a deeper appreciation for the user experience.
+Layered architecture organizes a system into distinct, modular layers—each responsible for specific functions. This promotes separation of concerns, scalability, and reusability.
 
-2. **Rapid Feedback Loops:** Vertical slices enable developers to deliver tangible, functional features quickly. This facilitates rapid feedback from stakeholders and end-users, allowing for early validation and adjustments. The iterative nature of development becomes more efficient, reducing the time between code implementation and user feedback.
+**Key Benefits:**
+- Simple to understand and adopt
+- Clear layer responsibilities
+- Flexible technology choices per layer
+- Good for team collaboration
 
-3. **Cross-Functional Collaboration:** Vertical slices encourage collaboration across different functional roles, as developers, designers, and other stakeholders work together to deliver complete features. This collaborative approach fosters better communication, shared ownership of features, and a more integrated development process.
+**When to Choose Layered over Clean:**
+- Quick project startup is critical
+- Team has varying experience levels
+- Technology flexibility is important
+- Project scope is well-defined
 
-4. **Incremental Value Delivery:** Developers can deliver incremental value with each vertical slice, providing tangible benefits to end-users or stakeholders at the end of every iteration. This aligns well with agile principles and allows for a more continuous and visible stream of progress.
+---
 
-5. **Mitigation of Integration Challenges:** By implementing features across all layers of the application stack in each vertical slice, integration challenges are addressed early in the development process. This reduces the likelihood of encountering major integration issues later in the project, making the overall development process smoother.
+### Clean Architecture
 
-6. **Flexible Technology Stacks:** Vertical Slice Architecture allows for flexibility in choosing technologies at the feature level. Developers can use the most suitable tools for each slice without being constrained by global technology choices. This adaptability is particularly beneficial in scenarios where different features have varied technical requirements.
+**Best For:** Large, complex applications with evolving requirements
 
-7. **Enhanced Developer Satisfaction:** Developers often find satisfaction in seeing their work result in tangible, user-facing features. Vertical Slice Architecture aligns with this desire for visible impact, as developers can witness the immediate results of their efforts in the form of complete features.
+Clean Architecture, pioneered by Robert C. Martin, enforces a clear, hierarchical structure that minimizes dependencies and allows for interchangeable components. It prioritizes separation of concerns, maintainability, and testability.
 
-8. **Reduced Time-to-Market:** The rapid delivery of functional slices and continuous user feedback contribute to shorter development cycles. This, in turn, reduces the time-to-market for the overall product, allowing organizations to respond more quickly to changing market demands.
+**Key Benefits:**
+- Strict architectural boundaries
+- Framework-agnostic design
+- Highly testable code
+- Long-term maintainability
 
-While Vertical Slice Architecture may not be a one-size-fits-all solution, its advantages in terms of rapid feedback, collaboration, and incremental value delivery make it a compelling approach, especially in dynamic and agile development environments.
+**When to Choose Clean over Layered:**
+- Complex business logic exists
+- Long-term maintenance is critical
+- Multiple teams will work on the code
+- Strict dependency management is needed
 
-## **Additional Resources**
+---
 
-For more information about the Command and Query Responsibility Segregation (CQRS) pattern, refer to the [CQRS](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs#:~:text=The%20Command%20and%20Query%20Responsibility,performance%2C%20scalability%2C%20and%20security.)
+### Vertical Slice Architecture
 
-Feel free to customize the solution template according to your specific requirements and extend it with additional features or technologies as needed.
+**Best For:** Agile teams delivering features incrementally
+
+Vertical Slice Architecture builds end-to-end slices of functionality across all layers. Associated with Domain-Driven Design and microservices, it emphasizes delivering complete features through the entire stack.
+
+**Key Benefits:**
+- Rapid feature delivery
+- Holistic understanding of features
+- Reduced integration challenges
+- Cross-functional collaboration
+- Flexibility in technology per feature
+
+**When to Choose Vertical Slice:**
+- Agile/iterative development is used
+- Rapid feedback is needed
+- Features are independent
+- Cross-functional teams are working together
+
+---
+
+## 💡 Key Architectural Principles
+
+All templates follow these core principles:
+
+1. **Modularity and Separation of Concerns** - Well-defined responsibilities reduce complexity and improve maintainability
+
+2. **Scalability** - Architecture grows with your application without major refactoring
+
+3. **Reusability** - Components are designed to be reused across features and projects
+
+4. **Testability** - Clear boundaries and dependencies make unit and integration testing straightforward
+
+5. **Collaborative Development** - Different teams work on different areas simultaneously without conflicts
+
+6. **Maintainability** - Clear structure and modular design simplify debugging and maintenance
+
+7. **Adaptability** - Flexible design accommodates technology updates and requirement changes
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- **For .NET Templates:** .NET 9 SDK
+- **For React Templates:** Node.js 18+, npm/yarn
+- Git
+
+### Step-by-Step
+
+1. **Explore the templates** - Browse the available architectures in `backend/.NET/` or `frontend/React/`
+
+2. **Read the architecture documentation** - Start with [ARCHITECTURE.md](ARCHITECTURE.md) to understand the patterns
+
+3. **Review a specific template** - Each template includes its own README with setup instructions
+
+4. **Clone/copy the template** - Use it as your project foundation
+
+5. **Customize for your needs** - Follow the [GETTING_STARTED.md](GETTING_STARTED.md) guide
+
+6. **Start building!** - Refer to the template's documentation as you develop
+
+See the [GETTING_STARTED.md](GETTING_STARTED.md) file for detailed step-by-step instructions.
+
+## 📖 Documentation
+
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - Detailed explanation of each architectural pattern, including diagrams and comparisons
+- **[GETTING_STARTED.md](GETTING_STARTED.md)** - Complete getting started guide for each template
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Guidelines for contributing new templates and improvements
+- **[backend/.NET/README.md](backend/.NET/README.md)** - Detailed .NET setup and architecture documentation
+
+## 🎓 Learning Resources
+
+### Architecture Fundamentals
+
+- [Clean Architecture by Robert C. Martin](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+- [Layered Architecture](https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html)
+- [Domain-Driven Design by Eric Evans](https://www.domainlanguage.com/ddd/)
+
+### .NET Specific
+
+- [Entity Framework Core Documentation](https://docs.microsoft.com/en-us/ef/core/)
+- [MediatR GitHub](https://github.com/jbogard/MediatR)
+- [CQRS Pattern](https://martinfowler.com/bliki/CQRS.html)
+
+### React Specific
+
+- [React Documentation](https://react.dev/)
+- [Redux Documentation](https://redux.js.org/)
+- [React Testing Library](https://testing-library.com/react)
+
+## 🤝 Contributing
+
+We welcome contributions! Whether it's:
+
+- New templates for other languages/frameworks
+- Improvements to existing templates
+- Better documentation
+- Bug fixes
+- Examples and tutorials
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+These templates are built on years of experience working with different codebases and learning from the community. Special thanks to:
+
+- Robert C. Martin for Clean Architecture principles
+- Eric Evans for Domain-Driven Design
+- The .NET and React communities for excellent tooling and libraries
+- All contributors and maintainers
+
+## 📞 Support & Discussion
+
+- **Issues** - Report bugs or request features via GitHub Issues
+- **Discussions** - Join conversations about architecture and best practices
+- **Contributing** - See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
+
+---
+
+**Happy Coding! 🚀**
+
+*Built with ❤️ by the Entelect Incubator team*

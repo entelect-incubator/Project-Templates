@@ -1,0 +1,130 @@
+/**
+ * Alert Component Styles
+ */
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid;
+  position: relative;
+
+  &__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.125rem;
+  }
+
+  &__icon-svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+
+  &__description,
+  &__message {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    opacity: 0.95;
+  }
+
+  &__close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &:focus {
+      outline: 2px solid;
+      outline-offset: 2px;
+    }
+  }
+
+  &__close-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Variants */
+  &--success {
+    background-color: #f0fdf4;
+    border-color: #86efac;
+    color: #166534;
+
+    .alert__icon-svg {
+      color: #16a34a;
+    }
+
+    .alert__close:focus {
+      outline-color: #16a34a;
+    }
+  }
+
+  &--warning {
+    background-color: #fefce8;
+    border-color: #fde047;
+    color: #713f12;
+
+    .alert__icon-svg {
+      color: #eab308;
+    }
+
+    .alert__close:focus {
+      outline-color: #eab308;
+    }
+  }
+
+  &--error {
+    background-color: #fef2f2;
+    border-color: #fecaca;
+    color: #991b1b;
+
+    .alert__icon-svg {
+      color: #dc2626;
+    }
+
+    .alert__close:focus {
+      outline-color: #dc2626;
+    }
+  }
+
+  &--info {
+    background-color: #f0f9ff;
+    border-color: #bfdbfe;
+    color: #0c2340;
+
+    .alert__icon-svg {
+      color: #0284c7;
+    }
+
+    .alert__close:focus {
+      outline-color: #0284c7;
+    }
+  }
+}

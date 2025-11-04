@@ -1,0 +1,81 @@
+/**
+ * Card Component Styles
+ */
+
+.card {
+  background-color: white;
+  border: 1px solid var(--gray-200);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.2s ease;
+
+  &--interactive {
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--primary-300);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &--flush {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+
+  &__header {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--gray-200);
+
+    .card--flush & {
+      border-bottom: none;
+    }
+  }
+
+  &__body {
+    padding: 1.25rem;
+  }
+
+  &__footer {
+    padding: 1.25rem;
+    border-top: 1px solid var(--gray-200);
+    background-color: var(--gray-50);
+
+    .card--flush & {
+      border-top: none;
+      background-color: transparent;
+    }
+  }
+
+  /* Remove margins from first/last elements in card sections */
+  &__header > :first-child {
+    margin-top: 0;
+  }
+
+  &__header > :last-child {
+    margin-bottom: 0;
+  }
+
+  &__body > :first-child {
+    margin-top: 0;
+  }
+
+  &__body > :last-child {
+    margin-bottom: 0;
+  }
+
+  &__footer > :first-child {
+    margin-top: 0;
+  }
+
+  &__footer > :last-child {
+    margin-bottom: 0;
+  }
+}

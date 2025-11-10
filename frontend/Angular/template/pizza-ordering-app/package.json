@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:pizza-ordering-app": "node dist/pizza-ordering-app/server/server.mjs",
-    "generate:api": "openapi-generator-cli generate -i ../../../clients/generated/spec/swagger.json -g typescript-angular -o src/app/generated/api --additional-properties=ngVersion=20,providedInSingleton=true,withInterfaces=true",
+    "generate:api": "openapi-generator-cli generate -i ../../../../clients/generated/spec/swagger.json -g typescript-angular -o src/app/generated/api --additional-properties=ngVersion=20,providedInSingleton=true,withInterfaces=true",
     "download:spec": "powershell -ExecutionPolicy Bypass -File ../../../clients/generation/download-spec.ps1"
   },
   "prettier": {

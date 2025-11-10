@@ -1,13 +1,13 @@
 namespace Api;
 
-using MediatR;
+using Utilities.CQRS;
 
 [ApiController]
 [Route("[controller]")]
 [Produces("application/json")]
-public sealed class ApiBaseController : ControllerBase
+public class ApiBaseController : ControllerBase
 {
-    private IMediator mediator;
+    private Dispatcher dispatcher;
 
-    public IMediator Mediator => this.mediator ??= this.HttpContext.RequestServices.GetService<IMediator>();
+    public Dispatcher Dispatcher => this.dispatcher ??= this.HttpContext.RequestServices.GetService<Dispatcher>();
 }

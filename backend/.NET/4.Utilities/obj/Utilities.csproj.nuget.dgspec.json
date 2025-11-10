@@ -17,7 +17,7 @@
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "D:\\Dev\\Incubator\\.NET-Template\\backend\\.NET\\2.CleanArchitecture\\NuGet.Config",
+          "D:\\Dev\\Incubator\\.NET-Template\\backend\\.NET\\3.VerticalSliceArchitecture\\1.Traditional\\NuGet.Config",
           "C:\\Users\\stian.leroux\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

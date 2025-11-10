@@ -1,4 +1,4 @@
-﻿namespace Benchmark.Testing.Samples.V1;
+﻿namespace Benchmark.Testing.Pizzas.V1;
 
 using Features.Pizzas.V1.Commands;
 using Features.Pizzas.V1.Models;
@@ -29,7 +29,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(this.Context);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
 
-        if (!resultCreate.IsError)
+        if (!resultCreate.HasError)
         {
             var sutGet = new GetPizzaQueryHandler(this.Context);
             var resultGet = await sutGet.Handle(new GetPizzaQuery { Id = resultCreate.Data.Id }, CancellationToken.None);
@@ -42,7 +42,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(this.Context);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
 
-        if (!resultCreate.IsError)
+        if (!resultCreate.HasError)
         {
             var sutGet = new GetPizzaQueryHandler(this.Context);
             var resultGet = await sutGet.Handle(new GetPizzaQuery { Id = resultCreate.Data.Id }, CancellationToken.None);
@@ -55,7 +55,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(this.Context);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
 
-        if (!resultCreate.IsError)
+        if (!resultCreate.HasError)
         {
             var sutUpdate = new UpdatePizzaCommandHandler(this.Context);
             var resultUpdate = await sutUpdate.Handle(
@@ -76,7 +76,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(this.Context);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
 
-        if (!resultCreate.IsError)
+        if (!resultCreate.HasError)
         {
 
             var sutDelete = new DeletePizzaCommandHandler(this.Context);

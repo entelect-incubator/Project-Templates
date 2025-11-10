@@ -1,6 +1,11 @@
 ﻿global using System.ComponentModel;
-global using Common.Extensions;
 global using FluentValidation;
-global using MediatR;
+global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.DependencyInjection;
+global using Riok.Mapperly.Abstractions;
+global using Utilities;
+global using Utilities.CQRS;
+global using Utilities.Extensions;
+global using Utilities.Models;
+global using Utilities.Results;

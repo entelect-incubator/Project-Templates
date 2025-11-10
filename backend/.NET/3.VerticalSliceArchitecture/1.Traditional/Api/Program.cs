@@ -1,9 +1,9 @@
 namespace Api;
 
-using Common.Logging.Static;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Utilities.Logging.Static;
 
 public class Program
 {

@@ -1,19 +1,18 @@
 namespace Features.Pizzas.V1.Commands;
 
-using Common.Models;
 using Features;
 using Features.Pizzas.Errors;
 using Features.Pizzas.V1.Mappers;
 using Features.Pizzas.V1.Models;
 
-public class UpdatePizzaCommand : IRequest<Result<PizzaModel>>
+public sealed class UpdatePizzaCommand : ICommand<Result<PizzaModel>>
 {
-    public int Id { get; set; }
+    public required int Id { get; set; }
 
-    public UpdatePizzaModel Model { get; set; }
+    public required UpdatePizzaModel Model { get; set; }
 }
 
-public class UpdatePizzaCommandHandler(DatabaseContext databaseContext) : IRequestHandler<UpdatePizzaCommand, Result<PizzaModel>>
+public sealed class UpdatePizzaCommandHandler(DatabaseContext databaseContext) : ICommandHandler<UpdatePizzaCommand, Result<PizzaModel>>
 {
     public async Task<Result<PizzaModel>> Handle(UpdatePizzaCommand request, CancellationToken cancellationToken = default)
     {

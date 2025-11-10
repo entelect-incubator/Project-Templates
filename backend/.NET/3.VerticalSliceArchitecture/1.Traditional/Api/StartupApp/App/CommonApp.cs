@@ -1,8 +1,9 @@
 namespace Api.StartupApp.App;
 
-using Correlate.AspNetCore;
 using Api.Middleware;
+using Correlate.AspNetCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Utilities.Logging.Static;
 
 public static class CommonApp
 {
@@ -64,7 +65,7 @@ public static class CommonApp
                     context.Response.ContentType = "application/json";
                     await context.Response.WriteAsync(JsonSerializer.Serialize(new
                     {
-                        Status = Enum.GetName(typeof(HealthStatus), report.Status),
+                        Status = Enum.GetName(report.Status),
                         Report = report
                     }));
                 });

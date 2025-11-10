@@ -1,6 +1,6 @@
 namespace Infrastructure.Mapping;
 
-using Domain.Entities.V1;
+using Domain.V1.Pizzas;
 
 public class PizzaMap : IEntityTypeConfiguration<Pizza>
 {

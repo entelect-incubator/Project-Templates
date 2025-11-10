@@ -1,5 +1,7 @@
 namespace Common;
 
+using Utilities;
+
 [ExcludeFromCodeCoverage]
 public static class StartupSettings
 {

@@ -24,9 +24,14 @@
   color: white;
   padding: $spacing-2xl $spacing-xl;
   box-shadow: $shadow-md;
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-lg;
 
   &__content {
+    flex: 1;
+    text-align: center;
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -44,7 +49,15 @@
     opacity: 0.95;
   }
 
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+  }
+
   @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
     padding: $spacing-xl $spacing-md;
 
     &__title {
@@ -53,6 +66,11 @@
 
     &__subtitle {
       font-size: $font-size-base;
+    }
+
+    &__actions {
+      width: 100%;
+      justify-content: center;
     }
   }
 }

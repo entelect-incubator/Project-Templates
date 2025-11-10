@@ -1,7 +1,5 @@
 namespace Api.Middleware;
 
-using System.Text;
-using Domain.Models.Shared;
 using FluentValidation;
 
 [ExcludeFromCodeCoverage]

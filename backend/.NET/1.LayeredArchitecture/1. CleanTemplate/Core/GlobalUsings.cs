@@ -1,8 +1,10 @@
 ﻿global using System.ComponentModel;
 global using Common.Enums;
-global using Common.Extensions;
-global using Common.Models.Shared;
+global using Common.V1.Orders;
 global using FluentValidation;
-global using MediatR;
-global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.EntityFrameworkCore;
+global using Utilities;
+global using Utilities.CQRS;
+global using Utilities.Extensions;
+global using Utilities.Models;
+global using Utilities.Results;

@@ -4,6 +4,28 @@
  */
 
 // ============================================================================
+// Theme Variables
+// ============================================================================
+
+:root {
+  &.light-theme {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --text-primary: #1f2937;
+    --text-secondary: #4b5563;
+    --border-color: #e5e7eb;
+  }
+
+  &.dark-theme {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --border-color: #374151;
+  }
+}
+
+// ============================================================================
 // Variables
 // ============================================================================
 
@@ -154,8 +176,11 @@ body {
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-size: $font-size-base;
   line-height: 1.5;
-  color: $color-gray-900;
-  background-color: $color-gray-50;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 // ============================================================================

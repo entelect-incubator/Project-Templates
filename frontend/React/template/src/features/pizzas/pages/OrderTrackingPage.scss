@@ -1,0 +1,313 @@
+// OrderTrackingPage.scss
+.order-tracking-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+
+    h1 {
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+  }
+
+  &__manual-lookup {
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+
+    h2 {
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        background: var(--surface-primary);
+        color: var(--text-primary);
+        font-size: 1rem;
+
+        &:focus {
+          outline: none;
+          border-color: var(--primary-color);
+          box-shadow: 0 0 0 2px var(--primary-color-alpha);
+        }
+
+        &::placeholder {
+          color: var(--text-tertiary);
+        }
+      }
+
+      .error {
+        color: var(--error-color);
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+      }
+    }
+
+    .search-button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background: var(--primary-color-dark);
+      }
+
+      &:disabled {
+        background: var(--text-tertiary);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__order-info {
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+
+    .order-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+
+      .detail-item {
+        .label {
+          font-weight: 500;
+          color: var(--text-secondary);
+          font-size: 0.875rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+
+        .value {
+          color: var(--text-primary);
+          font-size: 1.1rem;
+          margin-top: 0.25rem;
+        }
+      }
+    }
+  }
+
+  &__status-timeline {
+    position: relative;
+    margin: 2rem 0;
+
+    .timeline-step {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+
+      &:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        left: 15px;
+        top: 36px;
+        width: 2px;
+        height: 40px;
+        background: var(--border-color);
+      }
+
+      &.active::after {
+        background: var(--primary-color);
+      }
+
+      &.completed .step-indicator {
+        background: var(--success-color);
+        border-color: var(--success-color);
+
+        .step-icon {
+          display: block;
+        }
+
+        .step-number {
+          display: none;
+        }
+      }
+
+      &.active .step-indicator {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+        color: white;
+      }
+
+      .step-indicator {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid var(--border-color);
+        background: var(--surface-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-secondary);
+        position: relative;
+        z-index: 1;
+
+        .step-icon {
+          display: none;
+          font-size: 14px;
+        }
+      }
+
+      .step-content {
+        flex: 1;
+
+        .step-title {
+          font-weight: 600;
+          color: var(--text-primary);
+          margin-bottom: 0.25rem;
+        }
+
+        .step-description {
+          color: var(--text-secondary);
+          font-size: 0.875rem;
+        }
+
+        .step-time {
+          color: var(--text-tertiary);
+          font-size: 0.75rem;
+          margin-top: 0.25rem;
+        }
+      }
+    }
+  }
+
+  &__loading {
+    text-align: center;
+    padding: 3rem;
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border-color);
+      border-top: 3px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    p {
+      color: var(--text-secondary);
+    }
+  }
+
+  &__error {
+    background: var(--error-color-alpha);
+    border: 1px solid var(--error-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+
+    .error-icon {
+      color: var(--error-color);
+      margin-right: 0.5rem;
+    }
+
+    .error-message {
+      color: var(--error-color);
+      font-weight: 500;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+
+      &--primary {
+        background: var(--primary-color);
+        color: white;
+
+        &:hover {
+          background: var(--primary-color-dark);
+        }
+      }
+
+      &--secondary {
+        background: transparent;
+        color: var(--primary-color);
+        border: 1px solid var(--primary-color);
+
+        &:hover {
+          background: var(--primary-color-alpha);
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .order-tracking-page {
+    padding: 1rem;
+
+    &__order-info .order-details {
+      grid-template-columns: 1fr;
+    }
+
+    &__actions {
+      flex-direction: column;
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}

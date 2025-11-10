@@ -1,7 +1,8 @@
 namespace Api.StartupApp.App;
 
-using Correlate.AspNetCore;
 using Api.Middleware;
+using Correlate.AspNetCore;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 public static class CommonApp
@@ -68,6 +69,11 @@ public static class CommonApp
                         Report = report
                     }));
                 });
+            endpoints.MapHealthChecks("/health");
+            endpoints.MapHealthChecks("/alive", new HealthCheckOptions
+            {
+                Predicate = r => r.Tags.Contains("live")
+            });
         });
 
         return app;

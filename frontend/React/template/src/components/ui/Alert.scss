@@ -1,0 +1,44 @@
+/**
+ * Alert Component Styles
+ */
+
+.alert {
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid;
+  margin: 1rem 0;
+
+  h2,
+  h3,
+  h4 {
+    margin: 0 0 0.5rem;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  &--info {
+    background: #dbeafe;
+    border-color: #3b82f6;
+    color: #1e40af;
+  }
+
+  &--success {
+    background: #dcfce7;
+    border-color: #22c55e;
+    color: #166534;
+  }
+
+  &--warning {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #92400e;
+  }
+
+  &--error {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #dc2626;
+  }
+}

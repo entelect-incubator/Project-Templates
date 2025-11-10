@@ -1,22 +1,21 @@
 namespace Core.Pizzas.V1.Commands;
 
-using Common.Models.Pizza.V1;
-using Core;
-using Core.Pizzas.V1.Mappers;
+using Common.V1.Pizzas;
+using Common.V1.Pizzas.Models;
 
-public class UpdatePizzaCommand : IRequest<Result<PizzaModel>>
+public sealed class UpdatePizzaCommand : ICommand<Result<PizzaModel>>
 {
-    public int Id { get; set; }
+    public required int Id { get; set; }
 
-    public UpdatePizzaModel Model { get; set; }
+    public required UpdatePizzaModel Model { get; set; }
 }
 
-public class UpdatePizzaCommandHandler(DatabaseContext databaseContext) : IRequestHandler<UpdatePizzaCommand, Result<PizzaModel>>
+public sealed class UpdatePizzaCommandHandler(DatabaseContext databaseContext) : ICommandHandler<UpdatePizzaCommand, Result<PizzaModel>>
 {
     public async Task<Result<PizzaModel>> Handle(UpdatePizzaCommand request, CancellationToken cancellationToken = default)
     {
         var model = request.Model;
-        var findEntity = await databaseContext.Pizzas.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+        var findEntity = await CompiledQueries.Get(databaseContext, request.Id);
         if (findEntity is null)
         {
             return Result<PizzaModel>.NotFound(PizzaErrors.Update);

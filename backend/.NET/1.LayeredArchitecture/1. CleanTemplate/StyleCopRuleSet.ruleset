@@ -88,7 +88,7 @@
     <Rule Id="SA1203" Action="Error" />
     <Rule Id="SA1204" Action="Error" />
     <Rule Id="SA1205" Action="Error" />
-    <Rule Id="SA1206" Action="Error" />
+    <Rule Id="SA1206" Action="None" />
     <Rule Id="SA1207" Action="Error" />
     <Rule Id="SA1208" Action="Error" />
     <Rule Id="SA1209" Action="Error" />

@@ -1,8 +1,8 @@
 namespace Test.Pizzas.V1;
 
-using Common.Models.Pizza.V1;
-using DataAccess.Contracts.Pizzas.V1;
-using DataAccess.Pizzas.V1;
+using Common.V1.Pizzas.Models;
+using DataAccess.Contracts.V1;
+using DataAccess.V1.Pizzas;
 using Test.Setup.TestData.Pizza;
 
 [TestFixture]
@@ -24,7 +24,7 @@ public class TestPizzaeV1DataAccess : QueryTestBase
 
         this.handler = new PizzaDataAccess(this.Context);
         var result = await this.handler.Save(PizzaTestData.Create);
-        if (result.IsError)
+        if (result.HasError)
         {
             Assert.That(false, Is.False);
         }
@@ -44,7 +44,8 @@ public class TestPizzaeV1DataAccess : QueryTestBase
     {
         var response = await this.handler.Search(new PizzaSearchModel
         {
-            Name = this.model.Name
+            Name = this.model.Name,
+            OrderBy = "Name desc",
         });
         var outcome = response.Count;
 
@@ -56,7 +57,7 @@ public class TestPizzaeV1DataAccess : QueryTestBase
     {
         this.model.Name = "Test";
         var response = await this.handler.Update(this.model.Id, PizzaTestData.Update);
-        Assert.That(response != null && !response.IsError, Is.True);
+        Assert.That(response != null && !response.HasError, Is.True);
 
         var outcome = response.Data.Name.Equals(PizzaTestData.Update.Name);
         Assert.That(outcome, Is.True);
@@ -66,6 +67,6 @@ public class TestPizzaeV1DataAccess : QueryTestBase
     public async Task DeleteAsync()
     {
         var response = await this.handler.Delete(this.model.Id);
-        Assert.That(response != null && !response.IsError, Is.True);
+        Assert.That(response != null && !response.HasError, Is.True);
     }
 }

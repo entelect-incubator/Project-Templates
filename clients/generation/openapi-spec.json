@@ -1,0 +1,823 @@
+﻿{
+  "x-generator": "NSwag v14.5.0.0 (NJsonSchema v11.4.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": ".NET Vertical Slice Minimal Architecture API",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:7160"
+    }
+  ],
+  "paths": {
+    "/hc": {
+      "get": {
+        "tags": [
+          "Health Check"
+        ],
+        "operationId": "GetHc",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/pizzas": {
+      "post": {
+        "tags": [
+          "Pizzas"
+        ],
+        "summary": "Create a new pizza",
+        "operationId": "Create a pizza",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePizzaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfPizzaModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pizzas"
+        ],
+        "summary": "Update existing pizza",
+        "operationId": "Update pizza",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePizzaCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfPizzaModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundErrorResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pizzassearch": {
+      "post": {
+        "tags": [
+          "Pizzas"
+        ],
+        "summary": "Search for pizzas",
+        "operationId": "Search for pizzas",
+        "requestBody": {
+          "x-name": "query",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetAllPizzasQuery"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfIEnumerableOfPizzaModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pizzasorder/complete": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Complete an order",
+        "operationId": "Complete order",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompleteOrderCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfOrderModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pizzasorder": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Create a new order",
+        "operationId": "Create order",
+        "requestBody": {
+          "x-name": "command",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderCommand"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfOrderModel"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/pizzasorder/status/{id}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "summary": "Get the status of an order",
+        "operationId": "Get order status",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOfOrderStatus"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationErrorResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ResultOfPizzaModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultBase"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "Data": {
+                "$ref": "#/components/schemas/PizzaModel"
+              },
+              "Count": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ]
+      },
+      "PizzaModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "DateCreated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Disabled": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "ResultBase": {
+        "type": "object",
+        "x-abstract": true,
+        "additionalProperties": false,
+        "properties": {
+          "ErrorResult": {
+            "$ref": "#/components/schemas/ErrorResults"
+          },
+          "Message": {
+            "type": "string",
+            "nullable": true
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ValidationErrors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "HasError": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ErrorResults": {
+        "type": "integer",
+        "description": "",
+        "x-enum-names": [
+          "None",
+          "ValidationError",
+          "NotFound",
+          "GeneralError"
+        ],
+        "x-enum-varnames": [
+          "None",
+          "ValidationError",
+          "NotFound",
+          "GeneralError"
+        ],
+        "x-enumNames": [
+          "None",
+          "ValidationError",
+          "NotFound",
+          "GeneralError"
+        ],
+        "x-enum-descriptions": [
+          "None",
+          "Validation Error",
+          "Not Found",
+          "Error"
+        ],
+        "x-enumDescriptions": [
+          "None",
+          "Validation Error",
+          "Not Found",
+          "Error"
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "ValidationErrorResult": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "IsError": {
+                "type": "boolean",
+                "default": false
+              },
+              "IsValidationError": {
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        ]
+      },
+      "Result": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultBase"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ErrorResult": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "IsError": {
+                "type": "boolean",
+                "default": true
+              },
+              "IsValidationError": {
+                "type": "boolean",
+                "default": false
+              }
+            }
+          }
+        ]
+      },
+      "CreatePizzaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string"
+          }
+        }
+      },
+      "ResultOfIEnumerableOfPizzaModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultBase"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "Data": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PizzaModel"
+                }
+              },
+              "Count": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ]
+      },
+      "GetAllPizzasQuery": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BaseSearchModel"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "Name": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          }
+        ]
+      },
+      "BaseSearchModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "OrderBy": {
+            "type": "string"
+          },
+          "SortDirection": {
+            "$ref": "#/components/schemas/SortDirection"
+          },
+          "Ordering": {
+            "type": "string"
+          },
+          "PagingArgs": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PagingArgs"
+              }
+            ]
+          }
+        }
+      },
+      "SortDirection": {
+        "type": "string",
+        "description": "",
+        "x-enum-names": [
+          "Ascending",
+          "Descending"
+        ],
+        "x-enum-varnames": [
+          "Ascending",
+          "Descending"
+        ],
+        "x-enumNames": [
+          "Ascending",
+          "Descending"
+        ],
+        "x-enum-descriptions": [
+          "Asc",
+          "Desc"
+        ],
+        "x-enumDescriptions": [
+          "Asc",
+          "Desc"
+        ],
+        "enum": [
+          "Ascending",
+          "Descending"
+        ]
+      },
+      "PagingArgs": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "PageNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "SkipAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "UsePaging": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NotFoundErrorResult": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Result"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "IsNotFound": {
+                "type": "boolean",
+                "default": true
+              }
+            }
+          }
+        ]
+      },
+      "UpdatePizzaCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Model": {
+            "$ref": "#/components/schemas/UpdatePizzaModel"
+          }
+        }
+      },
+      "UpdatePizzaModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Disabled": {
+            "type": "boolean",
+            "nullable": true
+          }
+        }
+      },
+      "ResultOfOrderModel": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultBase"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "Data": {
+                "$ref": "#/components/schemas/OrderModel"
+              },
+              "Count": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ]
+      },
+      "OrderModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CustomerName": {
+            "type": "string"
+          },
+          "CustomerEmail": {
+            "type": "string"
+          },
+          "PizzaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Status": {
+            "$ref": "#/components/schemas/OrderStatus"
+          },
+          "DateCreated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "OrderStatus": {
+        "type": "integer",
+        "description": "",
+        "x-enum-names": [
+          "Confirmed",
+          "Making",
+          "Complete",
+          "SentOutForDelivery"
+        ],
+        "x-enum-varnames": [
+          "Confirmed",
+          "Making",
+          "Complete",
+          "SentOutForDelivery"
+        ],
+        "x-enumNames": [
+          "Confirmed",
+          "Making",
+          "Complete",
+          "SentOutForDelivery"
+        ],
+        "x-enum-descriptions": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "x-enumDescriptions": [
+          null,
+          null,
+          null,
+          null
+        ],
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "CompleteOrderCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CreateOrderCommand": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "CustomerName": {
+            "type": "string"
+          },
+          "CustomerEmail": {
+            "type": "string"
+          },
+          "PizzaId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ResultOfOrderStatus": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ResultBase"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "Data": {
+                "$ref": "#/components/schemas/OrderStatus"
+              },
+              "Count": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

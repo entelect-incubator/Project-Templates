@@ -1,3 +1,3 @@
-﻿global using Common.Models;
-global using FluentValidation;
-global using MediatR;
+﻿global using FluentValidation;
+global using Utilities.CQRS;
+global using Utilities.Results;

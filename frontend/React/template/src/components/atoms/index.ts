@@ -1,9 +1,19 @@
-/**
- * Atoms (Base Components)
- * Simple, reusable, standalone components that don't depend on other components
+/**/**/**
+
+ * Atoms compatibility export
+
+ * Re-exports UI components for backward compatibility * Atoms compatibility export * Atoms (Base Components)
+
  */
 
-export { Button, type ButtonVariant, type ButtonSize } from './Button';
+ * Re-exports UI components for backward compatibility * Simple, reusable, standalone components that don't depend on other components
+
+export * from '../ui';
+ */ */
+
+
+
+export * from '../ui';export { Button, type ButtonVariant, type ButtonSize } from './Button';
 export { Input } from './Input';
 export { Spinner } from './Spinner';
 export { Badge, type BadgeVariant } from './Badge';
@@ -12,3 +22,4 @@ export { Alert, type AlertVariant } from './Alert';
 export { Select, type SelectOption } from './Select';
 export { Checkbox } from './Checkbox';
 export { Radio, RadioGroup, type RadioGroupProps } from './Radio';
+export { ThemeSwitcher } from './ThemeSwitcher';

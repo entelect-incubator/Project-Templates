@@ -31,7 +31,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
             Name = PizzaTestData.Create.Name
         }, CancellationToken.None);
 
-        if (!resultCast.IsError)
+        if (!resultCast.HasError)
         {
             var sutGet = new GetAllPizzasQueryHandler(Context);
         }

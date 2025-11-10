@@ -1,13 +1,14 @@
 namespace Common.StartupApp.App;
 
 using System.Text.Json;
-using Common.Logging.Static;
-using Common.Middleware;
+using Common;
 using Correlate.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Utilities.Logging.Static;
+using Utilities.Middleware;
 
 public static class CommonApp
 {
@@ -15,7 +16,7 @@ public static class CommonApp
     /// Adds the common.
     /// </summary>
     /// <param name="app">The application.</param>
-    /// <returns>IApplicationBuilder</returns>
+    /// <returns>IApplicationBuilder.</returns>
     public static IApplicationBuilder AddCommon(this WebApplication app)
     {
         ////Exception Handling and Logging
@@ -60,7 +61,8 @@ public static class CommonApp
 
                 await context.Response.WriteAsync(GetHomePageHtml(StartupSettings.Current.DisplayName));
             });
-            endpoints.MapGet("/hc",
+            endpoints.MapGet(
+                "/hc",
                 async ([FromServices] HealthCheckService healthCheckService, HttpContext context) =>
                 {
                     var report = await healthCheckService.CheckHealthAsync();
@@ -70,7 +72,7 @@ public static class CommonApp
                     await context.Response.WriteAsync(JsonSerializer.Serialize(new
                     {
                         Status = Enum.GetName(report.Status),
-                        Report = report
+                        Report = report,
                     }));
                 }).WithTags("Health Check");
         });

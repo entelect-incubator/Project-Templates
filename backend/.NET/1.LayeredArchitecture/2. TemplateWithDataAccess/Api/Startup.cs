@@ -3,7 +3,6 @@ namespace Api;
 using Api.StartupApp.App;
 using Api.StartupApp.Services;
 using Core;
-using Core.Pizzas.V1.Commands;
 using DataAccess;
 
 public class Startup
@@ -28,9 +27,6 @@ public class Startup
         services.AddCommon();
         services.AddSecurity();
         services.AddApplication();
-
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreatePizzaCommand>());
-        services.AddHealthChecks().AddDbContextCheck<DatabaseContext>();
     }
 
     public void Configure(IApplicationBuilder app)

@@ -5,16 +5,15 @@ using Core.Pizzas.V1.Mappers;
 using Core.Pizzas.V1.Models;
 
 [BindProperties]
-public sealed class GetAllPizzasQuery : BaseSearchModel, IRequest<GetAllPizzasQuery, Result<IEnumerable<PizzaModel>>>
+public sealed class GetAllPizzasQuery : BaseSearchModel, IQuery<Result<IEnumerable<PizzaModel>>>
 {
     public string? Name { get; set; }
 }
 
-public struct GetAllPizzasQueryHandler(DatabaseContext databaseContext) : IRequestHandler<GetAllPizzasQuery, Task<Result<IEnumerable<PizzaModel>>>>
+public sealed class GetAllPizzasQueryHandler(DatabaseContext databaseContext) : IQueryHandler<GetAllPizzasQuery, Result<IEnumerable<PizzaModel>>>
 {
-    public readonly async Task<Result<IEnumerable<PizzaModel>>> Handle(GetAllPizzasQuery request, CancellationToken cancellationToken = default)
+    public async Task<Result<IEnumerable<PizzaModel>>> Handle(GetAllPizzasQuery request, CancellationToken cancellationToken = default)
     {
-        Logger.LogInfo("Hello", "Test");
         var entities = databaseContext.Pizzas.Select(x => x)
           .AsNoTracking()
           .FilterByName(request?.Name);

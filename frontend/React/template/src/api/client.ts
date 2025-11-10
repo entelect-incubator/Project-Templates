@@ -42,7 +42,7 @@ class ApiClient {
   private retryDelay = 1000;
 
   constructor(baseUrl?: string) {
-    this.baseUrl = baseUrl || import.meta.env['VITE_API_BASE_URL'] || 'http://localhost:5000';
+    this.baseUrl = baseUrl || import.meta.env['VITE_API_BASE_URL'] || 'https://localhost:7160';
   }
 
   /**

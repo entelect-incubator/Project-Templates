@@ -27,7 +27,7 @@ public class TestPizzaV1Core : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(this.databaseContext);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create);
 
-        if (resultCreate.IsError)
+        if (resultCreate.HasError)
         {
             Assert.That(false, Is.False);
         }
@@ -39,7 +39,7 @@ public class TestPizzaV1Core : QueryTestBase
     public async Task GetAllAsync()
     {
         var sutGetAll = new GetAllPizzasQueryHandler(this.databaseContext);
-        var resultGetAll = await sutGetAll.Handle(new GetAllPizzasQuery { Name = this.model.Name });
+        var resultGetAll = await sutGetAll.Handle(new GetAllPizzasQuery { Name = this.model.Name, OrderBy = "Name desc" });
 
         Assert.That(resultGetAll?.Count > 0, Is.True);
     }
@@ -55,6 +55,6 @@ public class TestPizzaV1Core : QueryTestBase
         var resultUpdate = await sutUpdate.Handle(
             new UpdatePizzaCommand { Id = this.model.Id, Model = new UpdatePizzaModel() { Name = PizzaTestData.Update.Name } });
 
-        Assert.That(resultUpdate.IsError, Is.False);
+        Assert.That(resultUpdate.HasError, Is.False);
     }
 }

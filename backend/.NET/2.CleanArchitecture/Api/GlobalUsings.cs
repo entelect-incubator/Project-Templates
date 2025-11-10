@@ -1,7 +1,10 @@
 ﻿global using System.Diagnostics.CodeAnalysis;
 global using System.Net;
 global using System.Text.Json;
+global using Api.Helpers;
 global using Domain;
-global using Domain.Logging.Static;
-global using Domain.Models.Shared;
 global using Microsoft.AspNetCore.Mvc;
+global using Utilities.Helpers;
+global using Utilities.Logging.Static;
+global using Utilities.Models;
+global using Utilities.Results;

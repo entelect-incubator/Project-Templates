@@ -1,0 +1,562 @@
+/**
+ * Pizza Menu Page Styles
+ * Pezza theme integration with vibrant red (#dc3348) and gold (#fec844)
+ */
+
+.pizza-menu-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  padding: 2rem 1rem;
+
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+  }
+}
+
+// Header
+.pizza-header {
+  background: linear-gradient(135deg, #dc3348 0%, #a01c2f 100%);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(220, 51, 72, 0.2);
+  animation: slideDown 0.6s ease-out;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    font-family: 'Cookie', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &__subtitle {
+    font-size: 1.1rem;
+    margin: 0.5rem 0 0;
+    opacity: 0.95;
+    font-family: 'Belleza', sans-serif;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}
+
+.pizza-cart-btn {
+  background-color: #fec844;
+  color: #1a1a1a;
+  font-weight: 600;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #fed159;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(254, 200, 68, 0.3);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Container Layout
+.pizza-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Pizza Grid Section
+.pizza-grid-section {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #dc3348;
+  margin-bottom: 2rem;
+  font-family: 'Cookie', cursive;
+
+  @media (prefers-color-scheme: dark) {
+    color: #fec844;
+  }
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+
+  p {
+    margin-top: 1rem;
+    color: #666;
+    font-size: 1.1rem;
+
+    @media (prefers-color-scheme: dark) {
+      color: #ccc;
+    }
+  }
+}
+
+// Pizza Grid
+.pizza-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Pizza Card
+.pizza-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: popIn 0.5s ease-out;
+
+  @media (prefers-color-scheme: dark) {
+    background: #2a2a2a;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 28px rgba(220, 51, 72, 0.2);
+
+    .pizza-card__image {
+      transform: scale(1.08);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  &__content {
+    padding: 1.5rem;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    font-family: 'Cookie', cursive;
+
+    @media (prefers-color-scheme: dark) {
+      color: #fec844;
+    }
+  }
+
+  &__description {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0.75rem 0;
+    line-height: 1.4;
+    font-family: 'Belleza', sans-serif;
+
+    @media (prefers-color-scheme: dark) {
+      color: #aaa;
+    }
+  }
+
+  &__toppings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.25rem;
+    gap: 1rem;
+  }
+
+  &__price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #dc3348;
+
+    @media (prefers-color-scheme: dark) {
+      color: #fec844;
+    }
+  }
+
+  &__action {
+    flex: 1;
+    background-color: #dc3348;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #a01c2f;
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(220, 51, 72, 0.3);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+// Sidebar Cart
+.pizza-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  padding: 1rem;
+  animation: slideInRight 0.3s ease-out;
+  z-index: 1000;
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.pizza-cart-card {
+  background: white;
+  border-radius: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15);
+
+  @media (prefers-color-scheme: dark) {
+    background: #2a2a2a;
+  }
+
+  @media (max-width: 480px) {
+    height: auto;
+    max-height: 90vh;
+  }
+}
+
+.pizza-cart {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 2px solid #fec844;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: #dc3348;
+    font-family: 'Cookie', cursive;
+
+    @media (prefers-color-scheme: dark) {
+      color: #fec844;
+    }
+  }
+
+  &__empty {
+    padding: 2rem;
+    text-align: center;
+    color: #999;
+    font-style: italic;
+  }
+
+  &__items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+
+  &__divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #dc3348, transparent);
+    margin: 1rem 0;
+  }
+
+  &__summary {
+    padding: 1rem;
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #dc3348;
+
+    @media (prefers-color-scheme: dark) {
+      color: #fec844;
+    }
+  }
+
+  &__checkout {
+    padding: 1.5rem;
+    border-top: 2px solid #f0f0f0;
+
+    @media (prefers-color-scheme: dark) {
+      border-top-color: #3a3a3a;
+    }
+  }
+}
+
+// Cart Item
+.pizza-cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
+
+  @media (prefers-color-scheme: dark) {
+    background: #3a3a3a;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    font-size: 0.95rem;
+    font-family: 'Belleza', sans-serif;
+
+    @media (prefers-color-scheme: dark) {
+      color: #fec844;
+    }
+  }
+
+  &__price {
+    font-size: 0.9rem;
+    color: #dc3348;
+    margin: 0.25rem 0 0;
+
+    @media (prefers-color-scheme: dark) {
+      color: #fec844;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__qty {
+    width: 50px;
+    padding: 0.5rem;
+    border: 2px solid #dc3348;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    color: #dc3348;
+    background: white;
+
+    @media (prefers-color-scheme: dark) {
+      background: #2a2a2a;
+      color: #fec844;
+      border-color: #fec844;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #fec844;
+    }
+  }
+}
+
+// Customer Info Form
+.pizza-customer-info {
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #dc3348;
+    margin: 0 0 1rem;
+    font-family: 'Cookie', cursive;
+
+    @media (prefers-color-scheme: dark) {
+      color: #fec844;
+    }
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: 'Belleza', sans-serif;
+    background: white;
+    color: #1a1a1a;
+    transition: border-color 0.3s ease;
+
+    @media (prefers-color-scheme: dark) {
+      background: #3a3a3a;
+      color: #fec844;
+      border-color: #4a4a4a;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #dc3348;
+
+      @media (prefers-color-scheme: dark) {
+        border-color: #fec844;
+      }
+    }
+
+    &::placeholder {
+      color: #999;
+
+      @media (prefers-color-scheme: dark) {
+        color: #777;
+      }
+    }
+  }
+}
+
+.pizza-checkout-btn {
+  width: 100%;
+  background-color: #dc3348;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+
+  &:hover:not(:disabled) {
+    background-color: #a01c2f;
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(220, 51, 72, 0.3);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Animations
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

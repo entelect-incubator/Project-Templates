@@ -3,7 +3,7 @@ namespace Test.Pizzas.V1;
 using Application.Pizzas.V1.Commands;
 using Application.Pizzas.V1.Queries;
 using Domain;
-using Domain.Models.Pizza.V1;
+using Domain.V1.Pizzas.Models;
 using Infrastructure;
 using Test.Setup.TestData.Pizza.V1;
 
@@ -27,7 +27,7 @@ public class TestPizzaV1Core : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(this.databaseContext);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
 
-        if (resultCreate.IsError)
+        if (resultCreate.HasError)
         {
             Assert.That(false, Is.False);
         }
@@ -47,10 +47,10 @@ public class TestPizzaV1Core : QueryTestBase
     [Test]
     public async Task GetAllAsync()
     {
-        var sutGetAll = new GetAllPizzaQueryHandler(this.databaseContext);
-        var resultGetAll = await sutGetAll.Handle(new GetAllPizzasQuery { Name = this.model.Name }, CancellationToken.None);
+        var sutGetAll = new GetAllPizzasQueryHandler(this.databaseContext);
+        var resultGetAll = await sutGetAll.Handle(new GetAllPizzasQuery { Name = this.model.Name, OrderBy = "Name desc" }, CancellationToken.None);
 
-        Assert.That(resultGetAll?.Data.Count > 0, Is.True);
+        Assert.That(resultGetAll?.Count > 0, Is.True);
     }
 
     [Test]
@@ -71,7 +71,7 @@ public class TestPizzaV1Core : QueryTestBase
                 }
             }, CancellationToken.None);
 
-        Assert.That(resultUpdate.IsError, Is.False);
+        Assert.That(resultUpdate.HasError, Is.False);
     }
 
     [Test]
@@ -84,6 +84,6 @@ public class TestPizzaV1Core : QueryTestBase
                 Id = this.model.Id
             }, CancellationToken.None);
 
-        Assert.That(outcomeDelete.IsError, Is.False);
+        Assert.That(outcomeDelete.HasError, Is.False);
     }
 }

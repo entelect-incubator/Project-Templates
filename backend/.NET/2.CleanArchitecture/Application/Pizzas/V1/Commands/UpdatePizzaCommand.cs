@@ -1,17 +1,16 @@
 namespace Application.Pizzas.V1.Commands;
 
 using Application.Pizzas.V1.Mappers;
-using Domain.Models.Pizza.V1;
-using Domain.Models.Shared;
+using Domain.V1.Pizzas.Models;
 
-public class UpdatePizzaCommand : IRequest<Result<PizzaModel>>
+public class UpdatePizzaCommand : ICommand<Result<PizzaModel>>
 {
     public int Id { get; set; }
 
     public UpdatePizzaModel Model { get; set; }
 }
 
-public class UpdatePizzaCommandHandler(DatabaseContext databaseContext) : IRequestHandler<UpdatePizzaCommand, Result<PizzaModel>>
+public class UpdatePizzaCommandHandler(DatabaseContext databaseContext) : ICommandHandler<UpdatePizzaCommand, Result<PizzaModel>>
 {
     public async Task<Result<PizzaModel>> Handle(UpdatePizzaCommand request, CancellationToken cancellationToken = default)
     {

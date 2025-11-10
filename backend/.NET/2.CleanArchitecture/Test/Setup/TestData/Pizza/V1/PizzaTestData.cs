@@ -1,9 +1,8 @@
 ﻿namespace Test.Setup.TestData.Pizza.V1;
 
-using System.Collections.Generic;
 using Application.Pizzas.V1.Commands;
-using Domain.Entities.V1;
-using Domain.Models.Pizza.V1;
+using Domain.V1.Pizzas;
+using Domain.V1.Pizzas.Models;
 
 public static class PizzaTestData
 {

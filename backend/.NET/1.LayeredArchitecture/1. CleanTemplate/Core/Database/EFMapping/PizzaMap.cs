@@ -1,6 +1,6 @@
 namespace Core.Database.EFMapping;
 
-using Common.Entities.V1;
+using Common.V1.Pizzas;
 
 public class PizzaMap : IEntityTypeConfiguration<Pizza>
 {

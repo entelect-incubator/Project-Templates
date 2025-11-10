@@ -2,6 +2,7 @@ namespace Api.Middleware;
 
 using System.Text;
 using FluentValidation;
+using Utilities.Logging.Static;
 
 [ExcludeFromCodeCoverage]
 public class LoggingMiddleware

@@ -5,16 +5,18 @@ using System.Threading.RateLimiting;
 using Asp.Versioning;
 using Correlate.DependencyInjection;
 using Domain;
-using Domain.Behaviours;
-using MediatR;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.FeatureManagement;
 using Newtonsoft.Json.Serialization;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using Polly;
 using Polly.Extensions.Http;
 using Serilog.Enrichers.Correlate;
+using Utilities.Handlers;
 
 public static class CommonServices
 {
@@ -111,8 +113,36 @@ public static class CommonServices
 
         services.AddHealthChecks();
 
+        ////DEPENDENCY INJECTION services.AddExceptionHandler<ValidationExceptionHandler>();
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
+
         ////DEPENDENCY INJECTION
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+        services.AddOpenTelemetry()
+            .ConfigureResource(resource => resource.AddService("Pezza"))
+        .WithMetrics(metrics =>
+        {
+            metrics
+                .AddHttpClientInstrumentation()
+                .AddAspNetCoreInstrumentation();
+
+            if (!string.IsNullOrWhiteSpace(Settings.Current.OpenTelemetryExportUrl))
+            {
+                metrics.AddOtlpExporter(options => options.Endpoint = new Uri(Settings.Current.OpenTelemetryExportUrl));
+            }
+        })
+        .WithTracing(tracing =>
+        {
+            tracing
+                .AddAspNetCoreInstrumentation()
+                .AddHttpClientInstrumentation()
+                .AddEntityFrameworkCoreInstrumentation();
+
+            if (!string.IsNullOrWhiteSpace(Settings.Current.OpenTelemetryExportUrl))
+            {
+                tracing.AddOtlpExporter(options => options.Endpoint = new Uri(Settings.Current.OpenTelemetryExportUrl));
+            }
+        });
 
         return services;
     }

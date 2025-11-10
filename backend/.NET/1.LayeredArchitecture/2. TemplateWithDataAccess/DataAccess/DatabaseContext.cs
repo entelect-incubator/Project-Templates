@@ -1,7 +1,7 @@
 namespace DataAccess;
 
-using Common.Entities.V1;
-
+using Common.V1.Orders;
+using Common.V1.Pizzas;
 public class DatabaseContext : DbContext
 {
     public DatabaseContext()
@@ -13,10 +13,13 @@ public class DatabaseContext : DbContext
     {
     }
 
-    public DbSet<Pizza> Samples { get; set; }
+    public DbSet<Order> Orders { get; set; }
+
+    public DbSet<Pizza> Pizzas { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.ApplyConfiguration(new OrderMap());
         modelBuilder.ApplyConfiguration(new PizzaMap());
     }
 }

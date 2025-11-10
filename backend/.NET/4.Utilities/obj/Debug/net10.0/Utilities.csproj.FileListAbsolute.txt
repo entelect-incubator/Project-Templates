@@ -1,0 +1,39 @@
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\obj\Debug\net10.0\Utilities.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\obj\Debug\net10.0\Utilities.AssemblyInfoInputs.cache
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\obj\Debug\net10.0\Utilities.AssemblyInfo.cs
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\obj\Debug\net10.0\Utilities.csproj.CoreCompileInputs.cache
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\obj\Debug\net10.0\Utilities.sourcelink.json
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\obj\Debug\net10.0\Utilities.csproj.AssemblyReference.cache
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\bin\Debug\net10.0\Utilities.deps.json
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\bin\Debug\net10.0\Utilities.dll
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\bin\Debug\net10.0\Utilities.pdb
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\obj\Debug\net10.0\Utilities.dll
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\obj\Debug\net10.0\refint\Utilities.dll
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\obj\Debug\net10.0\Utilities.pdb
+D:\Dev\Incubator\.NET\Phase 3\src\03. EndSolution\Utilities\obj\Debug\net10.0\ref\Utilities.dll
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\bin\Debug\net10.0\Utilities.deps.json
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\bin\Debug\net10.0\Utilities.dll
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\bin\Debug\net10.0\Utilities.pdb
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\obj\Debug\net10.0\Utilities.csproj.AssemblyReference.cache
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\obj\Debug\net10.0\Utilities.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\obj\Debug\net10.0\Utilities.AssemblyInfoInputs.cache
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\obj\Debug\net10.0\Utilities.AssemblyInfo.cs
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\obj\Debug\net10.0\Utilities.csproj.CoreCompileInputs.cache
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\obj\Debug\net10.0\Utilities.sourcelink.json
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\obj\Debug\net10.0\Utilities.dll
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\obj\Debug\net10.0\refint\Utilities.dll
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\obj\Debug\net10.0\Utilities.pdb
+D:\Dev\Incubator\.NET\Phase 4\src\02. Step1\Utilities\obj\Debug\net10.0\ref\Utilities.dll
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\bin\Debug\net10.0\Utilities.deps.json
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\bin\Debug\net10.0\Utilities.dll
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\bin\Debug\net10.0\Utilities.pdb
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\obj\Debug\net10.0\Utilities.csproj.AssemblyReference.cache
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\obj\Debug\net10.0\Utilities.GeneratedMSBuildEditorConfig.editorconfig
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\obj\Debug\net10.0\Utilities.AssemblyInfoInputs.cache
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\obj\Debug\net10.0\Utilities.AssemblyInfo.cs
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\obj\Debug\net10.0\Utilities.csproj.CoreCompileInputs.cache
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\obj\Debug\net10.0\Utilities.sourcelink.json
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\obj\Debug\net10.0\Utilities.dll
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\obj\Debug\net10.0\refint\Utilities.dll
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\obj\Debug\net10.0\Utilities.pdb
+D:\Dev\Incubator\.NET-Template\backend\.NET\4.Utilities\obj\Debug\net10.0\ref\Utilities.dll

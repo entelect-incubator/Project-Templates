@@ -1,1 +1,1 @@
-﻿global using Common.Models;
+﻿global using Utilities.Results;

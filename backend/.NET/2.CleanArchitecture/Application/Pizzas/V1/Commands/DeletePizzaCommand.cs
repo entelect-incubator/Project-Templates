@@ -1,11 +1,11 @@
 namespace Application.Pizzas.V1.Commands;
 
-public class DeletePizzaCommand : IRequest<Result>
+public class DeletePizzaCommand : ICommand<Result>
 {
-    public int Id { get; set; }
+    public required int Id { get; set; }
 }
 
-public class DeletePizzaCommandHandler(DatabaseContext databaseContext) : IRequestHandler<DeletePizzaCommand, Result>
+public class DeletePizzaCommandHandler(DatabaseContext databaseContext) : ICommandHandler<DeletePizzaCommand, Result>
 {
     public async Task<Result> Handle(DeletePizzaCommand request, CancellationToken cancellationToken = default)
     {

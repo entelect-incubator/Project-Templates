@@ -8,8 +8,8 @@
  * API Configuration
  */
 export const API_CONFIG = {
-  /** Base URL for API calls */
-  BASE_URL: import.meta.env.VITE_API_URL || 'http://localhost:5000',
+  /** Base URL for API calls - Default to .NET backend at https://localhost:7160 */
+  BASE_URL: import.meta.env.VITE_API_URL || 'https://localhost:7160',
 
   /** Default timeout for API requests (ms) */
   REQUEST_TIMEOUT: 30000,
@@ -213,8 +213,8 @@ export const SUCCESS_MESSAGES = {
  * Type-safe access to environment variables with defaults
  */
 export const ENV = {
-  /** API base URL */
-  API_URL: import.meta.env['VITE_API_URL'] || 'http://localhost:5000',
+  /** API base URL - Default to .NET backend at https://localhost:7160 */
+  API_URL: import.meta.env['VITE_API_URL'] || 'https://localhost:7160',
 
   /** API timeout */
   API_TIMEOUT: parseInt(import.meta.env['VITE_API_TIMEOUT'] || '30000', 10),

@@ -1,21 +1,16 @@
 namespace Api.Middleware;
 
 using System.Text;
-using Common.Models.Shared;
 using FluentValidation;
 
 [ExcludeFromCodeCoverage]
-public class LoggingMiddleware
+public class LoggingMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate next;
-
-    public LoggingMiddleware(RequestDelegate next) => this.next = next;
-
     public async Task Invoke(HttpContext context)
     {
         try
         {
-            await this.next(context);
+            await next(context);
         }
         catch (OperationCanceledException operationCanceledException)
         {

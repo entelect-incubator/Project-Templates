@@ -1,28 +1,15 @@
 ﻿namespace Application.Pizzas.V1.Mappers;
 
-using Domain.Entities.V1;
-using Domain.Models.Pizza.V1;
+using Domain.V1.Pizzas;
+using Domain.V1.Pizzas.Models;
 
-public static partial class SampleMapper
+[Mapper]
+public static partial class PizzaMapper
 {
-    public static PizzaModel Map(this Pizza entity)
-        => new()
-        {
-            Id = entity.Id,
-            Name = entity.Name,
-            DateCreated = entity.DateCreated,
-            Disabled = entity.Disabled
-        };
+    public static partial PizzaModel Map(this Pizza entity);
 
-    public static Pizza Map(this PizzaModel model)
-        => new()
-        {
-            Id = model.Id,
-            Name = model.Name,
-            DateCreated = model.DateCreated,
-            Disabled = model.Disabled
-        };
+    public static partial Pizza Map(this PizzaModel model);
 
-    public static List<PizzaModel> Map(this List<Pizza> pizzas)
-        => pizzas.Select(x => x.Map()).ToList();
+    public static IEnumerable<PizzaModel> Map(this List<Pizza>? pizzas)
+        => pizzas?.Select(x => x.Map()) ?? [];
 }

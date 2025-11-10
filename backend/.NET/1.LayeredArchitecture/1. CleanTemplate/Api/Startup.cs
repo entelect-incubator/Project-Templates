@@ -27,9 +27,6 @@ public class Startup
         services.AddCommon();
         services.AddSecurity();
         services.AddApplication();
-
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<CreatePizzaCommand>());
-        services.AddHealthChecks().AddDbContextCheck<DatabaseContext>();
     }
 
     public void Configure(IApplicationBuilder app)

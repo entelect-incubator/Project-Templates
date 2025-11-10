@@ -4,10 +4,8 @@ using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
 using Asp.Versioning;
-using Common.Behaviors;
-using Common.Models;
+using Common;
 using Correlate.DependencyInjection;
-using DispatchR.Abstractions.Send;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -21,6 +19,8 @@ using Polly;
 using Polly.Extensions.Http;
 using Polly.Retry;
 using Serilog.Enrichers.Correlate;
+using Utilities.Handlers;
+using Utilities.Models;
 
 public static class CommonServices
 {
@@ -59,9 +59,10 @@ public static class CommonServices
                 options.ReportApiVersions = true;
                 options.DefaultApiVersion = new ApiVersion(1, 0);
                 options.AssumeDefaultVersionWhenUnspecified = true;
-                options.ApiVersionReader = ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
-                                                new HeaderApiVersionReader("api-version"),
-                                                new MediaTypeApiVersionReader("api-version"));
+                options.ApiVersionReader = ApiVersionReader.Combine(
+                    new UrlSegmentApiVersionReader(),
+                    new HeaderApiVersionReader("api-version"),
+                    new MediaTypeApiVersionReader("api-version"));
             });
 
             apiVersioningBuilder.AddApiExplorer(options =>
@@ -117,9 +118,11 @@ public static class CommonServices
 
         services.AddHealthChecks();
 
-        ////DEPENDENCY INJECTION
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
+        services.AddExceptionHandler<ValidationExceptionHandler>();
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
 
+        ////DEPENDENCY INJECTION
         services.AddOpenTelemetry()
             .ConfigureResource(resource => resource.AddService("Pezza"))
         .WithMetrics(metrics =>
@@ -128,7 +131,10 @@ public static class CommonServices
                 .AddHttpClientInstrumentation()
                 .AddAspNetCoreInstrumentation();
 
-            metrics.AddOtlpExporter(options => options.Endpoint = new Uri(Settings.Current.OpenTelemetryExportUrl));
+            if (!string.IsNullOrWhiteSpace(Settings.Current.OpenTelemetryExportUrl))
+            {
+                metrics.AddOtlpExporter(options => options.Endpoint = new Uri(Settings.Current.OpenTelemetryExportUrl));
+            }
         })
         .WithTracing(tracing =>
         {
@@ -137,7 +143,10 @@ public static class CommonServices
                 .AddHttpClientInstrumentation()
                 .AddEntityFrameworkCoreInstrumentation();
 
-            tracing.AddOtlpExporter(options => options.Endpoint = new Uri(Settings.Current.OpenTelemetryExportUrl));
+            if (!string.IsNullOrWhiteSpace(Settings.Current.OpenTelemetryExportUrl))
+            {
+                tracing.AddOtlpExporter(options => options.Endpoint = new Uri(Settings.Current.OpenTelemetryExportUrl));
+            }
         });
 
         return services;

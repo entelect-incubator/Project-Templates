@@ -1,11 +1,12 @@
 namespace Application.Pizzas.V1.Queries;
 
 using Application.Pizzas.V1.Filters;
-using Domain.Models.Pizza.V1;
 using Application.Pizzas.V1.Mappers;
-using Domain.Extensions;
+using Domain.V1.Pizzas.Models;
+using Utilities.Extensions;
+using Utilities.Models;
 
-public class GetAllPizzasQuery : BaseSearchModel, IRequest<ListResult<PizzaModel>>
+public class GetAllPizzasQuery : BaseSearchModel, IQuery<Result<IEnumerable<PizzaModel>>>
 {
     public string? Name { get; set; }
 
@@ -14,9 +15,9 @@ public class GetAllPizzasQuery : BaseSearchModel, IRequest<ListResult<PizzaModel
     public bool? Disabled { get; set; }
 }
 
-public class GetAllPizzaQueryHandler(DatabaseContext databaseContext) : IRequestHandler<GetAllPizzasQuery, ListResult<PizzaModel>>
+public class GetAllPizzasQueryHandler(DatabaseContext databaseContext) : IQueryHandler<GetAllPizzasQuery, Result<IEnumerable<PizzaModel>>>
 {
-    public async Task<ListResult<PizzaModel>> Handle(GetAllPizzasQuery request, CancellationToken cancellationToken = default)
+    public async Task<Result<IEnumerable<PizzaModel>>> Handle(GetAllPizzasQuery request, CancellationToken cancellationToken = default)
     {
         var entities = databaseContext.Pizzas.Select(x => x)
           .AsNoTracking()
@@ -25,6 +26,6 @@ public class GetAllPizzaQueryHandler(DatabaseContext databaseContext) : IRequest
 
         var count = await entities.CountAsync(cancellationToken);
         var paged = await entities.ApplyPaging(request.PagingArgs).ToListAsync(cancellationToken);
-        return ListResult<PizzaModel>.Success(paged.Map(), count);
+        return Result<IEnumerable<PizzaModel>>.Success(paged.Map(), count);
     }
 }

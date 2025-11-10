@@ -1,8 +1,8 @@
-﻿namespace Benchmark.Testing.Samples.V1;
+﻿namespace Benchmark.Testing.Pizzas.V1;
 
-using Common.Models.Pizza.V1;
-using DataAccess.Contracts.Pizzas.V1;
-using DataAccess.Pizzas.V1;
+using Common.V1.Pizzas.Models;
+using DataAccess.Contracts.V1;
+using DataAccess.V1.Pizzas;
 using Test.Setup;
 using Test.Setup.TestData.Pizza;
 
@@ -10,7 +10,7 @@ using Test.Setup.TestData.Pizza;
 [SimpleJob(RuntimeMoniker.Net80, baseline: true)]
 [HtmlExporter]
 [RPlotExporter]
-public class PizzaV1MemoryBenchmarker : QueryTestBase
+public class PizzaV1MemoryBenchmarked : QueryTestBase
 {
     private IPizzaDataAccess? handler;
 
@@ -31,7 +31,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         this.handler = new PizzaDataAccess(this.Context);
 
         var saveResult = await this.handler.Save(PizzaTestData.Create);
-        if (!saveResult.IsError)
+        if (!saveResult.HasError)
         {
             var getResult = await this.handler.Get(saveResult.Data.Id);
         }
@@ -43,7 +43,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         this.handler = new PizzaDataAccess(this.Context);
 
         var result = await this.handler.Save(PizzaTestData.Create);
-        if (!result.IsError)
+        if (!result.HasError)
         {
             var model = await this.handler.Get(result.Data.Id);
         }
@@ -55,10 +55,10 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         this.handler = new PizzaDataAccess(this.Context);
 
         var result = await this.handler.Save(PizzaTestData.Create);
-        if (!result.IsError)
+        if (!result.HasError)
         {
             var getResult = await this.handler.Get(result.Data.Id);
-            if (!getResult.IsError)
+            if (!getResult.HasError)
             {
                 var updateResult = await this.handler.Update(getResult.Data.Id, new UpdatePizzaModel
                 {
@@ -74,10 +74,10 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         this.handler = new PizzaDataAccess(this.Context);
 
         var result = await this.handler.Save(PizzaTestData.Create);
-        if (!result.IsError)
+        if (!result.HasError)
         {
             var getResult = await this.handler.Get(result.Data.Id);
-            if (!getResult.IsError)
+            if (!getResult.HasError)
             {
                 var deleteResult = await this.handler.Delete(getResult.Data.Id);
             }

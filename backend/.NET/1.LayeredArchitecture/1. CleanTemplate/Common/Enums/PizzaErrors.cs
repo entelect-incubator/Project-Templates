@@ -1,12 +1,12 @@
 ﻿namespace Common.Enums;
 
-public static class PizzaErrors
+public class PizzaErrors
 {
-    public static string Save = "Error saving an Pizza";
+    public const string Save = "Error saving an Pizza";
 
-    public static string Update = "Error updating Pizza";
+    public const string Update = "Error updating Pizza";
 
-    public static string Delete = "Error deleting Pizza";
+    public const string Delete = "Error deleting Pizza";
 
-    public static string NotFound = "Pizza not found";
+    public const string NotFound = "Pizza not found";
 }

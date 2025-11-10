@@ -1,22 +1,32 @@
 namespace Api;
 
-using Common.Logging.Static;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using Api.StartupApp.App;
+using Api.StartupApp.Services;
+using Core;
+using Core.Pizzas.V1.Commands;
 using Serilog;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        Log.Logger = LoggerSetup.ConfigureLogging().CreateLogger();
-        CreateHostBuilder(args).Build().Run();
-    }
+        var builder = WebApplication.CreateBuilder(args);
 
-    public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(b =>
-            {
-                b.UseKestrel(opt => opt.AddServerHeader = false);
-                b.UseStartup<Startup>();
-            }).UseSerilog();
+        Log.Logger = LoggerSetup.ConfigureLogging().CreateLogger();
+        builder.Host.UseSerilog();
+        builder.WebHost.ConfigureKestrel(opt => opt.AddServerHeader = false);
+
+        builder.Services.AddDbContext<DatabaseContext>(builder => builder.UseInMemoryDatabase("DB"));
+
+        builder.Services.AddCommon();
+        builder.Services.AddSecurity();
+        builder.Services.AddApplication();
+
+        var app = builder.Build();
+
+        app.AddCommon();
+        app.AddSecurity();
+
+        app.Run();
+    }
 }

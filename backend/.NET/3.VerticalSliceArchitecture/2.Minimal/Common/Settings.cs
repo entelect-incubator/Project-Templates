@@ -1,6 +1,7 @@
 namespace Common;
 
 using Microsoft.Extensions.Configuration;
+using Utilities;
 
 [ExcludeFromCodeCoverage]
 public static class Settings

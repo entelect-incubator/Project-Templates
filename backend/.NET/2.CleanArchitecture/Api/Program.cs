@@ -1,6 +1,6 @@
 namespace Api;
 
-using Domain.Logging.Static;
+using Utilities.Logging.Static;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;

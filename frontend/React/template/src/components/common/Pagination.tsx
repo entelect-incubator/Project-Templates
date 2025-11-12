@@ -1,8 +1,10 @@
 /**
  * Pagination Component
- * Reusable pagination component with Tailwind styling
+ * Reusable pagination component with UI component composition
  */
 
+import { useCallback, useMemo } from 'react';
+import { Button } from '@/components/ui';
 import './Pagination.scss';
 
 interface PaginationProps {
@@ -13,8 +15,43 @@ interface PaginationProps {
 }
 
 /**
+ * Generates page numbers to display with ellipsis for large page ranges
+ * Memoized to prevent unnecessary recalculations
+ */
+const getPageNumbers = (currentPage: number, totalPages: number): (number | string)[] => {
+  const pages: (number | string)[] = [];
+  const maxPagesToShow = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+  const endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+  if (endPage - startPage < maxPagesToShow - 1) {
+    startPage = Math.max(1, endPage - maxPagesToShow + 1);
+  }
+
+  if (startPage > 1) {
+    pages.push(1);
+    if (startPage > 2) {
+      pages.push('...');
+    }
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
+
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      pages.push('...');
+    }
+    pages.push(totalPages);
+  }
+
+  return pages;
+};
+
+/**
  * Pagination Component
- * Displays page navigation controls
+ * Displays page navigation controls using UI Button component
  */
 export function Pagination({
   currentPage,
@@ -22,93 +59,79 @@ export function Pagination({
   isLoading = false,
   onChange,
 }: PaginationProps) {
-  const handlePrevious = () => {
+  const handlePrevious = useCallback(() => {
     if (currentPage > 1) {
       onChange(currentPage - 1);
     }
-  };
+  }, [currentPage, onChange]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (currentPage < totalPages) {
       onChange(currentPage + 1);
     }
-  };
+  }, [currentPage, totalPages, onChange]);
 
-  // Generate page numbers to display
-  const getPageNumbers = () => {
-    const pages: (number | string)[] = [];
-    const maxPagesToShow = 5;
-    let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
-    let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
-
-    if (endPage - startPage < maxPagesToShow - 1) {
-      startPage = Math.max(1, endPage - maxPagesToShow + 1);
-    }
-
-    if (startPage > 1) {
-      pages.push(1);
-      if (startPage > 2) {
-        pages.push('...');
+  const handlePageClick = useCallback(
+    (page: number | string) => {
+      if (typeof page === 'number') {
+        onChange(page);
       }
-    }
+    },
+    [onChange]
+  );
 
-    for (let i = startPage; i <= endPage; i++) {
-      pages.push(i);
-    }
-
-    if (endPage < totalPages) {
-      if (endPage < totalPages - 1) {
-        pages.push('...');
-      }
-      pages.push(totalPages);
-    }
-
-    return pages;
-  };
+  // Memoize page numbers calculation
+  const pageNumbers = useMemo(
+    () => getPageNumbers(currentPage, totalPages),
+    [currentPage, totalPages]
+  );
 
   return (
     <nav
-      className="pagination flex items-center justify-center gap-2 mt-8"
-      aria-label="Pagination Navigation"
+      className='pagination flex items-center justify-center gap-2 mt-8'
+      aria-label='Pagination Navigation'
     >
       {/* Previous Button */}
-      <button
+      <Button
         onClick={handlePrevious}
         disabled={currentPage === 1 || isLoading}
-        className="pagination__btn pagination__btn--prev"
-        aria-label="Previous page"
+        variant='secondary'
+        size='md'
+        aria-label='Previous page'
       >
         ← Previous
-      </button>
+      </Button>
 
       {/* Page Numbers */}
-      <div className="pagination__pages flex gap-1">
-        {getPageNumbers().map((page, index) => (
-          <button
-            key={`page-${index}`}
-            onClick={() => typeof page === 'number' && onChange(page)}
+      <div className='pagination__pages flex gap-1'>
+        {pageNumbers.map((page, index) => (
+          <Button
+            key={typeof page === 'number' ? `page-${page}` : `ellipsis-${index}`}
+            onClick={() => handlePageClick(page)}
             disabled={page === '...' || currentPage === page || isLoading}
-            className={`pagination__page ${currentPage === page ? 'pagination__page--active' : ''}`}
+            variant={currentPage === page ? 'primary' : 'secondary'}
+            size='sm'
             aria-current={currentPage === page ? 'page' : undefined}
             aria-label={typeof page === 'number' ? `Go to page ${page}` : 'More pages'}
           >
             {page}
-          </button>
+          </Button>
         ))}
       </div>
 
       {/* Next Button */}
-      <button
+      <Button
         onClick={handleNext}
         disabled={currentPage === totalPages || isLoading}
-        className="pagination__btn pagination__btn--next"
-        aria-label="Next page"
+        variant='secondary'
+        size='md'
+        aria-label='Next page'
       >
         Next →
-      </button>
+      </Button>
 
       {/* Page Info */}
-      <div className="pagination__info ml-auto text-sm text-gray-600">
+      <div className='pagination__info ml-auto text-sm text-gray-600'>
         Page {currentPage} of {totalPages}
       </div>
     </nav>

@@ -214,13 +214,13 @@ export const SUCCESS_MESSAGES = {
  */
 export const ENV = {
   /** API base URL - Default to .NET backend at https://localhost:7160 */
-  API_URL: import.meta.env['VITE_API_URL'] || 'https://localhost:7160',
+  API_URL: import.meta.env.VITE_API_URL || 'https://localhost:7160',
 
   /** API timeout */
-  API_TIMEOUT: parseInt(import.meta.env['VITE_API_TIMEOUT'] || '30000', 10),
+  API_TIMEOUT: parseInt(import.meta.env.VITE_API_TIMEOUT || '30000', 10),
 
   /** App environment */
-  ENVIRONMENT: (import.meta.env['VITE_ENV'] || 'development') as
+  ENVIRONMENT: (import.meta.env.VITE_ENV || 'development') as
     | 'development'
     | 'staging'
     | 'production',
@@ -232,7 +232,7 @@ export const ENV = {
   IS_PROD: import.meta.env.PROD,
 
   /** App version */
-  VERSION: import.meta.env['VITE_APP_VERSION'] || '1.0.0',
+  VERSION: import.meta.env.VITE_APP_VERSION || '1.0.0',
 } as const;
 
 /**

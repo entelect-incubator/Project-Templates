@@ -3,7 +3,7 @@
  * Simple global state management for theme switching
  */
 
-import { signal, computed } from '@preact/signals-react';
+import { computed, signal } from '@preact/signals-react';
 
 export type Theme = 'light' | 'dark';
 

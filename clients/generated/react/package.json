@@ -1,0 +1,31 @@
+{
+	"name": "@entelect/pizza-api-client",
+	"version": "1.0.0",
+	"description": "Generated Pizza API client from NSwag",
+	"type": "module",
+	"main": "./src/api/index.ts",
+	"types": "./src/api/index.ts",
+	"exports": {
+		".": {
+			"import": "./src/api/index.ts",
+			"types": "./src/api/index.ts"
+		},
+		"./types": {
+			"import": "./src/api/generated.ts",
+			"types": "./src/api/generated.ts"
+		}
+	},
+	"files": [
+		"src"
+	],
+	"keywords": [
+		"pizza",
+		"api",
+		"client",
+		"nswag",
+		"openapi"
+	],
+	"engines": {
+		"node": ">=18.0.0"
+	}
+}

@@ -4,13 +4,15 @@ using Utilities.Enums;
 
 public abstract class ResultBase
 {
+    public bool HasError => this.ErrorResult != ErrorResults.None;
+
     public ErrorResults ErrorResult { get; set; } = ErrorResults.None;
 
     public string? Message { get; set; }
 
-    public List<string> Errors { get; set; } =[];
+    public List<string> Errors { get; set; } = [];
 
-    public Dictionary<string, List<string>> ValidationErrors { get; set; } =[];
+    public Dictionary<string, List<string>> ValidationErrors { get; set; } = [];
 
     public void AddError(string error)
     {
@@ -30,6 +32,4 @@ public abstract class ResultBase
             existing.AddRange(errors);
         }
     }
-
-    public bool HasError => this.ErrorResult != ErrorResults.None;
 }

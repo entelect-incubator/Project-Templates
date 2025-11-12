@@ -3,8 +3,8 @@
  * Global state management for shopping cart and orders
  */
 
-import { signal, computed } from '@preact/signals-react';
-import type { Pizza, CartItem, CustomerInfo } from '@/features/pizzas/types';
+import { computed, signal } from '@preact/signals-react';
+import type { CartItem, CustomerInfo, Pizza } from '@/features/pizzas/types';
 
 // Cart state
 export const cartItems = signal<CartItem[]>([]);

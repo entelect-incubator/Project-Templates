@@ -25,7 +25,8 @@
       "@hooks/*": ["src/hooks/*"],
       "@api/*": ["src/api/*"],
       "@lib/*": ["src/lib/*"],
-      "@types/*": ["src/types/*"]
+      "@types/*": ["src/types/*"],
+      "@generated/*": ["../../clients/generated/react/src/*"]
     },
 
     /* Linting */

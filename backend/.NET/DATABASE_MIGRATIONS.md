@@ -78,19 +78,19 @@ public interface IDbMigrationRunner
 public class DbMigrationRunner : IDbMigrationRunner
 {
     private readonly string _connectionString;
-    private readonly ILogger<DbMigrationRunner> _logger;
+    private readonly ILogger<DbMigrationRunner> logger;
 
     public DbMigrationRunner(string connectionString, ILogger<DbMigrationRunner> logger)
     {
         _connectionString = connectionString;
-        _logger = logger;
+        logger = logger;
     }
 
     public async Task RunMigrationsAsync()
     {
         try
         {
-            _logger.LogInformation("Starting database migrations...");
+            logger.LogInformation("Starting database migrations...");
 
             var upgrader = DeployChanges.To
                 .PostgresqlDatabase(_connectionString)
@@ -104,15 +104,15 @@ public class DbMigrationRunner : IDbMigrationRunner
 
             if (!result.Successful)
             {
-                _logger.LogError("Database migration failed: {Error}", result.Error?.Message);
+                logger.LogError("Database migration failed: {Error}", result.Error?.Message);
                 throw new InvalidOperationException("Database migration failed", result.Error);
             }
 
-            _logger.LogInformation("Database migrations completed successfully");
+            logger.LogInformation("Database migrations completed successfully");
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Database migration error");
+            logger.LogError(ex, "Database migration error");
             throw;
         }
     }

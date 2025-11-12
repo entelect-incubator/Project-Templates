@@ -23,6 +23,8 @@ public static class DependencyInjection
         // Register Pizza command and query handlers (existing)
         services.AddTransient<ICommandHandler<CreatePizzaCommand, Result<PizzaModel>>, CreatePizzaCommandHandler>();
         services.AddTransient<ICommandHandler<UpdatePizzaCommand, Result<PizzaModel>>, UpdatePizzaCommandHandler>();
+        services.AddTransient<ICommandHandler<DeletePizzaCommand, Result>, DeletePizzaCommandHandler>();
+        services.AddTransient<IQueryHandler<GetPizzaQuery, Result<PizzaModel>>, GetPizzaQueryHandler>();
         services.AddTransient<IQueryHandler<GetAllPizzasQuery, Result<IEnumerable<PizzaModel>>>, GetAllPizzasQueryHandler>();
 
         // Register Order command and query handlers (new)

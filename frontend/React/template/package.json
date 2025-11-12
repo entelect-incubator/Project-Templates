@@ -9,10 +9,16 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
+    "build:ssr": "npm run build:client && npm run build:server",
+    "build:client": "vite build",
+    "build:server": "VITE_SSR=true vite build --mode ssr",
     "preview": "vite preview",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css,json}\" \"tests/**/*.{ts,tsx}\"",
+    "preview:ssr": "node dist/server/entry-server.js",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
     "type-check": "tsc --noEmit",
     "test": "vitest",
     "test:ui": "vitest --ui",
@@ -21,7 +27,7 @@
     "e2e:ui": "playwright test --ui",
     "generate:client": "cd ../../clients/generation && npm run generate:react",
     "generate:client:dev": "cd ../../clients/generation && npm run generate:react -- http://localhost:5000",
-    "pre-commit": "npm run type-check && npm run lint && npm run test"
+    "pre-commit": "npm run type-check && npm run check && npm run test"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -38,9 +44,10 @@
     "zod": "^4.1.12"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.3.4",
     "@playwright/test": "^1.40.1",
     "@testing-library/jest-dom": "^6.1.5",
-    "@testing-library/react": "^14.1.2",
+    "@testing-library/react": "^15.0.7",
     "@types/node": "^20.10.6",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

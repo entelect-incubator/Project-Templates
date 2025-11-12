@@ -6,13 +6,13 @@
  */
 
 import {
+  cartItems,
+  clearOrderError,
+  customerInfo,
   setCurrentOrder,
   setOrderError,
   setOrderLoading,
-  clearOrderError,
   updateOrderStatus,
-  customerInfo,
-  cartItems,
 } from '../store/cartStore';
 
 // Since we're using the generated client, we need to create a wrapper
@@ -82,7 +82,7 @@ export const createOrderService = (): IOrderService => {
     /**
      * Get order status
      */
-    async getOrderStatus(orderId: number) {
+    async getOrderStatus(_orderId: number) {
       try {
         // Call the generated API client
         // This will be: const apiClient = new PizzaApiClient();

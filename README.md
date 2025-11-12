@@ -33,6 +33,9 @@ project-templates/
 │   └── [More languages coming soon]
 ├── frontend/
 │   ├── React/
+│   │   └── template/          # React 19 + TypeScript + Vite application
+│   ├── Angular/
+│   │   └── template/          # Angular 20 + TypeScript + SSR application
 │   └── [More frameworks coming soon]
 ├── ARCHITECTURE.md          # Detailed architecture patterns
 ├── GETTING_STARTED.md       # Quick start guide
@@ -77,9 +80,17 @@ cd your-project
 
 See [backend/.NET/README.md](backend/.NET/README.md) for detailed .NET setup and architecture documentation.
 
-#### Frontend - React
+#### Frontend Templates
 
-*React templates coming soon - offering production-ready architectural patterns for React applications*
+**React 19.2 Template** 🚀 *Ready*
+- Modern React application with TypeScript, Vite, and comprehensive tooling
+- Features: Signal-based state management, OpenAPI integration, shadcn/ui components
+- [Quick Start](./frontend/React/template/GET_STARTED.md) | [Documentation](./frontend/React/template/docs/)
+
+**Angular 20 Template** 🆕 *Ready*  
+- Latest Angular with zoneless architecture, standalone components, and SSR
+- Features: Material Design, reactive signals, OpenTelemetry integration
+- [Quick Start](./frontend/Angular/template/ANGULAR_README.md)
 
 ### Technologies
 
@@ -95,14 +106,25 @@ See [backend/.NET/README.md](backend/.NET/README.md) for detailed .NET setup and
 - **NSwag** - OpenAPI/Swagger integration
 - **NUnit, FluentAssertions, Moq** - Testing framework stack
 
-#### React Stack (Coming Soon)
+#### Frontend Stacks
 
-- React 18+
-- TypeScript
-- Redux or Context API
-- Tailwind CSS
-- Jest & React Testing Library
-- Vite or Next.js
+**React Stack** 🚀
+- React 19.2 with concurrent features
+- TypeScript 5.7 for type safety  
+- Vite for fast development and builds
+- TanStack Query for server state
+- Zustand for client state management
+- Tailwind CSS + shadcn/ui components
+- Jest & React Testing Library for testing
+
+**Angular Stack** 🆕
+- Angular 20.3 with zoneless architecture
+- TypeScript 5.7 for type safety
+- Angular Material for UI components
+- RxJS for reactive programming  
+- Angular Signals for state management
+- SCSS for styling
+- Jasmine & Karma for testing
 
 ## 📚 Architecture Patterns
 
@@ -191,11 +213,12 @@ All templates follow these core principles:
 
 - **For .NET Templates:** .NET 9 SDK
 - **For React Templates:** Node.js 18+, npm/yarn
+- **For Angular Templates:** Node.js 18+, Angular CLI 20+
 - Git
 
 ### Step-by-Step
 
-1. **Explore the templates** - Browse the available architectures in `backend/.NET/` or `frontend/React/`
+1. **Explore the templates** - Browse the available architectures in `backend/.NET/`, `frontend/React/`, or `frontend/Angular/`
 
 2. **Read the architecture documentation** - Start with [ARCHITECTURE.md](ARCHITECTURE.md) to understand the patterns
 
@@ -230,11 +253,19 @@ See the [GETTING_STARTED.md](GETTING_STARTED.md) file for detailed step-by-step 
 - [MediatR GitHub](https://github.com/jbogard/MediatR)
 - [CQRS Pattern](https://martinfowler.com/bliki/CQRS.html)
 
-### React Specific
+### Frontend Specific
 
+**React Resources**
 - [React Documentation](https://react.dev/)
-- [Redux Documentation](https://redux.js.org/)
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [React Testing Library](https://testing-library.com/react)
+- [Vite Guide](https://vitejs.dev/guide/)
+
+**Angular Resources**  
+- [Angular Documentation](https://angular.dev/)
+- [Angular Material](https://material.angular.io/)
+- [RxJS Documentation](https://rxjs.dev/)
+- [Angular Testing Guide](https://angular.io/guide/testing)
 
 ## 🤝 Contributing
 
@@ -258,7 +289,7 @@ These templates are built on years of experience working with different codebase
 
 - Robert C. Martin for Clean Architecture principles
 - Eric Evans for Domain-Driven Design
-- The .NET and React communities for excellent tooling and libraries
+- The .NET, React, and Angular communities for excellent tooling and libraries
 - All contributors and maintainers
 
 ## 📞 Support & Discussion

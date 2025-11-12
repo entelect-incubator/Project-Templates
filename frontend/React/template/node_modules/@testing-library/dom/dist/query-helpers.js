@@ -113,10 +113,7 @@ const wrapAllByQueryWithSuggestion = (query, queryAllByName, variant) => (contai
   if (els.length && suggest) {
     // get a unique list of all suggestion messages.  We are only going to make a suggestion if
     // all the suggestions are the same
-    const uniqueSuggestionMessages = [...new Set(els.map(element => {
-      var _getSuggestedQuery;
-      return (_getSuggestedQuery = (0, _suggestions.getSuggestedQuery)(element, variant)) == null ? void 0 : _getSuggestedQuery.toString();
-    }))];
+    const uniqueSuggestionMessages = [...new Set(els.map(element => (0, _suggestions.getSuggestedQuery)(element, variant)?.toString()))];
     if (
     // only want to suggest if all the els have the same suggestion.
     uniqueSuggestionMessages.length === 1 && !queryAllByName.endsWith(

@@ -1,59 +1,59 @@
-// OrderTrackingPage.scss
+﻿// OrderTrackingPage.scss
 .order-tracking-page {
-  max-width: 800px;
+  max-width: var(--container-lg);
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--spacing-xl);
 
   &__header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-xl);
 
     h1 {
       color: var(--text-primary);
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--spacing-xs);
     }
 
     p {
       color: var(--text-secondary);
-      font-size: 1.1rem;
+      font-size: var(--font-size-lg);
     }
   }
 
   &__manual-lookup {
-    background: var(--surface-secondary);
+    background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
 
     h2 {
-      margin-bottom: 1rem;
+      margin-bottom: var(--spacing-md);
       color: var(--text-primary);
     }
 
     .form-group {
-      margin-bottom: 1rem;
+      margin-bottom: var(--spacing-md);
 
       label {
         display: block;
-        margin-bottom: 0.5rem;
+        margin-bottom: var(--spacing-xs);
         font-weight: 500;
         color: var(--text-primary);
       }
 
       input {
         width: 100%;
-        padding: 0.75rem;
+        padding: var(--spacing-sm);
         border: 1px solid var(--border-color);
-        border-radius: 4px;
-        background: var(--surface-primary);
+        border-radius: var(--radius-xs);
+        background: var(--bg-primary);
         color: var(--text-primary);
-        font-size: 1rem;
+        font-size: var(--font-size-base);
 
         &:focus {
           outline: none;
-          border-color: var(--primary-color);
-          box-shadow: 0 0 0 2px var(--primary-color-alpha);
+          border-color: var(--color-primary);
+          box-shadow: 0 0 0 2px var(--color-primary-alpha);
         }
 
         &::placeholder {
@@ -62,25 +62,25 @@
       }
 
       .error {
-        color: var(--error-color);
-        font-size: 0.875rem;
-        margin-top: 0.25rem;
+        color: var(--color-error);
+        font-size: var(--font-size-sm);
+        margin-top: var(--spacing-xs);
       }
     }
 
     .search-button {
-      background: var(--primary-color);
+      background: var(--color-primary);
       color: white;
       border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
-      font-size: 1rem;
+      padding: var(--spacing-sm) var(--spacing-lg);
+      border-radius: var(--radius-xs);
+      font-size: var(--font-size-base);
       font-weight: 500;
       cursor: pointer;
-      transition: background-color 0.2s;
+      transition: background-color var(--transition-base);
 
       &:hover {
-        background: var(--primary-color-dark);
+        background: var(--color-primary-dark);
       }
 
       &:disabled {
@@ -91,31 +91,31 @@
   }
 
   &__order-info {
-    background: var(--surface-secondary);
+    background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
 
     .order-details {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
 
       .detail-item {
         .label {
           font-weight: 500;
           color: var(--text-secondary);
-          font-size: 0.875rem;
+          font-size: var(--font-size-xs);
           text-transform: uppercase;
           letter-spacing: 0.5px;
         }
 
         .value {
           color: var(--text-primary);
-          font-size: 1.1rem;
-          margin-top: 0.25rem;
+          font-size: var(--font-size-lg);
+          margin-top: var(--spacing-2xs);
         }
       }
     }
@@ -123,12 +123,12 @@
 
   &__status-timeline {
     position: relative;
-    margin: 2rem 0;
+    margin: var(--spacing-xl) 0;
 
     .timeline-step {
       display: flex;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--spacing-lg);
       position: relative;
 
       &:not(:last-child)::after {
@@ -142,12 +142,12 @@
       }
 
       &.active::after {
-        background: var(--primary-color);
+        background: var(--color-primary);
       }
 
       &.completed .step-indicator {
-        background: var(--success-color);
-        border-color: var(--success-color);
+        background: var(--color-success);
+        border-color: var(--color-success);
 
         .step-icon {
           display: block;
@@ -159,22 +159,22 @@
       }
 
       &.active .step-indicator {
-        background: var(--primary-color);
-        border-color: var(--primary-color);
+        background: var(--color-primary);
+        border-color: var(--color-primary);
         color: white;
       }
 
       .step-indicator {
         width: 32px;
         height: 32px;
-        border-radius: 50%;
+        border-radius: var(--radius-full);
         border: 2px solid var(--border-color);
-        background: var(--surface-primary);
+        background: var(--bg-primary);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-right: 1rem;
-        font-size: 0.875rem;
+        margin-right: var(--spacing-md);
+        font-size: var(--font-size-sm);
         font-weight: 600;
         color: var(--text-secondary);
         position: relative;
@@ -192,18 +192,18 @@
         .step-title {
           font-weight: 600;
           color: var(--text-primary);
-          margin-bottom: 0.25rem;
+          margin-bottom: var(--spacing-2xs);
         }
 
         .step-description {
           color: var(--text-secondary);
-          font-size: 0.875rem;
+          font-size: var(--font-size-sm);
         }
 
         .step-time {
           color: var(--text-tertiary);
-          font-size: 0.75rem;
-          margin-top: 0.25rem;
+          font-size: var(--font-size-xs);
+          margin-top: var(--spacing-2xs);
         }
       }
     }
@@ -211,16 +211,16 @@
 
   &__loading {
     text-align: center;
-    padding: 3rem;
+    padding: var(--spacing-3xl);
 
     .spinner {
       width: 40px;
       height: 40px;
       border: 3px solid var(--border-color);
-      border-top: 3px solid var(--primary-color);
-      border-radius: 50%;
+      border-top: 3px solid var(--color-primary);
+      border-radius: var(--radius-full);
       animation: spin 1s linear infinite;
-      margin: 0 auto 1rem;
+      margin: 0 auto var(--spacing-md);
     }
 
     p {
@@ -230,54 +230,54 @@
 
   &__error {
     background: var(--error-color-alpha);
-    border: 1px solid var(--error-color);
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 2rem;
+    border: 1px solid var(--color-error);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
 
     .error-icon {
-      color: var(--error-color);
-      margin-right: 0.5rem;
+      color: var(--color-error);
+      margin-right: var(--spacing-xs);
     }
 
     .error-message {
-      color: var(--error-color);
+      color: var(--color-error);
       font-weight: 500;
     }
   }
 
   &__actions {
     display: flex;
-    gap: 1rem;
+    gap: var(--spacing-md);
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: var(--spacing-xl);
 
     .btn {
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
-      font-size: 1rem;
+      padding: var(--spacing-sm) var(--spacing-lg);
+      border-radius: var(--radius-xs);
+      font-size: var(--font-size-base);
       font-weight: 500;
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all var(--transition-base);
       border: none;
 
       &--primary {
-        background: var(--primary-color);
+        background: var(--color-primary);
         color: white;
 
         &:hover {
-          background: var(--primary-color-dark);
+          background: var(--color-primary-dark);
         }
       }
 
       &--secondary {
         background: transparent;
-        color: var(--primary-color);
-        border: 1px solid var(--primary-color);
+        color: var(--color-primary);
+        border: 1px solid var(--color-primary);
 
         &:hover {
-          background: var(--primary-color-alpha);
+          background: var(--color-primary-alpha);
         }
       }
     }
@@ -296,7 +296,7 @@
 // Responsive adjustments
 @media (max-width: 768px) {
   .order-tracking-page {
-    padding: 1rem;
+    padding: var(--spacing-md);
 
     &__order-info .order-details {
       grid-template-columns: 1fr;

@@ -1,0 +1,131 @@
+/**
+ * Global Theme Variables
+ * Centralized design system for spacing, colors, shadows, and typography
+ * All magic numbers should reference these variables
+ */
+
+:root {
+  /* ===== SPACING SCALE ===== */
+  --spacing-2xs: 0.25rem; /* 4px */
+  --spacing-xs: 0.5rem; /* 8px */
+  --spacing-sm: 0.75rem; /* 12px */
+  --spacing-md: 1rem; /* 16px */
+  --spacing-lg: 1.5rem; /* 24px */
+  --spacing-xl: 2rem; /* 32px */
+  --spacing-2xl: 2.5rem; /* 40px */
+  --spacing-3xl: 3rem; /* 48px */
+  --spacing-4xl: 4rem; /* 64px */
+
+  /* ===== BORDER RADIUS SCALE ===== */
+  --radius-2xs: 0.25rem; /* 4px */
+  --radius-xs: 0.375rem; /* 6px */
+  --radius-sm: 0.5rem; /* 8px */
+  --radius-md: 0.75rem; /* 12px */
+  --radius-lg: 1rem; /* 16px */
+  --radius-xl: 1.5rem; /* 24px */
+  --radius-2xl: 2rem; /* 32px */
+  --radius-full: 9999px; /* Full circle */
+
+  /* ===== COLORS - PRIMARY ===== */
+  --color-primary: #dc3348;
+  --color-primary-dark: #a01c2f;
+  --color-primary-light: #e84c5e;
+  --color-primary-alpha: rgba(220, 51, 72, 0.1);
+
+  /* ===== COLORS - ACCENT ===== */
+  --color-accent: #fec844;
+  --color-accent-dark: #fed159;
+  --color-accent-light: #fed96e;
+  --color-accent-alpha: rgba(254, 200, 68, 0.3);
+
+  /* ===== COLORS - SEMANTIC ===== */
+  --color-success: #10b981;
+  --color-success-alpha: rgba(16, 185, 129, 0.1);
+  --color-error: #dc2626;
+  --color-error-alpha: rgba(220, 38, 38, 0.1);
+  --color-warning: #f59e0b;
+  --color-warning-alpha: rgba(245, 158, 11, 0.1);
+  --color-info: #3b82f6;
+  --color-info-alpha: rgba(59, 130, 246, 0.1);
+
+  /* ===== COLORS - BACKGROUNDS ===== */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f0f0f0;
+  --bg-hover: #e5e7eb;
+  --bg-disabled: #f3f4f6;
+
+  /* ===== COLORS - TEXT ===== */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+
+  /* ===== COLORS - BORDERS ===== */
+  --border-color: #e2e8f0;
+  --border-color-dark: #cbd5e1;
+  --border-color-light: #f1f5f9;
+
+  /* ===== SHADOWS ===== */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
+  --shadow-primary: 0 4px 12px rgba(220, 51, 72, 0.2);
+  --shadow-primary-lg: 0 12px 28px rgba(220, 51, 72, 0.2);
+  --shadow-accent: 0 5px 15px rgba(254, 200, 68, 0.3);
+
+  /* ===== CONTAINER SIZES ===== */
+  --container-sm: 600px;
+  --container-md: 800px;
+  --container-lg: 1200px;
+  --container-xl: 1400px;
+
+  /* ===== FONT SIZES ===== */
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.1rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --font-size-2xl: 1.5rem; /* 24px */
+  --font-size-3xl: 1.75rem; /* 28px */
+  --font-size-4xl: 2rem; /* 32px */
+  --font-size-5xl: 2.5rem; /* 40px */
+
+  /* ===== TRANSITIONS ===== */
+  --transition-fast: 0.15s ease-in-out;
+  --transition-base: 0.2s ease-in-out;
+  --transition-slow: 0.3s ease-in-out;
+  --transition-slower: 0.5s ease-out;
+
+  /* ===== Z-INDEX SCALE ===== */
+  --z-dropdown: 100;
+  --z-sticky: 500;
+  --z-fixed: 900;
+  --z-modal: 1000;
+  --z-tooltip: 1100;
+}
+
+/* ===== DARK MODE ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --bg-tertiary: #3a3a3a;
+    --bg-hover: #3a3a3a;
+    --bg-disabled: #2a2a2a;
+
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-tertiary: #808080;
+
+    --border-color: #404040;
+    --border-color-dark: #505050;
+    --border-color-light: #303030;
+
+    --color-primary: #fec844;
+    --color-accent: #dc3348;
+    --color-error: #f87171;
+  }
+}

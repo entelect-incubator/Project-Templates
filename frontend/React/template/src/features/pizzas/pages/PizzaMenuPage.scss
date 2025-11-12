@@ -1,15 +1,483 @@
 /**
  * Pizza Menu Page Styles
- * Pezza theme integration with vibrant red (#dc3348) and gold (#fec844)
+ * Uses centralized theme variables for consistency
  */
 
 .pizza-menu-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
-  padding: 2rem 1rem;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  padding: var(--spacing-xl) var(--spacing-md);
+}
 
-  @media (prefers-color-scheme: dark) {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+// Header
+.pizza-header {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+  padding: var(--spacing-3xl) var(--spacing-xl);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-3xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-primary-lg);
+  animation: slideDown var(--transition-slower);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    text-align: center;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: var(--font-size-5xl);
+    font-weight: 800;
+    margin: 0;
+    font-family: 'Cookie', cursive;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  &__subtitle {
+    font-size: var(--font-size-lg);
+    margin: var(--spacing-xs) 0 0;
+    opacity: 0.95;
+    font-family: 'Belleza', sans-serif;
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}
+
+.pizza-cart-btn {
+  background-color: var(--color-accent);
+  color: #1a1a1a;
+  font-weight: 600;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+
+  &:hover {
+    background-color: var(--color-accent-dark);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-accent);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Container Layout
+.pizza-container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Pizza Grid Section
+.pizza-grid-section {
+  animation: fadeIn var(--transition-slower);
+}
+
+.section-title {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xl);
+  font-family: 'Cookie', cursive;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4xl) var(--spacing-xl);
+  text-align: center;
+
+  p {
+    margin-top: var(--spacing-md);
+    color: var(--text-secondary);
+    font-size: var(--font-size-lg);
+  }
+}
+
+// Pizza Grid
+.pizza-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--spacing-lg);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Pizza Card
+.pizza-card {
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all cubic-bezier(0.4, 0, 0.2, 1) var(--transition-slow);
+  animation: popIn var(--transition-slower);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-primary-lg);
+
+    .pizza-card__image {
+      transform: scale(1.08);
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    transition: transform var(--transition-base);
+  }
+
+  &__content {
+    padding: var(--spacing-lg);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  &__name {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    font-family: 'Cookie', cursive;
+  }
+
+  &__description {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    margin: var(--spacing-xs) 0;
+    line-height: 1.4;
+    font-family: 'Belleza', sans-serif;
+  }
+
+  &__toppings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+    margin: var(--spacing-md) 0;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--spacing-lg);
+    gap: var(--spacing-md);
+  }
+
+  &__price {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: var(--color-primary);
+  }
+
+  &__action {
+    flex: 1;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+
+    &:hover {
+      background-color: var(--color-primary-dark);
+      transform: scale(1.05);
+      box-shadow: var(--shadow-primary);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+// Sidebar Cart
+.pizza-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  padding: var(--spacing-md);
+  animation: slideInRight var(--transition-base);
+  z-index: var(--z-modal);
+
+  @media (max-width: 480px) {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.pizza-cart-card {
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.15);
+
+  @media (max-width: 480px) {
+    height: auto;
+    max-height: 90vh;
+  }
+}
+
+.pizza-cart {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    border-bottom: 2px solid var(--color-accent);
+  }
+
+  &__title {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-primary);
+    font-family: 'Cookie', cursive;
+  }
+
+  &__empty {
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-style: italic;
+  }
+
+  &__items {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-md);
+  }
+
+  &__divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    margin: var(--spacing-md) 0;
+  }
+
+  &__summary {
+    padding: var(--spacing-md);
+  }
+
+  &__total {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  &__checkout {
+    padding: var(--spacing-lg);
+    border-top: 2px solid var(--border-color-light);
+  }
+}
+
+// Cart Item
+.pizza-cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-xs);
+  gap: var(--spacing-md);
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    font-size: var(--font-size-base);
+    font-family: 'Belleza', sans-serif;
+  }
+
+  &__price {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    margin: var(--spacing-xs) 0 0;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  &__qty {
+    width: 50px;
+    padding: var(--spacing-xs);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: var(--bg-primary);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+  }
+}
+
+// Customer Info Form
+.pizza-customer-info {
+  h4 {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 var(--spacing-md);
+    font-family: 'Cookie', cursive;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-base);
+    font-family: 'Belleza', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: border-color var(--transition-base);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+
+    &::placeholder {
+      color: var(--text-tertiary);
+    }
+  }
+}
+
+.pizza-checkout-btn {
+  width: 100%;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  margin-top: var(--spacing-md);
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-primary-dark);
+    transform: scale(1.02);
+    box-shadow: var(--shadow-primary-lg);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Animations
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

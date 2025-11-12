@@ -30,7 +30,7 @@ export interface FetchOptions {
  * Export singleton instance for use throughout the application
  */
 export const apiClient = {
-  baseUrl: import.meta.env['VITE_API_BASE_URL'] || 'https://localhost:7160',
+  baseUrl: import.meta.env.VITE_API_BASE_URL || 'https://localhost:7160',
 };
 
 export default apiClient;

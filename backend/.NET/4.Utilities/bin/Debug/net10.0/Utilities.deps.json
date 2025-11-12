@@ -13,8 +13,8 @@
           "Correlate.AspNetCore": "6.1.1",
           "FluentValidation": "12.1.0",
           "LazyCache.AspNetCore": "2.4.0",
-          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "10.0.0-rc.2.25502.107",
-          "Microsoft.Extensions.Http.Polly": "10.0.0-rc.2.25502.107",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "10.0.0",
+          "Microsoft.Extensions.Http.Polly": "10.0.0",
           "Microsoft.FeatureManagement": "4.3.0",
           "NSwag.AspNetCore": "14.6.2",
           "NWebsec.AspNetCore.Middleware": "3.0.0",
@@ -181,27 +181,27 @@
           }
         }
       },
-      "Microsoft.AspNetCore.JsonPatch/10.0.0-rc.2.25502.107": {
+      "Microsoft.AspNetCore.JsonPatch/10.0.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
           "lib/net10.0/Microsoft.AspNetCore.JsonPatch.dll": {
             "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.25.50307"
+            "fileVersion": "10.0.25.52411"
           }
         }
       },
-      "Microsoft.AspNetCore.Mvc.NewtonsoftJson/10.0.0-rc.2.25502.107": {
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson/10.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.JsonPatch": "10.0.0-rc.2.25502.107",
+          "Microsoft.AspNetCore.JsonPatch": "10.0.0",
           "Newtonsoft.Json": "13.0.3",
           "Newtonsoft.Json.Bson": "1.0.2"
         },
         "runtime": {
           "lib/net10.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {
             "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.25.50307"
+            "fileVersion": "10.0.25.52411"
           }
         }
       },
@@ -213,7 +213,7 @@
           }
         }
       },
-      "Microsoft.Extensions.Http.Polly/10.0.0-rc.2.25502.107": {
+      "Microsoft.Extensions.Http.Polly/10.0.0": {
         "dependencies": {
           "Polly": "7.2.4",
           "Polly.Extensions.Http": "3.0.0"
@@ -221,7 +221,7 @@
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.Http.Polly.dll": {
             "assemblyVersion": "10.0.0.0",
-            "fileVersion": "10.0.25.50307"
+            "fileVersion": "10.0.25.52411"
           }
         }
       },
@@ -685,19 +685,19 @@
       "path": "lazycache.aspnetcore/2.4.0",
       "hashPath": "lazycache.aspnetcore.2.4.0.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.JsonPatch/10.0.0-rc.2.25502.107": {
+    "Microsoft.AspNetCore.JsonPatch/10.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-fROVfjJo4g3yiOS+aXT3s5v9pj3ET4s1ZEKUgSsrtCnNLSls9IQe72eB/9AeOtvV5yRkrTUks5JhMjNXEkcT1w==",
-      "path": "microsoft.aspnetcore.jsonpatch/10.0.0-rc.2.25502.107",
-      "hashPath": "microsoft.aspnetcore.jsonpatch.10.0.0-rc.2.25502.107.nupkg.sha512"
+      "sha512": "sha512-+hISlxEFfSmgVtJIzUenjkTcNVHvfU/LNSekIQQb001tb8Vrol5OqQMgiD+cz97zkguvFtmeVAejL6sIUnBEpA==",
+      "path": "microsoft.aspnetcore.jsonpatch/10.0.0",
+      "hashPath": "microsoft.aspnetcore.jsonpatch.10.0.0.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Mvc.NewtonsoftJson/10.0.0-rc.2.25502.107": {
+    "Microsoft.AspNetCore.Mvc.NewtonsoftJson/10.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-gre0g5wycPvI9UPJWjzwSXRoLFPBX+b/i+L/pI+Br26uv88MwFL62BWGmaozGXysm1pfGfODQb2GbxOvo3eQfw==",
-      "path": "microsoft.aspnetcore.mvc.newtonsoftjson/10.0.0-rc.2.25502.107",
-      "hashPath": "microsoft.aspnetcore.mvc.newtonsoftjson.10.0.0-rc.2.25502.107.nupkg.sha512"
+      "sha512": "sha512-EMDUybl6z95zX0YdLrTH8KnLyietzRQgseuzbEtiEpLy0nMXd2Xvvda09Q4DYGfeVRS1J1XQoTGCOEao6kJcgw==",
+      "path": "microsoft.aspnetcore.mvc.newtonsoftjson/10.0.0",
+      "hashPath": "microsoft.aspnetcore.mvc.newtonsoftjson.10.0.0.nupkg.sha512"
     },
     "Microsoft.Bcl.TimeProvider/8.0.1": {
       "type": "package",
@@ -706,12 +706,12 @@
       "path": "microsoft.bcl.timeprovider/8.0.1",
       "hashPath": "microsoft.bcl.timeprovider.8.0.1.nupkg.sha512"
     },
-    "Microsoft.Extensions.Http.Polly/10.0.0-rc.2.25502.107": {
+    "Microsoft.Extensions.Http.Polly/10.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aY5vLcrhdXCHsCjYI2lNwfat2vdSuiPs0FFZiy7IM6zcyqdxaefG8J8ezTKkZyiuAtznjVJJT70B660l/WlsxA==",
-      "path": "microsoft.extensions.http.polly/10.0.0-rc.2.25502.107",
-      "hashPath": "microsoft.extensions.http.polly.10.0.0-rc.2.25502.107.nupkg.sha512"
+      "sha512": "sha512-Jzb6e7kQc/iKDlMt8q8p9Q0rkUi75L/ZFHHTGM4mM6dJBn64YRUgW9k2/Zx7VnsIuu61r5Fhoa6075GTFYo5kg==",
+      "path": "microsoft.extensions.http.polly/10.0.0",
+      "hashPath": "microsoft.extensions.http.polly.10.0.0.nupkg.sha512"
     },
     "Microsoft.FeatureManagement/4.3.0": {
       "type": "package",

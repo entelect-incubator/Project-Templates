@@ -3,7 +3,7 @@
  * Uses Preact Signals for state management
  */
 
-import { themeSignal, themeActions } from '@/stores/theme';
+import { themeActions, themeSignal } from '@/stores/theme';
 import './ThemeButton.scss';
 
 export function ThemeButton() {
@@ -11,8 +11,8 @@ export function ThemeButton() {
 
   return (
     <button
-      type="button"
-      className="theme-button"
+      type='button'
+      className='theme-button'
       onClick={themeActions.toggle}
       aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
       title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}

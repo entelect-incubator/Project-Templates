@@ -20,7 +20,7 @@ This file contains guidelines for GitHub Copilot to follow when generating code 
 **Naming Conventions**
 - Classes: PascalCase (e.g., `UserService`)
 - Interfaces: IPascalCase (e.g., `IUserRepository`)
-- Private fields: _camelCase (e.g., `_userRepository`)
+- Private fields: _camelCase (e.g., `userRepository`)
 - Methods: PascalCase (e.g., `GetUserAsync`)
 - Constants: PascalCase (e.g., `MaxRetryAttempts`)
 
@@ -41,32 +41,23 @@ This file contains guidelines for GitHub Copilot to follow when generating code 
   }
   catch (SpecificException ex)
   {
-      _logger.LogWarning(ex, "Context about what failed");
+      logger.LogWarning(ex, "Context about what failed");
       throw;
   }
   catch (Exception ex)
   {
-      _logger.LogError(ex, "Unexpected error");
+      logger.LogError(ex, "Unexpected error");
       throw new ApplicationException("User-friendly message", ex);
   }
   ```
 
 **Dependency Injection**
 - Inject dependencies through constructor
-- Use readonly fields for dependencies
 - Favor abstractions over concrete types
 - Example:
   ```csharp
-  public class UserService
+  public class UserService(IUserRepository userRepository, ILogger<UserService> logger)
   {
-      private readonly IUserRepository _userRepository;
-      private readonly ILogger<UserService> _logger;
-
-      public UserService(IUserRepository userRepository, ILogger<UserService> logger)
-      {
-          _userRepository = userRepository;
-          _logger = logger;
-      }
   }
   ```
 
@@ -134,7 +125,7 @@ This file contains guidelines for GitHub Copilot to follow when generating code 
 - Include operation IDs for tracing
 - Example:
   ```csharp
-  _logger.LogInformation("User created: {UserId} by {RequesterId}",
+  logger.LogInformation("User created: {UserId} by {RequesterId}",
       newUser.Id, currentUserId);
   ```
 

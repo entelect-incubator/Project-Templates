@@ -5,9 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 public interface ICommand<TResult>
 {
 }
+
 public interface IQuery<TResult>
 {
 }
+
 public interface INotification
 {
 }

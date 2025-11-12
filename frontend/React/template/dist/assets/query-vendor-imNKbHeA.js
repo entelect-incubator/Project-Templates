@@ -1,2 +1,2311 @@
-var t,e,s,i,n,r,a,o,h,u,l,c,d,p,f,y,v,m,b,g,w,O,M,k,C,S,R,P,q,E,F,x,W,Q,A,T,D,U,j,K,I,L,H,_,G,B,N,$,z,J,V,X,Y,Z,tt,et,st,it,nt,rt,at,ot,ht,ut,lt,ct,dt,pt,ft,yt,vt,mt,bt,gt,wt,Ot,Mt,kt,Ct,St=t=>{throw TypeError(t)},Rt=(t,e,s)=>e.has(t)||St("Cannot "+s),Pt=(t,e,s)=>(Rt(t,e,"read from private field"),s?s.call(t):e.get(t)),qt=(t,e,s)=>e.has(t)?St("Cannot add the same private member more than once"):e instanceof WeakSet?e.add(t):e.set(t,s),Et=(t,e,s,i)=>(Rt(t,e,"write to private field"),i?i.call(t,s):e.set(t,s),s),Ft=(t,e,s)=>(Rt(t,e,"access private method"),s),xt=(t,e,s,i)=>({set _(i){Et(t,e,i,s)},get _(){return Pt(t,e,i)}});import{r as Wt}from"./react-vendor-aonCOLXD.js";var Qt={exports:{}},At={},Tt=Symbol.for("react.transitional.element"),Dt=Symbol.for("react.fragment");function Ut(t,e,s){var i=null;if(void 0!==s&&(i=""+s),void 0!==e.key&&(i=""+e.key),"key"in e)for(var n in s={},e)"key"!==n&&(s[n]=e[n]);else s=e;return e=s.ref,{$$typeof:Tt,type:t,key:i,ref:void 0!==e?e:null,props:s}}At.Fragment=Dt,At.jsx=Ut,At.jsxs=Ut,Qt.exports=At;var jt=Qt.exports,Kt=class{constructor(){this.listeners=new Set,this.subscribe=this.subscribe.bind(this)}subscribe(t){return this.listeners.add(t),this.onSubscribe(),()=>{this.listeners.delete(t),this.onUnsubscribe()}}hasListeners(){return this.listeners.size>0}onSubscribe(){}onUnsubscribe(){}},It={setTimeout:(t,e)=>setTimeout(t,e),clearTimeout:t=>clearTimeout(t),setInterval:(t,e)=>setInterval(t,e),clearInterval:t=>clearInterval(t)},Lt=new(s=class{constructor(){qt(this,t,It),qt(this,e,!1)}setTimeoutProvider(e){Et(this,t,e)}setTimeout(e,s){return Pt(this,t).setTimeout(e,s)}clearTimeout(e){Pt(this,t).clearTimeout(e)}setInterval(e,s){return Pt(this,t).setInterval(e,s)}clearInterval(e){Pt(this,t).clearInterval(e)}},t=new WeakMap,e=new WeakMap,s);var Ht="undefined"==typeof window||"Deno"in globalThis;function _t(){}function Gt(t){return"number"==typeof t&&t>=0&&t!==1/0}function Bt(t,e){return Math.max(t+(e||0)-Date.now(),0)}function Nt(t,e){return"function"==typeof t?t(e):t}function $t(t,e){return"function"==typeof t?t(e):t}function zt(t,e){const{type:s="all",exact:i,fetchStatus:n,predicate:r,queryKey:a,stale:o}=t;if(a)if(i){if(e.queryHash!==Vt(a,e.options))return!1}else if(!Yt(e.queryKey,a))return!1;if("all"!==s){const t=e.isActive();if("active"===s&&!t)return!1;if("inactive"===s&&t)return!1}return("boolean"!=typeof o||e.isStale()===o)&&((!n||n===e.state.fetchStatus)&&!(r&&!r(e)))}function Jt(t,e){const{exact:s,status:i,predicate:n,mutationKey:r}=t;if(r){if(!e.options.mutationKey)return!1;if(s){if(Xt(e.options.mutationKey)!==Xt(r))return!1}else if(!Yt(e.options.mutationKey,r))return!1}return(!i||e.state.status===i)&&!(n&&!n(e))}function Vt(t,e){return((null==e?void 0:e.queryKeyHashFn)||Xt)(t)}function Xt(t){return JSON.stringify(t,(t,e)=>ie(e)?Object.keys(e).sort().reduce((t,s)=>(t[s]=e[s],t),{}):e)}function Yt(t,e){return t===e||typeof t==typeof e&&(!(!t||!e||"object"!=typeof t||"object"!=typeof e)&&Object.keys(e).every(s=>Yt(t[s],e[s])))}var Zt=Object.prototype.hasOwnProperty;function te(t,e){if(t===e)return t;const s=se(t)&&se(e);if(!(s||ie(t)&&ie(e)))return e;const i=(s?t:Object.keys(t)).length,n=s?e:Object.keys(e),r=n.length,a=s?new Array(r):{};let o=0;for(let h=0;h<r;h++){const r=s?h:n[h],u=t[r],l=e[r];if(u===l){a[r]=u,(s?h<i:Zt.call(t,r))&&o++;continue}if(null===u||null===l||"object"!=typeof u||"object"!=typeof l){a[r]=l;continue}const c=te(u,l);a[r]=c,c===u&&o++}return i===r&&o===i?t:a}function ee(t,e){if(!e||Object.keys(t).length!==Object.keys(e).length)return!1;for(const s in t)if(t[s]!==e[s])return!1;return!0}function se(t){return Array.isArray(t)&&t.length===Object.keys(t).length}function ie(t){if(!ne(t))return!1;const e=t.constructor;if(void 0===e)return!0;const s=e.prototype;return!!ne(s)&&(!!s.hasOwnProperty("isPrototypeOf")&&Object.getPrototypeOf(t)===Object.prototype)}function ne(t){return"[object Object]"===Object.prototype.toString.call(t)}function re(t,e,s){return"function"==typeof s.structuralSharing?s.structuralSharing(t,e):!1!==s.structuralSharing?te(t,e):e}function ae(t,e,s=0){const i=[...t,e];return s&&i.length>s?i.slice(1):i}function oe(t,e,s=0){const i=[e,...t];return s&&i.length>s?i.slice(0,-1):i}var he=Symbol();function ue(t,e){return!t.queryFn&&(null==e?void 0:e.initialPromise)?()=>e.initialPromise:t.queryFn&&t.queryFn!==he?t.queryFn:()=>Promise.reject(new Error(`Missing queryFn: '${t.queryHash}'`))}function le(t,e){return"function"==typeof t?t(...e):!!t}var ce=new(a=class extends Kt{constructor(){super(),qt(this,i),qt(this,n),qt(this,r),Et(this,r,t=>{if(!Ht&&window.addEventListener){const e=()=>t();return window.addEventListener("visibilitychange",e,!1),()=>{window.removeEventListener("visibilitychange",e)}}})}onSubscribe(){Pt(this,n)||this.setEventListener(Pt(this,r))}onUnsubscribe(){var t;this.hasListeners()||(null==(t=Pt(this,n))||t.call(this),Et(this,n,void 0))}setEventListener(t){var e;Et(this,r,t),null==(e=Pt(this,n))||e.call(this),Et(this,n,t(t=>{"boolean"==typeof t?this.setFocused(t):this.onFocus()}))}setFocused(t){Pt(this,i)!==t&&(Et(this,i,t),this.onFocus())}onFocus(){const t=this.isFocused();this.listeners.forEach(e=>{e(t)})}isFocused(){var t;return"boolean"==typeof Pt(this,i)?Pt(this,i):"hidden"!==(null==(t=globalThis.document)?void 0:t.visibilityState)}},i=new WeakMap,n=new WeakMap,r=new WeakMap,a);function de(){let t,e;const s=new Promise((s,i)=>{t=s,e=i});function i(t){Object.assign(s,t),delete s.resolve,delete s.reject}return s.status="pending",s.catch(()=>{}),s.resolve=e=>{i({status:"fulfilled",value:e}),t(e)},s.reject=t=>{i({status:"rejected",reason:t}),e(t)},s}var pe=function(t){setTimeout(t,0)};var fe=function(){let t=[],e=0,s=t=>{t()},i=t=>{t()},n=pe;const r=i=>{e?t.push(i):n(()=>{s(i)})};return{batch:r=>{let a;e++;try{a=r()}finally{e--,e||(()=>{const e=t;t=[],e.length&&n(()=>{i(()=>{e.forEach(t=>{s(t)})})})})()}return a},batchCalls:t=>(...e)=>{r(()=>{t(...e)})},schedule:r,setNotifyFunction:t=>{s=t},setBatchNotifyFunction:t=>{i=t},setScheduler:t=>{n=t}}}(),ye=new(l=class extends Kt{constructor(){super(),qt(this,o,!0),qt(this,h),qt(this,u),Et(this,u,t=>{if(!Ht&&window.addEventListener){const e=()=>t(!0),s=()=>t(!1);return window.addEventListener("online",e,!1),window.addEventListener("offline",s,!1),()=>{window.removeEventListener("online",e),window.removeEventListener("offline",s)}}})}onSubscribe(){Pt(this,h)||this.setEventListener(Pt(this,u))}onUnsubscribe(){var t;this.hasListeners()||(null==(t=Pt(this,h))||t.call(this),Et(this,h,void 0))}setEventListener(t){var e;Et(this,u,t),null==(e=Pt(this,h))||e.call(this),Et(this,h,t(this.setOnline.bind(this)))}setOnline(t){Pt(this,o)!==t&&(Et(this,o,t),this.listeners.forEach(e=>{e(t)}))}isOnline(){return Pt(this,o)}},o=new WeakMap,h=new WeakMap,u=new WeakMap,l);function ve(t){return Math.min(1e3*2**t,3e4)}function me(t){return"online"!==(t??"online")||ye.isOnline()}var be=class extends Error{constructor(t){super("CancelledError"),this.revert=null==t?void 0:t.revert,this.silent=null==t?void 0:t.silent}};function ge(t){let e,s=!1,i=0;const n=de(),r=()=>"pending"!==n.status,a=()=>ce.isFocused()&&("always"===t.networkMode||ye.isOnline())&&t.canRun(),o=()=>me(t.networkMode)&&t.canRun(),h=t=>{r()||(null==e||e(),n.resolve(t))},u=t=>{r()||(null==e||e(),n.reject(t))},l=()=>new Promise(s=>{var i;e=t=>{(r()||a())&&s(t)},null==(i=t.onPause)||i.call(t)}).then(()=>{var s;e=void 0,r()||null==(s=t.onContinue)||s.call(t)}),c=()=>{if(r())return;let e;const n=0===i?t.initialPromise:void 0;try{e=n??t.fn()}catch(o){e=Promise.reject(o)}Promise.resolve(e).then(h).catch(e=>{var n;if(r())return;const o=t.retry??(Ht?0:3),h=t.retryDelay??ve,d="function"==typeof h?h(i,e):h,p=!0===o||"number"==typeof o&&i<o||"function"==typeof o&&o(i,e);var f;!s&&p?(i++,null==(n=t.onFail)||n.call(t,i,e),(f=d,new Promise(t=>{Lt.setTimeout(t,f)})).then(()=>a()?void 0:l()).then(()=>{s?u(e):c()})):u(e)})};return{promise:n,status:()=>n.status,cancel:e=>{var s;if(!r()){const i=new be(e);u(i),null==(s=t.onCancel)||s.call(t,i)}},continue:()=>(null==e||e(),n),cancelRetry:()=>{s=!0},continueRetry:()=>{s=!1},canStart:o,start:()=>(o()?c():l().then(c),n)}}var we=(d=class{constructor(){qt(this,c)}destroy(){this.clearGcTimeout()}scheduleGc(){this.clearGcTimeout(),Gt(this.gcTime)&&Et(this,c,Lt.setTimeout(()=>{this.optionalRemove()},this.gcTime))}updateGcTime(t){this.gcTime=Math.max(this.gcTime||0,t??(Ht?1/0:3e5))}clearGcTimeout(){Pt(this,c)&&(Lt.clearTimeout(Pt(this,c)),Et(this,c,void 0))}},c=new WeakMap,d),Oe=(M=class extends we{constructor(t){super(),qt(this,w),qt(this,p),qt(this,f),qt(this,y),qt(this,v),qt(this,m),qt(this,b),qt(this,g),Et(this,g,!1),Et(this,b,t.defaultOptions),this.setOptions(t.options),this.observers=[],Et(this,v,t.client),Et(this,y,Pt(this,v).getQueryCache()),this.queryKey=t.queryKey,this.queryHash=t.queryHash,Et(this,p,Ce(this.options)),this.state=t.state??Pt(this,p),this.scheduleGc()}get meta(){return this.options.meta}get promise(){var t;return null==(t=Pt(this,m))?void 0:t.promise}setOptions(t){if(this.options={...Pt(this,b),...t},this.updateGcTime(this.options.gcTime),this.state&&void 0===this.state.data){const t=Ce(this.options);void 0!==t.data&&(this.setState(ke(t.data,t.dataUpdatedAt)),Et(this,p,t))}}optionalRemove(){this.observers.length||"idle"!==this.state.fetchStatus||Pt(this,y).remove(this)}setData(t,e){const s=re(this.state.data,t,this.options);return Ft(this,w,O).call(this,{data:s,type:"success",dataUpdatedAt:null==e?void 0:e.updatedAt,manual:null==e?void 0:e.manual}),s}setState(t,e){Ft(this,w,O).call(this,{type:"setState",state:t,setStateOptions:e})}cancel(t){var e,s;const i=null==(e=Pt(this,m))?void 0:e.promise;return null==(s=Pt(this,m))||s.cancel(t),i?i.then(_t).catch(_t):Promise.resolve()}destroy(){super.destroy(),this.cancel({silent:!0})}reset(){this.destroy(),this.setState(Pt(this,p))}isActive(){return this.observers.some(t=>!1!==$t(t.options.enabled,this))}isDisabled(){return this.getObserversCount()>0?!this.isActive():this.options.queryFn===he||this.state.dataUpdateCount+this.state.errorUpdateCount===0}isStatic(){return this.getObserversCount()>0&&this.observers.some(t=>"static"===Nt(t.options.staleTime,this))}isStale(){return this.getObserversCount()>0?this.observers.some(t=>t.getCurrentResult().isStale):void 0===this.state.data||this.state.isInvalidated}isStaleByTime(t=0){return void 0===this.state.data||"static"!==t&&(!!this.state.isInvalidated||!Bt(this.state.dataUpdatedAt,t))}onFocus(){var t;const e=this.observers.find(t=>t.shouldFetchOnWindowFocus());null==e||e.refetch({cancelRefetch:!1}),null==(t=Pt(this,m))||t.continue()}onOnline(){var t;const e=this.observers.find(t=>t.shouldFetchOnReconnect());null==e||e.refetch({cancelRefetch:!1}),null==(t=Pt(this,m))||t.continue()}addObserver(t){this.observers.includes(t)||(this.observers.push(t),this.clearGcTimeout(),Pt(this,y).notify({type:"observerAdded",query:this,observer:t}))}removeObserver(t){this.observers.includes(t)&&(this.observers=this.observers.filter(e=>e!==t),this.observers.length||(Pt(this,m)&&(Pt(this,g)?Pt(this,m).cancel({revert:!0}):Pt(this,m).cancelRetry()),this.scheduleGc()),Pt(this,y).notify({type:"observerRemoved",query:this,observer:t}))}getObserversCount(){return this.observers.length}invalidate(){this.state.isInvalidated||Ft(this,w,O).call(this,{type:"invalidate"})}async fetch(t,e){var s,i,n,r,a,o,h,u,l,c,d,p;if("idle"!==this.state.fetchStatus&&"rejected"!==(null==(s=Pt(this,m))?void 0:s.status()))if(void 0!==this.state.data&&(null==e?void 0:e.cancelRefetch))this.cancel({silent:!0});else if(Pt(this,m))return Pt(this,m).continueRetry(),Pt(this,m).promise;if(t&&this.setOptions(t),!this.options.queryFn){const t=this.observers.find(t=>t.options.queryFn);t&&this.setOptions(t.options)}const b=new AbortController,M=t=>{Object.defineProperty(t,"signal",{enumerable:!0,get:()=>(Et(this,g,!0),b.signal)})},k=()=>{const t=ue(this.options,e),s=(()=>{const t={client:Pt(this,v),queryKey:this.queryKey,meta:this.meta};return M(t),t})();return Et(this,g,!1),this.options.persister?this.options.persister(t,s,this):t(s)},C=(()=>{const t={fetchOptions:e,options:this.options,queryKey:this.queryKey,client:Pt(this,v),state:this.state,fetchFn:k};return M(t),t})();null==(i=this.options.behavior)||i.onFetch(C,this),Et(this,f,this.state),"idle"!==this.state.fetchStatus&&this.state.fetchMeta===(null==(n=C.fetchOptions)?void 0:n.meta)||Ft(this,w,O).call(this,{type:"fetch",meta:null==(r=C.fetchOptions)?void 0:r.meta}),Et(this,m,ge({initialPromise:null==e?void 0:e.initialPromise,fn:C.fetchFn,onCancel:t=>{t instanceof be&&t.revert&&this.setState({...Pt(this,f),fetchStatus:"idle"}),b.abort()},onFail:(t,e)=>{Ft(this,w,O).call(this,{type:"failed",failureCount:t,error:e})},onPause:()=>{Ft(this,w,O).call(this,{type:"pause"})},onContinue:()=>{Ft(this,w,O).call(this,{type:"continue"})},retry:C.options.retry,retryDelay:C.options.retryDelay,networkMode:C.options.networkMode,canRun:()=>!0}));try{const t=await Pt(this,m).start();if(void 0===t)throw new Error(`${this.queryHash} data is undefined`);return this.setData(t),null==(o=(a=Pt(this,y).config).onSuccess)||o.call(a,t,this),null==(u=(h=Pt(this,y).config).onSettled)||u.call(h,t,this.state.error,this),t}catch(S){if(S instanceof be){if(S.silent)return Pt(this,m).promise;if(S.revert){if(void 0===this.state.data)throw S;return this.state.data}}throw Ft(this,w,O).call(this,{type:"error",error:S}),null==(c=(l=Pt(this,y).config).onError)||c.call(l,S,this),null==(p=(d=Pt(this,y).config).onSettled)||p.call(d,this.state.data,S,this),S}finally{this.scheduleGc()}}},p=new WeakMap,f=new WeakMap,y=new WeakMap,v=new WeakMap,m=new WeakMap,b=new WeakMap,g=new WeakMap,w=new WeakSet,O=function(t){this.state=(e=>{switch(t.type){case"failed":return{...e,fetchFailureCount:t.failureCount,fetchFailureReason:t.error};case"pause":return{...e,fetchStatus:"paused"};case"continue":return{...e,fetchStatus:"fetching"};case"fetch":return{...e,...Me(e.data,this.options),fetchMeta:t.meta??null};case"success":const s={...e,...ke(t.data,t.dataUpdatedAt),dataUpdateCount:e.dataUpdateCount+1,...!t.manual&&{fetchStatus:"idle",fetchFailureCount:0,fetchFailureReason:null}};return Et(this,f,t.manual?s:void 0),s;case"error":const i=t.error;return{...e,error:i,errorUpdateCount:e.errorUpdateCount+1,errorUpdatedAt:Date.now(),fetchFailureCount:e.fetchFailureCount+1,fetchFailureReason:i,fetchStatus:"idle",status:"error"};case"invalidate":return{...e,isInvalidated:!0};case"setState":return{...e,...t.state}}})(this.state),fe.batch(()=>{this.observers.forEach(t=>{t.onQueryUpdate()}),Pt(this,y).notify({query:this,type:"updated",action:t})})},M);function Me(t,e){return{fetchFailureCount:0,fetchFailureReason:null,fetchStatus:me(e.networkMode)?"fetching":"paused",...void 0===t&&{error:null,status:"pending"}}}function ke(t,e){return{data:t,dataUpdatedAt:e??Date.now(),error:null,isInvalidated:!1,status:"success"}}function Ce(t){const e="function"==typeof t.initialData?t.initialData():t.initialData,s=void 0!==e,i=s?"function"==typeof t.initialDataUpdatedAt?t.initialDataUpdatedAt():t.initialDataUpdatedAt:0;return{data:e,dataUpdateCount:0,dataUpdatedAt:s?i??Date.now():0,error:null,errorUpdateCount:0,errorUpdatedAt:0,fetchFailureCount:0,fetchFailureReason:null,fetchMeta:null,isInvalidated:!1,status:s?"success":"pending",fetchStatus:"idle"}}var Se=(z=class extends Kt{constructor(t,e){super(),qt(this,j),qt(this,k),qt(this,C),qt(this,S),qt(this,R),qt(this,P),qt(this,q),qt(this,E),qt(this,F),qt(this,x),qt(this,W),qt(this,Q),qt(this,A),qt(this,T),qt(this,D),qt(this,U,new Set),this.options=e,Et(this,k,t),Et(this,F,null),Et(this,E,de()),this.bindMethods(),this.setOptions(e)}bindMethods(){this.refetch=this.refetch.bind(this)}onSubscribe(){1===this.listeners.size&&(Pt(this,C).addObserver(this),Re(Pt(this,C),this.options)?Ft(this,j,K).call(this):this.updateResult(),Ft(this,j,_).call(this))}onUnsubscribe(){this.hasListeners()||this.destroy()}shouldFetchOnReconnect(){return Pe(Pt(this,C),this.options,this.options.refetchOnReconnect)}shouldFetchOnWindowFocus(){return Pe(Pt(this,C),this.options,this.options.refetchOnWindowFocus)}destroy(){this.listeners=new Set,Ft(this,j,G).call(this),Ft(this,j,B).call(this),Pt(this,C).removeObserver(this)}setOptions(t){const e=this.options,s=Pt(this,C);if(this.options=Pt(this,k).defaultQueryOptions(t),void 0!==this.options.enabled&&"boolean"!=typeof this.options.enabled&&"function"!=typeof this.options.enabled&&"boolean"!=typeof $t(this.options.enabled,Pt(this,C)))throw new Error("Expected enabled to be a boolean or a callback that returns a boolean");Ft(this,j,N).call(this),Pt(this,C).setOptions(this.options),e._defaulted&&!ee(this.options,e)&&Pt(this,k).getQueryCache().notify({type:"observerOptionsUpdated",query:Pt(this,C),observer:this});const i=this.hasListeners();i&&qe(Pt(this,C),s,this.options,e)&&Ft(this,j,K).call(this),this.updateResult(),!i||Pt(this,C)===s&&$t(this.options.enabled,Pt(this,C))===$t(e.enabled,Pt(this,C))&&Nt(this.options.staleTime,Pt(this,C))===Nt(e.staleTime,Pt(this,C))||Ft(this,j,I).call(this);const n=Ft(this,j,L).call(this);!i||Pt(this,C)===s&&$t(this.options.enabled,Pt(this,C))===$t(e.enabled,Pt(this,C))&&n===Pt(this,D)||Ft(this,j,H).call(this,n)}getOptimisticResult(t){const e=Pt(this,k).getQueryCache().build(Pt(this,k),t),s=this.createResult(e,t);return function(t,e){if(!ee(t.getCurrentResult(),e))return!0;return!1}(this,s)&&(Et(this,R,s),Et(this,q,this.options),Et(this,P,Pt(this,C).state)),s}getCurrentResult(){return Pt(this,R)}trackResult(t,e){return new Proxy(t,{get:(t,s)=>(this.trackProp(s),null==e||e(s),"promise"===s&&(this.trackProp("data"),this.options.experimental_prefetchInRender||"pending"!==Pt(this,E).status||Pt(this,E).reject(new Error("experimental_prefetchInRender feature flag is not enabled"))),Reflect.get(t,s))})}trackProp(t){Pt(this,U).add(t)}getCurrentQuery(){return Pt(this,C)}refetch({...t}={}){return this.fetch({...t})}fetchOptimistic(t){const e=Pt(this,k).defaultQueryOptions(t),s=Pt(this,k).getQueryCache().build(Pt(this,k),e);return s.fetch().then(()=>this.createResult(s,e))}fetch(t){return Ft(this,j,K).call(this,{...t,cancelRefetch:t.cancelRefetch??!0}).then(()=>(this.updateResult(),Pt(this,R)))}createResult(t,e){var s;const i=Pt(this,C),n=this.options,r=Pt(this,R),a=Pt(this,P),o=Pt(this,q),h=t!==i?t.state:Pt(this,S),{state:u}=t;let l,c={...u},d=!1;if(e._optimisticResults){const s=this.hasListeners(),r=!s&&Re(t,e),a=s&&qe(t,i,e,n);(r||a)&&(c={...c,...Me(u.data,t.options)}),"isRestoring"===e._optimisticResults&&(c.fetchStatus="idle")}let{error:p,errorUpdatedAt:f,status:y}=c;l=c.data;let v=!1;if(void 0!==e.placeholderData&&void 0===l&&"pending"===y){let t;(null==r?void 0:r.isPlaceholderData)&&e.placeholderData===(null==o?void 0:o.placeholderData)?(t=r.data,v=!0):t="function"==typeof e.placeholderData?e.placeholderData(null==(s=Pt(this,Q))?void 0:s.state.data,Pt(this,Q)):e.placeholderData,void 0!==t&&(y="success",l=re(null==r?void 0:r.data,t,e),d=!0)}if(e.select&&void 0!==l&&!v)if(r&&l===(null==a?void 0:a.data)&&e.select===Pt(this,x))l=Pt(this,W);else try{Et(this,x,e.select),l=e.select(l),l=re(null==r?void 0:r.data,l,e),Et(this,W,l),Et(this,F,null)}catch(k){Et(this,F,k)}Pt(this,F)&&(p=Pt(this,F),l=Pt(this,W),f=Date.now(),y="error");const m="fetching"===c.fetchStatus,b="pending"===y,g="error"===y,w=b&&m,O=void 0!==l,M={status:y,fetchStatus:c.fetchStatus,isPending:b,isSuccess:"success"===y,isError:g,isInitialLoading:w,isLoading:w,data:l,dataUpdatedAt:c.dataUpdatedAt,error:p,errorUpdatedAt:f,failureCount:c.fetchFailureCount,failureReason:c.fetchFailureReason,errorUpdateCount:c.errorUpdateCount,isFetched:c.dataUpdateCount>0||c.errorUpdateCount>0,isFetchedAfterMount:c.dataUpdateCount>h.dataUpdateCount||c.errorUpdateCount>h.errorUpdateCount,isFetching:m,isRefetching:m&&!b,isLoadingError:g&&!O,isPaused:"paused"===c.fetchStatus,isPlaceholderData:d,isRefetchError:g&&O,isStale:Ee(t,e),refetch:this.refetch,promise:Pt(this,E),isEnabled:!1!==$t(e.enabled,t)};if(this.options.experimental_prefetchInRender){const e=t=>{"error"===M.status?t.reject(M.error):void 0!==M.data&&t.resolve(M.data)},s=()=>{const t=Et(this,E,M.promise=de());e(t)},n=Pt(this,E);switch(n.status){case"pending":t.queryHash===i.queryHash&&e(n);break;case"fulfilled":"error"!==M.status&&M.data===n.value||s();break;case"rejected":"error"===M.status&&M.error===n.reason||s()}}return M}updateResult(){const t=Pt(this,R),e=this.createResult(Pt(this,C),this.options);if(Et(this,P,Pt(this,C).state),Et(this,q,this.options),void 0!==Pt(this,P).data&&Et(this,Q,Pt(this,C)),ee(e,t))return;Et(this,R,e);Ft(this,j,$).call(this,{listeners:(()=>{if(!t)return!0;const{notifyOnChangeProps:e}=this.options,s="function"==typeof e?e():e;if("all"===s||!s&&!Pt(this,U).size)return!0;const i=new Set(s??Pt(this,U));return this.options.throwOnError&&i.add("error"),Object.keys(Pt(this,R)).some(e=>{const s=e;return Pt(this,R)[s]!==t[s]&&i.has(s)})})()})}onQueryUpdate(){this.updateResult(),this.hasListeners()&&Ft(this,j,_).call(this)}},k=new WeakMap,C=new WeakMap,S=new WeakMap,R=new WeakMap,P=new WeakMap,q=new WeakMap,E=new WeakMap,F=new WeakMap,x=new WeakMap,W=new WeakMap,Q=new WeakMap,A=new WeakMap,T=new WeakMap,D=new WeakMap,U=new WeakMap,j=new WeakSet,K=function(t){Ft(this,j,N).call(this);let e=Pt(this,C).fetch(this.options,t);return(null==t?void 0:t.throwOnError)||(e=e.catch(_t)),e},I=function(){Ft(this,j,G).call(this);const t=Nt(this.options.staleTime,Pt(this,C));if(Ht||Pt(this,R).isStale||!Gt(t))return;const e=Bt(Pt(this,R).dataUpdatedAt,t)+1;Et(this,A,Lt.setTimeout(()=>{Pt(this,R).isStale||this.updateResult()},e))},L=function(){return("function"==typeof this.options.refetchInterval?this.options.refetchInterval(Pt(this,C)):this.options.refetchInterval)??!1},H=function(t){Ft(this,j,B).call(this),Et(this,D,t),!Ht&&!1!==$t(this.options.enabled,Pt(this,C))&&Gt(Pt(this,D))&&0!==Pt(this,D)&&Et(this,T,Lt.setInterval(()=>{(this.options.refetchIntervalInBackground||ce.isFocused())&&Ft(this,j,K).call(this)},Pt(this,D)))},_=function(){Ft(this,j,I).call(this),Ft(this,j,H).call(this,Ft(this,j,L).call(this))},G=function(){Pt(this,A)&&(Lt.clearTimeout(Pt(this,A)),Et(this,A,void 0))},B=function(){Pt(this,T)&&(Lt.clearInterval(Pt(this,T)),Et(this,T,void 0))},N=function(){const t=Pt(this,k).getQueryCache().build(Pt(this,k),this.options);if(t===Pt(this,C))return;const e=Pt(this,C);Et(this,C,t),Et(this,S,t.state),this.hasListeners()&&(null==e||e.removeObserver(this),t.addObserver(this))},$=function(t){fe.batch(()=>{t.listeners&&this.listeners.forEach(t=>{t(Pt(this,R))}),Pt(this,k).getQueryCache().notify({query:Pt(this,C),type:"observerResultsUpdated"})})},z);function Re(t,e){return function(t,e){return!1!==$t(e.enabled,t)&&void 0===t.state.data&&!("error"===t.state.status&&!1===e.retryOnMount)}(t,e)||void 0!==t.state.data&&Pe(t,e,e.refetchOnMount)}function Pe(t,e,s){if(!1!==$t(e.enabled,t)&&"static"!==Nt(e.staleTime,t)){const i="function"==typeof s?s(t):s;return"always"===i||!1!==i&&Ee(t,e)}return!1}function qe(t,e,s,i){return(t!==e||!1===$t(i.enabled,t))&&(!s.suspense||"error"!==t.state.status)&&Ee(t,s)}function Ee(t,e){return!1!==$t(e.enabled,t)&&t.isStaleByTime(Nt(e.staleTime,t))}function Fe(t){return{onFetch:(e,s)=>{var i,n,r,a,o;const h=e.options,u=null==(r=null==(n=null==(i=e.fetchOptions)?void 0:i.meta)?void 0:n.fetchMore)?void 0:r.direction,l=(null==(a=e.state.data)?void 0:a.pages)||[],c=(null==(o=e.state.data)?void 0:o.pageParams)||[];let d={pages:[],pageParams:[]},p=0;const f=async()=>{let s=!1;const i=ue(e.options,e.fetchOptions),n=async(t,n,r)=>{if(s)return Promise.reject();if(null==n&&t.pages.length)return Promise.resolve(t);const a=(()=>{const t={client:e.client,queryKey:e.queryKey,pageParam:n,direction:r?"backward":"forward",meta:e.options.meta};var i;return i=t,Object.defineProperty(i,"signal",{enumerable:!0,get:()=>(e.signal.aborted?s=!0:e.signal.addEventListener("abort",()=>{s=!0}),e.signal)}),t})(),o=await i(a),{maxPages:h}=e.options,u=r?oe:ae;return{pages:u(t.pages,o,h),pageParams:u(t.pageParams,n,h)}};if(u&&l.length){const t="backward"===u,e={pages:l,pageParams:c},s=(t?We:xe)(h,e);d=await n(e,s,t)}else{const e=t??l.length;do{const t=0===p?c[0]??h.initialPageParam:xe(h,d);if(p>0&&null==t)break;d=await n(d,t),p++}while(p<e)}return d};e.options.persister?e.fetchFn=()=>{var t,i;return null==(i=(t=e.options).persister)?void 0:i.call(t,f,{client:e.client,queryKey:e.queryKey,meta:e.options.meta,signal:e.signal},s)}:e.fetchFn=f}}}function xe(t,{pages:e,pageParams:s}){const i=e.length-1;return e.length>0?t.getNextPageParam(e[i],e,s[i],s):void 0}function We(t,{pages:e,pageParams:s}){var i;return e.length>0?null==(i=t.getPreviousPageParam)?void 0:i.call(t,e[0],e,s[0],s):void 0}var Qe=(et=class extends we{constructor(t){super(),qt(this,Z),qt(this,J),qt(this,V),qt(this,X),qt(this,Y),Et(this,J,t.client),this.mutationId=t.mutationId,Et(this,X,t.mutationCache),Et(this,V,[]),this.state=t.state||{context:void 0,data:void 0,error:null,failureCount:0,failureReason:null,isPaused:!1,status:"idle",variables:void 0,submittedAt:0},this.setOptions(t.options),this.scheduleGc()}setOptions(t){this.options=t,this.updateGcTime(this.options.gcTime)}get meta(){return this.options.meta}addObserver(t){Pt(this,V).includes(t)||(Pt(this,V).push(t),this.clearGcTimeout(),Pt(this,X).notify({type:"observerAdded",mutation:this,observer:t}))}removeObserver(t){Et(this,V,Pt(this,V).filter(e=>e!==t)),this.scheduleGc(),Pt(this,X).notify({type:"observerRemoved",mutation:this,observer:t})}optionalRemove(){Pt(this,V).length||("pending"===this.state.status?this.scheduleGc():Pt(this,X).remove(this))}continue(){var t;return(null==(t=Pt(this,Y))?void 0:t.continue())??this.execute(this.state.variables)}async execute(t){var e,s,i,n,r,a,o,h,u,l,c,d,p,f,y,v,m,b,g,w;const O=()=>{Ft(this,Z,tt).call(this,{type:"continue"})},M={client:Pt(this,J),meta:this.options.meta,mutationKey:this.options.mutationKey};Et(this,Y,ge({fn:()=>this.options.mutationFn?this.options.mutationFn(t,M):Promise.reject(new Error("No mutationFn found")),onFail:(t,e)=>{Ft(this,Z,tt).call(this,{type:"failed",failureCount:t,error:e})},onPause:()=>{Ft(this,Z,tt).call(this,{type:"pause"})},onContinue:O,retry:this.options.retry??0,retryDelay:this.options.retryDelay,networkMode:this.options.networkMode,canRun:()=>Pt(this,X).canRun(this)}));const k="pending"===this.state.status,C=!Pt(this,Y).canStart();try{if(k)O();else{Ft(this,Z,tt).call(this,{type:"pending",variables:t,isPaused:C}),await(null==(s=(e=Pt(this,X).config).onMutate)?void 0:s.call(e,t,this,M));const r=await(null==(n=(i=this.options).onMutate)?void 0:n.call(i,t,M));r!==this.state.context&&Ft(this,Z,tt).call(this,{type:"pending",context:r,variables:t,isPaused:C})}const p=await Pt(this,Y).start();return await(null==(a=(r=Pt(this,X).config).onSuccess)?void 0:a.call(r,p,t,this.state.context,this,M)),await(null==(h=(o=this.options).onSuccess)?void 0:h.call(o,p,t,this.state.context,M)),await(null==(l=(u=Pt(this,X).config).onSettled)?void 0:l.call(u,p,null,this.state.variables,this.state.context,this,M)),await(null==(d=(c=this.options).onSettled)?void 0:d.call(c,p,null,t,this.state.context,M)),Ft(this,Z,tt).call(this,{type:"success",data:p}),p}catch(S){try{throw await(null==(f=(p=Pt(this,X).config).onError)?void 0:f.call(p,S,t,this.state.context,this,M)),await(null==(v=(y=this.options).onError)?void 0:v.call(y,S,t,this.state.context,M)),await(null==(b=(m=Pt(this,X).config).onSettled)?void 0:b.call(m,void 0,S,this.state.variables,this.state.context,this,M)),await(null==(w=(g=this.options).onSettled)?void 0:w.call(g,void 0,S,t,this.state.context,M)),S}finally{Ft(this,Z,tt).call(this,{type:"error",error:S})}}finally{Pt(this,X).runNext(this)}}},J=new WeakMap,V=new WeakMap,X=new WeakMap,Y=new WeakMap,Z=new WeakSet,tt=function(t){this.state=(e=>{switch(t.type){case"failed":return{...e,failureCount:t.failureCount,failureReason:t.error};case"pause":return{...e,isPaused:!0};case"continue":return{...e,isPaused:!1};case"pending":return{...e,context:t.context,data:void 0,failureCount:0,failureReason:null,error:null,isPaused:t.isPaused,status:"pending",variables:t.variables,submittedAt:Date.now()};case"success":return{...e,data:t.data,failureCount:0,failureReason:null,error:null,status:"success",isPaused:!1};case"error":return{...e,data:void 0,error:t.error,failureCount:e.failureCount+1,failureReason:t.error,isPaused:!1,status:"error"}}})(this.state),fe.batch(()=>{Pt(this,V).forEach(e=>{e.onMutationUpdate(t)}),Pt(this,X).notify({mutation:this,type:"updated",action:t})})},et);var Ae=(rt=class extends Kt{constructor(t={}){super(),qt(this,st),qt(this,it),qt(this,nt),this.config=t,Et(this,st,new Set),Et(this,it,new Map),Et(this,nt,0)}build(t,e,s){const i=new Qe({client:t,mutationCache:this,mutationId:++xt(this,nt)._,options:t.defaultMutationOptions(e),state:s});return this.add(i),i}add(t){Pt(this,st).add(t);const e=Te(t);if("string"==typeof e){const s=Pt(this,it).get(e);s?s.push(t):Pt(this,it).set(e,[t])}this.notify({type:"added",mutation:t})}remove(t){if(Pt(this,st).delete(t)){const e=Te(t);if("string"==typeof e){const s=Pt(this,it).get(e);if(s)if(s.length>1){const e=s.indexOf(t);-1!==e&&s.splice(e,1)}else s[0]===t&&Pt(this,it).delete(e)}}this.notify({type:"removed",mutation:t})}canRun(t){const e=Te(t);if("string"==typeof e){const s=Pt(this,it).get(e),i=null==s?void 0:s.find(t=>"pending"===t.state.status);return!i||i===t}return!0}runNext(t){var e;const s=Te(t);if("string"==typeof s){const i=null==(e=Pt(this,it).get(s))?void 0:e.find(e=>e!==t&&e.state.isPaused);return(null==i?void 0:i.continue())??Promise.resolve()}return Promise.resolve()}clear(){fe.batch(()=>{Pt(this,st).forEach(t=>{this.notify({type:"removed",mutation:t})}),Pt(this,st).clear(),Pt(this,it).clear()})}getAll(){return Array.from(Pt(this,st))}find(t){const e={exact:!0,...t};return this.getAll().find(t=>Jt(e,t))}findAll(t={}){return this.getAll().filter(e=>Jt(t,e))}notify(t){fe.batch(()=>{this.listeners.forEach(e=>{e(t)})})}resumePausedMutations(){const t=this.getAll().filter(t=>t.state.isPaused);return fe.batch(()=>Promise.all(t.map(t=>t.continue().catch(_t))))}},st=new WeakMap,it=new WeakMap,nt=new WeakMap,rt);function Te(t){var e;return null==(e=t.options.scope)?void 0:e.id}var De=(pt=class extends Kt{constructor(t,e){super(),qt(this,lt),qt(this,at),qt(this,ot),qt(this,ht),qt(this,ut),Et(this,at,t),this.setOptions(e),this.bindMethods(),Ft(this,lt,ct).call(this)}bindMethods(){this.mutate=this.mutate.bind(this),this.reset=this.reset.bind(this)}setOptions(t){var e;const s=this.options;this.options=Pt(this,at).defaultMutationOptions(t),ee(this.options,s)||Pt(this,at).getMutationCache().notify({type:"observerOptionsUpdated",mutation:Pt(this,ht),observer:this}),(null==s?void 0:s.mutationKey)&&this.options.mutationKey&&Xt(s.mutationKey)!==Xt(this.options.mutationKey)?this.reset():"pending"===(null==(e=Pt(this,ht))?void 0:e.state.status)&&Pt(this,ht).setOptions(this.options)}onUnsubscribe(){var t;this.hasListeners()||null==(t=Pt(this,ht))||t.removeObserver(this)}onMutationUpdate(t){Ft(this,lt,ct).call(this),Ft(this,lt,dt).call(this,t)}getCurrentResult(){return Pt(this,ot)}reset(){var t;null==(t=Pt(this,ht))||t.removeObserver(this),Et(this,ht,void 0),Ft(this,lt,ct).call(this),Ft(this,lt,dt).call(this)}mutate(t,e){var s;return Et(this,ut,e),null==(s=Pt(this,ht))||s.removeObserver(this),Et(this,ht,Pt(this,at).getMutationCache().build(Pt(this,at),this.options)),Pt(this,ht).addObserver(this),Pt(this,ht).execute(t)}},at=new WeakMap,ot=new WeakMap,ht=new WeakMap,ut=new WeakMap,lt=new WeakSet,ct=function(){var t;const e=(null==(t=Pt(this,ht))?void 0:t.state)??{context:void 0,data:void 0,error:null,failureCount:0,failureReason:null,isPaused:!1,status:"idle",variables:void 0,submittedAt:0};Et(this,ot,{...e,isPending:"pending"===e.status,isSuccess:"success"===e.status,isError:"error"===e.status,isIdle:"idle"===e.status,mutate:this.mutate,reset:this.reset})},dt=function(t){fe.batch(()=>{var e,s,i,n,r,a,o,h;if(Pt(this,ut)&&this.hasListeners()){const u=Pt(this,ot).variables,l=Pt(this,ot).context,c={client:Pt(this,at),meta:this.options.meta,mutationKey:this.options.mutationKey};"success"===(null==t?void 0:t.type)?(null==(s=(e=Pt(this,ut)).onSuccess)||s.call(e,t.data,u,l,c),null==(n=(i=Pt(this,ut)).onSettled)||n.call(i,t.data,null,u,l,c)):"error"===(null==t?void 0:t.type)&&(null==(a=(r=Pt(this,ut)).onError)||a.call(r,t.error,u,l,c),null==(h=(o=Pt(this,ut)).onSettled)||h.call(o,void 0,t.error,u,l,c))}this.listeners.forEach(t=>{t(Pt(this,ot))})})},pt),Ue=(yt=class extends Kt{constructor(t={}){super(),qt(this,ft),this.config=t,Et(this,ft,new Map)}build(t,e,s){const i=e.queryKey,n=e.queryHash??Vt(i,e);let r=this.get(n);return r||(r=new Oe({client:t,queryKey:i,queryHash:n,options:t.defaultQueryOptions(e),state:s,defaultOptions:t.getQueryDefaults(i)}),this.add(r)),r}add(t){Pt(this,ft).has(t.queryHash)||(Pt(this,ft).set(t.queryHash,t),this.notify({type:"added",query:t}))}remove(t){const e=Pt(this,ft).get(t.queryHash);e&&(t.destroy(),e===t&&Pt(this,ft).delete(t.queryHash),this.notify({type:"removed",query:t}))}clear(){fe.batch(()=>{this.getAll().forEach(t=>{this.remove(t)})})}get(t){return Pt(this,ft).get(t)}getAll(){return[...Pt(this,ft).values()]}find(t){const e={exact:!0,...t};return this.getAll().find(t=>zt(e,t))}findAll(t={}){const e=this.getAll();return Object.keys(t).length>0?e.filter(e=>zt(t,e)):e}notify(t){fe.batch(()=>{this.listeners.forEach(e=>{e(t)})})}onFocus(){fe.batch(()=>{this.getAll().forEach(t=>{t.onFocus()})})}onOnline(){fe.batch(()=>{this.getAll().forEach(t=>{t.onOnline()})})}},ft=new WeakMap,yt),je=(Ct=class{constructor(t={}){qt(this,vt),qt(this,mt),qt(this,bt),qt(this,gt),qt(this,wt),qt(this,Ot),qt(this,Mt),qt(this,kt),Et(this,vt,t.queryCache||new Ue),Et(this,mt,t.mutationCache||new Ae),Et(this,bt,t.defaultOptions||{}),Et(this,gt,new Map),Et(this,wt,new Map),Et(this,Ot,0)}mount(){xt(this,Ot)._++,1===Pt(this,Ot)&&(Et(this,Mt,ce.subscribe(async t=>{t&&(await this.resumePausedMutations(),Pt(this,vt).onFocus())})),Et(this,kt,ye.subscribe(async t=>{t&&(await this.resumePausedMutations(),Pt(this,vt).onOnline())})))}unmount(){var t,e;xt(this,Ot)._--,0===Pt(this,Ot)&&(null==(t=Pt(this,Mt))||t.call(this),Et(this,Mt,void 0),null==(e=Pt(this,kt))||e.call(this),Et(this,kt,void 0))}isFetching(t){return Pt(this,vt).findAll({...t,fetchStatus:"fetching"}).length}isMutating(t){return Pt(this,mt).findAll({...t,status:"pending"}).length}getQueryData(t){var e;const s=this.defaultQueryOptions({queryKey:t});return null==(e=Pt(this,vt).get(s.queryHash))?void 0:e.state.data}ensureQueryData(t){const e=this.defaultQueryOptions(t),s=Pt(this,vt).build(this,e),i=s.state.data;return void 0===i?this.fetchQuery(t):(t.revalidateIfStale&&s.isStaleByTime(Nt(e.staleTime,s))&&this.prefetchQuery(e),Promise.resolve(i))}getQueriesData(t){return Pt(this,vt).findAll(t).map(({queryKey:t,state:e})=>[t,e.data])}setQueryData(t,e,s){const i=this.defaultQueryOptions({queryKey:t}),n=Pt(this,vt).get(i.queryHash),r=function(t,e){return"function"==typeof t?t(e):t}(e,null==n?void 0:n.state.data);if(void 0!==r)return Pt(this,vt).build(this,i).setData(r,{...s,manual:!0})}setQueriesData(t,e,s){return fe.batch(()=>Pt(this,vt).findAll(t).map(({queryKey:t})=>[t,this.setQueryData(t,e,s)]))}getQueryState(t){var e;const s=this.defaultQueryOptions({queryKey:t});return null==(e=Pt(this,vt).get(s.queryHash))?void 0:e.state}removeQueries(t){const e=Pt(this,vt);fe.batch(()=>{e.findAll(t).forEach(t=>{e.remove(t)})})}resetQueries(t,e){const s=Pt(this,vt);return fe.batch(()=>(s.findAll(t).forEach(t=>{t.reset()}),this.refetchQueries({type:"active",...t},e)))}cancelQueries(t,e={}){const s={revert:!0,...e},i=fe.batch(()=>Pt(this,vt).findAll(t).map(t=>t.cancel(s)));return Promise.all(i).then(_t).catch(_t)}invalidateQueries(t,e={}){return fe.batch(()=>(Pt(this,vt).findAll(t).forEach(t=>{t.invalidate()}),"none"===(null==t?void 0:t.refetchType)?Promise.resolve():this.refetchQueries({...t,type:(null==t?void 0:t.refetchType)??(null==t?void 0:t.type)??"active"},e)))}refetchQueries(t,e={}){const s={...e,cancelRefetch:e.cancelRefetch??!0},i=fe.batch(()=>Pt(this,vt).findAll(t).filter(t=>!t.isDisabled()&&!t.isStatic()).map(t=>{let e=t.fetch(void 0,s);return s.throwOnError||(e=e.catch(_t)),"paused"===t.state.fetchStatus?Promise.resolve():e}));return Promise.all(i).then(_t)}fetchQuery(t){const e=this.defaultQueryOptions(t);void 0===e.retry&&(e.retry=!1);const s=Pt(this,vt).build(this,e);return s.isStaleByTime(Nt(e.staleTime,s))?s.fetch(e):Promise.resolve(s.state.data)}prefetchQuery(t){return this.fetchQuery(t).then(_t).catch(_t)}fetchInfiniteQuery(t){return t.behavior=Fe(t.pages),this.fetchQuery(t)}prefetchInfiniteQuery(t){return this.fetchInfiniteQuery(t).then(_t).catch(_t)}ensureInfiniteQueryData(t){return t.behavior=Fe(t.pages),this.ensureQueryData(t)}resumePausedMutations(){return ye.isOnline()?Pt(this,mt).resumePausedMutations():Promise.resolve()}getQueryCache(){return Pt(this,vt)}getMutationCache(){return Pt(this,mt)}getDefaultOptions(){return Pt(this,bt)}setDefaultOptions(t){Et(this,bt,t)}setQueryDefaults(t,e){Pt(this,gt).set(Xt(t),{queryKey:t,defaultOptions:e})}getQueryDefaults(t){const e=[...Pt(this,gt).values()],s={};return e.forEach(e=>{Yt(t,e.queryKey)&&Object.assign(s,e.defaultOptions)}),s}setMutationDefaults(t,e){Pt(this,wt).set(Xt(t),{mutationKey:t,defaultOptions:e})}getMutationDefaults(t){const e=[...Pt(this,wt).values()],s={};return e.forEach(e=>{Yt(t,e.mutationKey)&&Object.assign(s,e.defaultOptions)}),s}defaultQueryOptions(t){if(t._defaulted)return t;const e={...Pt(this,bt).queries,...this.getQueryDefaults(t.queryKey),...t,_defaulted:!0};return e.queryHash||(e.queryHash=Vt(e.queryKey,e)),void 0===e.refetchOnReconnect&&(e.refetchOnReconnect="always"!==e.networkMode),void 0===e.throwOnError&&(e.throwOnError=!!e.suspense),!e.networkMode&&e.persister&&(e.networkMode="offlineFirst"),e.queryFn===he&&(e.enabled=!1),e}defaultMutationOptions(t){return(null==t?void 0:t._defaulted)?t:{...Pt(this,bt).mutations,...(null==t?void 0:t.mutationKey)&&this.getMutationDefaults(t.mutationKey),...t,_defaulted:!0}}clear(){Pt(this,vt).clear(),Pt(this,mt).clear()}},vt=new WeakMap,mt=new WeakMap,bt=new WeakMap,gt=new WeakMap,wt=new WeakMap,Ot=new WeakMap,Mt=new WeakMap,kt=new WeakMap,Ct),Ke=Wt.createContext(void 0),Ie=t=>{const e=Wt.useContext(Ke);if(!e)throw new Error("No QueryClient set, use QueryClientProvider to set one");return e},Le=({client:t,children:e})=>(Wt.useEffect(()=>(t.mount(),()=>{t.unmount()}),[t]),jt.jsx(Ke.Provider,{value:t,children:e})),He=Wt.createContext(!1);He.Provider;var _e=Wt.createContext(function(){let t=!1;return{clearReset:()=>{t=!1},reset:()=>{t=!0},isReset:()=>t}}()),Ge=(t,e,s)=>e.fetchOptimistic(t).catch(()=>{s.clearReset()});function Be(t,e,s){var i,n,r,a,o;const h=Wt.useContext(He),u=Wt.useContext(_e),l=Ie(),c=l.defaultQueryOptions(t);null==(n=null==(i=l.getDefaultOptions().queries)?void 0:i._experimental_beforeQuery)||n.call(i,c),c._optimisticResults=h?"isRestoring":"optimistic",(t=>{if(t.suspense){const e=1e3,s=t=>"static"===t?t:Math.max(t??e,e),i=t.staleTime;t.staleTime="function"==typeof i?(...t)=>s(i(...t)):s(i),"number"==typeof t.gcTime&&(t.gcTime=Math.max(t.gcTime,e))}})(c),((t,e)=>{(t.suspense||t.throwOnError||t.experimental_prefetchInRender)&&(e.isReset()||(t.retryOnMount=!1))})(c,u),(t=>{Wt.useEffect(()=>{t.clearReset()},[t])})(u);const d=!l.getQueryCache().get(c.queryHash),[p]=Wt.useState(()=>new e(l,c)),f=p.getOptimisticResult(c),y=!h&&!1!==t.subscribed;if(Wt.useSyncExternalStore(Wt.useCallback(t=>{const e=y?p.subscribe(fe.batchCalls(t)):_t;return p.updateResult(),e},[p,y]),()=>p.getCurrentResult(),()=>p.getCurrentResult()),Wt.useEffect(()=>{p.setOptions(c)},[c,p]),((t,e)=>(null==t?void 0:t.suspense)&&e.isPending)(c,f))throw Ge(c,p,u);if((({result:t,errorResetBoundary:e,throwOnError:s,query:i,suspense:n})=>t.isError&&!e.isReset()&&!t.isFetching&&i&&(n&&void 0===t.data||le(s,[t.error,i])))({result:f,errorResetBoundary:u,throwOnError:c.throwOnError,query:l.getQueryCache().get(c.queryHash),suspense:c.suspense}))throw f.error;if(null==(a=null==(r=l.getDefaultOptions().queries)?void 0:r._experimental_afterQuery)||a.call(r,c,f),c.experimental_prefetchInRender&&!Ht&&((t,e)=>t.isLoading&&t.isFetching&&!e)(f,h)){const t=d?Ge(c,p,u):null==(o=l.getQueryCache().get(c.queryHash))?void 0:o.promise;null==t||t.catch(_t).finally(()=>{p.updateResult()})}return c.notifyOnChangeProps?f:p.trackResult(f)}function Ne(t,e){return Be(t,Se)}function $e(t,e){const s=Ie(),[i]=Wt.useState(()=>new De(s,t));Wt.useEffect(()=>{i.setOptions(t)},[i,t]);const n=Wt.useSyncExternalStore(Wt.useCallback(t=>i.subscribe(fe.batchCalls(t)),[i]),()=>i.getCurrentResult(),()=>i.getCurrentResult()),r=Wt.useCallback((t,e)=>{i.mutate(t,e).catch(_t)},[i]);if(n.error&&le(i.options.throwOnError,[n.error]))throw n.error;return{...n,mutate:r,mutateAsync:n.mutate}}export{je as Q,Le as a,Ie as b,$e as c,jt as j,Ne as u};
+var t,
+  e,
+  s,
+  i,
+  n,
+  r,
+  a,
+  o,
+  h,
+  u,
+  l,
+  c,
+  d,
+  p,
+  f,
+  y,
+  v,
+  m,
+  b,
+  g,
+  w,
+  O,
+  M,
+  k,
+  C,
+  S,
+  R,
+  P,
+  q,
+  E,
+  F,
+  x,
+  W,
+  Q,
+  A,
+  T,
+  D,
+  U,
+  j,
+  K,
+  I,
+  L,
+  H,
+  _,
+  G,
+  B,
+  N,
+  $,
+  z,
+  J,
+  V,
+  X,
+  Y,
+  Z,
+  tt,
+  et,
+  st,
+  it,
+  nt,
+  rt,
+  at,
+  ot,
+  ht,
+  ut,
+  lt,
+  ct,
+  dt,
+  pt,
+  ft,
+  yt,
+  vt,
+  mt,
+  bt,
+  gt,
+  wt,
+  Ot,
+  Mt,
+  kt,
+  Ct,
+  St = (t) => {
+    throw TypeError(t);
+  },
+  Rt = (t, e, s) => e.has(t) || St('Cannot ' + s),
+  Pt = (t, e, s) => (Rt(t, e, 'read from private field'), s ? s.call(t) : e.get(t)),
+  qt = (t, e, s) =>
+    e.has(t)
+      ? St('Cannot add the same private member more than once')
+      : e instanceof WeakSet
+        ? e.add(t)
+        : e.set(t, s),
+  Et = (t, e, s, i) => (Rt(t, e, 'write to private field'), i ? i.call(t, s) : e.set(t, s), s),
+  Ft = (t, e, s) => (Rt(t, e, 'access private method'), s),
+  xt = (t, e, s, i) => ({
+    set _(i) {
+      Et(t, e, i, s);
+    },
+    get _() {
+      return Pt(t, e, i);
+    },
+  });
+
+import { r as Wt } from './react-vendor-aonCOLXD.js';
+
+var Qt = { exports: {} },
+  At = {},
+  Tt = Symbol.for('react.transitional.element'),
+  Dt = Symbol.for('react.fragment');
+function Ut(t, e, s) {
+  var i = null;
+  if ((void 0 !== s && (i = '' + s), void 0 !== e.key && (i = '' + e.key), 'key' in e))
+    for (var n in ((s = {}), e)) 'key' !== n && (s[n] = e[n]);
+  else s = e;
+  return (e = s.ref), { $$typeof: Tt, type: t, key: i, ref: void 0 !== e ? e : null, props: s };
+}
+(At.Fragment = Dt), (At.jsx = Ut), (At.jsxs = Ut), (Qt.exports = At);
+var jt = Qt.exports,
+  Kt = class {
+    constructor() {
+      (this.listeners = new Set()), (this.subscribe = this.subscribe.bind(this));
+    }
+    subscribe(t) {
+      return (
+        this.listeners.add(t),
+        this.onSubscribe(),
+        () => {
+          this.listeners.delete(t), this.onUnsubscribe();
+        }
+      );
+    }
+    hasListeners() {
+      return this.listeners.size > 0;
+    }
+    onSubscribe() {}
+    onUnsubscribe() {}
+  },
+  It = {
+    setTimeout: (t, e) => setTimeout(t, e),
+    clearTimeout: (t) => clearTimeout(t),
+    setInterval: (t, e) => setInterval(t, e),
+    clearInterval: (t) => clearInterval(t),
+  },
+  Lt = new ((s = class {
+    constructor() {
+      qt(this, t, It), qt(this, e, !1);
+    }
+    setTimeoutProvider(e) {
+      Et(this, t, e);
+    }
+    setTimeout(e, s) {
+      return Pt(this, t).setTimeout(e, s);
+    }
+    clearTimeout(e) {
+      Pt(this, t).clearTimeout(e);
+    }
+    setInterval(e, s) {
+      return Pt(this, t).setInterval(e, s);
+    }
+    clearInterval(e) {
+      Pt(this, t).clearInterval(e);
+    }
+  }),
+  (t = new WeakMap()),
+  (e = new WeakMap()),
+  s)();
+var Ht = 'undefined' == typeof window || 'Deno' in globalThis;
+function _t() {}
+function Gt(t) {
+  return 'number' == typeof t && t >= 0 && t !== 1 / 0;
+}
+function Bt(t, e) {
+  return Math.max(t + (e || 0) - Date.now(), 0);
+}
+function Nt(t, e) {
+  return 'function' == typeof t ? t(e) : t;
+}
+function $t(t, e) {
+  return 'function' == typeof t ? t(e) : t;
+}
+function zt(t, e) {
+  const { type: s = 'all', exact: i, fetchStatus: n, predicate: r, queryKey: a, stale: o } = t;
+  if (a)
+    if (i) {
+      if (e.queryHash !== Vt(a, e.options)) return !1;
+    } else if (!Yt(e.queryKey, a)) return !1;
+  if ('all' !== s) {
+    const t = e.isActive();
+    if ('active' === s && !t) return !1;
+    if ('inactive' === s && t) return !1;
+  }
+  return (
+    ('boolean' != typeof o || e.isStale() === o) &&
+    (!n || n === e.state.fetchStatus) &&
+    !(r && !r(e))
+  );
+}
+function Jt(t, e) {
+  const { exact: s, status: i, predicate: n, mutationKey: r } = t;
+  if (r) {
+    if (!e.options.mutationKey) return !1;
+    if (s) {
+      if (Xt(e.options.mutationKey) !== Xt(r)) return !1;
+    } else if (!Yt(e.options.mutationKey, r)) return !1;
+  }
+  return (!i || e.state.status === i) && !(n && !n(e));
+}
+function Vt(t, e) {
+  return ((null == e ? void 0 : e.queryKeyHashFn) || Xt)(t);
+}
+function Xt(t) {
+  return JSON.stringify(t, (t, e) =>
+    ie(e)
+      ? Object.keys(e)
+          .sort()
+          .reduce((t, s) => ((t[s] = e[s]), t), {})
+      : e
+  );
+}
+function Yt(t, e) {
+  return (
+    t === e ||
+    (typeof t == typeof e &&
+      !(!t || !e || 'object' != typeof t || 'object' != typeof e) &&
+      Object.keys(e).every((s) => Yt(t[s], e[s])))
+  );
+}
+var Zt = Object.prototype.hasOwnProperty;
+function te(t, e) {
+  if (t === e) return t;
+  const s = se(t) && se(e);
+  if (!(s || (ie(t) && ie(e)))) return e;
+  const i = (s ? t : Object.keys(t)).length,
+    n = s ? e : Object.keys(e),
+    r = n.length,
+    a = s ? new Array(r) : {};
+  let o = 0;
+  for (let h = 0; h < r; h++) {
+    const r = s ? h : n[h],
+      u = t[r],
+      l = e[r];
+    if (u === l) {
+      (a[r] = u), (s ? h < i : Zt.call(t, r)) && o++;
+      continue;
+    }
+    if (null === u || null === l || 'object' != typeof u || 'object' != typeof l) {
+      a[r] = l;
+      continue;
+    }
+    const c = te(u, l);
+    (a[r] = c), c === u && o++;
+  }
+  return i === r && o === i ? t : a;
+}
+function ee(t, e) {
+  if (!e || Object.keys(t).length !== Object.keys(e).length) return !1;
+  for (const s in t) if (t[s] !== e[s]) return !1;
+  return !0;
+}
+function se(t) {
+  return Array.isArray(t) && t.length === Object.keys(t).length;
+}
+function ie(t) {
+  if (!ne(t)) return !1;
+  const e = t.constructor;
+  if (void 0 === e) return !0;
+  const s = e.prototype;
+  return (
+    !!ne(s) && !!Object.hasOwn(s, 'isPrototypeOf') && Object.getPrototypeOf(t) === Object.prototype
+  );
+}
+function ne(t) {
+  return '[object Object]' === Object.prototype.toString.call(t);
+}
+function re(t, e, s) {
+  return 'function' == typeof s.structuralSharing
+    ? s.structuralSharing(t, e)
+    : !1 !== s.structuralSharing
+      ? te(t, e)
+      : e;
+}
+function ae(t, e, s = 0) {
+  const i = [...t, e];
+  return s && i.length > s ? i.slice(1) : i;
+}
+function oe(t, e, s = 0) {
+  const i = [e, ...t];
+  return s && i.length > s ? i.slice(0, -1) : i;
+}
+var he = Symbol();
+function ue(t, e) {
+  return !t.queryFn && (null == e ? void 0 : e.initialPromise)
+    ? () => e.initialPromise
+    : t.queryFn && t.queryFn !== he
+      ? t.queryFn
+      : () => Promise.reject(new Error(`Missing queryFn: '${t.queryHash}'`));
+}
+function le(t, e) {
+  return 'function' == typeof t ? t(...e) : !!t;
+}
+var ce = new ((a = class extends Kt {
+  constructor() {
+    super(),
+      qt(this, i),
+      qt(this, n),
+      qt(this, r),
+      Et(this, r, (t) => {
+        if (!Ht && window.addEventListener) {
+          const e = () => t();
+          return (
+            window.addEventListener('visibilitychange', e, !1),
+            () => {
+              window.removeEventListener('visibilitychange', e);
+            }
+          );
+        }
+      });
+  }
+  onSubscribe() {
+    Pt(this, n) || this.setEventListener(Pt(this, r));
+  }
+  onUnsubscribe() {
+    var t;
+    this.hasListeners() || (null == (t = Pt(this, n)) || t.call(this), Et(this, n, void 0));
+  }
+  setEventListener(t) {
+    var e;
+    Et(this, r, t),
+      null == (e = Pt(this, n)) || e.call(this),
+      Et(
+        this,
+        n,
+        t((t) => {
+          'boolean' == typeof t ? this.setFocused(t) : this.onFocus();
+        })
+      );
+  }
+  setFocused(t) {
+    Pt(this, i) !== t && (Et(this, i, t), this.onFocus());
+  }
+  onFocus() {
+    const t = this.isFocused();
+    this.listeners.forEach((e) => {
+      e(t);
+    });
+  }
+  isFocused() {
+    var t;
+    return 'boolean' == typeof Pt(this, i)
+      ? Pt(this, i)
+      : 'hidden' !== (null == (t = globalThis.document) ? void 0 : t.visibilityState);
+  }
+}),
+(i = new WeakMap()),
+(n = new WeakMap()),
+(r = new WeakMap()),
+a)();
+function de() {
+  let t, e;
+  const s = new Promise((s, i) => {
+    (t = s), (e = i);
+  });
+  function i(t) {
+    Object.assign(s, t), delete s.resolve, delete s.reject;
+  }
+  return (
+    (s.status = 'pending'),
+    s.catch(() => {}),
+    (s.resolve = (e) => {
+      i({ status: 'fulfilled', value: e }), t(e);
+    }),
+    (s.reject = (t) => {
+      i({ status: 'rejected', reason: t }), e(t);
+    }),
+    s
+  );
+}
+var pe = (t) => {
+  setTimeout(t, 0);
+};
+var fe = (() => {
+    let t = [],
+      e = 0,
+      s = (t) => {
+        t();
+      },
+      i = (t) => {
+        t();
+      },
+      n = pe;
+    const r = (i) => {
+      e
+        ? t.push(i)
+        : n(() => {
+            s(i);
+          });
+    };
+    return {
+      batch: (r) => {
+        let a;
+        e++;
+        try {
+          a = r();
+        } finally {
+          e--,
+            e ||
+              (() => {
+                const e = t;
+                (t = []),
+                  e.length &&
+                    n(() => {
+                      i(() => {
+                        e.forEach((t) => {
+                          s(t);
+                        });
+                      });
+                    });
+              })();
+        }
+        return a;
+      },
+      batchCalls:
+        (t) =>
+        (...e) => {
+          r(() => {
+            t(...e);
+          });
+        },
+      schedule: r,
+      setNotifyFunction: (t) => {
+        s = t;
+      },
+      setBatchNotifyFunction: (t) => {
+        i = t;
+      },
+      setScheduler: (t) => {
+        n = t;
+      },
+    };
+  })(),
+  ye = new ((l = class extends Kt {
+    constructor() {
+      super(),
+        qt(this, o, !0),
+        qt(this, h),
+        qt(this, u),
+        Et(this, u, (t) => {
+          if (!Ht && window.addEventListener) {
+            const e = () => t(!0),
+              s = () => t(!1);
+            return (
+              window.addEventListener('online', e, !1),
+              window.addEventListener('offline', s, !1),
+              () => {
+                window.removeEventListener('online', e), window.removeEventListener('offline', s);
+              }
+            );
+          }
+        });
+    }
+    onSubscribe() {
+      Pt(this, h) || this.setEventListener(Pt(this, u));
+    }
+    onUnsubscribe() {
+      var t;
+      this.hasListeners() || (null == (t = Pt(this, h)) || t.call(this), Et(this, h, void 0));
+    }
+    setEventListener(t) {
+      var e;
+      Et(this, u, t),
+        null == (e = Pt(this, h)) || e.call(this),
+        Et(this, h, t(this.setOnline.bind(this)));
+    }
+    setOnline(t) {
+      Pt(this, o) !== t &&
+        (Et(this, o, t),
+        this.listeners.forEach((e) => {
+          e(t);
+        }));
+    }
+    isOnline() {
+      return Pt(this, o);
+    }
+  }),
+  (o = new WeakMap()),
+  (h = new WeakMap()),
+  (u = new WeakMap()),
+  l)();
+function ve(t) {
+  return Math.min(1e3 * 2 ** t, 3e4);
+}
+function me(t) {
+  return 'online' !== (t ?? 'online') || ye.isOnline();
+}
+var be = class extends Error {
+  constructor(t) {
+    super('CancelledError'),
+      (this.revert = null == t ? void 0 : t.revert),
+      (this.silent = null == t ? void 0 : t.silent);
+  }
+};
+function ge(t) {
+  let e,
+    s = !1,
+    i = 0;
+  const n = de(),
+    r = () => 'pending' !== n.status,
+    a = () => ce.isFocused() && ('always' === t.networkMode || ye.isOnline()) && t.canRun(),
+    o = () => me(t.networkMode) && t.canRun(),
+    h = (t) => {
+      r() || (null == e || e(), n.resolve(t));
+    },
+    u = (t) => {
+      r() || (null == e || e(), n.reject(t));
+    },
+    l = () =>
+      new Promise((s) => {
+        var i;
+        (e = (t) => {
+          (r() || a()) && s(t);
+        }),
+          null == (i = t.onPause) || i.call(t);
+      }).then(() => {
+        var s;
+        (e = void 0), r() || null == (s = t.onContinue) || s.call(t);
+      }),
+    c = () => {
+      if (r()) return;
+      let e;
+      const n = 0 === i ? t.initialPromise : void 0;
+      try {
+        e = n ?? t.fn();
+      } catch (o) {
+        e = Promise.reject(o);
+      }
+      Promise.resolve(e)
+        .then(h)
+        .catch((e) => {
+          var n;
+          if (r()) return;
+          const o = t.retry ?? (Ht ? 0 : 3),
+            h = t.retryDelay ?? ve,
+            d = 'function' == typeof h ? h(i, e) : h,
+            p = !0 === o || ('number' == typeof o && i < o) || ('function' == typeof o && o(i, e));
+          var f;
+          !s && p
+            ? (i++,
+              null == (n = t.onFail) || n.call(t, i, e),
+              ((f = d),
+              new Promise((t) => {
+                Lt.setTimeout(t, f);
+              }))
+                .then(() => (a() ? void 0 : l()))
+                .then(() => {
+                  s ? u(e) : c();
+                }))
+            : u(e);
+        });
+    };
+  return {
+    promise: n,
+    status: () => n.status,
+    cancel: (e) => {
+      var s;
+      if (!r()) {
+        const i = new be(e);
+        u(i), null == (s = t.onCancel) || s.call(t, i);
+      }
+    },
+    continue: () => (null == e || e(), n),
+    cancelRetry: () => {
+      s = !0;
+    },
+    continueRetry: () => {
+      s = !1;
+    },
+    canStart: o,
+    start: () => (o() ? c() : l().then(c), n),
+  };
+}
+var we =
+    ((d = class {
+      constructor() {
+        qt(this, c);
+      }
+      destroy() {
+        this.clearGcTimeout();
+      }
+      scheduleGc() {
+        this.clearGcTimeout(),
+          Gt(this.gcTime) &&
+            Et(
+              this,
+              c,
+              Lt.setTimeout(() => {
+                this.optionalRemove();
+              }, this.gcTime)
+            );
+      }
+      updateGcTime(t) {
+        this.gcTime = Math.max(this.gcTime || 0, t ?? (Ht ? 1 / 0 : 3e5));
+      }
+      clearGcTimeout() {
+        Pt(this, c) && (Lt.clearTimeout(Pt(this, c)), Et(this, c, void 0));
+      }
+    }),
+    (c = new WeakMap()),
+    d),
+  Oe =
+    ((M = class extends we {
+      constructor(t) {
+        super(),
+          qt(this, w),
+          qt(this, p),
+          qt(this, f),
+          qt(this, y),
+          qt(this, v),
+          qt(this, m),
+          qt(this, b),
+          qt(this, g),
+          Et(this, g, !1),
+          Et(this, b, t.defaultOptions),
+          this.setOptions(t.options),
+          (this.observers = []),
+          Et(this, v, t.client),
+          Et(this, y, Pt(this, v).getQueryCache()),
+          (this.queryKey = t.queryKey),
+          (this.queryHash = t.queryHash),
+          Et(this, p, Ce(this.options)),
+          (this.state = t.state ?? Pt(this, p)),
+          this.scheduleGc();
+      }
+      get meta() {
+        return this.options.meta;
+      }
+      get promise() {
+        var t;
+        return null == (t = Pt(this, m)) ? void 0 : t.promise;
+      }
+      setOptions(t) {
+        if (
+          ((this.options = { ...Pt(this, b), ...t }),
+          this.updateGcTime(this.options.gcTime),
+          this.state && void 0 === this.state.data)
+        ) {
+          const t = Ce(this.options);
+          void 0 !== t.data && (this.setState(ke(t.data, t.dataUpdatedAt)), Et(this, p, t));
+        }
+      }
+      optionalRemove() {
+        this.observers.length || 'idle' !== this.state.fetchStatus || Pt(this, y).remove(this);
+      }
+      setData(t, e) {
+        const s = re(this.state.data, t, this.options);
+        return (
+          Ft(this, w, O).call(this, {
+            data: s,
+            type: 'success',
+            dataUpdatedAt: null == e ? void 0 : e.updatedAt,
+            manual: null == e ? void 0 : e.manual,
+          }),
+          s
+        );
+      }
+      setState(t, e) {
+        Ft(this, w, O).call(this, { type: 'setState', state: t, setStateOptions: e });
+      }
+      cancel(t) {
+        var e, s;
+        const i = null == (e = Pt(this, m)) ? void 0 : e.promise;
+        return (
+          null == (s = Pt(this, m)) || s.cancel(t), i ? i.then(_t).catch(_t) : Promise.resolve()
+        );
+      }
+      destroy() {
+        super.destroy(), this.cancel({ silent: !0 });
+      }
+      reset() {
+        this.destroy(), this.setState(Pt(this, p));
+      }
+      isActive() {
+        return this.observers.some((t) => !1 !== $t(t.options.enabled, this));
+      }
+      isDisabled() {
+        return this.getObserversCount() > 0
+          ? !this.isActive()
+          : this.options.queryFn === he ||
+              this.state.dataUpdateCount + this.state.errorUpdateCount === 0;
+      }
+      isStatic() {
+        return (
+          this.getObserversCount() > 0 &&
+          this.observers.some((t) => 'static' === Nt(t.options.staleTime, this))
+        );
+      }
+      isStale() {
+        return this.getObserversCount() > 0
+          ? this.observers.some((t) => t.getCurrentResult().isStale)
+          : void 0 === this.state.data || this.state.isInvalidated;
+      }
+      isStaleByTime(t = 0) {
+        return (
+          void 0 === this.state.data ||
+          ('static' !== t && (!!this.state.isInvalidated || !Bt(this.state.dataUpdatedAt, t)))
+        );
+      }
+      onFocus() {
+        var t;
+        const e = this.observers.find((t) => t.shouldFetchOnWindowFocus());
+        null == e || e.refetch({ cancelRefetch: !1 }), null == (t = Pt(this, m)) || t.continue();
+      }
+      onOnline() {
+        var t;
+        const e = this.observers.find((t) => t.shouldFetchOnReconnect());
+        null == e || e.refetch({ cancelRefetch: !1 }), null == (t = Pt(this, m)) || t.continue();
+      }
+      addObserver(t) {
+        this.observers.includes(t) ||
+          (this.observers.push(t),
+          this.clearGcTimeout(),
+          Pt(this, y).notify({ type: 'observerAdded', query: this, observer: t }));
+      }
+      removeObserver(t) {
+        this.observers.includes(t) &&
+          ((this.observers = this.observers.filter((e) => e !== t)),
+          this.observers.length ||
+            (Pt(this, m) &&
+              (Pt(this, g) ? Pt(this, m).cancel({ revert: !0 }) : Pt(this, m).cancelRetry()),
+            this.scheduleGc()),
+          Pt(this, y).notify({ type: 'observerRemoved', query: this, observer: t }));
+      }
+      getObserversCount() {
+        return this.observers.length;
+      }
+      invalidate() {
+        this.state.isInvalidated || Ft(this, w, O).call(this, { type: 'invalidate' });
+      }
+      async fetch(t, e) {
+        var s, i, n, r, a, o, h, u, l, c, d, p;
+        if (
+          'idle' !== this.state.fetchStatus &&
+          'rejected' !== (null == (s = Pt(this, m)) ? void 0 : s.status())
+        )
+          if (void 0 !== this.state.data && (null == e ? void 0 : e.cancelRefetch))
+            this.cancel({ silent: !0 });
+          else if (Pt(this, m)) return Pt(this, m).continueRetry(), Pt(this, m).promise;
+        if ((t && this.setOptions(t), !this.options.queryFn)) {
+          const t = this.observers.find((t) => t.options.queryFn);
+          t && this.setOptions(t.options);
+        }
+        const b = new AbortController(),
+          M = (t) => {
+            Object.defineProperty(t, 'signal', {
+              enumerable: !0,
+              get: () => (Et(this, g, !0), b.signal),
+            });
+          },
+          k = () => {
+            const t = ue(this.options, e),
+              s = (() => {
+                const t = { client: Pt(this, v), queryKey: this.queryKey, meta: this.meta };
+                return M(t), t;
+              })();
+            return (
+              Et(this, g, !1), this.options.persister ? this.options.persister(t, s, this) : t(s)
+            );
+          },
+          C = (() => {
+            const t = {
+              fetchOptions: e,
+              options: this.options,
+              queryKey: this.queryKey,
+              client: Pt(this, v),
+              state: this.state,
+              fetchFn: k,
+            };
+            return M(t), t;
+          })();
+        null == (i = this.options.behavior) || i.onFetch(C, this),
+          Et(this, f, this.state),
+          ('idle' !== this.state.fetchStatus &&
+            this.state.fetchMeta === (null == (n = C.fetchOptions) ? void 0 : n.meta)) ||
+            Ft(this, w, O).call(this, {
+              type: 'fetch',
+              meta: null == (r = C.fetchOptions) ? void 0 : r.meta,
+            }),
+          Et(
+            this,
+            m,
+            ge({
+              initialPromise: null == e ? void 0 : e.initialPromise,
+              fn: C.fetchFn,
+              onCancel: (t) => {
+                t instanceof be &&
+                  t.revert &&
+                  this.setState({ ...Pt(this, f), fetchStatus: 'idle' }),
+                  b.abort();
+              },
+              onFail: (t, e) => {
+                Ft(this, w, O).call(this, { type: 'failed', failureCount: t, error: e });
+              },
+              onPause: () => {
+                Ft(this, w, O).call(this, { type: 'pause' });
+              },
+              onContinue: () => {
+                Ft(this, w, O).call(this, { type: 'continue' });
+              },
+              retry: C.options.retry,
+              retryDelay: C.options.retryDelay,
+              networkMode: C.options.networkMode,
+              canRun: () => !0,
+            })
+          );
+        try {
+          const t = await Pt(this, m).start();
+          if (void 0 === t) throw new Error(`${this.queryHash} data is undefined`);
+          return (
+            this.setData(t),
+            null == (o = (a = Pt(this, y).config).onSuccess) || o.call(a, t, this),
+            null == (u = (h = Pt(this, y).config).onSettled) ||
+              u.call(h, t, this.state.error, this),
+            t
+          );
+        } catch (S) {
+          if (S instanceof be) {
+            if (S.silent) return Pt(this, m).promise;
+            if (S.revert) {
+              if (void 0 === this.state.data) throw S;
+              return this.state.data;
+            }
+          }
+          throw (
+            (Ft(this, w, O).call(this, { type: 'error', error: S }),
+            null == (c = (l = Pt(this, y).config).onError) || c.call(l, S, this),
+            null == (p = (d = Pt(this, y).config).onSettled) || p.call(d, this.state.data, S, this),
+            S)
+          );
+        } finally {
+          this.scheduleGc();
+        }
+      }
+    }),
+    (p = new WeakMap()),
+    (f = new WeakMap()),
+    (y = new WeakMap()),
+    (v = new WeakMap()),
+    (m = new WeakMap()),
+    (b = new WeakMap()),
+    (g = new WeakMap()),
+    (w = new WeakSet()),
+    (O = function (t) {
+      (this.state = ((e) => {
+        switch (t.type) {
+          case 'failed':
+            return { ...e, fetchFailureCount: t.failureCount, fetchFailureReason: t.error };
+          case 'pause':
+            return { ...e, fetchStatus: 'paused' };
+          case 'continue':
+            return { ...e, fetchStatus: 'fetching' };
+          case 'fetch':
+            return { ...e, ...Me(e.data, this.options), fetchMeta: t.meta ?? null };
+          case 'success': {
+            const s = {
+              ...e,
+              ...ke(t.data, t.dataUpdatedAt),
+              dataUpdateCount: e.dataUpdateCount + 1,
+              ...(!t.manual && {
+                fetchStatus: 'idle',
+                fetchFailureCount: 0,
+                fetchFailureReason: null,
+              }),
+            };
+            return Et(this, f, t.manual ? s : void 0), s;
+          }
+          case 'error': {
+            const i = t.error;
+            return {
+              ...e,
+              error: i,
+              errorUpdateCount: e.errorUpdateCount + 1,
+              errorUpdatedAt: Date.now(),
+              fetchFailureCount: e.fetchFailureCount + 1,
+              fetchFailureReason: i,
+              fetchStatus: 'idle',
+              status: 'error',
+            };
+          }
+          case 'invalidate':
+            return { ...e, isInvalidated: !0 };
+          case 'setState':
+            return { ...e, ...t.state };
+        }
+      })(this.state)),
+        fe.batch(() => {
+          this.observers.forEach((t) => {
+            t.onQueryUpdate();
+          }),
+            Pt(this, y).notify({ query: this, type: 'updated', action: t });
+        });
+    }),
+    M);
+function Me(t, e) {
+  return {
+    fetchFailureCount: 0,
+    fetchFailureReason: null,
+    fetchStatus: me(e.networkMode) ? 'fetching' : 'paused',
+    ...(void 0 === t && { error: null, status: 'pending' }),
+  };
+}
+function ke(t, e) {
+  return {
+    data: t,
+    dataUpdatedAt: e ?? Date.now(),
+    error: null,
+    isInvalidated: !1,
+    status: 'success',
+  };
+}
+function Ce(t) {
+  const e = 'function' == typeof t.initialData ? t.initialData() : t.initialData,
+    s = void 0 !== e,
+    i = s
+      ? 'function' == typeof t.initialDataUpdatedAt
+        ? t.initialDataUpdatedAt()
+        : t.initialDataUpdatedAt
+      : 0;
+  return {
+    data: e,
+    dataUpdateCount: 0,
+    dataUpdatedAt: s ? (i ?? Date.now()) : 0,
+    error: null,
+    errorUpdateCount: 0,
+    errorUpdatedAt: 0,
+    fetchFailureCount: 0,
+    fetchFailureReason: null,
+    fetchMeta: null,
+    isInvalidated: !1,
+    status: s ? 'success' : 'pending',
+    fetchStatus: 'idle',
+  };
+}
+var Se =
+  ((z = class extends Kt {
+    constructor(t, e) {
+      super(),
+        qt(this, j),
+        qt(this, k),
+        qt(this, C),
+        qt(this, S),
+        qt(this, R),
+        qt(this, P),
+        qt(this, q),
+        qt(this, E),
+        qt(this, F),
+        qt(this, x),
+        qt(this, W),
+        qt(this, Q),
+        qt(this, A),
+        qt(this, T),
+        qt(this, D),
+        qt(this, U, new Set()),
+        (this.options = e),
+        Et(this, k, t),
+        Et(this, F, null),
+        Et(this, E, de()),
+        this.bindMethods(),
+        this.setOptions(e);
+    }
+    bindMethods() {
+      this.refetch = this.refetch.bind(this);
+    }
+    onSubscribe() {
+      1 === this.listeners.size &&
+        (Pt(this, C).addObserver(this),
+        Re(Pt(this, C), this.options) ? Ft(this, j, K).call(this) : this.updateResult(),
+        Ft(this, j, _).call(this));
+    }
+    onUnsubscribe() {
+      this.hasListeners() || this.destroy();
+    }
+    shouldFetchOnReconnect() {
+      return Pe(Pt(this, C), this.options, this.options.refetchOnReconnect);
+    }
+    shouldFetchOnWindowFocus() {
+      return Pe(Pt(this, C), this.options, this.options.refetchOnWindowFocus);
+    }
+    destroy() {
+      (this.listeners = new Set()),
+        Ft(this, j, G).call(this),
+        Ft(this, j, B).call(this),
+        Pt(this, C).removeObserver(this);
+    }
+    setOptions(t) {
+      const e = this.options,
+        s = Pt(this, C);
+      if (
+        ((this.options = Pt(this, k).defaultQueryOptions(t)),
+        void 0 !== this.options.enabled &&
+          'boolean' != typeof this.options.enabled &&
+          'function' != typeof this.options.enabled &&
+          'boolean' != typeof $t(this.options.enabled, Pt(this, C)))
+      )
+        throw new Error('Expected enabled to be a boolean or a callback that returns a boolean');
+      Ft(this, j, N).call(this),
+        Pt(this, C).setOptions(this.options),
+        e._defaulted &&
+          !ee(this.options, e) &&
+          Pt(this, k)
+            .getQueryCache()
+            .notify({ type: 'observerOptionsUpdated', query: Pt(this, C), observer: this });
+      const i = this.hasListeners();
+      i && qe(Pt(this, C), s, this.options, e) && Ft(this, j, K).call(this),
+        this.updateResult(),
+        !i ||
+          (Pt(this, C) === s &&
+            $t(this.options.enabled, Pt(this, C)) === $t(e.enabled, Pt(this, C)) &&
+            Nt(this.options.staleTime, Pt(this, C)) === Nt(e.staleTime, Pt(this, C))) ||
+          Ft(this, j, I).call(this);
+      const n = Ft(this, j, L).call(this);
+      !i ||
+        (Pt(this, C) === s &&
+          $t(this.options.enabled, Pt(this, C)) === $t(e.enabled, Pt(this, C)) &&
+          n === Pt(this, D)) ||
+        Ft(this, j, H).call(this, n);
+    }
+    getOptimisticResult(t) {
+      const e = Pt(this, k).getQueryCache().build(Pt(this, k), t),
+        s = this.createResult(e, t);
+      return (
+        ((t, e) => {
+          if (!ee(t.getCurrentResult(), e)) return !0;
+          return !1;
+        })(this, s) && (Et(this, R, s), Et(this, q, this.options), Et(this, P, Pt(this, C).state)),
+        s
+      );
+    }
+    getCurrentResult() {
+      return Pt(this, R);
+    }
+    trackResult(t, e) {
+      return new Proxy(t, {
+        get: (t, s) => (
+          this.trackProp(s),
+          null == e || e(s),
+          'promise' === s &&
+            (this.trackProp('data'),
+            this.options.experimental_prefetchInRender ||
+              'pending' !== Pt(this, E).status ||
+              Pt(this, E).reject(
+                new Error('experimental_prefetchInRender feature flag is not enabled')
+              )),
+          Reflect.get(t, s)
+        ),
+      });
+    }
+    trackProp(t) {
+      Pt(this, U).add(t);
+    }
+    getCurrentQuery() {
+      return Pt(this, C);
+    }
+    refetch({ ...t } = {}) {
+      return this.fetch({ ...t });
+    }
+    fetchOptimistic(t) {
+      const e = Pt(this, k).defaultQueryOptions(t),
+        s = Pt(this, k).getQueryCache().build(Pt(this, k), e);
+      return s.fetch().then(() => this.createResult(s, e));
+    }
+    fetch(t) {
+      return Ft(this, j, K)
+        .call(this, { ...t, cancelRefetch: t.cancelRefetch ?? !0 })
+        .then(() => (this.updateResult(), Pt(this, R)));
+    }
+    createResult(t, e) {
+      var s;
+      const i = Pt(this, C),
+        n = this.options,
+        r = Pt(this, R),
+        a = Pt(this, P),
+        o = Pt(this, q),
+        h = t !== i ? t.state : Pt(this, S),
+        { state: u } = t;
+      let l,
+        c = { ...u },
+        d = !1;
+      if (e._optimisticResults) {
+        const s = this.hasListeners(),
+          r = !s && Re(t, e),
+          a = s && qe(t, i, e, n);
+        (r || a) && (c = { ...c, ...Me(u.data, t.options) }),
+          'isRestoring' === e._optimisticResults && (c.fetchStatus = 'idle');
+      }
+      let { error: p, errorUpdatedAt: f, status: y } = c;
+      l = c.data;
+      let v = !1;
+      if (void 0 !== e.placeholderData && void 0 === l && 'pending' === y) {
+        let t;
+        (null == r ? void 0 : r.isPlaceholderData) &&
+        e.placeholderData === (null == o ? void 0 : o.placeholderData)
+          ? ((t = r.data), (v = !0))
+          : (t =
+              'function' == typeof e.placeholderData
+                ? e.placeholderData(null == (s = Pt(this, Q)) ? void 0 : s.state.data, Pt(this, Q))
+                : e.placeholderData),
+          void 0 !== t && ((y = 'success'), (l = re(null == r ? void 0 : r.data, t, e)), (d = !0));
+      }
+      if (e.select && void 0 !== l && !v)
+        if (r && l === (null == a ? void 0 : a.data) && e.select === Pt(this, x)) l = Pt(this, W);
+        else
+          try {
+            Et(this, x, e.select),
+              (l = e.select(l)),
+              (l = re(null == r ? void 0 : r.data, l, e)),
+              Et(this, W, l),
+              Et(this, F, null);
+          } catch (k) {
+            Et(this, F, k);
+          }
+      Pt(this, F) && ((p = Pt(this, F)), (l = Pt(this, W)), (f = Date.now()), (y = 'error'));
+      const m = 'fetching' === c.fetchStatus,
+        b = 'pending' === y,
+        g = 'error' === y,
+        w = b && m,
+        O = void 0 !== l,
+        M = {
+          status: y,
+          fetchStatus: c.fetchStatus,
+          isPending: b,
+          isSuccess: 'success' === y,
+          isError: g,
+          isInitialLoading: w,
+          isLoading: w,
+          data: l,
+          dataUpdatedAt: c.dataUpdatedAt,
+          error: p,
+          errorUpdatedAt: f,
+          failureCount: c.fetchFailureCount,
+          failureReason: c.fetchFailureReason,
+          errorUpdateCount: c.errorUpdateCount,
+          isFetched: c.dataUpdateCount > 0 || c.errorUpdateCount > 0,
+          isFetchedAfterMount:
+            c.dataUpdateCount > h.dataUpdateCount || c.errorUpdateCount > h.errorUpdateCount,
+          isFetching: m,
+          isRefetching: m && !b,
+          isLoadingError: g && !O,
+          isPaused: 'paused' === c.fetchStatus,
+          isPlaceholderData: d,
+          isRefetchError: g && O,
+          isStale: Ee(t, e),
+          refetch: this.refetch,
+          promise: Pt(this, E),
+          isEnabled: !1 !== $t(e.enabled, t),
+        };
+      if (this.options.experimental_prefetchInRender) {
+        const e = (t) => {
+            'error' === M.status ? t.reject(M.error) : void 0 !== M.data && t.resolve(M.data);
+          },
+          s = () => {
+            const t = Et(this, E, (M.promise = de()));
+            e(t);
+          },
+          n = Pt(this, E);
+        switch (n.status) {
+          case 'pending':
+            t.queryHash === i.queryHash && e(n);
+            break;
+          case 'fulfilled':
+            ('error' !== M.status && M.data === n.value) || s();
+            break;
+          case 'rejected':
+            ('error' === M.status && M.error === n.reason) || s();
+        }
+      }
+      return M;
+    }
+    updateResult() {
+      const t = Pt(this, R),
+        e = this.createResult(Pt(this, C), this.options);
+      if (
+        (Et(this, P, Pt(this, C).state),
+        Et(this, q, this.options),
+        void 0 !== Pt(this, P).data && Et(this, Q, Pt(this, C)),
+        ee(e, t))
+      )
+        return;
+      Et(this, R, e);
+      Ft(this, j, $).call(this, {
+        listeners: (() => {
+          if (!t) return !0;
+          const { notifyOnChangeProps: e } = this.options,
+            s = 'function' == typeof e ? e() : e;
+          if ('all' === s || (!s && !Pt(this, U).size)) return !0;
+          const i = new Set(s ?? Pt(this, U));
+          return (
+            this.options.throwOnError && i.add('error'),
+            Object.keys(Pt(this, R)).some((e) => {
+              const s = e;
+              return Pt(this, R)[s] !== t[s] && i.has(s);
+            })
+          );
+        })(),
+      });
+    }
+    onQueryUpdate() {
+      this.updateResult(), this.hasListeners() && Ft(this, j, _).call(this);
+    }
+  }),
+  (k = new WeakMap()),
+  (C = new WeakMap()),
+  (S = new WeakMap()),
+  (R = new WeakMap()),
+  (P = new WeakMap()),
+  (q = new WeakMap()),
+  (E = new WeakMap()),
+  (F = new WeakMap()),
+  (x = new WeakMap()),
+  (W = new WeakMap()),
+  (Q = new WeakMap()),
+  (A = new WeakMap()),
+  (T = new WeakMap()),
+  (D = new WeakMap()),
+  (U = new WeakMap()),
+  (j = new WeakSet()),
+  (K = function (t) {
+    Ft(this, j, N).call(this);
+    let e = Pt(this, C).fetch(this.options, t);
+    return (null == t ? void 0 : t.throwOnError) || (e = e.catch(_t)), e;
+  }),
+  (I = function () {
+    Ft(this, j, G).call(this);
+    const t = Nt(this.options.staleTime, Pt(this, C));
+    if (Ht || Pt(this, R).isStale || !Gt(t)) return;
+    const e = Bt(Pt(this, R).dataUpdatedAt, t) + 1;
+    Et(
+      this,
+      A,
+      Lt.setTimeout(() => {
+        Pt(this, R).isStale || this.updateResult();
+      }, e)
+    );
+  }),
+  (L = function () {
+    return (
+      ('function' == typeof this.options.refetchInterval
+        ? this.options.refetchInterval(Pt(this, C))
+        : this.options.refetchInterval) ?? !1
+    );
+  }),
+  (H = function (t) {
+    Ft(this, j, B).call(this),
+      Et(this, D, t),
+      !Ht &&
+        !1 !== $t(this.options.enabled, Pt(this, C)) &&
+        Gt(Pt(this, D)) &&
+        0 !== Pt(this, D) &&
+        Et(
+          this,
+          T,
+          Lt.setInterval(
+            () => {
+              (this.options.refetchIntervalInBackground || ce.isFocused()) &&
+                Ft(this, j, K).call(this);
+            },
+            Pt(this, D)
+          )
+        );
+  }),
+  (_ = function () {
+    Ft(this, j, I).call(this), Ft(this, j, H).call(this, Ft(this, j, L).call(this));
+  }),
+  (G = function () {
+    Pt(this, A) && (Lt.clearTimeout(Pt(this, A)), Et(this, A, void 0));
+  }),
+  (B = function () {
+    Pt(this, T) && (Lt.clearInterval(Pt(this, T)), Et(this, T, void 0));
+  }),
+  (N = function () {
+    const t = Pt(this, k).getQueryCache().build(Pt(this, k), this.options);
+    if (t === Pt(this, C)) return;
+    const e = Pt(this, C);
+    Et(this, C, t),
+      Et(this, S, t.state),
+      this.hasListeners() && (null == e || e.removeObserver(this), t.addObserver(this));
+  }),
+  ($ = function (t) {
+    fe.batch(() => {
+      t.listeners &&
+        this.listeners.forEach((t) => {
+          t(Pt(this, R));
+        }),
+        Pt(this, k)
+          .getQueryCache()
+          .notify({ query: Pt(this, C), type: 'observerResultsUpdated' });
+    });
+  }),
+  z);
+function Re(t, e) {
+  return (
+    ((t, e) =>
+      !1 !== $t(e.enabled, t) &&
+      void 0 === t.state.data &&
+      !('error' === t.state.status && !1 === e.retryOnMount))(t, e) ||
+    (void 0 !== t.state.data && Pe(t, e, e.refetchOnMount))
+  );
+}
+function Pe(t, e, s) {
+  if (!1 !== $t(e.enabled, t) && 'static' !== Nt(e.staleTime, t)) {
+    const i = 'function' == typeof s ? s(t) : s;
+    return 'always' === i || (!1 !== i && Ee(t, e));
+  }
+  return !1;
+}
+function qe(t, e, s, i) {
+  return (
+    (t !== e || !1 === $t(i.enabled, t)) && (!s.suspense || 'error' !== t.state.status) && Ee(t, s)
+  );
+}
+function Ee(t, e) {
+  return !1 !== $t(e.enabled, t) && t.isStaleByTime(Nt(e.staleTime, t));
+}
+function Fe(t) {
+  return {
+    onFetch: (e, s) => {
+      var i, n, r, a, o;
+      const h = e.options,
+        u =
+          null ==
+          (r = null == (n = null == (i = e.fetchOptions) ? void 0 : i.meta) ? void 0 : n.fetchMore)
+            ? void 0
+            : r.direction,
+        l = (null == (a = e.state.data) ? void 0 : a.pages) || [],
+        c = (null == (o = e.state.data) ? void 0 : o.pageParams) || [];
+      let d = { pages: [], pageParams: [] },
+        p = 0;
+      const f = async () => {
+        let s = !1;
+        const i = ue(e.options, e.fetchOptions),
+          n = async (t, n, r) => {
+            if (s) return Promise.reject();
+            if (null == n && t.pages.length) return Promise.resolve(t);
+            const a = (() => {
+                const t = {
+                  client: e.client,
+                  queryKey: e.queryKey,
+                  pageParam: n,
+                  direction: r ? 'backward' : 'forward',
+                  meta: e.options.meta,
+                };
+                var i;
+                return (
+                  (i = t),
+                  Object.defineProperty(i, 'signal', {
+                    enumerable: !0,
+                    get: () => (
+                      e.signal.aborted
+                        ? (s = !0)
+                        : e.signal.addEventListener('abort', () => {
+                            s = !0;
+                          }),
+                      e.signal
+                    ),
+                  }),
+                  t
+                );
+              })(),
+              o = await i(a),
+              { maxPages: h } = e.options,
+              u = r ? oe : ae;
+            return { pages: u(t.pages, o, h), pageParams: u(t.pageParams, n, h) };
+          };
+        if (u && l.length) {
+          const t = 'backward' === u,
+            e = { pages: l, pageParams: c },
+            s = (t ? We : xe)(h, e);
+          d = await n(e, s, t);
+        } else {
+          const e = t ?? l.length;
+          do {
+            const t = 0 === p ? (c[0] ?? h.initialPageParam) : xe(h, d);
+            if (p > 0 && null == t) break;
+            (d = await n(d, t)), p++;
+          } while (p < e);
+        }
+        return d;
+      };
+      e.options.persister
+        ? (e.fetchFn = () => {
+            var t, i;
+            return null == (i = (t = e.options).persister)
+              ? void 0
+              : i.call(
+                  t,
+                  f,
+                  {
+                    client: e.client,
+                    queryKey: e.queryKey,
+                    meta: e.options.meta,
+                    signal: e.signal,
+                  },
+                  s
+                );
+          })
+        : (e.fetchFn = f);
+    },
+  };
+}
+function xe(t, { pages: e, pageParams: s }) {
+  const i = e.length - 1;
+  return e.length > 0 ? t.getNextPageParam(e[i], e, s[i], s) : void 0;
+}
+function We(t, { pages: e, pageParams: s }) {
+  var i;
+  return e.length > 0
+    ? null == (i = t.getPreviousPageParam)
+      ? void 0
+      : i.call(t, e[0], e, s[0], s)
+    : void 0;
+}
+var Qe =
+  ((et = class extends we {
+    constructor(t) {
+      super(),
+        qt(this, Z),
+        qt(this, J),
+        qt(this, V),
+        qt(this, X),
+        qt(this, Y),
+        Et(this, J, t.client),
+        (this.mutationId = t.mutationId),
+        Et(this, X, t.mutationCache),
+        Et(this, V, []),
+        (this.state = t.state || {
+          context: void 0,
+          data: void 0,
+          error: null,
+          failureCount: 0,
+          failureReason: null,
+          isPaused: !1,
+          status: 'idle',
+          variables: void 0,
+          submittedAt: 0,
+        }),
+        this.setOptions(t.options),
+        this.scheduleGc();
+    }
+    setOptions(t) {
+      (this.options = t), this.updateGcTime(this.options.gcTime);
+    }
+    get meta() {
+      return this.options.meta;
+    }
+    addObserver(t) {
+      Pt(this, V).includes(t) ||
+        (Pt(this, V).push(t),
+        this.clearGcTimeout(),
+        Pt(this, X).notify({ type: 'observerAdded', mutation: this, observer: t }));
+    }
+    removeObserver(t) {
+      Et(
+        this,
+        V,
+        Pt(this, V).filter((e) => e !== t)
+      ),
+        this.scheduleGc(),
+        Pt(this, X).notify({ type: 'observerRemoved', mutation: this, observer: t });
+    }
+    optionalRemove() {
+      Pt(this, V).length ||
+        ('pending' === this.state.status ? this.scheduleGc() : Pt(this, X).remove(this));
+    }
+    continue() {
+      var t;
+      return (
+        (null == (t = Pt(this, Y)) ? void 0 : t.continue()) ?? this.execute(this.state.variables)
+      );
+    }
+    async execute(t) {
+      var e, s, i, n, r, a, o, h, u, l, c, d, p, f, y, v, m, b, g, w;
+      const O = () => {
+          Ft(this, Z, tt).call(this, { type: 'continue' });
+        },
+        M = { client: Pt(this, J), meta: this.options.meta, mutationKey: this.options.mutationKey };
+      Et(
+        this,
+        Y,
+        ge({
+          fn: () =>
+            this.options.mutationFn
+              ? this.options.mutationFn(t, M)
+              : Promise.reject(new Error('No mutationFn found')),
+          onFail: (t, e) => {
+            Ft(this, Z, tt).call(this, { type: 'failed', failureCount: t, error: e });
+          },
+          onPause: () => {
+            Ft(this, Z, tt).call(this, { type: 'pause' });
+          },
+          onContinue: O,
+          retry: this.options.retry ?? 0,
+          retryDelay: this.options.retryDelay,
+          networkMode: this.options.networkMode,
+          canRun: () => Pt(this, X).canRun(this),
+        })
+      );
+      const k = 'pending' === this.state.status,
+        C = !Pt(this, Y).canStart();
+      try {
+        if (k) O();
+        else {
+          Ft(this, Z, tt).call(this, { type: 'pending', variables: t, isPaused: C }),
+            await (null == (s = (e = Pt(this, X).config).onMutate)
+              ? void 0
+              : s.call(e, t, this, M));
+          const r = await (null == (n = (i = this.options).onMutate) ? void 0 : n.call(i, t, M));
+          r !== this.state.context &&
+            Ft(this, Z, tt).call(this, { type: 'pending', context: r, variables: t, isPaused: C });
+        }
+        const p = await Pt(this, Y).start();
+        return (
+          await (null == (a = (r = Pt(this, X).config).onSuccess)
+            ? void 0
+            : a.call(r, p, t, this.state.context, this, M)),
+          await (null == (h = (o = this.options).onSuccess)
+            ? void 0
+            : h.call(o, p, t, this.state.context, M)),
+          await (null == (l = (u = Pt(this, X).config).onSettled)
+            ? void 0
+            : l.call(u, p, null, this.state.variables, this.state.context, this, M)),
+          await (null == (d = (c = this.options).onSettled)
+            ? void 0
+            : d.call(c, p, null, t, this.state.context, M)),
+          Ft(this, Z, tt).call(this, { type: 'success', data: p }),
+          p
+        );
+      } catch (S) {
+        try {
+          throw (
+            (await (null == (f = (p = Pt(this, X).config).onError)
+              ? void 0
+              : f.call(p, S, t, this.state.context, this, M)),
+            await (null == (v = (y = this.options).onError)
+              ? void 0
+              : v.call(y, S, t, this.state.context, M)),
+            await (null == (b = (m = Pt(this, X).config).onSettled)
+              ? void 0
+              : b.call(m, void 0, S, this.state.variables, this.state.context, this, M)),
+            await (null == (w = (g = this.options).onSettled)
+              ? void 0
+              : w.call(g, void 0, S, t, this.state.context, M)),
+            S)
+          );
+        } finally {
+          Ft(this, Z, tt).call(this, { type: 'error', error: S });
+        }
+      } finally {
+        Pt(this, X).runNext(this);
+      }
+    }
+  }),
+  (J = new WeakMap()),
+  (V = new WeakMap()),
+  (X = new WeakMap()),
+  (Y = new WeakMap()),
+  (Z = new WeakSet()),
+  (tt = function (t) {
+    (this.state = ((e) => {
+      switch (t.type) {
+        case 'failed':
+          return { ...e, failureCount: t.failureCount, failureReason: t.error };
+        case 'pause':
+          return { ...e, isPaused: !0 };
+        case 'continue':
+          return { ...e, isPaused: !1 };
+        case 'pending':
+          return {
+            ...e,
+            context: t.context,
+            data: void 0,
+            failureCount: 0,
+            failureReason: null,
+            error: null,
+            isPaused: t.isPaused,
+            status: 'pending',
+            variables: t.variables,
+            submittedAt: Date.now(),
+          };
+        case 'success':
+          return {
+            ...e,
+            data: t.data,
+            failureCount: 0,
+            failureReason: null,
+            error: null,
+            status: 'success',
+            isPaused: !1,
+          };
+        case 'error':
+          return {
+            ...e,
+            data: void 0,
+            error: t.error,
+            failureCount: e.failureCount + 1,
+            failureReason: t.error,
+            isPaused: !1,
+            status: 'error',
+          };
+      }
+    })(this.state)),
+      fe.batch(() => {
+        Pt(this, V).forEach((e) => {
+          e.onMutationUpdate(t);
+        }),
+          Pt(this, X).notify({ mutation: this, type: 'updated', action: t });
+      });
+  }),
+  et);
+var Ae =
+  ((rt = class extends Kt {
+    constructor(t = {}) {
+      super(),
+        qt(this, st),
+        qt(this, it),
+        qt(this, nt),
+        (this.config = t),
+        Et(this, st, new Set()),
+        Et(this, it, new Map()),
+        Et(this, nt, 0);
+    }
+    build(t, e, s) {
+      const i = new Qe({
+        client: t,
+        mutationCache: this,
+        mutationId: ++xt(this, nt)._,
+        options: t.defaultMutationOptions(e),
+        state: s,
+      });
+      return this.add(i), i;
+    }
+    add(t) {
+      Pt(this, st).add(t);
+      const e = Te(t);
+      if ('string' == typeof e) {
+        const s = Pt(this, it).get(e);
+        s ? s.push(t) : Pt(this, it).set(e, [t]);
+      }
+      this.notify({ type: 'added', mutation: t });
+    }
+    remove(t) {
+      if (Pt(this, st).delete(t)) {
+        const e = Te(t);
+        if ('string' == typeof e) {
+          const s = Pt(this, it).get(e);
+          if (s)
+            if (s.length > 1) {
+              const e = s.indexOf(t);
+              -1 !== e && s.splice(e, 1);
+            } else s[0] === t && Pt(this, it).delete(e);
+        }
+      }
+      this.notify({ type: 'removed', mutation: t });
+    }
+    canRun(t) {
+      const e = Te(t);
+      if ('string' == typeof e) {
+        const s = Pt(this, it).get(e),
+          i = null == s ? void 0 : s.find((t) => 'pending' === t.state.status);
+        return !i || i === t;
+      }
+      return !0;
+    }
+    runNext(t) {
+      var e;
+      const s = Te(t);
+      if ('string' == typeof s) {
+        const i =
+          null == (e = Pt(this, it).get(s)) ? void 0 : e.find((e) => e !== t && e.state.isPaused);
+        return (null == i ? void 0 : i.continue()) ?? Promise.resolve();
+      }
+      return Promise.resolve();
+    }
+    clear() {
+      fe.batch(() => {
+        Pt(this, st).forEach((t) => {
+          this.notify({ type: 'removed', mutation: t });
+        }),
+          Pt(this, st).clear(),
+          Pt(this, it).clear();
+      });
+    }
+    getAll() {
+      return Array.from(Pt(this, st));
+    }
+    find(t) {
+      const e = { exact: !0, ...t };
+      return this.getAll().find((t) => Jt(e, t));
+    }
+    findAll(t = {}) {
+      return this.getAll().filter((e) => Jt(t, e));
+    }
+    notify(t) {
+      fe.batch(() => {
+        this.listeners.forEach((e) => {
+          e(t);
+        });
+      });
+    }
+    resumePausedMutations() {
+      const t = this.getAll().filter((t) => t.state.isPaused);
+      return fe.batch(() => Promise.all(t.map((t) => t.continue().catch(_t))));
+    }
+  }),
+  (st = new WeakMap()),
+  (it = new WeakMap()),
+  (nt = new WeakMap()),
+  rt);
+function Te(t) {
+  var e;
+  return null == (e = t.options.scope) ? void 0 : e.id;
+}
+var De =
+    ((pt = class extends Kt {
+      constructor(t, e) {
+        super(),
+          qt(this, lt),
+          qt(this, at),
+          qt(this, ot),
+          qt(this, ht),
+          qt(this, ut),
+          Et(this, at, t),
+          this.setOptions(e),
+          this.bindMethods(),
+          Ft(this, lt, ct).call(this);
+      }
+      bindMethods() {
+        (this.mutate = this.mutate.bind(this)), (this.reset = this.reset.bind(this));
+      }
+      setOptions(t) {
+        var e;
+        const s = this.options;
+        (this.options = Pt(this, at).defaultMutationOptions(t)),
+          ee(this.options, s) ||
+            Pt(this, at)
+              .getMutationCache()
+              .notify({ type: 'observerOptionsUpdated', mutation: Pt(this, ht), observer: this }),
+          (null == s ? void 0 : s.mutationKey) &&
+          this.options.mutationKey &&
+          Xt(s.mutationKey) !== Xt(this.options.mutationKey)
+            ? this.reset()
+            : 'pending' === (null == (e = Pt(this, ht)) ? void 0 : e.state.status) &&
+              Pt(this, ht).setOptions(this.options);
+      }
+      onUnsubscribe() {
+        var t;
+        this.hasListeners() || null == (t = Pt(this, ht)) || t.removeObserver(this);
+      }
+      onMutationUpdate(t) {
+        Ft(this, lt, ct).call(this), Ft(this, lt, dt).call(this, t);
+      }
+      getCurrentResult() {
+        return Pt(this, ot);
+      }
+      reset() {
+        var t;
+        null == (t = Pt(this, ht)) || t.removeObserver(this),
+          Et(this, ht, void 0),
+          Ft(this, lt, ct).call(this),
+          Ft(this, lt, dt).call(this);
+      }
+      mutate(t, e) {
+        var s;
+        return (
+          Et(this, ut, e),
+          null == (s = Pt(this, ht)) || s.removeObserver(this),
+          Et(this, ht, Pt(this, at).getMutationCache().build(Pt(this, at), this.options)),
+          Pt(this, ht).addObserver(this),
+          Pt(this, ht).execute(t)
+        );
+      }
+    }),
+    (at = new WeakMap()),
+    (ot = new WeakMap()),
+    (ht = new WeakMap()),
+    (ut = new WeakMap()),
+    (lt = new WeakSet()),
+    (ct = function () {
+      var t;
+      const e = (null == (t = Pt(this, ht)) ? void 0 : t.state) ?? {
+        context: void 0,
+        data: void 0,
+        error: null,
+        failureCount: 0,
+        failureReason: null,
+        isPaused: !1,
+        status: 'idle',
+        variables: void 0,
+        submittedAt: 0,
+      };
+      Et(this, ot, {
+        ...e,
+        isPending: 'pending' === e.status,
+        isSuccess: 'success' === e.status,
+        isError: 'error' === e.status,
+        isIdle: 'idle' === e.status,
+        mutate: this.mutate,
+        reset: this.reset,
+      });
+    }),
+    (dt = function (t) {
+      fe.batch(() => {
+        var e, s, i, n, r, a, o, h;
+        if (Pt(this, ut) && this.hasListeners()) {
+          const u = Pt(this, ot).variables,
+            l = Pt(this, ot).context,
+            c = {
+              client: Pt(this, at),
+              meta: this.options.meta,
+              mutationKey: this.options.mutationKey,
+            };
+          'success' === (null == t ? void 0 : t.type)
+            ? (null == (s = (e = Pt(this, ut)).onSuccess) || s.call(e, t.data, u, l, c),
+              null == (n = (i = Pt(this, ut)).onSettled) || n.call(i, t.data, null, u, l, c))
+            : 'error' === (null == t ? void 0 : t.type) &&
+              (null == (a = (r = Pt(this, ut)).onError) || a.call(r, t.error, u, l, c),
+              null == (h = (o = Pt(this, ut)).onSettled) || h.call(o, void 0, t.error, u, l, c));
+        }
+        this.listeners.forEach((t) => {
+          t(Pt(this, ot));
+        });
+      });
+    }),
+    pt),
+  Ue =
+    ((yt = class extends Kt {
+      constructor(t = {}) {
+        super(), qt(this, ft), (this.config = t), Et(this, ft, new Map());
+      }
+      build(t, e, s) {
+        const i = e.queryKey,
+          n = e.queryHash ?? Vt(i, e);
+        let r = this.get(n);
+        return (
+          r ||
+            ((r = new Oe({
+              client: t,
+              queryKey: i,
+              queryHash: n,
+              options: t.defaultQueryOptions(e),
+              state: s,
+              defaultOptions: t.getQueryDefaults(i),
+            })),
+            this.add(r)),
+          r
+        );
+      }
+      add(t) {
+        Pt(this, ft).has(t.queryHash) ||
+          (Pt(this, ft).set(t.queryHash, t), this.notify({ type: 'added', query: t }));
+      }
+      remove(t) {
+        const e = Pt(this, ft).get(t.queryHash);
+        e &&
+          (t.destroy(),
+          e === t && Pt(this, ft).delete(t.queryHash),
+          this.notify({ type: 'removed', query: t }));
+      }
+      clear() {
+        fe.batch(() => {
+          this.getAll().forEach((t) => {
+            this.remove(t);
+          });
+        });
+      }
+      get(t) {
+        return Pt(this, ft).get(t);
+      }
+      getAll() {
+        return [...Pt(this, ft).values()];
+      }
+      find(t) {
+        const e = { exact: !0, ...t };
+        return this.getAll().find((t) => zt(e, t));
+      }
+      findAll(t = {}) {
+        const e = this.getAll();
+        return Object.keys(t).length > 0 ? e.filter((e) => zt(t, e)) : e;
+      }
+      notify(t) {
+        fe.batch(() => {
+          this.listeners.forEach((e) => {
+            e(t);
+          });
+        });
+      }
+      onFocus() {
+        fe.batch(() => {
+          this.getAll().forEach((t) => {
+            t.onFocus();
+          });
+        });
+      }
+      onOnline() {
+        fe.batch(() => {
+          this.getAll().forEach((t) => {
+            t.onOnline();
+          });
+        });
+      }
+    }),
+    (ft = new WeakMap()),
+    yt),
+  je =
+    ((Ct = class {
+      constructor(t = {}) {
+        qt(this, vt),
+          qt(this, mt),
+          qt(this, bt),
+          qt(this, gt),
+          qt(this, wt),
+          qt(this, Ot),
+          qt(this, Mt),
+          qt(this, kt),
+          Et(this, vt, t.queryCache || new Ue()),
+          Et(this, mt, t.mutationCache || new Ae()),
+          Et(this, bt, t.defaultOptions || {}),
+          Et(this, gt, new Map()),
+          Et(this, wt, new Map()),
+          Et(this, Ot, 0);
+      }
+      mount() {
+        xt(this, Ot)._++,
+          1 === Pt(this, Ot) &&
+            (Et(
+              this,
+              Mt,
+              ce.subscribe(async (t) => {
+                t && (await this.resumePausedMutations(), Pt(this, vt).onFocus());
+              })
+            ),
+            Et(
+              this,
+              kt,
+              ye.subscribe(async (t) => {
+                t && (await this.resumePausedMutations(), Pt(this, vt).onOnline());
+              })
+            ));
+      }
+      unmount() {
+        var t, e;
+        xt(this, Ot)._--,
+          0 === Pt(this, Ot) &&
+            (null == (t = Pt(this, Mt)) || t.call(this),
+            Et(this, Mt, void 0),
+            null == (e = Pt(this, kt)) || e.call(this),
+            Et(this, kt, void 0));
+      }
+      isFetching(t) {
+        return Pt(this, vt).findAll({ ...t, fetchStatus: 'fetching' }).length;
+      }
+      isMutating(t) {
+        return Pt(this, mt).findAll({ ...t, status: 'pending' }).length;
+      }
+      getQueryData(t) {
+        var e;
+        const s = this.defaultQueryOptions({ queryKey: t });
+        return null == (e = Pt(this, vt).get(s.queryHash)) ? void 0 : e.state.data;
+      }
+      ensureQueryData(t) {
+        const e = this.defaultQueryOptions(t),
+          s = Pt(this, vt).build(this, e),
+          i = s.state.data;
+        return void 0 === i
+          ? this.fetchQuery(t)
+          : (t.revalidateIfStale && s.isStaleByTime(Nt(e.staleTime, s)) && this.prefetchQuery(e),
+            Promise.resolve(i));
+      }
+      getQueriesData(t) {
+        return Pt(this, vt)
+          .findAll(t)
+          .map(({ queryKey: t, state: e }) => [t, e.data]);
+      }
+      setQueryData(t, e, s) {
+        const i = this.defaultQueryOptions({ queryKey: t }),
+          n = Pt(this, vt).get(i.queryHash),
+          r = ((t, e) => ('function' == typeof t ? t(e) : t))(e, null == n ? void 0 : n.state.data);
+        if (void 0 !== r)
+          return Pt(this, vt)
+            .build(this, i)
+            .setData(r, { ...s, manual: !0 });
+      }
+      setQueriesData(t, e, s) {
+        return fe.batch(() =>
+          Pt(this, vt)
+            .findAll(t)
+            .map(({ queryKey: t }) => [t, this.setQueryData(t, e, s)])
+        );
+      }
+      getQueryState(t) {
+        var e;
+        const s = this.defaultQueryOptions({ queryKey: t });
+        return null == (e = Pt(this, vt).get(s.queryHash)) ? void 0 : e.state;
+      }
+      removeQueries(t) {
+        const e = Pt(this, vt);
+        fe.batch(() => {
+          e.findAll(t).forEach((t) => {
+            e.remove(t);
+          });
+        });
+      }
+      resetQueries(t, e) {
+        const s = Pt(this, vt);
+        return fe.batch(
+          () => (
+            s.findAll(t).forEach((t) => {
+              t.reset();
+            }),
+            this.refetchQueries({ type: 'active', ...t }, e)
+          )
+        );
+      }
+      cancelQueries(t, e = {}) {
+        const s = { revert: !0, ...e },
+          i = fe.batch(() =>
+            Pt(this, vt)
+              .findAll(t)
+              .map((t) => t.cancel(s))
+          );
+        return Promise.all(i).then(_t).catch(_t);
+      }
+      invalidateQueries(t, e = {}) {
+        return fe.batch(
+          () => (
+            Pt(this, vt)
+              .findAll(t)
+              .forEach((t) => {
+                t.invalidate();
+              }),
+            'none' === (null == t ? void 0 : t.refetchType)
+              ? Promise.resolve()
+              : this.refetchQueries(
+                  {
+                    ...t,
+                    type:
+                      (null == t ? void 0 : t.refetchType) ??
+                      (null == t ? void 0 : t.type) ??
+                      'active',
+                  },
+                  e
+                )
+          )
+        );
+      }
+      refetchQueries(t, e = {}) {
+        const s = { ...e, cancelRefetch: e.cancelRefetch ?? !0 },
+          i = fe.batch(() =>
+            Pt(this, vt)
+              .findAll(t)
+              .filter((t) => !t.isDisabled() && !t.isStatic())
+              .map((t) => {
+                let e = t.fetch(void 0, s);
+                return (
+                  s.throwOnError || (e = e.catch(_t)),
+                  'paused' === t.state.fetchStatus ? Promise.resolve() : e
+                );
+              })
+          );
+        return Promise.all(i).then(_t);
+      }
+      fetchQuery(t) {
+        const e = this.defaultQueryOptions(t);
+        void 0 === e.retry && (e.retry = !1);
+        const s = Pt(this, vt).build(this, e);
+        return s.isStaleByTime(Nt(e.staleTime, s)) ? s.fetch(e) : Promise.resolve(s.state.data);
+      }
+      prefetchQuery(t) {
+        return this.fetchQuery(t).then(_t).catch(_t);
+      }
+      fetchInfiniteQuery(t) {
+        return (t.behavior = Fe(t.pages)), this.fetchQuery(t);
+      }
+      prefetchInfiniteQuery(t) {
+        return this.fetchInfiniteQuery(t).then(_t).catch(_t);
+      }
+      ensureInfiniteQueryData(t) {
+        return (t.behavior = Fe(t.pages)), this.ensureQueryData(t);
+      }
+      resumePausedMutations() {
+        return ye.isOnline() ? Pt(this, mt).resumePausedMutations() : Promise.resolve();
+      }
+      getQueryCache() {
+        return Pt(this, vt);
+      }
+      getMutationCache() {
+        return Pt(this, mt);
+      }
+      getDefaultOptions() {
+        return Pt(this, bt);
+      }
+      setDefaultOptions(t) {
+        Et(this, bt, t);
+      }
+      setQueryDefaults(t, e) {
+        Pt(this, gt).set(Xt(t), { queryKey: t, defaultOptions: e });
+      }
+      getQueryDefaults(t) {
+        const e = [...Pt(this, gt).values()],
+          s = {};
+        return (
+          e.forEach((e) => {
+            Yt(t, e.queryKey) && Object.assign(s, e.defaultOptions);
+          }),
+          s
+        );
+      }
+      setMutationDefaults(t, e) {
+        Pt(this, wt).set(Xt(t), { mutationKey: t, defaultOptions: e });
+      }
+      getMutationDefaults(t) {
+        const e = [...Pt(this, wt).values()],
+          s = {};
+        return (
+          e.forEach((e) => {
+            Yt(t, e.mutationKey) && Object.assign(s, e.defaultOptions);
+          }),
+          s
+        );
+      }
+      defaultQueryOptions(t) {
+        if (t._defaulted) return t;
+        const e = {
+          ...Pt(this, bt).queries,
+          ...this.getQueryDefaults(t.queryKey),
+          ...t,
+          _defaulted: !0,
+        };
+        return (
+          e.queryHash || (e.queryHash = Vt(e.queryKey, e)),
+          void 0 === e.refetchOnReconnect && (e.refetchOnReconnect = 'always' !== e.networkMode),
+          void 0 === e.throwOnError && (e.throwOnError = !!e.suspense),
+          !e.networkMode && e.persister && (e.networkMode = 'offlineFirst'),
+          e.queryFn === he && (e.enabled = !1),
+          e
+        );
+      }
+      defaultMutationOptions(t) {
+        return (null == t ? void 0 : t._defaulted)
+          ? t
+          : {
+              ...Pt(this, bt).mutations,
+              ...((null == t ? void 0 : t.mutationKey) && this.getMutationDefaults(t.mutationKey)),
+              ...t,
+              _defaulted: !0,
+            };
+      }
+      clear() {
+        Pt(this, vt).clear(), Pt(this, mt).clear();
+      }
+    }),
+    (vt = new WeakMap()),
+    (mt = new WeakMap()),
+    (bt = new WeakMap()),
+    (gt = new WeakMap()),
+    (wt = new WeakMap()),
+    (Ot = new WeakMap()),
+    (Mt = new WeakMap()),
+    (kt = new WeakMap()),
+    Ct),
+  Ke = Wt.createContext(void 0),
+  Ie = (t) => {
+    const e = Wt.useContext(Ke);
+    if (!e) throw new Error('No QueryClient set, use QueryClientProvider to set one');
+    return e;
+  },
+  Le = ({ client: t, children: e }) => (
+    Wt.useEffect(
+      () => (
+        t.mount(),
+        () => {
+          t.unmount();
+        }
+      ),
+      [t]
+    ),
+    jt.jsx(Ke.Provider, { value: t, children: e })
+  ),
+  He = Wt.createContext(!1);
+He.Provider;
+var _e = Wt.createContext(
+    (() => {
+      let t = !1;
+      return {
+        clearReset: () => {
+          t = !1;
+        },
+        reset: () => {
+          t = !0;
+        },
+        isReset: () => t,
+      };
+    })()
+  ),
+  Ge = (t, e, s) =>
+    e.fetchOptimistic(t).catch(() => {
+      s.clearReset();
+    });
+function Be(t, e, s) {
+  var i, n, r, a, o;
+  const h = Wt.useContext(He),
+    u = Wt.useContext(_e),
+    l = Ie(),
+    c = l.defaultQueryOptions(t);
+  null ==
+    (n = null == (i = l.getDefaultOptions().queries) ? void 0 : i._experimental_beforeQuery) ||
+    n.call(i, c),
+    (c._optimisticResults = h ? 'isRestoring' : 'optimistic'),
+    ((t) => {
+      if (t.suspense) {
+        const e = 1e3,
+          s = (t) => ('static' === t ? t : Math.max(t ?? e, e)),
+          i = t.staleTime;
+        (t.staleTime = 'function' == typeof i ? (...t) => s(i(...t)) : s(i)),
+          'number' == typeof t.gcTime && (t.gcTime = Math.max(t.gcTime, e));
+      }
+    })(c),
+    ((t, e) => {
+      (t.suspense || t.throwOnError || t.experimental_prefetchInRender) &&
+        (e.isReset() || (t.retryOnMount = !1));
+    })(c, u),
+    ((t) => {
+      Wt.useEffect(() => {
+        t.clearReset();
+      }, [t]);
+    })(u);
+  const d = !l.getQueryCache().get(c.queryHash),
+    [p] = Wt.useState(() => new e(l, c)),
+    f = p.getOptimisticResult(c),
+    y = !h && !1 !== t.subscribed;
+  if (
+    (Wt.useSyncExternalStore(
+      Wt.useCallback(
+        (t) => {
+          const e = y ? p.subscribe(fe.batchCalls(t)) : _t;
+          return p.updateResult(), e;
+        },
+        [p, y]
+      ),
+      () => p.getCurrentResult(),
+      () => p.getCurrentResult()
+    ),
+    Wt.useEffect(() => {
+      p.setOptions(c);
+    }, [c, p]),
+    ((t, e) => (null == t ? void 0 : t.suspense) && e.isPending)(c, f))
+  )
+    throw Ge(c, p, u);
+  if (
+    (({ result: t, errorResetBoundary: e, throwOnError: s, query: i, suspense: n }) =>
+      t.isError &&
+      !e.isReset() &&
+      !t.isFetching &&
+      i &&
+      ((n && void 0 === t.data) || le(s, [t.error, i])))({
+      result: f,
+      errorResetBoundary: u,
+      throwOnError: c.throwOnError,
+      query: l.getQueryCache().get(c.queryHash),
+      suspense: c.suspense,
+    })
+  )
+    throw f.error;
+  if (
+    (null ==
+      (a = null == (r = l.getDefaultOptions().queries) ? void 0 : r._experimental_afterQuery) ||
+      a.call(r, c, f),
+    c.experimental_prefetchInRender && !Ht && ((t, e) => t.isLoading && t.isFetching && !e)(f, h))
+  ) {
+    const t = d
+      ? Ge(c, p, u)
+      : null == (o = l.getQueryCache().get(c.queryHash))
+        ? void 0
+        : o.promise;
+    null == t ||
+      t.catch(_t).finally(() => {
+        p.updateResult();
+      });
+  }
+  return c.notifyOnChangeProps ? f : p.trackResult(f);
+}
+function Ne(t, e) {
+  return Be(t, Se);
+}
+function $e(t, e) {
+  const s = Ie(),
+    [i] = Wt.useState(() => new De(s, t));
+  Wt.useEffect(() => {
+    i.setOptions(t);
+  }, [i, t]);
+  const n = Wt.useSyncExternalStore(
+      Wt.useCallback((t) => i.subscribe(fe.batchCalls(t)), [i]),
+      () => i.getCurrentResult(),
+      () => i.getCurrentResult()
+    ),
+    r = Wt.useCallback(
+      (t, e) => {
+        i.mutate(t, e).catch(_t);
+      },
+      [i]
+    );
+  if (n.error && le(i.options.throwOnError, [n.error])) throw n.error;
+  return { ...n, mutate: r, mutateAsync: n.mutate };
+}
+export { je as Q, Le as a, Ie as b, $e as c, jt as j, Ne as u };
 //# sourceMappingURL=query-vendor-imNKbHeA.js.map

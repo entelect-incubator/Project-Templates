@@ -1,57 +1,57 @@
-// CheckoutPage.scss
+﻿// CheckoutPage.scss
 .checkout-page {
-  max-width: 1200px;
+  max-width: var(--container-xl);
   margin: 0 auto;
-  padding: 2rem;
+  padding: var(--spacing-xl);
 
   &__header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: var(--spacing-3xl);
 
     h1 {
       color: var(--text-primary);
-      margin-bottom: 2rem;
+      margin-bottom: var(--spacing-xl);
     }
   }
 
   &__steps {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
 
     .step {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 25px;
-      background: var(--surface-secondary);
+      gap: var(--spacing-xs);
+      padding: var(--spacing-sm) var(--spacing-lg);
+      border-radius: var(--radius-full);
+      background: var(--bg-secondary);
       border: 2px solid var(--border-color);
       color: var(--text-secondary);
-      transition: all 0.3s ease;
+      transition: all var(--transition-base);
 
       &.active {
-        background: var(--primary-color);
-        border-color: var(--primary-color);
+        background: var(--color-primary);
+        border-color: var(--color-primary);
         color: white;
       }
 
       &.completed {
-        background: var(--success-color);
-        border-color: var(--success-color);
+        background: var(--color-success);
+        border-color: var(--color-success);
         color: white;
       }
 
       .step-number {
         width: 24px;
         height: 24px;
-        border-radius: 50%;
+        border-radius: var(--radius-full);
         background: rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.875rem;
+        font-size: var(--font-size-sm);
         font-weight: 600;
       }
 
@@ -64,45 +64,45 @@
   &__content {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: var(--spacing-xl);
   }
 
   &__empty {
     text-align: center;
-    padding: 4rem 2rem;
+    padding: var(--spacing-4xl) var(--spacing-xl);
 
     h1 {
       color: var(--text-primary);
-      margin-bottom: 1rem;
+      margin-bottom: var(--spacing-md);
     }
 
     p {
       color: var(--text-secondary);
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+      font-size: var(--font-size-lg);
+      margin-bottom: var(--spacing-xl);
     }
   }
 
   .order-summary {
-    background: var(--surface-secondary);
+    background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 2rem;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
 
     h2 {
       color: var(--text-primary);
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--spacing-lg);
     }
 
     .order-items {
-      margin-bottom: 2rem;
+      margin-bottom: var(--spacing-xl);
     }
 
     .order-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 0;
+      padding: var(--spacing-md) 0;
       border-bottom: 1px solid var(--border-color);
 
       &:last-child {
@@ -114,13 +114,13 @@
 
         h3 {
           color: var(--text-primary);
-          margin-bottom: 0.25rem;
-          font-size: 1.1rem;
+          margin-bottom: var(--spacing-2xs);
+          font-size: var(--font-size-lg);
         }
 
         .item-quantity {
           color: var(--text-secondary);
-          font-size: 0.9rem;
+          font-size: var(--font-size-sm);
         }
       }
 
@@ -128,27 +128,27 @@
         .price {
           color: var(--text-primary);
           font-weight: 600;
-          font-size: 1.1rem;
+          font-size: var(--font-size-lg);
         }
       }
     }
 
     .order-total {
       border-top: 2px solid var(--border-color);
-      padding-top: 1rem;
+      padding-top: var(--spacing-md);
 
       .total-row {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 0.5rem;
+        margin-bottom: var(--spacing-xs);
         color: var(--text-secondary);
 
         &.total-final {
           color: var(--text-primary);
           font-weight: 600;
-          font-size: 1.2rem;
-          margin-top: 0.5rem;
-          padding-top: 0.5rem;
+          font-size: var(--font-size-xl);
+          margin-top: var(--spacing-xs);
+          padding-top: var(--spacing-xs);
           border-top: 1px solid var(--border-color);
         }
       }
@@ -156,62 +156,62 @@
   }
 
   .customer-info-section {
-    background: var(--surface-secondary);
+    background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 2rem;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
 
     h2 {
       color: var(--text-primary);
-      margin-bottom: 1.5rem;
+      margin-bottom: var(--spacing-lg);
     }
   }
 
   .order-summary-sidebar {
-    background: var(--surface-primary);
+    background: var(--bg-primary);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
 
     h3 {
       color: var(--text-primary);
-      margin-bottom: 1rem;
+      margin-bottom: var(--spacing-md);
     }
 
     .summary-items {
-      margin-bottom: 1rem;
+      margin-bottom: var(--spacing-md);
     }
 
     .summary-item {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 0.5rem;
-      padding: 0.5rem 0;
+      margin-bottom: var(--spacing-xs);
+      padding: var(--spacing-xs) 0;
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      font-size: var(--font-size-sm);
     }
 
     .summary-total {
-      padding-top: 0.5rem;
+      padding-top: var(--spacing-xs);
       border-top: 1px solid var(--border-color);
       color: var(--text-primary);
-      font-size: 1.1rem;
+      font-size: var(--font-size-lg);
     }
   }
 
   .checkout-actions {
     display: flex;
-    gap: 1rem;
+    gap: var(--spacing-md);
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: var(--spacing-xl);
 
     .btn {
-      padding: 0.875rem 2rem;
-      border-radius: 8px;
-      font-size: 1rem;
+      padding: var(--spacing-lg) var(--spacing-xl);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-base);
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all var(--transition-base);
       border: none;
       text-decoration: none;
       display: inline-flex;
@@ -225,22 +225,22 @@
       }
 
       &--primary {
-        background: var(--primary-color);
+        background: var(--color-primary);
         color: white;
 
         &:hover:not(:disabled) {
-          background: var(--primary-color-dark);
+          background: var(--color-primary-dark);
           transform: translateY(-1px);
         }
       }
 
       &--secondary {
         background: transparent;
-        color: var(--primary-color);
-        border: 2px solid var(--primary-color);
+        color: var(--color-primary);
+        border: 2px solid var(--color-primary);
 
         &:hover:not(:disabled) {
-          background: var(--primary-color-alpha);
+          background: var(--color-primary-alpha);
         }
       }
     }
@@ -251,7 +251,7 @@
 .checkout-page__content {
   &:has(.customer-info-section) {
     grid-template-columns: 2fr 1fr;
-    gap: 3rem;
+    gap: var(--spacing-3xl);
 
     .customer-info-section {
       grid-column: 1;
@@ -260,7 +260,7 @@
     .order-summary-sidebar {
       grid-column: 2;
       position: sticky;
-      top: 2rem;
+      top: var(--spacing-xl);
       height: fit-content;
     }
   }
@@ -269,11 +269,11 @@
 // Responsive design
 @media (max-width: 768px) {
   .checkout-page {
-    padding: 1rem;
+    padding: var(--spacing-md);
 
     &__steps {
       flex-direction: column;
-      gap: 0.5rem;
+      gap: var(--spacing-xs);
 
       .step {
         justify-content: center;
@@ -282,7 +282,7 @@
 
     &__content {
       grid-template-columns: 1fr !important;
-      gap: 1.5rem;
+      gap: var(--spacing-lg);
 
       .order-summary-sidebar {
         position: static;
@@ -301,7 +301,7 @@
     .order-item {
       flex-direction: column;
       align-items: flex-start;
-      gap: 0.5rem;
+      gap: var(--spacing-xs);
 
       .item-price {
         align-self: flex-end;
@@ -312,21 +312,21 @@
 
 @media (max-width: 480px) {
   .checkout-page {
-    padding: 0.5rem;
+    padding: var(--spacing-xs);
 
     .order-summary,
     .customer-info-section {
-      padding: 1rem;
+      padding: var(--spacing-md);
     }
 
     &__steps .step {
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
+      padding: var(--spacing-xs) var(--spacing-md);
+      font-size: var(--font-size-sm);
 
       .step-number {
         width: 20px;
         height: 20px;
-        font-size: 0.75rem;
+        font-size: var(--font-size-xs);
       }
     }
   }

@@ -32,7 +32,7 @@ A comprehensive guide to maintaining consistent, clean, and professional code ac
 ```csharp
 // ✅ GOOD
 public class UserService { }
-private readonly IUserRepository _userRepository;
+private readonly IUserRepository userRepository;
 public string FirstName { get; set; }
 private const int MaxRetryAttempts = 3;
 private static readonly object _lockObject = new();
@@ -241,7 +241,7 @@ public class UserNotFoundException : Exception
 // ✅ GOOD - Try-catch with specific exceptions
 try
 {
-    var user = await _userRepository.GetUserByIdAsync(userId);
+    var user = await userRepository.GetUserByIdAsync(userId);
     if (user == null)
         throw new UserNotFoundException(userId);
     
@@ -249,24 +249,24 @@ try
 }
 catch (UserNotFoundException ex)
 {
-    _logger.LogWarning(ex, "User not found: {UserId}", userId);
+    logger.LogWarning(ex, "User not found: {UserId}", userId);
     throw;
 }
 catch (OperationCanceledException ex)
 {
-    _logger.LogWarning(ex, "Operation cancelled");
+    logger.LogWarning(ex, "Operation cancelled");
     throw;
 }
 catch (Exception ex)
 {
-    _logger.LogError(ex, "Unexpected error occurred");
+    logger.LogError(ex, "Unexpected error occurred");
     throw new ApplicationException("An unexpected error occurred.", ex);
 }
 
 // ❌ BAD - Generic catch-all
 try
 {
-    var user = await _userRepository.GetUserByIdAsync(userId);
+    var user = await userRepository.GetUserByIdAsync(userId);
     return user;
 }
 catch { }
@@ -350,18 +350,18 @@ FATAL   - Fatal error messages for very severe errors
 
 ```csharp
 // ✅ GOOD - Structured logging
-_logger.LogInformation("User created: {UserId} by {RequesterId}",
+logger.LogInformation("User created: {UserId} by {RequesterId}",
     newUser.Id, currentUserId);
 
-_logger.LogWarning("Retry attempt {Attempt} for operation {OperationId}",
+logger.LogWarning("Retry attempt {Attempt} for operation {OperationId}",
     attempt, operationId);
 
-_logger.LogError(exception, "Failed to process payment for order {OrderId}",
+logger.LogError(exception, "Failed to process payment for order {OrderId}",
     orderId);
 
 // ❌ BAD - String concatenation
-_logger.LogInformation("User created: " + newUser.Id);
-_logger.LogError("Error: " + exception.Message);
+logger.LogInformation("User created: " + newUser.Id);
+logger.LogError("Error: " + exception.Message);
 ```
 
 ### TypeScript/React Logging Example

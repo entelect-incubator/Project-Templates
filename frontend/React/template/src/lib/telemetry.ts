@@ -3,7 +3,7 @@
  * Provides distributed tracing and observability for the React application
  */
 
-import { trace, context, SpanStatusCode } from '@opentelemetry/api';
+import { context, SpanStatusCode, trace } from '@opentelemetry/api';
 
 // Initialize the OpenTelemetry tracer
 const tracer = trace.getTracer('react-app', '1.0.0');
@@ -64,6 +64,36 @@ export function recordSpanEvent(
   if (span) {
     span.addEvent(name, attributes);
   }
+}
+
+/**
+ * Execute an async operation with automatic span, telemetry, and error handling
+ * Eliminates the need for try-catch blocks in telemetry code
+ * @param spanName - The name of the operation span
+ * @param fn - The async function to execute
+ * @param attributes - Optional attributes to add to the span
+ * @returns The result of the function
+ */
+export async function withSpanAndTelemetry<T>(
+  spanName: string,
+  fn: () => Promise<T>,
+  attributes?: Record<string, string | number | boolean>
+): Promise<T> {
+  return withSpan(spanName, async () => {
+    try {
+      if (attributes) {
+        addSpanAttributes(attributes);
+      }
+      const result = await fn();
+      recordSpanEvent(`${spanName}.success`, attributes || {});
+      return result;
+    } catch (error) {
+      recordSpanEvent(`${spanName}.exception`, {
+        'error.message': error instanceof Error ? error.message : 'Unknown error',
+      });
+      throw error;
+    }
+  });
 }
 
 export { tracer };

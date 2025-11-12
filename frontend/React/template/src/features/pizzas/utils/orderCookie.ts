@@ -1,5 +1,5 @@
 // orderCookie.ts
-import { customerInfo, currentOrder } from '../../../store/cartStore';
+import { currentOrder, customerInfo } from '../../../store/cartStore';
 
 const COOKIE_NAME = 'last_order_tracking';
 

@@ -11,7 +11,7 @@ export const Alert: React.FC<AlertProps> = ({ variant = 'info', children, classN
   const classNames = ['alert', `alert--${variant}`, className].filter(Boolean).join(' ');
 
   return (
-    <div className={classNames} role="alert">
+    <div className={classNames} role='alert'>
       {children}
     </div>
   );

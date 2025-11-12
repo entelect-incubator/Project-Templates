@@ -16,7 +16,7 @@ export const customerInfoSchema = z.object({
 
   phone: z
     .string()
-    .regex(/^[\d\-\s\+\(\)]+$/, {
+    .regex(/^[\d\-\s+()]+$/, {
       message: 'Invalid phone number format',
     })
     .min(10, { message: 'Phone number must be at least 10 digits' })

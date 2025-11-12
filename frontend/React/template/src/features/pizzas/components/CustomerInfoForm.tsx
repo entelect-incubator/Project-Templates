@@ -1,21 +1,37 @@
 /**
  * Customer Information Form Component
  * Using React Hook Form + Zod for validation
+ * Utilizes reusable FormInput, FormEmail, FormTelephone components with type-safe CSS Modules
  */
 
-import { FormEvent } from 'react';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { customerInfoSchema, type CustomerInfoFormData } from '../validation/schemas';
+import { useForm } from 'react-hook-form';
+import { FormDisclaimer, FormEmail, FormInput, FormTelephone, SubmitButton } from '@/components/ui';
 import { setCustomerInfo } from '../../../store/cartStore';
+import { type CustomerInfoFormData, customerInfoSchema } from '../validation/schemas';
 import styles from './CustomerInfoForm.module.scss';
+
+/**
+ * Typed CSS class names - ensures autocomplete and type safety
+ */
+type CustomerInfoFormStyles = {
+  form: string;
+  title: string;
+};
 
 interface CustomerInfoFormProps {
   onSubmit?: (data: CustomerInfoFormData) => void | Promise<void>;
   isLoading?: boolean;
 }
 
+/**
+ * CustomerInfoForm
+ * Form for collecting customer delivery information
+ * Uses react-hook-form with zod schema validation
+ */
 export const CustomerInfoForm = ({ onSubmit, isLoading = false }: CustomerInfoFormProps) => {
+  const typedStyles = styles as CustomerInfoFormStyles;
+
   const {
     register,
     handleSubmit,
@@ -42,83 +58,40 @@ export const CustomerInfoForm = ({ onSubmit, isLoading = false }: CustomerInfoFo
   const isSubmittingForm = isSubmitting || isLoading;
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className={styles.form} noValidate>
-      <h2 className={styles.title}>Delivery Information</h2>
+    <form onSubmit={handleSubmit(handleFormSubmit)} className={typedStyles.form} noValidate>
+      <h2 className={typedStyles.title}>Delivery Information</h2>
 
-      {/* Name Field */}
-      <div className={styles.formGroup}>
-        <label htmlFor="name" className={styles.label}>
-          Full Name *
-        </label>
-        <input
-          {...register('name')}
-          id="name"
-          type="text"
-          placeholder="John Doe"
-          className={`${styles.input} ${errors.name ? styles.error : ''}`}
-          disabled={isSubmittingForm}
-          aria-invalid={!!errors.name}
-          aria-describedby={errors.name ? 'name-error' : undefined}
-        />
-        {errors.name && (
-          <span id="name-error" className={styles.errorMessage}>
-            {errors.name.message}
-          </span>
-        )}
-      </div>
+      <FormInput
+        label='Full Name'
+        registration={register('name')}
+        error={errors.name}
+        placeholder='John Doe'
+        disabled={isSubmittingForm}
+      />
 
-      {/* Email Field */}
-      <div className={styles.formGroup}>
-        <label htmlFor="email" className={styles.label}>
-          Email Address *
-        </label>
-        <input
-          {...register('email')}
-          id="email"
-          type="email"
-          placeholder="john@example.com"
-          className={`${styles.input} ${errors.email ? styles.error : ''}`}
-          disabled={isSubmittingForm}
-          aria-invalid={!!errors.email}
-          aria-describedby={errors.email ? 'email-error' : undefined}
-        />
-        {errors.email && (
-          <span id="email-error" className={styles.errorMessage}>
-            {errors.email.message}
-          </span>
-        )}
-      </div>
+      <FormEmail
+        label='Email Address'
+        registration={register('email')}
+        error={errors.email}
+        placeholder='john@example.com'
+        disabled={isSubmittingForm}
+      />
 
-      {/* Phone Field */}
-      <div className={styles.formGroup}>
-        <label htmlFor="phone" className={styles.label}>
-          Phone Number *
-        </label>
-        <input
-          {...register('phone')}
-          id="phone"
-          type="tel"
-          placeholder="(555) 123-4567"
-          className={`${styles.input} ${errors.phone ? styles.error : ''}`}
-          disabled={isSubmittingForm}
-          aria-invalid={!!errors.phone}
-          aria-describedby={errors.phone ? 'phone-error' : undefined}
-        />
-        {errors.phone && (
-          <span id="phone-error" className={styles.errorMessage}>
-            {errors.phone.message}
-          </span>
-        )}
-      </div>
+      <FormTelephone
+        label='Phone Number'
+        registration={register('phone')}
+        error={errors.phone}
+        placeholder='(555) 123-4567'
+        disabled={isSubmittingForm}
+      />
 
-      {/* Submit Button */}
-      <button type="submit" className={styles.submitButton} disabled={isSubmittingForm}>
-        {isSubmittingForm ? 'Processing...' : 'Continue to Payment'}
-      </button>
+      <SubmitButton
+        label='Continue to Payment'
+        isLoading={isSubmittingForm}
+        loadingLabel='Processing...'
+      />
 
-      <p className={styles.disclaimer}>
-        * Required fields. Your information is secure and will only be used for order delivery.
-      </p>
+      <FormDisclaimer />
     </form>
   );
 };

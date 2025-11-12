@@ -1,17 +1,20 @@
 /**
- * API Client with Error Handling & Type Safety
+ * API Client with Network Status Awareness & Error Handling
  *
  * Features:
+ * - Network status detection (online/offline)
  * - Automatic error handling and retries
  * - Request/response logging (dev mode)
  * - AbortSignal support for cancellation
  * - Type-safe requests and responses
  * - Proper HTTP status code handling
- * - Network error recovery
+ * - Telemetry integration
  *
  * Phase 6: API Layer Integration
- * Provides the foundation for all API communication
+ * Provides the foundation for all API communication with network awareness
  */
+
+import { addSpanAttributes, recordSpanEvent, withSpan } from '@/lib/telemetry';
 
 export class ApiError extends Error {
   constructor(
@@ -33,8 +36,8 @@ export interface FetchOptions {
 }
 
 /**
- * API Client - Handles all HTTP requests
- * Replace with actual generated client after backend API is ready
+ * API Client - Handles all HTTP requests with network awareness
+ * Integrates with NetworkContext for offline detection and retry logic
  */
 class ApiClient {
   private baseUrl: string;
@@ -46,100 +49,140 @@ class ApiClient {
   }
 
   /**
-   * Helper to make API requests with error handling
+   * Helper to make API requests with error handling and network awareness
    */
-  private async request<T>(endpoint: string, options: RequestInit & FetchOptions = {}): Promise<T> {
-    const { signal, retries = this.retries, retryDelay = this.retryDelay } = options;
+  private async request<T>(
+    endpoint: string,
+    options: Record<string, unknown> & FetchOptions = {}
+  ): Promise<T> {
+    const {
+      signal,
+      retries = this.retries,
+      retryDelay = this.retryDelay,
+    } = options as FetchOptions & Record<string, unknown>;
     const url = `${this.baseUrl}${endpoint}`;
 
-    // Log request in dev mode
-    if (import.meta.env.DEV) {
-      console.log(`🔷 ${options.method || 'GET'} ${endpoint}`);
+    // Check if online before making request
+    if (!navigator.onLine) {
+      throw new ApiError(0, 'No internet connection. Please check your network.');
     }
 
-    for (let attempt = 0; attempt <= retries; attempt++) {
-      try {
-        const fetchInit: RequestInit = {
-          ...options,
-          headers: {
-            'Content-Type': 'application/json',
-            ...options.headers,
-          },
-        };
+    return withSpan('api-request', async () => {
+      // Log request in dev mode
+      if (import.meta.env.DEV) {
+        // eslint-disable-next-line no-console
+        console.log(`🔷 ${(options['method'] as string) || 'GET'} ${endpoint}`);
+      }
 
-        if (signal) {
-          fetchInit.signal = signal;
-        }
+      for (let attempt = 0; attempt <= retries; attempt++) {
+        try {
+          const fetchInit = {
+            ...options,
+            headers: {
+              'Content-Type': 'application/json',
+              ...(options['headers'] as Record<string, string>),
+            },
+          };
 
-        const response = await fetch(url, fetchInit);
-
-        // Handle error responses
-        if (!response.ok) {
-          let errorData;
-          try {
-            errorData = await response.json();
-          } catch {
-            errorData = { message: response.statusText };
+          if (signal) {
+            fetchInit.signal = signal;
           }
 
-          const error = new ApiError(
-            response.status,
-            errorData.message || response.statusText,
-            errorData
-          );
+          const response = await fetch(url, fetchInit as Record<string, unknown>);
+
+          addSpanAttributes({
+            'http.status': response.status,
+            'http.method': (options['method'] as string) || 'GET',
+            'http.url': endpoint,
+          });
+
+          // Handle error responses
+          if (!response.ok) {
+            let errorData: unknown;
+            try {
+              errorData = await response.json();
+            } catch {
+              errorData = { message: response.statusText };
+            }
+
+            const error = new ApiError(
+              response.status,
+              ((errorData as Record<string, unknown>)['message'] as string) || response.statusText,
+              errorData
+            );
+
+            if (import.meta.env.DEV) {
+              // eslint-disable-next-line no-console
+              console.error(`🔴 ${response.status} ${error.message}`);
+            }
+
+            // Retry on 5xx errors (server errors)
+            if (response.status >= 500 && attempt < retries) {
+              recordSpanEvent('api-retry', {
+                'http.status': response.status,
+                attempt: attempt + 1,
+              });
+              await new Promise((resolve) => setTimeout(resolve, retryDelay * (attempt + 1)));
+              continue;
+            }
+
+            recordSpanEvent('api-error', {
+              'http.status': response.status,
+              'error.message': error.message,
+            });
+
+            throw error;
+          }
+
+          // Handle 204 No Content
+          if (response.status === 204) {
+            if (import.meta.env.DEV) {
+              // eslint-disable-next-line no-console
+              console.log(`✓ ${response.status} (No Content)`);
+            }
+            recordSpanEvent('api-success', { 'http.status': 204 });
+            return undefined as T;
+          }
+
+          const data = (await response.json()) as T;
 
           if (import.meta.env.DEV) {
-            console.error(`🔴 ${response.status} ${error.message}`);
+            // eslint-disable-next-line no-console
+            console.log(`✓ ${response.status} ${endpoint}`, data);
           }
 
-          // Retry on 5xx errors (server errors)
-          if (response.status >= 500 && attempt < retries) {
+          recordSpanEvent('api-success', { 'http.status': response.status });
+          return data;
+        } catch (error) {
+          // Retry on network errors
+          if (error instanceof TypeError && attempt < retries) {
+            recordSpanEvent('api-network-error', {
+              attempt: attempt + 1,
+              'error.message': error instanceof Error ? error.message : 'Network error',
+            });
             await new Promise((resolve) => setTimeout(resolve, retryDelay * (attempt + 1)));
             continue;
           }
 
-          throw error;
-        }
-
-        // Handle 204 No Content
-        if (response.status === 204) {
-          if (import.meta.env.DEV) {
-            console.log(`✓ ${response.status} (No Content)`);
+          if (error instanceof ApiError) {
+            throw error;
           }
-          return undefined as T;
+
+          // Network or unknown error
+          throw new ApiError(0, error instanceof Error ? error.message : 'Unknown error', error);
         }
-
-        const data = (await response.json()) as T;
-
-        if (import.meta.env.DEV) {
-          console.log(`✓ ${response.status} ${endpoint}`, data);
-        }
-
-        return data;
-      } catch (error) {
-        // Retry on network errors
-        if (error instanceof TypeError && attempt < retries) {
-          await new Promise((resolve) => setTimeout(resolve, retryDelay * (attempt + 1)));
-          continue;
-        }
-
-        if (error instanceof ApiError) {
-          throw error;
-        }
-
-        // Network or unknown error
-        throw new ApiError(0, error instanceof Error ? error.message : 'Unknown error', error);
       }
-    }
 
-    throw new ApiError(0, 'Max retries exceeded');
+      recordSpanEvent('api-max-retries', { endpoint: endpoint });
+      throw new ApiError(0, 'Max retries exceeded');
+    });
   }
 
   /**
    * GET request
    */
   async getTodos(page: number, pageSize: number, options?: FetchOptions) {
-    return this.request<any>(`/api/todos?page=${page}&pageSize=${pageSize}`, {
+    return this.request<unknown>(`/api/todos?page=${page}&pageSize=${pageSize}`, {
       method: 'GET',
       ...options,
     });
@@ -149,7 +192,7 @@ class ApiClient {
    * GET single todo
    */
   async getTodoById(id: string, options?: FetchOptions) {
-    return this.request<any>(`/api/todos/${id}`, {
+    return this.request<unknown>(`/api/todos/${id}`, {
       method: 'GET',
       ...options,
     });
@@ -159,7 +202,7 @@ class ApiClient {
    * Search todos
    */
   async searchTodos(query: string, page: number, pageSize: number, options?: FetchOptions) {
-    return this.request<any>(
+    return this.request<unknown>(
       `/api/todos/search?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}`,
       {
         method: 'GET',
@@ -172,7 +215,7 @@ class ApiClient {
    * POST - Create todo
    */
   async createTodo(command: unknown, options?: FetchOptions) {
-    return this.request<any>('/api/todos', {
+    return this.request<unknown>('/api/todos', {
       method: 'POST',
       body: JSON.stringify(command),
       ...options,
@@ -183,7 +226,7 @@ class ApiClient {
    * PUT - Update todo
    */
   async updateTodo(id: string, command: unknown, options?: FetchOptions) {
-    return this.request<any>(`/api/todos/${id}`, {
+    return this.request<unknown>(`/api/todos/${id}`, {
       method: 'PUT',
       body: JSON.stringify(command),
       ...options,

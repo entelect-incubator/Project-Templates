@@ -85,7 +85,7 @@ When assisting with code:
 1. **Check Naming**
    - Classes: PascalCase (UserService)
    - Interfaces: IPascalCase (IUserRepository)
-   - Private fields: _camelCase (_userRepository)
+   - Private fields: _camelCase (userRepository)
    - Methods: PascalCase (GetUserAsync)
    - Constants: PascalCase (MaxRetryAttempts)
 

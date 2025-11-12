@@ -8,7 +8,7 @@
  * - Order tracking
  */
 
-import { signal, computed } from '@preact/signals-react';
+import { computed, signal } from '@preact/signals-react';
 
 // ============================================================================
 // Type Definitions
@@ -225,7 +225,7 @@ export const loadOrderFromCookie = (): {
 } | null => {
   try {
     const match = document.cookie.match(new RegExp(`(?:^|; )${ORDER_COOKIE_NAME}=([^;]*)`));
-    if (match && match[1]) {
+    if (match?.[1]) {
       return JSON.parse(decodeURIComponent(match[1]));
     }
   } catch (error) {

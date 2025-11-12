@@ -3,8 +3,8 @@
  * Catches React errors and provides fallback UI with logging
  */
 
-import { Component, ErrorInfo, ReactNode } from 'react';
-import { withSpan, addSpanAttributes, recordSpanEvent } from '@/lib/telemetry';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { addSpanAttributes, recordSpanEvent, withSpan } from '@/lib/telemetry';
 
 interface Props {
   children: ReactNode;
@@ -54,7 +54,7 @@ export class GlobalErrorBoundary extends Component<Props, State> {
       });
 
       // Send to error tracking service in production
-      if (process.env['NODE_ENV'] === 'production') {
+      if (import.meta.env.PROD) {
         console.error('Error caught by boundary:', error, errorInfo);
       }
     }).catch((err) => {
@@ -82,7 +82,7 @@ export class GlobalErrorBoundary extends Component<Props, State> {
               problem persists.
             </p>
 
-            {process.env['NODE_ENV'] === 'development' && this.state.error && (
+            {import.meta.env.DEV && this.state.error && (
               <details className="error-boundary-details">
                 <summary>Error Details</summary>
                 <pre className="error-boundary-stack">
@@ -95,7 +95,7 @@ export class GlobalErrorBoundary extends Component<Props, State> {
               </details>
             )}
 
-            <button className="error-boundary-button" onClick={this.handleReset}>
+            <button type="button" className="error-boundary-button" onClick={this.handleReset}>
               Try Again
             </button>
           </div>

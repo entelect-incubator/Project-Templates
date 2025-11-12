@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>preview</LangVersion>
-        <CodeAnalysisRuleSet>$(ProjectDir)..\StyleCopRuleSet.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>$(ProjectDir).\StyleCopRuleSet.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,8 +14,8 @@
         <PackageReference Include="FluentValidation" Version="12.1.0" />
         <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
         <PackageReference Include="Correlate.AspNetCore" Version="6.1.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.0-rc.2.25502.107" />
-        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="10.0.0-rc.2.25502.107" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="10.0.0" />
         <PackageReference Include="Microsoft.FeatureManagement" Version="4.3.0" />
         <PackageReference Include="NSwag.AspNetCore" Version="14.6.2" />
         <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />

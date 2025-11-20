@@ -1,5 +1,6 @@
 namespace Api.StartupApp.Services;
 
+using System.IO.Compression;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
 using Asp.Versioning;
@@ -14,6 +15,7 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Polly;
 using Polly.Extensions.Http;
+using Polly.Retry;
 using Serilog.Enrichers.Correlate;
 using Utilities.Handlers;
 
@@ -45,6 +47,16 @@ public static class CommonServices
         {
             options.Providers.Add<BrotliCompressionProvider>();
             options.Providers.Add<GzipCompressionProvider>();
+        });
+
+        services.Configure<BrotliCompressionProviderOptions>(options =>
+        {
+            options.Level = CompressionLevel.Fastest;
+        });
+
+        services.Configure<GzipCompressionProviderOptions>(options =>
+        {
+            options.Level = CompressionLevel.Fastest;
         });
 
         if (StartupSettings.Current.IncludeHeaderVersion)
@@ -150,7 +162,7 @@ public static class CommonServices
         return services;
     }
 
-    private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+    private static AsyncRetryPolicy<HttpResponseMessage> GetRetryPolicy()
         => HttpPolicyExtensions
             .HandleTransientHttpError()
             .OrResult(msg => msg.StatusCode == HttpStatusCode.NotFound)

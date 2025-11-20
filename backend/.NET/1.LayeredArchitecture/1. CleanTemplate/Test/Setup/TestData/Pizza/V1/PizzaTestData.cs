@@ -6,7 +6,8 @@ using Core.Pizzas.V1.Commands;
 
 public static class PizzaTestData
 {
-    public static Pizza Pizza = new()
+    // Returns a new Pizza instance each time
+    public static Pizza GetPizza() => new()
     {
         Id = 1,
         Disabled = false,
@@ -14,7 +15,8 @@ public static class PizzaTestData
         DateCreated = DateTime.Now
     };
 
-    public static PizzaModel PizzaModel = new()
+    // Returns a new PizzaModel instance
+    public static PizzaModel GetPizzaModel() => new()
     {
         Id = 1,
         Disabled = false,
@@ -22,13 +24,15 @@ public static class PizzaTestData
         DateCreated = DateTime.Now
     };
 
-    public static CreatePizzaCommand Create = new()
+    // Returns a new CreatePizzaCommand instance
+    public static CreatePizzaCommand GetCreateCommand() => new()
     {
         Name = "Margherita Pizza",
         Disabled = false
     };
 
-    public static UpdatePizzaModel Update = new()
+    // Returns a new UpdatePizzaModel instance
+    public static UpdatePizzaModel GetUpdateModel() => new()
     {
         Name = "BBQ Chicken Pizza",
     };

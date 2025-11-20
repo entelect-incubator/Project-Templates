@@ -1,7 +1,5 @@
 namespace Api.Endpoints.V1.Orders;
 
-using Api.Endpoints;
-
 using Core.Orders.V1.Commands;
 using Core.Orders.V1.Models;
 
@@ -14,15 +12,17 @@ public class CompleteOrderEndpoint(Dispatcher dispatcher)
 public static class CompleteOrderEndpointExtensions
 {
     public static void MapEndpoints(this IEndpointRouteBuilder app)
-        => app.MapPost($"{Config.ENDPOINT}order/complete", (CompleteOrderEndpoint ep, CompleteOrderCommand command, CancellationToken cancellationToken) => ep.Complete(command, cancellationToken))
-            .WithTags("Orders")
-            .WithName("Complete order")
-            .Produces<Result<OrderModel>>(StatusCodes.Status200OK, "application/json")
-            .WithStandardErrors()
-            .WithOpenApi(op =>
-            {
-                op.OperationId = "CompleteOrder";
-                op.Summary = "Complete an order";
-                return op;
-            });
+        => app.MapPost($"{Config.ENDPOINT}order/complete", async ([FromServices] Dispatcher dispatcher, CompleteOrderCommand command, CancellationToken ct)
+            => ApiMinimalResultHelper.Outcome(await dispatcher.Send(command, ct)))
+                .WithOrder(220)
+                .WithTags("Orders")
+                .WithName("Complete order")
+                .Produces<Result<OrderModel>>(StatusCodes.Status200OK, "application/json")
+                .WithStandardErrors()
+                .AddOpenApiOperationTransformer((operation, context, ct) =>
+                {
+                    operation.Summary = "Complete Order";
+                    operation.Description = "Complete an order";
+                    return Task.CompletedTask;
+                });
 }

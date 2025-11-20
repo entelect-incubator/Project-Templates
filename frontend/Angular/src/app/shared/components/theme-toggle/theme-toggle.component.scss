@@ -1,0 +1,133 @@
+/**
+ * Theme Toggle Component Styles
+ * Styles for the theme switcher with smooth transitions
+ */
+
+:host {
+  display: block;
+}
+
+.theme-toggle {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: var(--radius-md, 8px);
+
+  &:hover {
+    background-color: rgba(var(--primary-rgb, 37, 99, 235), 0.1);
+  }
+
+  &.dark-active {
+    color: var(--warning-500, #f59e0b);
+
+    mat-icon {
+      filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.3));
+    }
+  }
+
+  mat-icon {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.theme-menu {
+  min-width: 160px;
+
+  .mat-mdc-menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3, 0.75rem);
+    padding: var(--spacing-2, 0.5rem) var(--spacing-4, 1rem);
+    transition: background-color 0.2s ease;
+
+    &.active {
+      background-color: var(--primary-50, #eff6ff);
+      color: var(--primary-700, #1d4ed8);
+
+      mat-icon {
+        color: var(--primary-600, #2563eb);
+      }
+    }
+
+    &:hover {
+      background-color: var(--gray-50, #f9fafb);
+    }
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      margin-right: 0;
+    }
+
+    span {
+      font-weight: var(--font-weight-medium, 500);
+    }
+  }
+}
+
+// Animation for icon changes
+@keyframes iconPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.theme-toggle:active mat-icon {
+  animation: iconPulse 0.2s ease;
+}
+
+// Dark theme specific styles
+:host-context(.dark-theme) {
+  .theme-toggle {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .theme-menu .mat-mdc-menu-item {
+    &.active {
+      background-color: var(--primary-900, #1e3a8a);
+      color: var(--primary-100, #dbeafe);
+
+      mat-icon {
+        color: var(--primary-200, #bfdbfe);
+      }
+    }
+
+    &:hover {
+      background-color: var(--gray-800, #1f2937);
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .theme-toggle {
+    border: 1px solid currentColor;
+  }
+
+  .theme-menu .mat-mdc-menu-item.active {
+    border-left: 3px solid var(--primary-600, #2563eb);
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle,
+  .theme-toggle mat-icon,
+  .theme-menu .mat-mdc-menu-item {
+    transition: none;
+  }
+
+  .theme-toggle:active mat-icon {
+    animation: none;
+  }
+}

@@ -1,9 +1,9 @@
 namespace Api;
 
-using Utilities.Logging.Static;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Utilities.Logging.Static;
 
 public class Program
 {
@@ -14,9 +14,5 @@ public class Program
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(b =>
-            {
-                b.UseKestrel(opt => opt.AddServerHeader = false);
-                b.UseStartup<Startup>();
-            }).UseSerilog();
+        .ConfigureWebHostDefaults(b => b.UseStartup<Startup>()).UseSerilog();
 }

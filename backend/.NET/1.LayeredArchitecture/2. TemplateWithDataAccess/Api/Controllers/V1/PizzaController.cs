@@ -23,7 +23,7 @@ public sealed class PizzaController : ApiController
     /// <param name="query">Pizza Search Model</param>
     /// <param name="cancellationToken">Cancellation Token</param>
     [HttpPost]
-    [Route("Search")]
+    [Route("Search", Order = 100)]
     public async Task<ActionResult<Result<IEnumerable<PizzaModel>>>> Search(GetAllPizzasQuery query, CancellationToken cancellationToken = default)
         => ApiResponseHelper.ResponseOutcome(await this.Dispatcher.Query(query, cancellationToken), this);
 
@@ -41,6 +41,7 @@ public sealed class PizzaController : ApiController
     /// <param name="cancellationToken">Cancellation Token</param>
     /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
     [HttpPost]
+    [Route("", Order = 110)]
     public async Task<ActionResult<Result<PizzaModel>>> Create(CreatePizzaCommand command, CancellationToken cancellationToken = default)
         => ApiResponseHelper.ResponseOutcome(await this.Dispatcher.Send(command, cancellationToken), this);
 
@@ -58,7 +59,7 @@ public sealed class PizzaController : ApiController
     /// <param name="model">Pizza Update Model.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
-    [HttpPatch("{id}")]
+    [HttpPatch("{id}", Order = 120)]
     public async Task<ActionResult<Result<PizzaModel>>> Update(int id, UpdatePizzaModel model, CancellationToken cancellationToken = default)
         => ApiResponseHelper.ResponseOutcome(await this.Dispatcher.Send(new UpdatePizzaCommand { Id = id, Model = model }, cancellationToken), this);
 

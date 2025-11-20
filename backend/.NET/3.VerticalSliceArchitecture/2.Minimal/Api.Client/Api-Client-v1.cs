@@ -37,117 +37,63 @@ namespace Farris.API.Client.Template
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task GetHcAsync(System.Threading.CancellationToken cancellationToken);
 
-        /// <summary>
-        /// Create a new pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfPizzaModel> Create_a_pizzaAsync(CreatePizzaCommand command);
 
-        /// <summary>
-        /// Create a new pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         ResultOfPizzaModel Create_a_pizza(CreatePizzaCommand command);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Create a new pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfPizzaModel> Create_a_pizzaAsync(CreatePizzaCommand command, System.Threading.CancellationToken cancellationToken);
 
-        /// <summary>
-        /// Update existing pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfPizzaModel> Update_pizzaAsync(UpdatePizzaCommand command);
 
-        /// <summary>
-        /// Update existing pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         ResultOfPizzaModel Update_pizza(UpdatePizzaCommand command);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Update existing pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfPizzaModel> Update_pizzaAsync(UpdatePizzaCommand command, System.Threading.CancellationToken cancellationToken);
 
-        /// <summary>
-        /// Search for pizzas
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfIEnumerableOfPizzaModel> Search_for_pizzasAsync(GetAllPizzasQuery query);
 
-        /// <summary>
-        /// Search for pizzas
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         ResultOfIEnumerableOfPizzaModel Search_for_pizzas(GetAllPizzasQuery query);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Search for pizzas
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfIEnumerableOfPizzaModel> Search_for_pizzasAsync(GetAllPizzasQuery query, System.Threading.CancellationToken cancellationToken);
 
-        /// <summary>
-        /// Complete an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfOrderModel> Complete_orderAsync(CompleteOrderCommand command);
 
-        /// <summary>
-        /// Complete an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         ResultOfOrderModel Complete_order(CompleteOrderCommand command);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Complete an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfOrderModel> Complete_orderAsync(CompleteOrderCommand command, System.Threading.CancellationToken cancellationToken);
 
-        /// <summary>
-        /// Create a new order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfOrderModel> Create_orderAsync(CreateOrderCommand command);
 
-        /// <summary>
-        /// Create a new order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         ResultOfOrderModel Create_order(CreateOrderCommand command);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Create a new order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfOrderModel> Create_orderAsync(CreateOrderCommand command, System.Threading.CancellationToken cancellationToken);
 
-        /// <summary>
-        /// Get the status of an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfOrderStatus> Get_order_statusAsync(int id);
 
-        /// <summary>
-        /// Get the status of an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         ResultOfOrderStatus Get_order_status(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Get the status of an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<ResultOfOrderStatus> Get_order_statusAsync(int id, System.Threading.CancellationToken cancellationToken);
 
@@ -277,18 +223,12 @@ namespace Farris.API.Client.Template
             }
         }
 
-        /// <summary>
-        /// Create a new pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<ResultOfPizzaModel> Create_a_pizzaAsync(CreatePizzaCommand command)
         {
             return Create_a_pizzaAsync(command, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>
-        /// Create a new pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual ResultOfPizzaModel Create_a_pizza(CreatePizzaCommand command)
         {
@@ -296,9 +236,6 @@ namespace Farris.API.Client.Template
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Create a new pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<ResultOfPizzaModel> Create_a_pizzaAsync(CreatePizzaCommand command, System.Threading.CancellationToken cancellationToken)
         {
@@ -395,18 +332,12 @@ namespace Farris.API.Client.Template
             }
         }
 
-        /// <summary>
-        /// Update existing pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<ResultOfPizzaModel> Update_pizzaAsync(UpdatePizzaCommand command)
         {
             return Update_pizzaAsync(command, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>
-        /// Update existing pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual ResultOfPizzaModel Update_pizza(UpdatePizzaCommand command)
         {
@@ -414,9 +345,6 @@ namespace Farris.API.Client.Template
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Update existing pizza
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<ResultOfPizzaModel> Update_pizzaAsync(UpdatePizzaCommand command, System.Threading.CancellationToken cancellationToken)
         {
@@ -523,18 +451,12 @@ namespace Farris.API.Client.Template
             }
         }
 
-        /// <summary>
-        /// Search for pizzas
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<ResultOfIEnumerableOfPizzaModel> Search_for_pizzasAsync(GetAllPizzasQuery query)
         {
             return Search_for_pizzasAsync(query, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>
-        /// Search for pizzas
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual ResultOfIEnumerableOfPizzaModel Search_for_pizzas(GetAllPizzasQuery query)
         {
@@ -542,9 +464,6 @@ namespace Farris.API.Client.Template
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Search for pizzas
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<ResultOfIEnumerableOfPizzaModel> Search_for_pizzasAsync(GetAllPizzasQuery query, System.Threading.CancellationToken cancellationToken)
         {
@@ -641,18 +560,12 @@ namespace Farris.API.Client.Template
             }
         }
 
-        /// <summary>
-        /// Complete an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<ResultOfOrderModel> Complete_orderAsync(CompleteOrderCommand command)
         {
             return Complete_orderAsync(command, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>
-        /// Complete an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual ResultOfOrderModel Complete_order(CompleteOrderCommand command)
         {
@@ -660,9 +573,6 @@ namespace Farris.API.Client.Template
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Complete an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<ResultOfOrderModel> Complete_orderAsync(CompleteOrderCommand command, System.Threading.CancellationToken cancellationToken)
         {
@@ -759,18 +669,12 @@ namespace Farris.API.Client.Template
             }
         }
 
-        /// <summary>
-        /// Create a new order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<ResultOfOrderModel> Create_orderAsync(CreateOrderCommand command)
         {
             return Create_orderAsync(command, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>
-        /// Create a new order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual ResultOfOrderModel Create_order(CreateOrderCommand command)
         {
@@ -778,9 +682,6 @@ namespace Farris.API.Client.Template
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Create a new order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<ResultOfOrderModel> Create_orderAsync(CreateOrderCommand command, System.Threading.CancellationToken cancellationToken)
         {
@@ -877,18 +778,12 @@ namespace Farris.API.Client.Template
             }
         }
 
-        /// <summary>
-        /// Get the status of an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual System.Threading.Tasks.Task<ResultOfOrderStatus> Get_order_statusAsync(int id)
         {
             return Get_order_statusAsync(id, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>
-        /// Get the status of an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual ResultOfOrderStatus Get_order_status(int id)
         {
@@ -896,9 +791,6 @@ namespace Farris.API.Client.Template
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Get the status of an order
-        /// </summary>
         /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<ResultOfOrderStatus> Get_order_statusAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
@@ -1158,6 +1050,9 @@ namespace Farris.API.Client.Template
     public abstract partial class ResultBase
     {
 
+        [Newtonsoft.Json.JsonProperty("HasError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool HasError { get; set; }
+
         [Newtonsoft.Json.JsonProperty("ErrorResult", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ErrorResults ErrorResult { get; set; }
 
@@ -1169,9 +1064,6 @@ namespace Farris.API.Client.Template
 
         [Newtonsoft.Json.JsonProperty("ValidationErrors", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationErrors { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("HasError", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool HasError { get; set; }
 
     }
 
@@ -1335,7 +1227,7 @@ namespace Farris.API.Client.Template
     public partial class ResultOfOrderModel : ResultBase
     {
 
-        [Newtonsoft.Json.JsonProperty("Data", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("Data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public OrderModel Data { get; set; }
 
         [Newtonsoft.Json.JsonProperty("Count", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]

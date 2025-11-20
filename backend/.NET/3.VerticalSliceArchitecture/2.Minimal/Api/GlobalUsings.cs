@@ -1,3 +1,4 @@
+global using Api.Endpoints;
 global using Api.Helpers;
 global using FluentValidation;
 global using Microsoft.AspNetCore.Builder;

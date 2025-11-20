@@ -21,7 +21,7 @@ public sealed class OrderController : ApiController
     /// <param name="command">Order Create Model.</param>
     /// <param name="cancellationToken">Cancellation Token</param>
     /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
-    [HttpPost]
+    [HttpPost("", Order = 200)]
     public async Task<ActionResult<Result<OrderModel>>> Create(CreateOrderCommand command, CancellationToken cancellationToken = default)
         => ApiResponseHelper.ResponseOutcome(await this.Dispatcher.Send(command, cancellationToken), this);
 
@@ -35,7 +35,7 @@ public sealed class OrderController : ApiController
     /// <param name="id">Order ID.</param>
     /// <param name="cancellationToken">Cancellation Token</param>
     /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
-    [HttpPost("{id}/complete")]
+    [HttpPost("{id}/complete", Order = 220)]
     public async Task<ActionResult<Result<OrderModel>>> Complete(int id, CancellationToken cancellationToken = default)
         => ApiResponseHelper.ResponseOutcome(await this.Dispatcher.Send(new CompleteOrderCommand { Id = id }, cancellationToken), this);
 
@@ -45,7 +45,7 @@ public sealed class OrderController : ApiController
     /// <param name="id">Order ID.</param>
     /// <param name="cancellationToken">Cancellation Token.</param>
     /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
-    [HttpGet("{id}/status")]
+    [HttpGet("{id}/status", Order = 210)]
     public async Task<ActionResult<Result<OrderStatus>>> GetStatus(int id, CancellationToken cancellationToken = default)
         => ApiResponseHelper.ResponseOutcome(await this.Dispatcher.Query(new GetOrderStatusQuery { Id = id }, cancellationToken), this);
 }

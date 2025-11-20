@@ -29,9 +29,9 @@ public class LoggingMiddleware(RequestDelegate next)
         }
     }
 
-    private static Task HandleValidationExceptionAsync(HttpContext context, Exception exception)
+    private static Task HandleValidationExceptionAsync(HttpContext context, ValidationException exception)
     {
-        var errors = ((ValidationException)exception).Errors;
+        var errors = exception.Errors;
         if (errors.Any())
         {
             var failures = errors.ToLookup(o => o.PropertyName.Replace("Data.", string.Empty), o => o.ErrorMessage.Replace("Data ", string.Empty));
@@ -56,7 +56,7 @@ public class LoggingMiddleware(RequestDelegate next)
         }
     }
 
-    private static Task HandleOperationCanceledExceptionAsync(HttpContext context, Exception exception)
+    private static Task HandleOperationCanceledExceptionAsync(HttpContext context, OperationCanceledException exception)
     {
         var result = JsonSerializer.Serialize(new { succeeded = false, errors = new List<object> { exception.Message } });
         context.Response.ContentType = "application/json";

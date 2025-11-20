@@ -1,7 +1,5 @@
 ﻿namespace Api.Endpoints.V1.Pizzas;
 
-using Api.Endpoints;
-
 using Core.Pizzas.V1.Commands;
 using Core.Pizzas.V1.Models;
 
@@ -14,15 +12,17 @@ public class CreatePizzaEndpoint(Dispatcher dispatcher)
 public static class CreatePizzaEndpointExtensions
 {
     public static void MapEndpoints(this IEndpointRouteBuilder app)
-        => app.MapPost($"{Config.ENDPOINT}", (CreatePizzaEndpoint ep, CreatePizzaCommand command, CancellationToken cancellationToken) => ep.Create(command, cancellationToken))
-            .WithTags(Config.TAG)
-            .WithName("Create a pizza")
-            .Produces<Result<PizzaModel>>(StatusCodes.Status200OK, "application/json")
-            .WithStandardErrors()
-            .WithOpenApi(op =>
-            {
-                op.OperationId = "CreatePizza";
-                op.Summary = "Create a new pizza";
-                return op;
-            });
+        => app.MapPost($"{Config.ENDPOINT}", (CreatePizzaEndpoint ep, CreatePizzaCommand command, CancellationToken cancellationToken)
+            => ep.Create(command, cancellationToken))
+                .WithOrder(110)
+                .WithTags(Config.TAG)
+                .WithName("Create a pizza")
+                .Produces<Result<PizzaModel>>(StatusCodes.Status200OK, "application/json")
+                .WithStandardErrors()
+                .AddOpenApiOperationTransformer((operation, context, ct) =>
+                {
+                    operation.Summary = "Create Pizza";
+                    operation.Description = "Create a new pizza";
+                    return Task.CompletedTask;
+                });
 }

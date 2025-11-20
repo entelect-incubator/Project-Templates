@@ -24,7 +24,7 @@ public class TestPizzaV1Core : QueryTestBase
         configuration.Bind("Settings", new Settings());
         this.databaseContext = this.Context;
         var sutCreate = new CreatePizzaCommandHandler(this.databaseContext);
-        var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
+        var resultCreate = await sutCreate.Handle(PizzaTestData.GetCreateCommand(), CancellationToken.None);
 
         if (resultCreate.HasError)
         {

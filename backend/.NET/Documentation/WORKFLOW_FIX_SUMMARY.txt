@@ -1,0 +1,28 @@
+# Workflow Fix - Quick Summary
+
+## Problem
+GitHub workflow `Vertical Slice Minimal Architecture` failed because:
+- Using outdated .NET versions (8.x, 9.x instead of 10)
+- Incorrect file paths (missing `backend/.NET/` prefix)
+
+## Solution Files
+1. **DOTNET10_WORKFLOW_FIX.yml** - Complete corrected workflow file
+2. **DOTNET10_WORKFLOW_MIGRATION.md** - Detailed explanation of all changes
+
+## Key Changes
+1. Update: `dotnet-version: 8.x, 9.x` → `10.x`
+2. Update: `include-prerelease: true` → `false`
+3. Fix all paths: `3.VerticalSliceArchitecture/...` → `backend/.NET/3.VerticalSliceArchitecture/...`
+
+## Implementation
+Replace contents of `.github/workflows/min-vertical-slice.yml` in the Project-Templates repository with the corrected version from `DOTNET10_WORKFLOW_FIX.yml`.
+
+Changes needed in these lines:
+- Line 19-22: dotnet-version and include-prerelease
+- Line 25: dotnet restore path
+- Line 29: dotnet build path  
+- Line 33+: dotnet test path and coverage output
+- Line 51: reportgenerator paths
+- Line 60: cp command for HTML report
+- Line 78: artifact upload path
+- Line 86: artifact upload path

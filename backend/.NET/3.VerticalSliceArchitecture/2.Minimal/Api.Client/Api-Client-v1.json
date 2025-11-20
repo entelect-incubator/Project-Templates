@@ -24,7 +24,6 @@
         "tags": [
           "Pizzas"
         ],
-        "summary": "Create a new pizza",
         "operationId": "Create a pizza",
         "requestBody": {
           "x-name": "command",
@@ -75,7 +74,6 @@
         "tags": [
           "Pizzas"
         ],
-        "summary": "Update existing pizza",
         "operationId": "Update pizza",
         "requestBody": {
           "x-name": "command",
@@ -138,7 +136,6 @@
         "tags": [
           "Pizzas"
         ],
-        "summary": "Search for pizzas",
         "operationId": "Search for pizzas",
         "requestBody": {
           "x-name": "query",
@@ -191,7 +188,6 @@
         "tags": [
           "Orders"
         ],
-        "summary": "Complete an order",
         "operationId": "Complete order",
         "requestBody": {
           "x-name": "command",
@@ -244,7 +240,6 @@
         "tags": [
           "Orders"
         ],
-        "summary": "Create a new order",
         "operationId": "Create order",
         "requestBody": {
           "x-name": "command",
@@ -297,7 +292,6 @@
         "tags": [
           "Orders"
         ],
-        "summary": "Get the status of an order",
         "operationId": "Get order status",
         "parameters": [
           {
@@ -395,6 +389,9 @@
         "x-abstract": true,
         "additionalProperties": false,
         "properties": {
+          "HasError": {
+            "type": "boolean"
+          },
           "ErrorResult": {
             "$ref": "#/components/schemas/ErrorResults"
           },
@@ -416,9 +413,6 @@
                 "type": "string"
               }
             }
-          },
-          "HasError": {
-            "type": "boolean"
           }
         }
       },
@@ -660,7 +654,12 @@
             "additionalProperties": false,
             "properties": {
               "Data": {
-                "$ref": "#/components/schemas/OrderModel"
+                "nullable": true,
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/OrderModel"
+                  }
+                ]
               },
               "Count": {
                 "type": "integer",

@@ -11,22 +11,33 @@ public class OrderMap : IEntityTypeConfiguration<Order>
 
         builder.HasKey(o => o.Id);
 
+        builder.Property(o => o.Id)
+            .HasColumnType("integer")
+            .ValueGeneratedOnAdd();
+
         builder.Property(o => o.CustomerName)
             .IsRequired()
+            .HasColumnType("character varying(100)")
             .HasMaxLength(100);
 
         builder.Property(o => o.CustomerEmail)
             .IsRequired()
+            .HasColumnType("character varying(100)")
             .HasMaxLength(100);
 
         builder.Property(o => o.PizzaId)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnType("integer");
 
         builder.Property(o => o.Status)
             .IsRequired()
+            .HasColumnType("integer")
+            .HasConversion<int>()
             .HasDefaultValue(OrderStatus.Confirmed);
 
         builder.Property(o => o.DateCreated)
-            .IsRequired();
+            .IsRequired()
+            .HasColumnType("timestamp with time zone")
+            .HasDefaultValueSql("now() at time zone 'UTC'");
     }
 }

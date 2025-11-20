@@ -1,0 +1,333 @@
+# Port Configuration - Visual Guide
+
+## How Port Configuration Works
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      DEVELOPMENT FLOW                        │
+└─────────────────────────────────────────────────────────────┘
+
+1. dotnet run
+   ↓
+   Reads environment from launchSettings.json
+   ↓
+   Sets ASPNETCORE_ENVIRONMENT=Development
+   ↓
+   Program.cs runs
+   ↓
+   Reads appsettings.Development.json
+   ↓
+   Kestrel starts on port 5000
+   ✓ URL: http://localhost:5000
+
+
+2. Kestrel__Port=7160 dotnet run
+   ↓
+   Sets environment variable first
+   ↓
+   launchSettings.json sets ASPNETCORE_ENVIRONMENT=Development
+   ↓
+   Program.cs runs
+   ↓
+   ConfigureKestrel reads Kestrel__Port env var
+   ↓
+   Environment variable WINS (port 7160)
+   ✓ URL: http://localhost:7160
+
+
+3. docker run -e Kestrel__Port=8080 myapp
+   ↓
+   No launchSettings.json (not in Docker)
+   ↓
+   ASPNETCORE_ENVIRONMENT defaults to Production (usually)
+   ↓
+   Program.cs runs
+   ↓
+   ConfigureKestrel reads Kestrel__Port env var
+   ↓
+   Env var wins (port 8080)
+   ✓ URL: http://0.0.0.0:8080
+```
+
+---
+
+## Configuration Priority Chart
+
+```
+                    PRIORITY (Highest to Lowest)
+                           ▲
+                           │
+                    1 ─────┼───── Environment Variables
+                           │      Kestrel__Port=8080
+                           │
+                    2 ─────┼───── appsettings.Production.json
+                           │      Kestrel: { Port: 80 }
+                           │
+                    3 ─────┼───── appsettings.json
+                           │      Kestrel: { Port: 5000 }
+                           │
+                    4 ─────┼───── Code Default
+                           │      ?? "5000"
+                           │
+                    5 ─────┼───── ASP.NET Core Default
+                           │      Port 5000
+                           │
+                           ▼
+```
+
+---
+
+## Configuration File Hierarchy
+
+```
+                      appsettings.json (BASE)
+                      - Kestrel: { Port: 5000 }
+                               │
+                ┌──────────────┼──────────────┐
+                │              │              │
+         Development      Staging       Production
+         
+appsettings.     appsettings.      appsettings.
+Development.json Staging.json      Production.json
+- Kestrel: {     - Kestrel: {      - Kestrel: {
+  Port: 5000 }     Port: 8080 }      Port: 80 }
+```
+
+---
+
+## Where Port Configuration Comes From
+
+```
+┌──────────────────────┐
+│  launchSettings.json │  ← Only used by "dotnet run" debugging
+└──────────────────────┘
+          │
+          └─→ Sets ASPNETCORE_ENVIRONMENT env var
+              (doesn't directly set port)
+
+┌──────────────────────┐
+│  Program.cs Config   │  ← Reads Kestrel config
+└──────────────────────┘
+          │
+          └─→ Reads from IConfiguration
+              - Env vars
+              - appsettings.json
+              - appsettings.{Environment}.json
+
+┌──────────────────────┐
+│  appsettings.json    │  ← Base configuration
+└──────────────────────┘
+          │
+          └─→ Merged with env-specific files
+              - appsettings.Development.json
+              - appsettings.Production.json
+```
+
+---
+
+## Example: Complete Request Flow
+
+```
+User runs: Kestrel__Port=7160 dotnet run
+
+Step 1: Environment Setup
+        ├─ launchSettings.json loaded
+        ├─ ASPNETCORE_ENVIRONMENT = Development
+        └─ Kestrel__Port = 7160
+
+Step 2: Configuration Loading
+        ├─ appsettings.json loaded
+        │  └─ Kestrel: { Port: 5000 }
+        │
+        ├─ appsettings.Development.json loaded (overlays)
+        │  └─ Kestrel: { Port: 5000 }
+        │
+        └─ Environment variables (highest priority!)
+           └─ Kestrel__Port = 7160
+
+Step 3: Program.cs Executes
+        └─ ConfigureKestrel((context, options) =>
+           {
+               var port = context.Configuration["Kestrel:Port"]
+                                   ?? "5000"  // ← Gets "7160" from env var!
+               options.ListenAnyIP(port, ...)
+           })
+
+Step 4: Kestrel Starts
+        └─ Listening on: http://[::]:7160 ✓
+```
+
+---
+
+## Docker Examples with Port Flow
+
+```
+EXAMPLE 1: Simple Docker Run
+──────────────────────────────
+$ docker run -p 8080:5000 myapp
+
+Inside Container:
+  - appsettings.json → Kestrel: { Port: 5000 }
+  - No env vars set
+  - Container listens on port 5000
+
+Docker Mapping:
+  - Host Port 8080 → Container Port 5000
+  
+Result:
+  - Access via: http://localhost:8080 (host)
+  - Container actually listens on: 5000
+
+
+EXAMPLE 2: Docker with Environment Variable
+──────────────────────────────────────────────
+$ docker run -p 9000:9000 -e Kestrel__Port=9000 myapp
+
+Inside Container:
+  - appsettings.json → Kestrel: { Port: 5000 }
+  - Env var → Kestrel__Port = 9000  (WINS!)
+  - Container listens on port 9000
+
+Docker Mapping:
+  - Host Port 9000 → Container Port 9000
+
+Result:
+  - Access via: http://localhost:9000
+  - Container listens on: 9000
+
+
+EXAMPLE 3: Docker Production Mode
+──────────────────────────────────
+$ docker run -p 80:80 \
+    -e ASPNETCORE_ENVIRONMENT=Production \
+    myapp
+
+Inside Container:
+  - appsettings.json → Kestrel: { Port: 5000 }
+  - appsettings.Production.json → Kestrel: { Port: 80 }
+  - Production config used (port 80)
+  - No Kestrel__Port env var set
+  - Container listens on port 80
+
+Docker Mapping:
+  - Host Port 80 → Container Port 80
+
+Result:
+  - Access via: http://localhost (standard web port)
+  - Container listens on: 80
+```
+
+---
+
+## Decision Tree
+
+```
+┌─ What are you doing?
+│
+├─→ Local development
+│   └─ Run: dotnet run
+│      Uses: appsettings.Development.json
+│      Port: 5000 ✓
+│
+├─→ Test on specific port
+│   └─ Run: Kestrel__Port=8080 dotnet run
+│      Uses: 8080 (env var overrides config)
+│      Port: 8080 ✓
+│
+├─→ Docker development
+│   └─ Run: docker run -e Kestrel__Port=5000 myapp
+│      Port: 5000 ✓
+│
+├─→ Docker production
+│   └─ Run: docker run -e ASPNETCORE_ENVIRONMENT=Production myapp
+│      Uses: appsettings.Production.json
+│      Port: 80 (or whatever in Production config) ✓
+│
+├─→ Kubernetes
+│   └─ Set env var in deployment manifest
+│      Port: Whatever you set ✓
+│
+└─→ CI/CD Pipeline
+   └─ Set multiple env vars
+      Port: From env var (highest priority) ✓
+```
+
+---
+
+## Code Change Summary
+
+```
+BEFORE (Hardcoded)
+─────────────────
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(7160, listenOptions => 
+        listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3);
+});
+
+
+AFTER (Configuration-Driven)
+────────────────────────────
+builder.WebHost.ConfigureKestrel((context, options) =>
+{
+    var port = int.Parse(context.Configuration["Kestrel:Port"] ?? "5000");
+    
+    options.ListenAnyIP(port, listenOptions =>
+    {
+        listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+    });
+});
+
+
+CONFIGURATION (appsettings.json)
+───────────────────────────────
+{
+  "Kestrel": {
+    "Port": 5000
+  }
+}
+
+
+BENEFITS
+───────
+✓ No hardcoding
+✓ Easy to override
+✓ Environment-aware
+✓ Docker friendly
+✓ Kubernetes ready
+```
+
+---
+
+## Troubleshooting Visual
+
+```
+Problem: App always uses port 5000, can't override with env var
+
+Check ↓
+1. Is ConfigureKestrel reading from context.Configuration?
+   └─ Must use (context, options) ← not just options
+
+2. Is env var name correct?
+   └─ Use Kestrel__Port (double underscore is important!)
+   └─ NOT Kestrel_Port or Kestrel:Port
+
+3. Is Configuration bound correctly?
+   └─ context.Configuration["Kestrel:Port"]
+   └─ Env var: Kestrel__Port=8080
+
+4. Are you sure env var is being passed?
+   └─ docker run -e Kestrel__Port=8080 (before image name!)
+   └─ NOT: docker run image -e Kestrel__Port=8080
+
+If still not working:
+  ├─ Check: docker exec CONTAINER_ID printenv | grep Kestrel
+  ├─ Check: Program.cs is actually reading from config
+  └─ Check: No typos in variable names
+```
+
+---
+
+**Visual Guide Created: November 12, 2025**  
+**All Files in:** c:\Dev\Incubator\
+**Reference:** KESTREL_PORT_CONFIGURATION.md (full technical details)

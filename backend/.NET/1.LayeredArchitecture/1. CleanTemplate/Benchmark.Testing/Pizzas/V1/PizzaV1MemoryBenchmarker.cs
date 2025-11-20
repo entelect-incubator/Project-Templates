@@ -13,7 +13,7 @@ using Test.Setup.TestData.Pizza.V1;
 public class PizzaV1MemoryBenchmarker : QueryTestBase
 {
     [GlobalSetup]
-    public void Setup()
+    public static void Setup()
     {
         var configuration = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", true, true)

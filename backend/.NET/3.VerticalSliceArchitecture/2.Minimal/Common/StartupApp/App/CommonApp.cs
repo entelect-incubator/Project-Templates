@@ -51,31 +51,26 @@ public static class CommonApp
             app.UseAuthorization();
         }
 
-        app.UseEndpoints(static endpoints =>
+        app.MapControllers();
+        app.MapGet("/", async (context) =>
         {
-            endpoints.MapControllers();
-            endpoints.MapGet("/", async (context) =>
-            {
-                context.Response.StatusCode = 200;
-                context.Response.ContentType = "text/html";
+            context.Response.StatusCode = 200;
+            context.Response.ContentType = "text/html";
 
-                await context.Response.WriteAsync(GetHomePageHtml(StartupSettings.Current.DisplayName));
-            });
-            endpoints.MapGet(
-                "/hc",
-                async ([FromServices] HealthCheckService healthCheckService, HttpContext context) =>
-                {
-                    var report = await healthCheckService.CheckHealthAsync();
-                    Logger.LogInfo("Health check", Enum.GetName(report.Status));
-                    context.Response.StatusCode = 200;
-                    context.Response.ContentType = "application/json";
-                    await context.Response.WriteAsync(JsonSerializer.Serialize(new
-                    {
-                        Status = Enum.GetName(report.Status),
-                        Report = report,
-                    }));
-                }).WithTags("Health Check");
+            await context.Response.WriteAsync(GetHomePageHtml(StartupSettings.Current.DisplayName));
         });
+        app.MapGet("/hc", async ([FromServices] HealthCheckService healthCheckService, HttpContext context) =>
+        {
+            var report = await healthCheckService.CheckHealthAsync();
+            Logger.LogInfo("Health check", Enum.GetName(report.Status));
+            context.Response.StatusCode = 200;
+            context.Response.ContentType = "application/json";
+            await context.Response.WriteAsync(JsonSerializer.Serialize(new
+            {
+                Status = Enum.GetName(report.Status),
+                Report = report,
+            }));
+        }).WithTags("Health Check");
 
         return app;
     }

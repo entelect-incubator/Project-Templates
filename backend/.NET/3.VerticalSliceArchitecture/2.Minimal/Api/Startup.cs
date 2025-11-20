@@ -3,6 +3,7 @@
 using Api.Endpoints;
 using Api.Endpoints.V1.Orders;
 using Api.Endpoints.V1.Pizzas;
+using Api.Infrastructure;
 using Common.StartupApp.App;
 using Common.StartupApp.Services;
 using Core;
@@ -12,6 +13,7 @@ public static class Startup
 {
     public static void RegisterServices(this WebApplicationBuilder builder)
         => builder.Services
+        .AddDatabaseContext(builder.Configuration)
         .AddEndpointsApiExplorer()
         .AddCommon()
         .AddSecurity()

@@ -404,12 +404,15 @@
       "type": "object",
       "x-abstract": true,
       "required": [
+        "HasError",
         "ErrorResult",
         "Errors",
-        "ValidationErrors",
-        "HasError"
+        "ValidationErrors"
       ],
       "properties": {
+        "HasError": {
+          "type": "boolean"
+        },
         "ErrorResult": {
           "$ref": "#/definitions/ErrorResults"
         },
@@ -430,9 +433,6 @@
               "type": "string"
             }
           }
-        },
-        "HasError": {
-          "type": "boolean"
         }
       }
     },

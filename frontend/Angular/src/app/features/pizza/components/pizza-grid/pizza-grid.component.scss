@@ -1,0 +1,233 @@
+/**
+ * Pizza Grid Styles
+ * Grid layout with loading states and responsive design
+ */
+
+:host {
+  display: block;
+}
+
+.pizza-grid {
+  width: 100%;
+}
+
+.pizza-grid__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-6, 1.5rem);
+  padding: var(--spacing-8, 2rem) var(--spacing-4, 1rem);
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-4, 1rem);
+
+  p {
+    color: var(--text-secondary, #6b7280);
+    font-size: var(--text-lg, 1.125rem);
+    margin: 0;
+  }
+}
+
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-6, 1.5rem);
+  width: 100%;
+  max-width: 1200px;
+}
+
+.pizza-card-skeleton {
+  background: var(--surface, #ffffff);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  border: 1px solid var(--border, #e5e7eb);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 200px;
+  background: var(--gray-200, #e5e7eb);
+}
+
+.skeleton-content {
+  padding: var(--spacing-4, 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3, 0.75rem);
+}
+
+.skeleton-title {
+  height: 24px;
+  background: var(--gray-200, #e5e7eb);
+  border-radius: var(--radius-md, 8px);
+  width: 70%;
+}
+
+.skeleton-description {
+  height: 16px;
+  background: var(--gray-200, #e5e7eb);
+  border-radius: var(--radius-sm, 4px);
+  width: 100%;
+}
+
+.skeleton-ingredients {
+  display: flex;
+  gap: var(--spacing-2, 0.5rem);
+}
+
+.skeleton-tag {
+  height: 20px;
+  width: 60px;
+  background: var(--gray-200, #e5e7eb);
+  border-radius: var(--radius-sm, 4px);
+}
+
+.skeleton-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-2, 0.5rem);
+}
+
+.skeleton-price {
+  height: 24px;
+  width: 80px;
+  background: var(--gray-200, #e5e7eb);
+  border-radius: var(--radius-md, 8px);
+}
+
+.skeleton-button {
+  height: 36px;
+  width: 120px;
+  background: var(--gray-200, #e5e7eb);
+  border-radius: var(--radius-md, 8px);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pizza-grid__empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  padding: var(--spacing-8, 2rem) var(--spacing-4, 1rem);
+}
+
+.empty-state {
+  text-align: center;
+  max-width: 400px;
+}
+
+.empty-state__icon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-4, 1rem);
+  opacity: 0.7;
+}
+
+.empty-state__title {
+  font-size: var(--text-2xl, 1.5rem);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--text-primary, #111827);
+  margin: 0 0 var(--spacing-2, 0.5rem);
+}
+
+.empty-state__message {
+  color: var(--text-secondary, #6b7280);
+  font-size: var(--text-base, 1rem);
+  line-height: 1.6;
+  margin: 0 0 var(--spacing-6, 1.5rem);
+}
+
+.pizza-grid__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-6, 1.5rem);
+  padding: var(--spacing-4, 1rem) 0;
+}
+
+.pizza-grid__load-more {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-8, 2rem) var(--spacing-4, 1rem);
+
+  button {
+    min-width: 200px;
+
+    mat-spinner {
+      margin-right: var(--spacing-2, 0.5rem);
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .pizza-grid__container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-4, 1rem);
+  }
+
+  .skeleton-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-4, 1rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .pizza-grid__container {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4, 1rem);
+    padding: var(--spacing-2, 0.5rem) 0;
+  }
+
+  .skeleton-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4, 1rem);
+  }
+
+  .pizza-grid__loading,
+  .pizza-grid__empty {
+    padding: var(--spacing-6, 1.5rem) var(--spacing-2, 0.5rem);
+  }
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+  .pizza-card-skeleton {
+    background: var(--surface-dark, #1f2937);
+    border-color: var(--border-dark, #374151);
+  }
+
+  .skeleton-image,
+  .skeleton-title,
+  .skeleton-description,
+  .skeleton-tag,
+  .skeleton-price,
+  .skeleton-button {
+    background: var(--gray-700, #374151);
+  }
+
+  .loading-state p {
+    color: var(--text-secondary-dark, #d1d5db);
+  }
+
+  .empty-state__title {
+    color: var(--text-primary-dark, #f9fafb);
+  }
+
+  .empty-state__message {
+    color: var(--text-secondary-dark, #d1d5db);
+  }
+}

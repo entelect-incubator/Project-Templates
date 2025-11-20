@@ -1,5 +1,6 @@
 ﻿namespace Utilities.Results;
 
+using System.Collections.Generic;
 using Utilities.Enums;
 
 public abstract class ResultBase
@@ -23,9 +24,10 @@ public abstract class ResultBase
     public void AddValidationError(string name, List<string> errors)
     {
         this.ErrorResult = ErrorResults.ValidationError;
+
         if (!this.ValidationErrors.TryGetValue(name, out var existing))
         {
-            this.ValidationErrors[name] = errors;
+            this.ValidationErrors[name] = [.. errors];
         }
         else
         {

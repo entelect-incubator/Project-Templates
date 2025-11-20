@@ -16,23 +16,23 @@ public class PizzaMap : IEntityTypeConfiguration<Pizza>
         builder.Property(t => t.Id)
             .IsRequired()
             .HasColumnName("Id")
-            .HasColumnType("int")
+            .HasColumnType("integer")
             .ValueGeneratedOnAdd();
 
         builder.Property(t => t.Name)
             .IsRequired()
             .HasColumnName("Name")
-            .HasColumnType("varchar(200)")
+            .HasColumnType("character varying(200)")
             .HasMaxLength(200);
 
         builder.Property(t => t.DateCreated)
             .HasColumnName("DateCreated")
-            .HasColumnType("datetime")
-            .HasDefaultValueSql("GETDATE()");
+            .HasColumnType("timestamp with time zone")
+            .HasDefaultValueSql("now() at time zone 'UTC'");
 
         builder.Property(t => t.Disabled)
             .HasColumnName("Disabled")
-            .HasColumnType("bool")
+            .HasColumnType("boolean")
             .HasDefaultValueSql("true");
     }
 

@@ -1670,6 +1670,9 @@ namespace API.Client.Template
     public abstract partial class ResultBase
     {
 
+        [Newtonsoft.Json.JsonProperty("HasError", Required = Newtonsoft.Json.Required.Always)]
+        public bool HasError { get; set; }
+
         [Newtonsoft.Json.JsonProperty("ErrorResult", Required = Newtonsoft.Json.Required.Always)]
         public ErrorResults ErrorResult { get; set; }
 
@@ -1683,9 +1686,6 @@ namespace API.Client.Template
         [Newtonsoft.Json.JsonProperty("ValidationErrors", Required = Newtonsoft.Json.Required.Always)]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.IDictionary<string, System.Collections.Generic.ICollection<string>> ValidationErrors { get; set; } = new System.Collections.Generic.Dictionary<string, System.Collections.Generic.ICollection<string>>();
-
-        [Newtonsoft.Json.JsonProperty("HasError", Required = Newtonsoft.Json.Required.Always)]
-        public bool HasError { get; set; }
 
     }
 

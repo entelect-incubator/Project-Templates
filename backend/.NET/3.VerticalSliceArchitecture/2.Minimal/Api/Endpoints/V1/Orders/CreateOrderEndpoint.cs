@@ -1,7 +1,5 @@
 namespace Api.Endpoints.V1.Orders;
 
-using Api.Endpoints;
-
 using Core.Orders.V1.Commands;
 using Core.Orders.V1.Models;
 
@@ -14,15 +12,17 @@ public class CreateOrderEndpoint(Dispatcher dispatcher)
 public static class CreateOrderEndpointExtensions
 {
     public static void MapEndpoints(this IEndpointRouteBuilder app)
-        => app.MapPost($"{Config.ENDPOINT}order", (CreateOrderEndpoint ep, CreateOrderCommand command, CancellationToken cancellationToken) => ep.Create(command, cancellationToken))
-            .WithTags("Orders")
-            .WithName("Create order")
-            .Produces<Result<OrderModel>>(StatusCodes.Status200OK, "application/json")
-            .WithStandardErrors()
-            .WithOpenApi(op =>
-            {
-                op.OperationId = "CreateOrder";
-                op.Summary = "Create a new order";
-                return op;
-            });
+        => app.MapPost($"{Config.ENDPOINT}order", (CreateOrderEndpoint ep, CreateOrderCommand command, CancellationToken cancellationToken)
+            => ep.Create(command, cancellationToken))
+                .WithOrder(200)
+                .WithTags("Orders")
+                .WithName("Create order")
+                .Produces<Result<OrderModel>>(StatusCodes.Status200OK, "application/json")
+                .WithStandardErrors()
+                .AddOpenApiOperationTransformer((operation, context, ct) =>
+                {
+                    operation.Summary = "Create Order";
+                    operation.Description = "Create a new order";
+                    return Task.CompletedTask;
+                });
 }

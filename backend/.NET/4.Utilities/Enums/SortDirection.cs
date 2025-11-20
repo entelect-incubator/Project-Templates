@@ -2,10 +2,12 @@
 
 using System.ComponentModel;
 using System.Text.Json.Serialization;
+using Newtonsoft.Json.Converters;
 
 /// <summary>
 /// Sort Direction.
 /// </summary>
+[Newtonsoft.Json.JsonConverter(typeof(StringEnumConverter))]
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum SortDirection
 {
@@ -19,5 +21,5 @@ public enum SortDirection
     /// The descending
     /// </summary>
     [Description("Desc")]
-    Descending,
+    Descending
 }

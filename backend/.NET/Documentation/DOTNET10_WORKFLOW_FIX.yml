@@ -1,0 +1,90 @@
+name: Vertical Slice Minimal Architecture
+
+on:
+    push:
+        branches: [master]
+    pull_request:
+        branches: [master]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Setup .NET
+              uses: actions/setup-dotnet@v1
+              with:
+                  dotnet-version: |
+                      10.x
+                  include-prerelease: false
+            - name: Install dependencies
+              run: dotnet restore "./backend/.NET/3.VerticalSliceArchitecture/2.Minimal/.NET.VerticalSliceArchitecture.Minimal.sln"
+            - name: Build
+              run: dotnet build "./backend/.NET/3.VerticalSliceArchitecture/2.Minimal/.NET.VerticalSliceArchitecture.Minimal.sln" --configuration Release --no-restore
+            # Run the tests and collect code coverage
+            - name: Run Tests and Collect Code Coverage
+              run: |
+                  dotnet test backend/.NET/3.VerticalSliceArchitecture/2.Minimal/Test/Test.csproj --no-build --collect:'XPlat Code Coverage' \
+                    /p:CollectCoverage=true \
+                    /p:CoverletOutputFormat=cobertura \
+                    /p:CoverletOutput="backend/.NET/3.VerticalSliceArchitecture/2.Minimal/Test/TestResults/" \
+                    /p:IsBenchmarkProject=false \
+                    /p:Configuration=Release \
+                    --verbosity detailed
+
+            # Install ReportGenerator (if necessary)
+            - name: Install ReportGenerator
+              run: |
+                  dotnet tool install --global dotnet-reportgenerator-globaltool
+
+            # Generate HTML report from Cobertura XML
+            - name: Generate HTML Coverage Report
+              run: |
+                  reportgenerator "-reports:backend/.NET/3.VerticalSliceArchitecture/2.Minimal/Test/TestResults/*/coverage.cobertura.xml" \
+                    "-targetdir:backend/.NET/3.VerticalSliceArchitecture/2.Minimal/Test/TestResults/html" \
+                    -reporttypes:Html
+
+            # Rename report index.html and create main index.html
+            - name: Organize Reports
+              run: |
+                  mkdir -p reports
+                  mkdir -p reports/vertical-min-test-results
+                  # Copy the entire HTML report directory
+                  cp -r backend/.NET/3.VerticalSliceArchitecture/2.Minimal/Test/TestResults/html/* reports/vertical-min-test-results/
+
+                  # Copy the CSS file to the root of the deployment directory
+                  cp reports/vertical-min-test-results/report.css reports/report.css
+
+                  # Rename main index.html
+                  mv reports/vertical-min-test-results/index.html reports/vertical-min-test-results.html
+
+                  # Generate main index.html
+                  echo "<!DOCTYPE html>" > reports/index.html
+                  echo "<html><head><title>Test Reports</title></head><body>" >> reports/index.html
+                  echo "<h1>Test Reports</h1>" >> reports/index.html
+                  echo "<ul>" >> reports/index.html
+                  echo "<li><a href='vertical-min-test-results.html'>Vertical Slice Minimal Test Results</a></li>" >> reports/index.html
+                  echo "</ul>" >> reports/index.html
+                  echo "</body></html>" >> reports/index.html
+
+            # Upload coverage HTML report as artifact
+            - name: Upload HTML Report Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: coverage-report
+                  path: backend/.NET/3.VerticalSliceArchitecture/2.Minimal/Test/TestResults/html/
+
+            # Upload Cobertura XML as artifact (optional)
+            - name: Upload Cobertura Report Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: cobertura-report
+                  path: backend/.NET/3.VerticalSliceArchitecture/2.Minimal/Test/TestResults/coverage.cobertura.xml
+
+            - name: Deploy to GitHub Pages
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./reports
+                  publish_branch: gh-pages

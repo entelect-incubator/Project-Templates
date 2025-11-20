@@ -12,7 +12,11 @@ public static class DispatcherExtensions
     }
 
     public static Task<TResult> Send<TResult>(this Dispatcher dispatcher, ICommand<TResult> command, CancellationToken ct = default)
-        => dispatcher.Send<ICommand<TResult>, TResult>(command, ct);
+    {
+        var commandType = command.GetType();
+        var method = typeof(Dispatcher).GetMethod("Send")!.MakeGenericMethod(commandType, typeof(TResult));
+        return (Task<TResult>)method.Invoke(dispatcher, [command, ct])!;
+    }
 
     public static Task Publish<TNotification>(this Dispatcher dispatcher, TNotification notification, CancellationToken ct = default)
         where TNotification : INotification

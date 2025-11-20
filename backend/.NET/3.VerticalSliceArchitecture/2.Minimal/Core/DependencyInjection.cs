@@ -12,12 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
 {
-    private const string DatabaseName = "DB";
-
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddDbContext<DatabaseContext>(builder => builder.UseInMemoryDatabase(DatabaseName));
-
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddTransient<Dispatcher>();

@@ -23,7 +23,7 @@ public sealed class UpdatePizzaCommandHandler(DatabaseContext databaseContext) :
         }
 
         ActionHelper.UpdateIf(() => findEntity.Name = model.Name, model?.Name);
-        ActionHelper.UpdateIf(() => findEntity.Disabled = model.Disabled.Value, model?.Disabled);
+        ActionHelper.UpdateIf(() => findEntity.Disabled = model.Disabled!.Value, model?.Disabled);
 
         databaseContext.Pizzas.Update(findEntity);
         var outcome = await databaseContext.SaveChangesAsync(cancellationToken);

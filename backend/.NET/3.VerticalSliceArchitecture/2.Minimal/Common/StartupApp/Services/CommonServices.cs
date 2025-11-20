@@ -1,5 +1,6 @@
 namespace Common.StartupApp.Services;
 
+using System.IO.Compression;
 using System.Net;
 using System.Text.Json.Serialization;
 using System.Threading.RateLimiting;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
 using Newtonsoft.Json.Serialization;
 using OpenTelemetry.Metrics;
@@ -50,6 +52,16 @@ public static class CommonServices
         {
             options.Providers.Add<BrotliCompressionProvider>();
             options.Providers.Add<GzipCompressionProvider>();
+        });
+
+        services.Configure<BrotliCompressionProviderOptions>(options =>
+        {
+            options.Level = CompressionLevel.Fastest;
+        });
+
+        services.Configure<GzipCompressionProviderOptions>(options =>
+        {
+            options.Level = CompressionLevel.Fastest;
         });
 
         if (StartupSettings.Current.IncludeHeaderVersion)

@@ -1,5 +1,6 @@
 namespace Api;
 
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Api.StartupApp.App;
 using Api.StartupApp.Services;
 using Core;
@@ -14,7 +15,13 @@ public class Program
 
         Log.Logger = LoggerSetup.ConfigureLogging().CreateLogger();
         builder.Host.UseSerilog();
-        builder.WebHost.ConfigureKestrel(opt => opt.AddServerHeader = false);
+        //// Enable Kestrel with HTTP/3 and configurable port
+        builder.WebHost.ConfigureKestrel((context, options) =>
+        {
+            var port = int.Parse(context.Configuration["Kestrel:Port"] ?? "5000");
+            options.ListenAnyIP(port, listenOptions => listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3);
+            options.AddServerHeader = false;
+        });
 
         builder.Services.AddDbContext<DatabaseContext>(builder => builder.UseInMemoryDatabase("DB"));
 

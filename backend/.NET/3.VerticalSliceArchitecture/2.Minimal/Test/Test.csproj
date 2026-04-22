@@ -21,7 +21,9 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Bogus" Version="35.6.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.0" />
+		<PackageReference Include="NSubstitute" Version="5.3.0" />
 		<PackageReference Include="nunit" Version="4.4.0" />
 		<PackageReference Include="NUnit3TestAdapter" Version="5.2.0" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
@@ -30,15 +32,12 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Common\Common.csproj" />
 		<ProjectReference Include="..\Core\Core.csproj" />
+		<ProjectReference Include="..\Api\Api.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Integration\" />
 	  <Folder Include="TestResults\" />
 	</ItemGroup>
 
-	<Target Name="RunCustomBuildSteps" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
-		<Exec Command="dotnet tool list --global | findstr dotnet-reportgenerator-globaltool || dotnet tool install --global dotnet-reportgenerator-globaltool" />
-		<Exec Command="dotnet test ../Test/Test.csproj --no-build --collect:&quot;XPlat Code Coverage&quot; /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude=&quot;[xunit*]\*&quot; /p:CoverletOutput=&quot;./TestResults/&quot; /p:IsBenchmarkProject=false" />
-		<Exec Command="reportgenerator -reports:./TestResults/coverage.cobertura.xml -targetdir:./TestResults/html -reporttypes:HTML;" />
-	</Target>
 </Project>

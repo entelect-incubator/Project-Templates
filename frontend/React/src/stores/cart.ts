@@ -50,6 +50,7 @@ export const cartActions = {
         pizza,
         quantity,
         subtotal: quantity * pizza.price,
+        addedAt: new Date().toISOString(),
       };
       cartItems.value = [...cartItems.value, newItem];
     }

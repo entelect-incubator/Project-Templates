@@ -44,12 +44,23 @@ export function OrderForm({ onSuccess, onCancel }: OrderFormProps) {
     try {
       cartActions.updateCustomerInfo(data);
 
+      const orderItems = cartItems.value.map((item) => ({
+        pizzaId: item.pizzaId,
+        quantity: item.quantity,
+      }));
+
+      const customerPayload = {
+        name: data.name,
+        email: data.email,
+        phone: data.phone ?? '',
+        address: data.address,
+        city: data.city,
+        zipCode: data.zipCode,
+      };
+
       const orderData = {
-        items: cartItems.value.map((item) => ({
-          pizzaId: item.pizzaId,
-          quantity: item.quantity,
-        })),
-        customer: data,
+        items: orderItems,
+        customer: customerPayload,
       };
 
       await createOrderMutation.mutateAsync(orderData);
@@ -66,7 +77,7 @@ export function OrderForm({ onSuccess, onCancel }: OrderFormProps) {
 
   if (cartItems.value.length === 0) {
     return (
-      <div className='order-form__empty'>
+      <div className="order-form__empty">
         <h3>Your cart is empty</h3>
         <p>Add some pizzas to your cart before placing an order.</p>
       </div>
@@ -74,12 +85,12 @@ export function OrderForm({ onSuccess, onCancel }: OrderFormProps) {
   }
 
   return (
-    <div className='order-form'>
-      <div className='order-form__header'>
+    <div className="order-form">
+      <div className="order-form__header">
         <h2>Complete Your Order</h2>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className='order-form__form'>
+      <form onSubmit={handleSubmit(onSubmit)} className="order-form__form">
         {/* Order Summary */}
         <OrderSummary items={cartItems.value} total={cartTotal.value} />
 
@@ -87,16 +98,16 @@ export function OrderForm({ onSuccess, onCancel }: OrderFormProps) {
         <CustomerInfoSection register={register} errors={errors} />
 
         {/* Form Actions */}
-        <div className='order-form__actions'>
+        <div className="order-form__actions">
           {onCancel && (
-            <Button type='button' onClick={onCancel} variant='secondary'>
+            <Button type="button" onClick={onCancel} variant="secondary">
               Cancel
             </Button>
           )}
           <SubmitButton
-            label='Place Order'
+            label="Place Order"
             isLoading={isSubmitting || createOrderMutation.isPending}
-            loadingLabel='Processing...'
+            loadingLabel="Processing..."
             disabled={isSubmitting || createOrderMutation.isPending}
           />
         </div>

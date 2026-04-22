@@ -1,0 +1,442 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   PEZZA THEME - LIGHT & DARK MODE
+   ============================================ */
+
+:root {
+	--color-primary: #dc3348;
+	--color-secondary: #fec844;
+
+	/* Light Mode Defaults */
+	--bg-color: #ffffff;
+	--bg-surface: #f9fafb;
+	--text-color: #1f2937;
+	--text-secondary: #6b7280;
+	--border-color: #e5e7eb;
+	--input-bg: #ffffff;
+	--input-text: #1f2937;
+}
+
+/* Backwards-compatible theme variables expected by some SCSS components.
+   Define them here so runtime CSS doesn't have undefined var() references. */
+:root {
+	--color-bg: var(--bg-color);
+	--color-bg-card: var(--bg-surface);
+	--color-bg-input: var(--input-bg);
+	--color-border: var(--border-color);
+	--color-primary-dark: #b12237; /* darker tint of primary (fallback) */
+	--color-secondary-dark: #d09a2a; /* darker tint of secondary (fallback) */
+	--color-text: var(--text-color);
+	--color-text-muted: var(--text-secondary);
+	--color-text-secondary: var(--text-secondary);
+	/* Glow fallbacks for animations (can be overridden by consumers) */
+	--color-primary-glow: rgba(220, 51, 72, 0.6);
+	--color-primary-glow-light: rgba(220, 51, 72, 0.3);
+}
+
+html.dark {
+	--bg-color: #202020;
+	--bg-surface: #2a2a2a;
+	--text-color: #e5e7eb;
+	--text-secondary: #a0aec0;
+	--border-color: #454545;
+	--input-bg: #333333;
+	--input-text: #e5e7eb;
+}
+
+@layer base {
+	body {
+		@apply bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text transition-colors duration-300;
+	}
+}
+
+@layer components {
+	/* Hero Section with Video Background */
+	.hero-video {
+		@apply relative w-full h-96 md:h-[500px] overflow-hidden;
+	}
+
+	.hero-video video {
+		@apply absolute top-0 left-0 w-full h-full object-cover;
+	}
+
+	.hero-overlay {
+		@apply absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center z-10 text-white text-center;
+	}
+
+	.dark-overlay {
+		position: relative;
+		z-index: 10;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		/* move the overlay content toward the top of the hero */
+		justify-content: flex-start;
+		height: 100vh;
+		padding-top: 16vh; /* adjustable to preference */
+		text-align: center;
+	}
+
+	/* Mouse-follow glow effect */
+	.card-hover {
+		position: relative; /* ensure pseudo-element positioned correctly */
+		overflow: hidden;
+	}
+
+	.card-hover::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		opacity: 0;
+		transition: opacity 200ms ease, transform 200ms ease;
+		/* radial gradient uses CSS variables --mouse-x/--mouse-y (percent values)
+		   fallback to center if not set */
+		background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(220, 51, 72, 0.22) 0%, rgba(220, 51, 72, 0.12) 12%, transparent 40%);
+		mix-blend-mode: screen;
+	}
+
+	.card-hover.has-glow::before {
+		opacity: 1;
+	}
+
+	/* Buttons */
+	.btn-primary {
+		@apply bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 ease-in-out hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+	}
+
+	.btn-primary:disabled {
+		@apply opacity-50 cursor-not-allowed;
+	}
+
+	.btn-secondary {
+		@apply bg-secondary-400 hover:bg-secondary-500 text-gray-900 px-6 py-3 rounded-lg font-semibold transition-all duration-200;
+	}
+
+	/* Form Inputs */
+	.input-field {
+		@apply w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 transition-all duration-200;
+	}
+
+	.input-field:focus {
+		@apply outline-none border-primary-500 ring-2 ring-primary-500/30;
+	}
+
+	/* Dark-mode explicit styles for input-field to enforce dark-gray surfaces */
+	.input-field:is(.dark *) {
+		/* border: gray-600 */
+		--tw-border-opacity: 1;
+		border-color: rgb(75 85 99 / var(--tw-border-opacity, 1));
+		/* bg: gray-800 / #1f2937 */
+		--tw-bg-opacity: 1;
+		background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+		/* text: white */
+		--tw-text-opacity: 1;
+		color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+	}
+
+	.input-field:is(.dark *)::-moz-placeholder {
+		--tw-placeholder-opacity: 1;
+		color: rgb(156 163 175 / var(--tw-placeholder-opacity, 1));
+	}
+
+	.input-field:is(.dark *)::placeholder {
+		--tw-placeholder-opacity: 1;
+		color: rgb(156 163 175 / var(--tw-placeholder-opacity, 1));
+	}
+
+	/* More explicit selector to avoid specificity/order issues: */
+	html.dark .input-field {
+		/* Use !important to ensure this dark background/color wins over other CSS (bootstrap, resets) */
+		--tw-border-opacity: 1;
+		border-color: rgb(75 85 99 / var(--tw-border-opacity, 1)) !important;
+		--tw-bg-opacity: 1;
+		background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1)) !important;
+		background-image: none !important;
+		--tw-text-opacity: 1;
+		color: rgb(255 255 255 / var(--tw-text-opacity, 1)) !important;
+	}
+
+	html.dark .input-field::placeholder {
+		--tw-placeholder-opacity: 1;
+		color: rgb(156 163 175 / var(--tw-placeholder-opacity, 1));
+	}
+
+	textarea.input-field {
+		/* tailwind uses resize-y for vertical resizing */
+		@apply resize-y min-h-24;
+	}
+
+	/* Alerts */
+	.alert {
+		@apply p-4 rounded-lg border-l-4 flex items-start gap-3;
+	}
+
+	.alert-success {
+		@apply bg-emerald-500/10 dark:bg-emerald-500/20 border-emerald-500 text-emerald-700 dark:text-emerald-400;
+	}
+
+	.alert-danger {
+		@apply bg-red-500/10 dark:bg-red-500/20 border-red-500 text-red-700 dark:text-red-400;
+	}
+
+	.alert-warning {
+		@apply bg-amber-500/10 dark:bg-amber-500/20 border-amber-500 text-amber-700 dark:text-amber-400;
+	}
+
+	/* Sections */
+	.section {
+		@apply py-16 md:py-24;
+	}
+
+	.section-title {
+		@apply text-3xl md:text-4xl font-bold mb-2 text-center font-cookie;
+	}
+
+	.section-subtitle {
+		@apply text-gray-600 dark:text-gray-400 text-center text-lg;
+	}
+
+	/* Utilities */
+	/* Avoid redefining core utility classes (e.g. .hidden) to prevent recursive @apply errors. */
+
+	/* Checkbox Group */
+	.checkbox-group {
+		@apply w-full;
+	}
+
+	/* Badge */
+	.badge {
+		@apply inline-block px-3 py-1 rounded-full text-sm font-semibold;
+	}
+
+	.badge-primary {
+		@apply bg-primary-500 text-white;
+	}
+
+	.badge-secondary {
+		@apply bg-secondary-400 text-gray-900;
+	}
+}
+
+/* ============================================
+   THEME SWITCHER
+   ============================================ */
+
+.theme-switcher {
+	@apply fixed top-6 right-6 z-50 flex items-center gap-3 bg-black/80 dark:bg-black/90 px-4 py-2 rounded-full border border-primary-500/20 backdrop-blur-sm transition-all duration-300;
+}
+
+/* Scroll snapping and hero layout */
+html,
+body {
+	height: 100%;
+	/* Apply scroll snapping to both html and body to cover browser differences */
+	scroll-snap-type: y mandatory;
+	scroll-behavior: smooth;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* Rendering hint for form controls/scrollbars: set document color-scheme here so
+   the browser can optimize rendering for dark vs light. */
+html {
+	color-scheme: dark;
+}
+
+/* Allow overriding when a light theme is explicitly selected via data attribute */
+html[data-theme="light"] {
+	color-scheme: light;
+}
+
+section {
+	scroll-snap-align: start;
+}
+
+/* Hero full-screen and parallax */
+.hero-video {
+	position: relative;
+	height: 100vh;
+	min-height: 100vh; /* ensure full viewport to make scroll-snap hit the hero */
+	overflow: hidden;
+	scroll-snap-align: start; /* allow snapping to the hero */
+}
+
+.hero-video video {
+	/* Confine the video to the hero section by positioning it absolute inside
+	   the .hero-video container. This prevents the video from appearing
+	   behind subsequent sections. */
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transform: translate3d(0, 0, 0) scale(1.15);
+	z-index: 0;
+	object-fit: cover;
+}
+
+.hero-overlay {
+	/* overlay should sit above the video and cover the hero area */
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* place content toward the top so it doesn't sit centered */
+	justify-content: flex-start;
+	padding-top: 12vh; /* adjust to preference */
+	text-align: center;
+	will-change: transform; /* hint for smooth parallax transforms */
+	color: white;
+}
+
+/* Dark gradient overlay to improve text contrast over the video */
+.hero-overlay::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 12; /* below content but above video */
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.35) 40%, rgba(0, 0, 0, 0.25) 100%);
+	pointer-events: none;
+}
+
+/* Ensure overlay children sit above the gradient */
+.hero-overlay > * {
+	position: relative;
+	z-index: 20;
+}
+
+@media (max-width: 640px) {
+	/* slightly stronger overlay on small screens for readability */
+	.hero-overlay::before {
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.45) 40%, rgba(0, 0, 0, 0.35) 100%);
+	}
+}
+
+/* ensure sections after hero snap into place and are visible */
+.section {
+	/* Make sections full viewport height so scroll snap moves exactly between
+	   hero -> menu -> order. You can reduce to 80vh if you prefer shorter
+	   sections, but full 100vh gives a clean snap behaviour. */
+	min-height: 100vh;
+	scroll-snap-align: start;
+}
+
+/* Make footer a final snap target (full viewport) so scrolling can snap to it */
+footer {
+	/* Force the footer to occupy the full viewport when snapped, and center
+	   its inner content both vertically and horizontally. This places the
+	   copyright and tagline in the middle of the screen when the footer
+	   is the active snap target. */
+	scroll-snap-align: start;
+	min-height: 100vh; /* full viewport snap target */
+	display: flex;
+	align-items: center; /* vertical center */
+	justify-content: center; /* horizontal center */
+	padding: 2rem; /* modest padding all around */
+}
+
+/* Footer snap animation: start slightly translated and transparent, then
+   animate into place when JS toggles the `footer-visible` class. This is
+   intentionally light & short so the snap feels smooth and not janky. */
+footer {
+	transition: opacity 420ms cubic-bezier(0.2, 0, 0, 1), transform 420ms cubic-bezier(0.2, 0, 0, 1);
+	opacity: 0;
+	transform: translateY(12px);
+}
+
+footer.footer-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	footer,
+	footer.footer-visible {
+		transition: none !important;
+		transform: none !important;
+		opacity: 1 !important;
+	}
+}
+
+.theme-toggle {
+	/* Use an explicit text size (arbitrary value) so we don't pull in
+	   the `text-xl` line-height which causes duplicate line-height
+	   declarations in generated CSS. Keep `leading-none` so the
+	   final line-height is 1 (appropriate for icon buttons). */
+	@apply bg-none border-none text-[1.25rem] cursor-pointer transition-transform duration-300 hover:scale-125 p-0 leading-none;
+}
+
+.theme-label {
+	@apply text-gray-300 text-sm font-medium;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 640px) {
+	.hero-video {
+		@apply h-64;
+	}
+
+	.theme-switcher {
+		@apply top-4 right-4 px-3 py-1;
+	}
+
+	.theme-label {
+		@apply hidden;
+	}
+
+	.section-title {
+		@apply text-2xl;
+	}
+}
+
+/* Responsive utilities */
+@layer utilities {
+	.container-responsive {
+		@apply px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto;
+	}
+
+	.grid-responsive {
+		@apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+	}
+
+	.fade-in {
+		animation: fadeIn 0.5s ease-in-out;
+	}
+
+	.slide-up {
+		animation: slideUp 0.5s ease-out;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes slideUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+}

@@ -3,7 +3,7 @@ namespace Api.Endpoints.V1.Orders;
 using Core.Orders.V1.Commands;
 using Core.Orders.V1.Models;
 
-public class CompleteOrderEndpoint(Dispatcher dispatcher)
+public class CompleteOrderEndpoint(Dispatcher dispatcher) : IEndpoint
 {
     public async Task<IResult> Complete(CompleteOrderCommand command, CancellationToken cancellationToken)
         => ApiMinimalResultHelper.Outcome(await dispatcher.Send(command, cancellationToken));

@@ -120,7 +120,7 @@ export async function getOrCreateApiClient(config: ApiClientConfig = {}): Promis
 
   try {
     // Dynamically import at runtime to avoid compile-time module resolution
-    const generated = await import('../../../clients/generated/react/src/api/generated');
+    const generated = await import('@generated/api/generated');
     const PizzaApiClient = generated.PizzaApi?.PizzaApiClient;
 
     if (!PizzaApiClient) {

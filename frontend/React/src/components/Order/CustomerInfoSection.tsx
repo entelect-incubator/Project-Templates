@@ -1,6 +1,6 @@
 import type { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { FormEmail, FormInput, FormTelephone } from '@/components/ui';
-import type { CustomerInfoFormData } from '@/features/pizzas/schemas/order';
+import type { CustomerInfoFormData } from '@/features/order/schemas/order';
 import styles from './CustomerInfoSection.module.scss';
 
 /**
@@ -34,19 +34,19 @@ export function CustomerInfoSection({ register, errors }: CustomerInfoSectionPro
 
       <div className={typedStyles.formRow}>
         <FormInput
-          id='name'
-          label='Full Name'
+          id="name"
+          label="Full Name"
           required
-          placeholder='John Doe'
+          placeholder="John Doe"
           registration={register('name')}
           error={errors.name}
         />
 
         <FormEmail
-          id='email'
-          label='Email Address'
+          id="email"
+          label="Email Address"
           required
-          placeholder='john@example.com'
+          placeholder="john@example.com"
           registration={register('email')}
           error={errors.email}
         />
@@ -54,39 +54,39 @@ export function CustomerInfoSection({ register, errors }: CustomerInfoSectionPro
 
       <div className={typedStyles.formRow}>
         <FormTelephone
-          id='phone'
-          label='Phone Number'
+          id="phone"
+          label="Phone Number"
           required
-          placeholder='(555) 123-4567'
+          placeholder="(555) 123-4567"
           registration={register('phone')}
           error={errors.phone}
         />
       </div>
 
       <FormInput
-        id='address'
-        label='Address'
+        id="address"
+        label="Address"
         required
-        placeholder='123 Main St'
+        placeholder="123 Main St"
         registration={register('address')}
         error={errors.address}
       />
 
       <div className={typedStyles.formRow}>
         <FormInput
-          id='city'
-          label='City'
+          id="city"
+          label="City"
           required
-          placeholder='New York'
+          placeholder="New York"
           registration={register('city')}
           error={errors.city}
         />
 
         <FormInput
-          id='zipCode'
-          label='Zip Code'
+          id="zipCode"
+          label="Zip Code"
           required
-          placeholder='10001'
+          placeholder="10001"
           registration={register('zipCode')}
           error={errors.zipCode}
         />

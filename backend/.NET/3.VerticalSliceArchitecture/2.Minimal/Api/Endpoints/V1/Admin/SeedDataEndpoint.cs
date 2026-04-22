@@ -2,7 +2,7 @@ namespace Api.Endpoints.V1.Admin;
 
 using Api.Infrastructure;
 
-public class SeedDataEndpoint
+public class SeedDataEndpoint : IEndpoint
 {
     public async Task<IResult> Seed(CancellationToken cancellationToken)
     {

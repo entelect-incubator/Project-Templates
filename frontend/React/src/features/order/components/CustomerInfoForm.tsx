@@ -44,7 +44,11 @@ export const CustomerInfoForm = ({ onSubmit, isLoading = false }: CustomerInfoFo
 
   const handleFormSubmit = async (data: CustomerInfoFormData) => {
     // Update global state
-    setCustomerInfo(data);
+    setCustomerInfo({
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+    });
 
     // Call optional callback
     if (onSubmit) {

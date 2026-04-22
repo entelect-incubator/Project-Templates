@@ -2,10 +2,10 @@
 
 using Application.Pizzas.V1.Commands;
 using Application.Pizzas.V1.Queries;
-using Test.Setup;
-using Test.Setup.TestData.Pizza.V1;
 using Domain;
 using Domain.V1.Pizzas.Models;
+using Test.Setup;
+using Test.Setup.TestData.Pizza.V1;
 
 [MemoryDiagnoser]
 [SimpleJob(RuntimeMoniker.Net80, baseline: true)]
@@ -30,7 +30,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(Context);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
 
-        if (!resultCreate.HasError)
+        if (resultCreate.IsSuccess)
         {
             var sutGet = new GetPizzaQueryHandler(Context);
             var resultGet = await sutGet.Handle(new GetPizzaQuery { Id = resultCreate.Data.Id }, CancellationToken.None);
@@ -43,7 +43,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(Context);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
 
-        if (!resultCreate.HasError)
+        if (resultCreate.IsSuccess)
         {
             var sutGet = new GetPizzaQueryHandler(Context);
             var resultGet = await sutGet.Handle(new GetPizzaQuery { Id = resultCreate.Data.Id }, CancellationToken.None);
@@ -56,7 +56,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(Context);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
 
-        if (!resultCreate.HasError)
+        if (resultCreate.IsSuccess)
         {
             var sutUpdate = new UpdatePizzaCommandHandler(Context);
             var resultUpdate = await sutUpdate.Handle(
@@ -77,7 +77,7 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(Context);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
 
-        if (!resultCreate.HasError)
+        if (resultCreate.IsSuccess)
         {
 
             var sutDelete = new DeletePizzaCommandHandler(Context);

@@ -3,91 +3,66 @@
  * Standalone component for switching between light/dark themes
  */
 
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { Component, inject, computed } from '@angular/core';
 import { ThemeService, Theme } from '../../services/theme.service';
 
 @Component({
   selector: 'app-theme-toggle',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, MatTooltipModule],
   template: `
-    <button
-      mat-icon-button
-      [matMenuTriggerFor]="themeMenu"
-      [matTooltip]="getTooltipText()"
-      matTooltipPosition="below"
-      class="theme-toggle"
-      [class.dark-active]="themeService.effectiveTheme() === 'dark'"
-    >
-      <mat-icon>{{ getCurrentIcon() }}</mat-icon>
-    </button>
-
-    <mat-menu #themeMenu="matMenu" class="theme-menu">
+    <div class="theme-switcher fixed top-4 right-4 z-50 flex items-center gap-2">
       <button
-        mat-menu-item
-        (click)="setTheme('light')"
-        [class.active]="themeService.theme() === 'light'"
+        (click)="toggleTheme()"
+        class="theme-toggle w-12 h-12 rounded-full flex items-center justify-center
+               border border-primary-500/30 hover:border-primary-500
+               transition-all duration-300 hover:scale-110 hover:shadow-lg
+               focus:outline-none focus:ring-2 focus:ring-primary-500"
+        [style.background-color]="isDark() ? 'var(--color-bg-card)' : 'var(--color-surface)'"
+        [attr.aria-label]="'Switch to ' + (isDark() ? 'light' : 'dark') + ' mode'"
+        [title]="'Switch to ' + (isDark() ? 'light' : 'dark') + ' mode'"
       >
-        <mat-icon>light_mode</mat-icon>
-        <span>Light</span>
+        <span class="text-2xl transition-transform duration-300 hover:rotate-12">
+          {{ isDark() ? '☀️' : '🌙' }}
+        </span>
       </button>
-
-      <button
-        mat-menu-item
-        (click)="setTheme('dark')"
-        [class.active]="themeService.theme() === 'dark'"
+      <span
+        class="theme-label text-sm font-medium hidden sm:block"
+        [style.color]="isDark() ? '#e5e7eb' : '#1a1a1a'"
       >
-        <mat-icon>dark_mode</mat-icon>
-        <span>Dark</span>
-      </button>
-
-      <button
-        mat-menu-item
-        (click)="setTheme('system')"
-        [class.active]="themeService.theme() === 'system'"
-      >
-        <mat-icon>computer</mat-icon>
-        <span>System</span>
-      </button>
-    </mat-menu>
+        {{ isDark() ? 'Light' : 'Dark' }}
+      </span>
+    </div>
   `,
-  styleUrl: './theme-toggle.component.scss',
+  styles: [
+    `
+      .theme-toggle:hover span {
+        animation: wiggle 0.3s ease-in-out;
+      }
+      @keyframes wiggle {
+        0%,
+        100% {
+          transform: rotate(0deg);
+        }
+        25% {
+          transform: rotate(-10deg);
+        }
+        75% {
+          transform: rotate(10deg);
+        }
+      }
+    `,
+  ],
 })
 export class ThemeToggleComponent {
-  protected readonly themeService = inject(ThemeService);
+  private readonly themeService = inject(ThemeService);
+
+  readonly isDark = computed(() => this.themeService.effectiveTheme() === 'dark');
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
 
   setTheme(theme: Theme): void {
     this.themeService.setTheme(theme);
-  }
-
-  getCurrentIcon(): string {
-    const currentTheme = this.themeService.theme();
-
-    switch (currentTheme) {
-      case 'light':
-        return 'light_mode';
-      case 'dark':
-        return 'dark_mode';
-      case 'system':
-        return 'computer';
-      default:
-        return 'brightness_6';
-    }
-  }
-
-  getTooltipText(): string {
-    const currentTheme = this.themeService.theme();
-    const effectiveTheme = this.themeService.effectiveTheme();
-
-    if (currentTheme === 'system') {
-      return `Theme: System (${effectiveTheme})`;
-    }
-
-    return `Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)}`;
   }
 }

@@ -6,13 +6,10 @@ public class PizzaMap : IEntityTypeConfiguration<Pizza>
 {
     public void Configure(EntityTypeBuilder<Pizza> builder)
     {
-        // table
-        builder.ToTable("Pizza");
+        builder.ToTable("Pizza", schema: null);
 
-        // key
         builder.HasKey(t => t.Id);
 
-        // properties
         builder.Property(t => t.Id)
             .IsRequired()
             .HasColumnName("Id")

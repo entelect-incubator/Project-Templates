@@ -4,13 +4,14 @@
  */
 
 // Types
-export type * from './types';
+export * from './types';
 
 // Hooks
 export * from './hooks';
 
-// Validation
+// Validation & Schemas
 export * from './validation';
+export * from './schemas/order';
 
 // Utilities
 export * from './utils/orderHelpers';
@@ -30,7 +31,7 @@ export { OrderReviewStep } from './components/OrderReviewStep';
 export { ModeSelection } from './components/ModeSelection';
 
 // Components - Order Management
-export { OrderSummaryCard } from './components/OrderSummaryCard';
+export { OrderSummary as OrderSummaryCard } from './components/OrderSummaryCard';
 export { OrderForm } from './components/OrderForm';
 export { OrderLookupForms } from './components/OrderLookupForms';
 export { CurrentStatus } from './components/CurrentStatus';

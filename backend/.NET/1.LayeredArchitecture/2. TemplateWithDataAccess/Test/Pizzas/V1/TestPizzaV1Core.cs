@@ -6,10 +6,6 @@ using Core.V1.Pizzas.Queries;
 using DataAccess.Contracts.V1;
 using DataAccess.V1.Pizzas;
 using Test.Setup.TestData.Pizza;
-using static Core.V1.Pizzas.Commands.DeletePizzaCommand;
-using static Core.V1.Pizzas.Commands.UpdatePizzaCommand;
-using static Core.V1.Pizzas.Queries.GetAllPizzasQuery;
-using static Core.V1.Pizzas.Queries.GetPizzaQuery;
 
 [TestFixture]
 public class TestPizzaV1Core : QueryTestBase
@@ -36,10 +32,7 @@ public class TestPizzaV1Core : QueryTestBase
                 Model = PizzaTestData.Create
             }, CancellationToken.None);
 
-        if (resultCreate.HasError)
-        {
-            Assert.That(false, Is.False);
-        }
+        Assert.That(resultCreate.IsSuccess, Is.True);
 
         this.model = resultCreate.Data;
     }
@@ -92,7 +85,7 @@ public class TestPizzaV1Core : QueryTestBase
                 }
             }, CancellationToken.None);
 
-        Assert.That(resultUpdate.HasError, Is.False);
+        Assert.That(resultUpdate.IsSuccess, Is.True);
     }
 
     [Test]
@@ -105,6 +98,6 @@ public class TestPizzaV1Core : QueryTestBase
                 Id = this.model.Id
             }, CancellationToken.None);
 
-        Assert.That(outcomeDelete.HasError, Is.False);
+        Assert.That(outcomeDelete.IsSuccess, Is.True);
     }
 }

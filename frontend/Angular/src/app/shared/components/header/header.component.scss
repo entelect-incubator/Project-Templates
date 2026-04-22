@@ -1,0 +1,161 @@
+/**
+ * Header Component Styles
+ * @see https://angular.dev/style-guide#style-05-04
+ * Uses Tailwind @apply for consistency with design system
+ */
+
+:host {
+  @apply block;
+}
+
+.header-container {
+  @apply fixed top-0 left-0 right-0 z-50;
+  @apply transition-all duration-300;
+
+  &.scrolled {
+    @apply shadow-lg;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+
+    :host-context(.dark) & {
+      background-color: rgba(17, 24, 39, 0.95);
+    }
+
+    .brand-name,
+    .nav-link,
+    .cart-label {
+      @apply text-gray-900;
+
+      :host-context(.dark) & {
+        @apply text-white;
+      }
+    }
+  }
+
+  &.transparent {
+    @apply bg-transparent;
+
+    /* White text on transparent for visibility over video */
+    .brand-name {
+      @apply text-white !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-link {
+      @apply text-white !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+
+      &:hover {
+        color: #dc3348 !important;
+      }
+    }
+
+    .cart-label {
+      @apply text-white !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .cart-button {
+      @apply bg-white/20 border-white/30 hover:bg-white/30;
+    }
+
+    .cart-icon {
+      @apply text-white;
+    }
+  }
+}
+
+.header-content {
+  @apply container mx-auto px-4 md:px-6 lg:px-8;
+}
+
+.header-inner {
+  @apply flex items-center justify-between h-16 md:h-20;
+}
+
+/* Brand/Logo */
+.brand-link {
+  @apply flex items-center gap-3 no-underline;
+  @apply transition-transform duration-200;
+
+  &:hover {
+    @apply scale-105;
+  }
+
+  &:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary rounded;
+  }
+}
+
+.brand-icon {
+  @apply text-3xl;
+}
+
+.brand-name {
+  @apply font-display text-2xl md:text-3xl;
+  /* Color is handled by transparent/scrolled states */
+}
+
+/* Navigation */
+.nav-desktop {
+  @apply hidden md:flex items-center gap-8;
+}
+
+.nav-link {
+  @apply text-gray-700 dark:text-gray-300;
+  @apply hover:text-primary dark:hover:text-primary;
+  @apply font-medium transition-colors;
+  @apply no-underline;
+
+  &:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary rounded;
+  }
+}
+
+.nav-button {
+  @apply cursor-pointer bg-transparent border-none;
+  @apply text-base; /* Match other nav links */
+}
+
+/* Header Actions */
+.header-actions {
+  @apply flex items-center gap-4;
+}
+
+/* Cart */
+.cart-container {
+  @apply relative;
+}
+
+.cart-button {
+  @apply relative flex items-center gap-2;
+  @apply px-4 py-2 rounded-full;
+  @apply bg-primary/10 hover:bg-primary/20;
+  @apply border border-primary/30 hover:border-primary;
+  @apply transition-all duration-300;
+  @apply cursor-pointer;
+
+  &:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+.cart-icon {
+  @apply w-5 h-5 text-primary;
+}
+
+.cart-label {
+  @apply text-primary font-medium hidden sm:block;
+}
+
+.cart-badge {
+  @apply absolute -top-2 -right-2;
+  @apply w-6 h-6 flex items-center justify-center;
+  @apply bg-secondary text-gray-900 text-sm font-bold rounded-full;
+  @apply animate-pulse;
+}
+
+/* Header Spacer - Hidden when hero is present */
+.header-spacer {
+  display: none; /* Hero extends under header, no spacer needed */
+}

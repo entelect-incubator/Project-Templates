@@ -1,0 +1,88 @@
+<!-- 
+  Pizza Card Component Template
+  @see https://angular.dev/style-guide#style-05-04
+-->
+
+<article
+  class="pizza-card"
+  [attr.aria-label]="pizza.name + (pizza.disabled ? ' - Currently unavailable' : '')"
+>
+  <!-- Pizza Image -->
+  <div class="card-image-container">
+    <app-lazy-image
+      [src]="getImageUrl()"
+      [alt]="pizza.name || 'Pizza'"
+      containerClass="image-wrapper"
+      imageClass="pizza-image"
+    />
+
+    <!-- Quick Add Button (visible on hover) -->
+    <button
+      type="button"
+      (click)="quickAdd()"
+      class="quick-add-btn"
+      [disabled]="pizza.disabled"
+      [attr.aria-label]="'Quick add ' + pizza.name + ' to cart'"
+    >
+      <span aria-hidden="true">+</span> Add
+    </button>
+
+    <!-- Disabled Badge -->
+    @if (pizza.disabled) {
+    <div class="unavailable-badge" role="status">Unavailable</div>
+    }
+  </div>
+
+  <!-- Pizza Info -->
+  <div class="card-content">
+    <h3 class="pizza-name">
+      {{ pizza.name }}
+    </h3>
+    <p class="pizza-description">Delicious pizza made with fresh ingredients</p>
+    <p class="pizza-price">
+      {{ price | currency : 'ZAR' : 'symbol' : '1.2-2' }}
+    </p>
+  </div>
+
+  <!-- Quantity & Add to Cart -->
+  <div class="card-actions">
+    <div class="quantity-selector">
+      <label [for]="'qty_' + pizza.id" class="quantity-label"> Qty </label>
+      <div class="quantity-controls">
+        <button
+          type="button"
+          (click)="decrementQuantity()"
+          class="quantity-btn quantity-btn--decrement"
+          [disabled]="quantity() <= 1"
+          [attr.aria-label]="'Decrease quantity'"
+        >
+          <span aria-hidden="true">−</span>
+        </button>
+        <input
+          [id]="'qty_' + pizza.id"
+          type="number"
+          [value]="quantity()"
+          (input)="onQuantityChange($event)"
+          min="1"
+          max="10"
+          class="quantity-input"
+          [attr.aria-label]="'Quantity for ' + pizza.name"
+        />
+        <button
+          type="button"
+          (click)="incrementQuantity()"
+          class="quantity-btn quantity-btn--increment"
+          [disabled]="quantity() >= 10"
+          [attr.aria-label]="'Increase quantity'"
+        >
+          <span aria-hidden="true">+</span>
+        </button>
+      </div>
+    </div>
+
+    <button type="button" (click)="addToCart()" [disabled]="pizza.disabled" class="add-to-cart-btn">
+      <span class="cart-icon" aria-hidden="true">🛒</span>
+      <span>Add</span>
+    </button>
+  </div>
+</article>

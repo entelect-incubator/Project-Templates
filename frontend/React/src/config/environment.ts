@@ -19,8 +19,8 @@ export function getEnvironment(): EnvironmentConfig {
   const isServer = typeof window === 'undefined';
 
   // API Base URL configuration
-  // Defaults to localhost:5001 for development
-  const defaultApiUrl = isDevelopment ? 'https://localhost:5001' : 'https://api.pizzatracker.com'; // Replace with your production API URL
+  // Defaults to localhost:7160 for development (Vertical Slice Architecture API)
+  const defaultApiUrl = isDevelopment ? 'https://localhost:7160' : 'https://api.pizzatracker.com'; // Replace with your production API URL
 
   const apiBaseUrl = import.meta.env['VITE_API_BASE_URL'] || defaultApiUrl;
 
@@ -41,10 +41,17 @@ export const ENV = getEnvironment();
  * API endpoints builder
  */
 export const API_ENDPOINTS = {
-  pizzas: `${ENV.apiBaseUrl}/api/pizzas`,
-  orders: `${ENV.apiBaseUrl}/api/orders`,
+  pizzas: `${ENV.apiBaseUrl}/v1/pizzas/Search`,
+  orders: `${ENV.apiBaseUrl}/v1/orders`,
+  pizzaImage: (pizzaId: string | number) => `${ENV.apiBaseUrl}/v1/pizzas/${pizzaId}/image`,
+  orderStatus: (orderId: string) => `${ENV.apiBaseUrl}/v1/orders/${orderId}/status`,
   health: `${ENV.apiBaseUrl}/health`,
 } as const;
+
+export const HERO_VIDEO_URL = 'https://cdn.coverr.co/videos/coverr-neapolitan-pizza-1687/1080p.mp4';
+
+export const HERO_POSTER_URL =
+  'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1600&q=80';
 
 /**
  * Validate environment configuration

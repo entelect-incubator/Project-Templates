@@ -1,0 +1,61 @@
+<header class="header-container" role="banner">
+  <div class="header-content">
+    <div class="header-inner">
+      <!-- Logo/Brand -->
+      <a routerLink="/" class="brand-link" aria-label="Pezza Pizzeria - Home">
+        <span class="brand-icon" aria-hidden="true">🍕</span>
+        <span class="brand-name">Pezza</span>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="nav-desktop" aria-label="Main navigation">
+        <a routerLink="/" class="nav-link"> Home </a>
+        <a href="#menuSection" class="nav-link"> Menu </a>
+        <button type="button" (click)="orderClick.emit()" class="nav-link nav-button">Order</button>
+      </nav>
+
+      <!-- Right Side: Theme Toggle & Cart -->
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <app-theme-toggle />
+
+        <!-- Cart Button -->
+        <div class="cart-container">
+          <button
+            type="button"
+            (click)="cartClick.emit()"
+            class="cart-button"
+            [attr.aria-label]="'View Cart' + (cartCount() > 0 ? ', ' + cartCount() + ' items' : '')"
+          >
+            <svg
+              class="cart-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
+            <span class="cart-label">Cart</span>
+            @if (cartCount() > 0) {
+            <span class="cart-badge" aria-hidden="true">
+              {{ cartCount() }}
+            </span>
+            }
+          </button>
+
+          <!-- Cart Dropdown Slot (projected content) -->
+          <ng-content />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Spacer for fixed header -->
+<div class="header-spacer"></div>

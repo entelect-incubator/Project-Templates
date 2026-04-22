@@ -4,7 +4,7 @@
  */
 
 // Types
-export type * from './types';
+export * from './types';
 
 // Hooks
 export * from './hooks';
@@ -16,4 +16,4 @@ export { PizzaMenuLoading } from './components/PizzaMenuLoading';
 export { PizzaCardFooter } from './components/PizzaCardFooter';
 
 // Pages
-export { PizzaMenuPage } from './pages/PizzaMenuPage';
+export { default as PizzaMenuPage } from './pages/PizzaMenuPage';

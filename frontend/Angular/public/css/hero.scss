@@ -1,0 +1,117 @@
+// ============================================
+// HERO SECTION & VIDEO OVERLAY
+// ============================================
+
+@import 'variables';
+@import 'mixins';
+
+.hero-video {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-card) 100%);
+
+  @include media-md {
+    height: 500px;
+  }
+
+  @include media-lg {
+    height: 600px;
+  }
+
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// Dark Overlay Over Video
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include flex-column-center;
+  text-align: center;
+  color: white;
+  z-index: 10;
+
+  // Dark overlay background
+  background: linear-gradient(
+    135deg,
+    rgba(10, 14, 39, 0.65) 0%,
+    rgba(26, 31, 58, 0.75) 100%
+  );
+
+  // Enhanced dark overlay
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      circle at center,
+      rgba(220, 51, 72, 0.15) 0%,
+      rgba(10, 14, 39, 0.85) 100%
+    );
+    z-index: 1;
+  }
+
+  // Content wrapper to sit above overlays
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  img {
+    height: 80px;
+    margin-bottom: $spacing-md;
+    filter: drop-shadow(0 0 10px rgba(220, 51, 72, 0.5));
+    @include transition;
+
+    @include media-md {
+      height: 112px;
+    }
+
+    &:hover {
+      filter: drop-shadow(0 0 20px rgba(220, 51, 72, 0.8));
+      transform: scale(1.05);
+    }
+  }
+
+  h1 {
+    font-size: 1.875rem;
+    font-weight: bold;
+    margin-bottom: $spacing-sm;
+    color: white;
+    text-shadow: 0 0 20px rgba(220, 51, 72, 0.6);
+    @include transition;
+
+    @include media-md {
+      font-size: 3rem;
+    }
+
+    &:hover {
+      text-shadow: 0 0 30px rgba(254, 200, 68, 0.8);
+    }
+  }
+
+  p {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+    @include media-md {
+      font-size: 1.25rem;
+    }
+  }
+}

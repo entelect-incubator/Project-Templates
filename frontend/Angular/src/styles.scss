@@ -1,1 +1,262 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tailwind CSS v4 */
+@import 'tailwindcss';
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Belleza:wght@400&family=Cookie:wght@400&display=swap');
+
+/* Theme Configuration for Tailwind */
+@theme {
+  /* Colors */
+  --color-primary: #dc3348;
+  --color-primary-light: #e74c62;
+  --color-primary-dark: #a8233d;
+  --color-secondary: #fec844;
+  --color-secondary-light: #fed66d;
+  --color-secondary-dark: #f0b500;
+  --color-light: #f3f4f6;
+  --color-dark: #0a0e27;
+
+  /* Fonts */
+  --font-display: 'Belleza', serif;
+  --font-accent: 'Cookie', cursive;
+}
+
+/* CSS Variables for Theme */
+:root {
+  color-scheme: dark;
+
+  /* Background Colors */
+  --color-bg: #0a0e27;
+  --color-bg-card: #1a1f3a;
+  --color-bg-input: #0f1229;
+  --color-surface: #1a1f3a;
+
+  /* Text Colors */
+  --color-text: #e5e7eb;
+  --color-text-muted: #b0b0b0;
+  --color-text-secondary: #888888;
+
+  /* Border Colors */
+  --color-border: rgba(220, 51, 72, 0.2);
+}
+
+/* Light Theme */
+html.light {
+  color-scheme: light;
+
+  --color-bg: #f3f4f6;
+  --color-bg-card: #ffffff;
+  --color-bg-input: #e5e7eb;
+  --color-surface: #ffffff;
+
+  --color-text: #111827;
+  --color-text-muted: #4b5563;
+  --color-text-secondary: #6b7280;
+
+  --color-border: rgba(0, 0, 0, 0.1);
+}
+
+/* Base Styles */
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Custom Utility Classes */
+@layer utilities {
+  .font-display {
+    font-family: 'Belleza', serif;
+  }
+
+  .font-accent {
+    font-family: 'Cookie', cursive;
+  }
+
+  .text-primary {
+    color: #dc3348;
+  }
+
+  .text-secondary {
+    color: #fec844;
+  }
+
+  .bg-primary {
+    background-color: #dc3348;
+  }
+
+  .bg-secondary {
+    background-color: #fec844;
+  }
+
+  .bg-light {
+    background-color: #f3f4f6;
+  }
+
+  .bg-dark {
+    background-color: #0a0e27;
+  }
+
+  .border-primary {
+    border-color: #dc3348;
+  }
+}
+
+/* Component Classes */
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    background-color: #dc3348;
+    color: white;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #a8233d;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    background-color: #fec844;
+    color: #111827;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    background-color: #f0b500;
+    transform: translateY(-2px);
+  }
+
+  .card {
+    background-color: var(--color-bg-card);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-hover {
+    background-color: var(--color-bg-card);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(220, 51, 72, 0.3);
+    border: 1px solid rgba(220, 51, 72, 0.3);
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+
+  .section-title {
+    font-family: 'Belleza', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .price-tag {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #dc3348;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-input) 25%,
+      var(--color-surface) 50%,
+      var(--color-bg-input) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.5rem;
+  }
+
+  .skeleton-image {
+    width: 100%;
+    height: 12rem;
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-input) 25%,
+      var(--color-surface) 50%,
+      var(--color-bg-input) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .skeleton-title {
+    height: 1.5rem;
+    width: 75%;
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-input) 25%,
+      var(--color-surface) 50%,
+      var(--color-bg-input) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.25rem;
+  }
+
+  .skeleton-text {
+    height: 1rem;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      var(--color-bg-input) 25%,
+      var(--color-surface) 50%,
+      var(--color-bg-input) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.25rem;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

@@ -6,77 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PizzaService, type PizzaModel, type GetAllPizzasQuery } from '../../generated/api';
 import { NotificationService } from '../../core/services/notification.service';
-import { OpenTelemetryService } from '../../core/observability/opentelemetry.service';
+import { CartService } from '../order/services/cart.service';
+import { LoggingService } from '../../core/services/logging.service';
 
 @Component({
   selector: 'app-pizza-menu',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule],
-  template: `
-    <div class="pizza-menu">
-      <h1>Our Delicious Pizzas</h1>
-
-      @if (isLoading()) {
-      <div class="loading-container">
-        <mat-spinner></mat-spinner>
-        <p>Loading our delicious pizzas...</p>
-      </div>
-      } @else {
-      <div class="pizza-grid">
-        @for (pizza of pizzas(); track pizza.id) {
-        <mat-card class="pizza-card">
-          <mat-card-header>
-            <mat-card-title>{{ pizza.name }}</mat-card-title>
-            <mat-card-subtitle>Fresh & Delicious</mat-card-subtitle>
-          </mat-card-header>
-
-          <img
-            mat-card-image
-            src="https://via.placeholder.com/300x200/FF6B35/FFFFFF?text=🍕+Pizza"
-            [alt]="pizza.name"
-            class="pizza-image"
-          />
-
-          <mat-card-content>
-            <p>{{ pizza.name }} - A delicious pizza made with the finest ingredients.</p>
-
-            <div class="pizza-info">
-              <span
-                class="status"
-                [class.available]="!pizza.disabled"
-                [class.unavailable]="pizza.disabled"
-              >
-                {{ pizza.disabled ? 'Currently Unavailable' : 'Available Now' }}
-              </span>
-              @if (pizza.dateCreated) {
-              <small class="date-added">Added: {{ formatDate(pizza.dateCreated) }}</small>
-              }
-            </div>
-          </mat-card-content>
-
-          <mat-card-actions align="end">
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="addToCart(pizza)"
-              [disabled]="pizza.disabled"
-            >
-              <mat-icon>add_shopping_cart</mat-icon>
-              Add to Cart
-            </button>
-          </mat-card-actions>
-        </mat-card>
-        }
-      </div>
-      } @if (!isLoading() && pizzas().length === 0) {
-      <div class="empty-state">
-        <mat-icon>local_pizza</mat-icon>
-        <h2>No pizzas available</h2>
-        <p>Please check back later for our delicious selections!</p>
-      </div>
-      }
-    </div>
-  `,
+  templateUrl: './pizza-menu.component.html',
   styles: [
     `
       .pizza-menu {
@@ -126,6 +63,17 @@ import { OpenTelemetryService } from '../../core/observability/opentelemetry.ser
       .pizza-image {
         height: 200px;
         object-fit: cover;
+        transition: opacity 0.3s ease-in-out, filter 0.3s ease-in-out;
+
+        &.loading {
+          filter: blur(10px);
+          opacity: 0.6;
+        }
+
+        &.loaded {
+          filter: blur(0);
+          opacity: 1;
+        }
       }
 
       mat-card-content {
@@ -194,17 +142,49 @@ import { OpenTelemetryService } from '../../core/observability/opentelemetry.ser
 export class PizzaMenuComponent implements OnInit {
   private pizzaService = inject(PizzaService);
   private notificationService = inject(NotificationService);
-  private telemetryService = inject(OpenTelemetryService);
+  private readonly cartService = inject(CartService);
+  private loggingService = inject(LoggingService);
 
   pizzas = signal<PizzaModel[]>([]);
   isLoading = signal(true);
+  imageLoadingStates = signal<Map<number, boolean>>(new Map());
 
   ngOnInit() {
     this.loadPizzas();
   }
 
+  /**
+   * Get pizza image URL from API
+   */
+  getPizzaImageUrl(pizzaId?: number): string {
+    if (!pizzaId) return 'https://via.placeholder.com/300x200/FF6B35/FFFFFF?text=Pizza';
+    // API endpoint for pizza images
+    return `https://localhost:7160/v1/pizzas/${pizzaId}/image`;
+  }
+
+  /**
+   * Handle image load completion
+   */
+  onImageLoad(pizzaId?: number): void {
+    if (pizzaId) {
+      this.imageLoadingStates.update((states) => {
+        const newStates = new Map(states);
+        newStates.set(pizzaId, true);
+        return newStates;
+      });
+    }
+  }
+
+  /**
+   * Check if image has loaded
+   */
+  isImageLoaded(pizzaId?: number): boolean {
+    if (!pizzaId) return false;
+    return this.imageLoadingStates().get(pizzaId) ?? false;
+  }
+
   private async loadPizzas(): Promise<void> {
-    await this.telemetryService.createSpan('load-pizzas', async () => {
+    await this.loggingService.trackOperation('load-pizzas', async () => {
       try {
         this.isLoading.set(true);
 
@@ -263,10 +243,21 @@ export class PizzaMenuComponent implements OnInit {
   }
 
   async addToCart(pizza: PizzaModel): Promise<void> {
-    await this.telemetryService.createSpan('add-to-cart', async () => {
+    await this.loggingService.trackOperation('add-to-cart', async () => {
       try {
-        // TODO: Implement cart service
-        console.log('Adding pizza to cart:', pizza);
+        // Add pizza to the cart using CartService
+        this.cartService.addToCart({
+          id: pizza.id?.toString() ?? '',
+          name: pizza.name ?? 'Pizza',
+          price: 12.99,
+          description: pizza.name ?? 'Pizza',
+          category: 'specialty',
+          ingredients: [],
+          imageUrl: '/images/pizza-placeholder.jpg',
+          available: !pizza.disabled,
+          preparationTime: 15,
+          size: 'medium',
+        });
 
         this.notificationService.showSuccess(`${pizza.name} added to your cart!`);
       } catch (error) {

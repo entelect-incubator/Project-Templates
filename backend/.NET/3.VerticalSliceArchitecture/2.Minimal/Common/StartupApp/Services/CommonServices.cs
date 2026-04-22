@@ -8,6 +8,7 @@ using Asp.Versioning;
 using Common;
 using Correlate.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,13 @@ public static class CommonServices
             .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
             .AddNewtonsoftJson(x => x.SerializerSettings.ContractResolver = new DefaultContractResolver())
             .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+        // Configure JSON serialization options for minimal APIs
+        services.Configure<JsonOptions>(options =>
+        {
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        });
 
         ////Rate Limiting
         services.AddRateLimiter(options =>
@@ -134,32 +142,50 @@ public static class CommonServices
         services.AddExceptionHandler<GlobalExceptionHandler>();
         services.AddProblemDetails();
 
-        ////DEPENDENCY INJECTION
+        ////DEPENDENCY INJECTION - OpenTelemetry with Aspire support
+        // Aspire injects OTEL_EXPORTER_OTLP_ENDPOINT environment variable
+        var otlpEndpoint = Environment.GetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT")
+            ?? Settings.Current.OpenTelemetryExportUrl;
+
         services.AddOpenTelemetry()
-            .ConfigureResource(resource => resource.AddService("Pezza"))
-        .WithMetrics(metrics =>
-        {
-            metrics
-                .AddHttpClientInstrumentation()
-                .AddAspNetCoreInstrumentation();
-
-            if (!string.IsNullOrWhiteSpace(Settings.Current.OpenTelemetryExportUrl))
+            .ConfigureResource(resource => resource.AddService(
+                serviceName: Environment.GetEnvironmentVariable("OTEL_SERVICE_NAME") ?? "Pezza",
+                serviceVersion: typeof(CommonServices).Assembly.GetName().Version?.ToString() ?? "1.0.0"))
+            .WithMetrics(metrics =>
             {
-                metrics.AddOtlpExporter(options => options.Endpoint = new Uri(Settings.Current.OpenTelemetryExportUrl));
-            }
-        })
-        .WithTracing(tracing =>
-        {
-            tracing
-                .AddAspNetCoreInstrumentation()
-                .AddHttpClientInstrumentation()
-                .AddEntityFrameworkCoreInstrumentation();
+                metrics
+                    .AddRuntimeInstrumentation()
+                    .AddHttpClientInstrumentation()
+                    .AddAspNetCoreInstrumentation();
 
-            if (!string.IsNullOrWhiteSpace(Settings.Current.OpenTelemetryExportUrl))
+                if (!string.IsNullOrWhiteSpace(otlpEndpoint))
+                {
+                    metrics.AddOtlpExporter();
+                }
+            })
+            .WithTracing(tracing =>
             {
-                tracing.AddOtlpExporter(options => options.Endpoint = new Uri(Settings.Current.OpenTelemetryExportUrl));
-            }
-        });
+                tracing
+                    .AddSource("Pezza.*")
+                    .AddAspNetCoreInstrumentation(options =>
+                    {
+                        options.RecordException = true;
+                    })
+                    .AddHttpClientInstrumentation(options =>
+                    {
+                        options.RecordException = true;
+                    })
+                    .AddEntityFrameworkCoreInstrumentation(options =>
+                    {
+                        options.SetDbStatementForText = true;
+                        options.SetDbStatementForStoredProcedure = true;
+                    });
+
+                if (!string.IsNullOrWhiteSpace(otlpEndpoint))
+                {
+                    tracing.AddOtlpExporter();
+                }
+            });
 
         return services;
     }

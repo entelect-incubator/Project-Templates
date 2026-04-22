@@ -189,8 +189,8 @@ public class Result : Result<object?>
     /// </summary>
     /// <param name="message">An optional message providing additional context. Defaults to <c>null</c>.</param>
     /// <returns>A <see cref="Result"/> instance with <see cref="Result{T}.IsSuccess"/> set to <c>true</c>.</returns>
-    public static new Result? Success(string? message = null)
-        => Success(null, 0, message) as Result;
+    public static Result Success(string? message = null)
+        => new() { Message = message };
 
     /// <summary>
     /// Creates a failed result with the specified error messages.
@@ -199,7 +199,7 @@ public class Result : Result<object?>
     /// <param name="message">An optional message providing additional context. Defaults to <c>null</c>.</param>
     /// <returns>A <see cref="Result"/> instance with <see cref="Result{T}.ErrorResult"/> set to <see cref="ErrorResults.GeneralError"/>.</returns>
     public static new Result Failure(List<string>? errors = null, string? message = null)
-        => (Result)Result<object?>.Failure(errors, message);
+        => new() { ErrorResult = ErrorResults.GeneralError, Errors = errors ?? [], Message = message };
 
     /// <summary>
     /// Creates a failed result with a single error message.
@@ -208,7 +208,7 @@ public class Result : Result<object?>
     /// <param name="message">An optional message providing additional context. Defaults to <c>null</c>.</param>
     /// <returns>A <see cref="Result"/> instance with <see cref="Result{T}.ErrorResult"/> set to <see cref="ErrorResults.GeneralError"/>.</returns>
     public static new Result Failure(string error, string? message = null)
-        => (Result)Result<object?>.Failure(error, message);
+        => new() { ErrorResult = ErrorResults.GeneralError, Errors = [error], Message = message };
 
     /// <summary>
     /// Creates a failed result from an exception.
@@ -219,7 +219,7 @@ public class Result : Result<object?>
     /// <param name="exception">The exception to extract error information from.</param>
     /// <returns>A <see cref="Result"/> instance with <see cref="Result{T}.ErrorResult"/> set to <see cref="ErrorResults.GeneralError"/>.</returns>
     public static new Result Failure(Exception exception)
-        => (Result)Result<object?>.Failure(exception);
+        => new() { ErrorResult = ErrorResults.GeneralError, Errors = [exception.Message], Message = exception.InnerException?.Message };
 
     /// <summary>
     /// Creates a failed result with validation errors.
@@ -232,7 +232,7 @@ public class Result : Result<object?>
     /// <param name="message">An optional message providing additional context. Defaults to <c>null</c>.</param>
     /// <returns>A <see cref="Result"/> instance with <see cref="Result{T}.ErrorResult"/> set to <see cref="ErrorResults.ValidationError"/>.</returns>
     public static Result ValidationFailure(Dictionary<string, List<string>>? validationErrors = null, string? message = null)
-        => (Result)Result<object?>.ValidationFailure(validationErrors, message);
+        => new() { ErrorResult = ErrorResults.ValidationError, ValidationErrors = validationErrors ?? [], Message = message };
 
     /// <summary>
     /// Creates a failed result indicating that the requested resource was not found.
@@ -240,5 +240,5 @@ public class Result : Result<object?>
     /// <param name="message">An optional message providing additional context. Defaults to <c>null</c>.</param>
     /// <returns>A <see cref="Result"/> instance with <see cref="Result{T}.ErrorResult"/> set to <see cref="ErrorResults.NotFound"/>.</returns>
     public static new Result NotFound(string? message = null)
-        => (Result)Result<object?>.NotFound(message);
+        => new() { ErrorResult = ErrorResults.NotFound, Message = message };
 }

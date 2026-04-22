@@ -13,8 +13,18 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.RegisterServices();
-        builder.Logging.AddOpenTelemetry(logging
-            => logging.AddOtlpExporter(options => options.Endpoint = new Uri("https://localhost:21007")));
+
+        // Configure OpenTelemetry logging to use Aspire's OTLP endpoint
+        var otlpEndpoint = Environment.GetEnvironmentVariable("OTEL_EXPORTER_OTLP_ENDPOINT");
+        if (!string.IsNullOrWhiteSpace(otlpEndpoint))
+        {
+            builder.Logging.AddOpenTelemetry(logging =>
+            {
+                logging.IncludeFormattedMessage = true;
+                logging.IncludeScopes = true;
+                logging.AddOtlpExporter();
+            });
+        }
 
         var app = builder.Build();
 

@@ -2,6 +2,7 @@ namespace Core.Pizzas.V1.Commands;
 
 using Core.Pizzas.V1.Mappers;
 using Core.Pizzas.V1.Models;
+using Microsoft.EntityFrameworkCore;
 
 public sealed class UpdatePizzaCommand : ICommand<Result<PizzaModel>>
 {
@@ -15,8 +16,7 @@ public sealed class UpdatePizzaCommandHandler(DatabaseContext databaseContext) :
     public async Task<Result<PizzaModel>> Handle(UpdatePizzaCommand request, CancellationToken cancellationToken = default)
     {
         var model = request.Model;
-        var query = EF.CompileAsyncQuery((DatabaseContext db, int id) => db.Pizzas.FirstOrDefault(c => c.Id == id));
-        var findEntity = await query(databaseContext, request.Id);
+        var findEntity = await databaseContext.Pizzas.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
         if (findEntity is null)
         {
             return Result<PizzaModel>.NotFound();

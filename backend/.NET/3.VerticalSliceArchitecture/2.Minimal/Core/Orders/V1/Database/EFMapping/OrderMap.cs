@@ -7,7 +7,7 @@ public class OrderMap : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
-        builder.ToTable("Orders");
+        builder.ToTable("Orders", schema: null);
 
         builder.HasKey(o => o.Id);
 

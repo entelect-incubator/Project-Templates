@@ -1,0 +1,69 @@
+<!-- 
+  Footer Component Template
+  @see https://angular.dev/style-guide#style-05-04
+-->
+
+<footer class="footer-container" role="contentinfo">
+  <div class="footer-content">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <div class="brand-wrapper">
+          <img src="/images/logo.png" alt="" class="brand-logo" loading="lazy" />
+          <span class="brand-name">Pezza Pizzeria</span>
+        </div>
+        <p class="brand-tagline">
+          Crafting delicious memories since 1940. Every pizza tells a story of passion and quality.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h3 class="nav-title">Quick Links</h3>
+        <ul class="nav-list">
+          <li>
+            <a href="#menuSection" class="nav-link">Our Menu</a>
+          </li>
+          <li>
+            <a href="#order" class="nav-link">Order Online</a>
+          </li>
+          <li>
+            <a href="#about" class="nav-link">About Us</a>
+          </li>
+          <li>
+            <a href="#contact" class="nav-link">Contact</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Contact -->
+      <address class="footer-contact">
+        <h3 class="contact-title">Contact Us</h3>
+        <ul class="contact-list">
+          <li>
+            <span aria-hidden="true">📍</span>
+            <span>123 Pizza Street, Cape Town</span>
+          </li>
+          <li>
+            <span aria-hidden="true">📞</span>
+            <a href="tel:+27111234567">+27 (11) 123-4567</a>
+          </li>
+          <li>
+            <span aria-hidden="true">📧</span>
+            <a href="mailto:info@pezza.co.za">info&#64;pezza.co.za</a>
+          </li>
+          <li>
+            <span aria-hidden="true">🕐</span>
+            <span>Open Daily: 10am - 10pm</span>
+          </li>
+        </ul>
+      </address>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p class="copyright">&copy; {{ currentYear }} Pezza Pizzeria. All rights reserved.</p>
+      <p class="tagline">Making delicious memories since 1940 <span aria-hidden="true">🍕</span></p>
+    </div>
+  </div>
+</footer>

@@ -19,14 +19,13 @@ public static class DependencyInjection
         services.AddTransient<Dispatcher>();
 
         // Register command and query handlers
-        services.AddTransient<ICommandHandler<CreatePizzaCommand, Result<PizzaModel>>, CreatePizzaCommandHandler>();
-        services.AddTransient<ICommandHandler<UpdatePizzaCommand, Result<PizzaModel>>, UpdatePizzaCommandHandler>();
-        services.AddTransient<ICommandHandler<DeletePizzaCommand, Result>, DeletePizzaCommandHandler>();
-        services.AddTransient<IQueryHandler<GetPizzaQuery, Result<PizzaModel>>, GetPizzaQueryHandler>();
-        services.AddTransient<IQueryHandler<GetAllPizzasQuery, Result<IEnumerable<PizzaModel>>>, GetAllPizzasQueryHandler>();
-        services.AddTransient<ICommandHandler<CreateOrderCommand, Result<OrderModel>>, CreateOrderCommandHandler>();
-        services.AddTransient<ICommandHandler<CompleteOrderCommand, Result<OrderModel>>, CompleteOrderCommandHandler>();
-        services.AddTransient<IQueryHandler<GetOrderStatusQuery, Result<OrderStatus>>, GetOrderStatusQueryHandler>();
+        services.Scan(scan => scan
+            .FromAssemblyOf<CreatePizzaCommandHandler>() // or any handler in that assembly
+            .AddClasses(c => c.Where(type =>
+                type.Name.EndsWith("CommandHandler") ||
+                type.Name.EndsWith("QueryHandler")))
+            .AsImplementedInterfaces()
+            .WithTransientLifetime());
 
         services.AddHealthChecks().AddDbContextCheck<DatabaseContext>();
 

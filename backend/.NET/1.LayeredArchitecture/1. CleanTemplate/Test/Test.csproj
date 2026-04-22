@@ -5,6 +5,7 @@
 		<CodeAnalysisRuleSet>$(ProjectDir)..\StyleCopRuleSet.ruleset</CodeAnalysisRuleSet>
 
 		<IsPackable>false</IsPackable>
+		<DefineConstants>ORDER_TYPES_COMMON</DefineConstants>
 
 		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
 	</PropertyGroup>

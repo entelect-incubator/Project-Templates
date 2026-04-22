@@ -28,10 +28,10 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
         var sutCast = new CreatePizzaCommandHandler(Context);
         var resultCast = await sutCast.Handle(new CreatePizzaCommand()
         {
-            Name = PizzaTestData.Create.Name
+            Name = PizzaTestDataMother.CreatePizza().Name
         }, CancellationToken.None);
 
-        if (!resultCast.HasError)
+        if (resultCast.IsSuccess)
         {
             var sutGet = new GetAllPizzasQueryHandler(Context);
         }

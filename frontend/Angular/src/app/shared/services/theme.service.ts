@@ -64,13 +64,20 @@ export class ThemeService {
   }
 
   /**
+   * Check if current theme is dark
+   */
+  isDark(): boolean {
+    return this.effectiveTheme() === 'dark';
+  }
+
+  /**
    * Get system theme preference
    */
   private getSystemPreference(): 'light' | 'dark' {
     if (typeof window !== 'undefined' && window.matchMedia) {
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     }
-    return 'light';
+    return 'dark'; // Default to dark theme
   }
 
   /**
@@ -80,19 +87,16 @@ export class ThemeService {
     if (typeof document === 'undefined') return;
 
     const htmlElement = document.documentElement;
-    const bodyElement = document.body;
 
-    // Remove existing theme classes
-    htmlElement.classList.remove('light-theme', 'dark-theme');
-    bodyElement.classList.remove('light-theme', 'dark-theme');
-
-    // Add new theme class
-    const themeClass = `${theme}-theme`;
-    htmlElement.classList.add(themeClass);
-    bodyElement.classList.add(themeClass);
+    // Remove existing theme classes and add new one
+    htmlElement.classList.remove('light', 'dark');
+    htmlElement.classList.add(theme);
 
     // Set data attribute for CSS
     htmlElement.setAttribute('data-theme', theme);
+
+    // Set color scheme
+    document.body.style.colorScheme = theme;
 
     // Update meta theme color for mobile browsers
     this.updateMetaThemeColor(theme);

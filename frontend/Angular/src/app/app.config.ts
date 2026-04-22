@@ -15,6 +15,7 @@ import { BASE_PATH } from './generated/api/variables';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
 import { loadingInterceptor } from './core/interceptors/loading.interceptor';
+import { provideTelemetry } from './core/telemetry';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -29,6 +30,8 @@ export const appConfig: ApplicationConfig = {
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
+    // OpenTelemetry
+    ...provideTelemetry(),
     // API Configuration
     {
       provide: BASE_PATH,

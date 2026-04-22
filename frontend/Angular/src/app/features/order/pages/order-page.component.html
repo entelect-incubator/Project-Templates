@@ -1,0 +1,147 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-8">Your Order</h1>
+
+  @if (isEmpty()) {
+  <div class="text-center py-12">
+    <mat-icon class="text-6xl text-gray-400 mb-4">shopping_cart</mat-icon>
+    <p class="text-xl text-gray-600 mb-4">Your cart is empty</p>
+    <button mat-raised-button color="primary" onclick="window.history.back()">Browse Pizzas</button>
+  </div>
+  } @else {
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Cart Items -->
+    <div class="lg:col-span-2">
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-semibold mb-4">Cart Items</h2>
+
+        @for (item of cartItems(); track item.pizzaId) {
+        <div class="flex items-center justify-between py-4 border-b last:border-b-0">
+          <div class="flex items-center gap-4 flex-1">
+            <div class="w-20 h-20 bg-gray-200 rounded flex items-center justify-center">
+              <mat-icon class="text-gray-400">local_pizza</mat-icon>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-semibold text-lg">{{ item.pizzaName }}</h3>
+              <p class="text-primary font-semibold mt-1">R{{ item.price }}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+              <button
+                mat-icon-button
+                (click)="updateQuantity(item.pizzaId, item.quantity - 1)"
+                [disabled]="item.quantity <= 1"
+              >
+                <mat-icon>remove</mat-icon>
+              </button>
+              <span class="w-12 text-center font-semibold">{{ item.quantity }}</span>
+              <button mat-icon-button (click)="updateQuantity(item.pizzaId, item.quantity + 1)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="removeItem(item.pizzaId)"
+              aria-label="Remove item"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Order Summary & Checkout Form -->
+    <div class="lg:col-span-1">
+      <div class="bg-white rounded-lg shadow-md p-6 sticky top-4">
+        <h2 class="text-2xl font-semibold mb-4">Order Summary</h2>
+
+        <div class="space-y-2 mb-4 pb-4 border-b">
+          <div class="flex justify-between">
+            <span>Subtotal:</span>
+            <span class="font-semibold">R{{ subtotal() }}</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Tax (15%):</span>
+            <span class="font-semibold">R{{ (subtotal() * 0.15).toFixed(2) }}</span>
+          </div>
+          <div class="flex justify-between text-lg font-bold">
+            <span>Total:</span>
+            <span class="text-primary">R{{ total() }}</span>
+          </div>
+        </div>
+
+        <form (ngSubmit)="placeOrder()" class="space-y-4">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input
+              matInput
+              [value]="customerName()"
+              (input)="customerName.set($any($event.target).value)"
+              required
+              placeholder="Enter your name"
+            />
+            <mat-icon matPrefix>person</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="email"
+              [value]="customerEmail()"
+              (input)="customerEmail.set($any($event.target).value)"
+              required
+              placeholder="your@email.com"
+            />
+            <mat-icon matPrefix>email</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input
+              matInput
+              [value]="customerPhone()"
+              (input)="customerPhone.set($any($event.target).value)"
+              required
+              placeholder="0821234567"
+            />
+            <mat-icon matPrefix>phone</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Delivery Address</mat-label>
+            <textarea
+              matInput
+              [value]="deliveryAddress()"
+              (input)="deliveryAddress.set($any($event.target).value)"
+              required
+              rows="3"
+              placeholder="123 Main St, City, Postal Code"
+            ></textarea>
+            <mat-icon matPrefix>home</mat-icon>
+          </mat-form-field>
+
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="w-full"
+            [disabled]="!isFormValid() || isSubmitting()"
+          >
+            @if (isSubmitting()) {
+            <span>Processing...</span>
+            } @else {
+            <span>Place Order (R{{ total() }})</span>
+            }
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  }
+</div>

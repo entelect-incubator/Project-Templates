@@ -1,5 +1,6 @@
 namespace Api;
 
+using Api.Services;
 using Api.StartupApp.App;
 using Api.StartupApp.Services;
 using Domain;
@@ -7,8 +8,6 @@ using Infrastructure;
 
 public class Startup
 {
-    private const string DatabaseName = "GDEDB";
-
     public Startup(IConfiguration configuration)
     {
         this.ConfigRoot = configuration;
@@ -22,9 +21,11 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddSingleton<PizzaImageService>();
+
         services.AddCommon();
         services.AddSecurity();
-        services.AddInfrastructure();
+        services.AddInfrastructure(this.ConfigRoot);
     }
 
     public void Configure(IApplicationBuilder app)

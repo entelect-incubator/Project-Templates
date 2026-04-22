@@ -1,11 +1,39 @@
 namespace Api.Controllers.V1;
 
+using System;
+using System.Linq;
+using Api.Services;
 using Features.Pizzas.V1.Commands;
 using Features.Pizzas.V1.Models;
 using Features.Pizzas.V1.Queries;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 
 public sealed class PizzaController : ApiController
 {
+    private const string SvgMediaType = "image/svg+xml";
+    private static readonly TimeSpan CacheDuration = TimeSpan.FromDays(7);
+
+    [HttpGet("/v1/pizzas/{pizzaId:int}/image", Name = "GetPizzaImage", Order = 10)]
+    public IActionResult GetImage(int pizzaId, [FromServices] PizzaImageService imageService)
+    {
+        var image = imageService.GetImage(pizzaId);
+        if (image is null)
+        {
+            return this.NotFound();
+        }
+
+        if (IsNotModified(this.HttpContext, image))
+        {
+            this.Response.Headers[HeaderNames.ETag] = image.eTag;
+            return this.StatusCode(StatusCodes.Status304NotModified);
+        }
+
+        SetCacheHeaders(this.Response, image);
+        return this.File(image.content, image.mediaType ?? SvgMediaType, image.fileName);
+    }
+
     /// <summary>
     ///     Get Pizza by Id.
     /// </summary>
@@ -72,4 +100,30 @@ public sealed class PizzaController : ApiController
     [HttpDelete("{id}")]
     public async Task<ActionResult<Result>> Delete(int id, CancellationToken cancellationToken = default)
         => ApiResponseHelper.ResponseOutcome(await this.Dispatcher.Send(new DeletePizzaCommand { Id = id }, cancellationToken), this);
+
+    private static void SetCacheHeaders(HttpResponse response, PizzaImageDefinition image)
+    {
+        var headers = response.GetTypedHeaders();
+        headers.CacheControl = new CacheControlHeaderValue
+        {
+            Public = true,
+            MaxAge = CacheDuration,
+        };
+        headers.LastModified = image.lastModified;
+        response.Headers[HeaderNames.Vary] = "Accept";
+        response.Headers[HeaderNames.ETag] = image.eTag;
+    }
+
+    private static bool IsNotModified(HttpContext context, PizzaImageDefinition image)
+    {
+        if (context.Request.Headers.TryGetValue(HeaderNames.IfNoneMatch, out var etags) &&
+            etags.Any(tag => string.Equals(tag.Trim(), image.eTag, StringComparison.OrdinalIgnoreCase)))
+        {
+            return true;
+        }
+
+        return context.Request.Headers.TryGetValue(HeaderNames.IfModifiedSince, out var modifiedSince) &&
+            DateTimeOffset.TryParse(modifiedSince, out var since) &&
+            since.ToUniversalTime() >= image.lastModified.ToUniversalTime();
+    }
 }

@@ -42,11 +42,7 @@ public class Dispatcher(IServiceProvider provider)
     }
 
     public Task<TResult> Query<TQuery, TResult>(TQuery query, CancellationToken ct = default)
-        where TQuery : IQuery<TResult>
-    {
-        var handler = provider.GetRequiredService<IQueryHandler<TQuery, TResult>>();
-        return handler.Handle(query, ct);
-    }
+        where TQuery : IQuery<TResult> => provider.GetRequiredService<IQueryHandler<TQuery, TResult>>().Handle(query, ct);
 
     public async Task Publish<TNotification>(TNotification notification, CancellationToken ct = default)
         where TNotification : INotification

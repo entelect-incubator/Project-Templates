@@ -1,0 +1,82 @@
+// ============================================
+// MIXINS & UTILITIES
+// ============================================
+
+@import 'variables';
+
+// Media Query Mixin
+@mixin media-sm {
+  @media (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @media (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @media (min-width: $breakpoint-xl) {
+    @content;
+  }
+}
+
+@mixin media-2xl {
+  @media (min-width: $breakpoint-2xl) {
+    @content;
+  }
+}
+
+// Flex Center Mixin
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// Gradient Background Mixin
+@mixin gradient-bg($color1, $color2) {
+  background: linear-gradient(135deg, $color1 0%, $color2 100%);
+}
+
+// Transition Mixin
+@mixin transition($properties: all) {
+  transition: $properties $transition-smooth;
+}
+
+// Text Truncate Mixin
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Glow Effect Mixin
+@mixin glow($color, $intensity: 0.3) {
+  box-shadow: 0 0 10px rgba($color, $intensity);
+
+  &:hover {
+    box-shadow: 0 0 20px rgba($color, $intensity * 2);
+  }
+}
+
+// Blur Backdrop Mixin
+@mixin backdrop-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}

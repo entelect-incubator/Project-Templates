@@ -24,10 +24,8 @@ public class TestPizzaeV1DataAccess : QueryTestBase
 
         this.handler = new PizzaDataAccess(this.Context);
         var result = await this.handler.Save(PizzaTestData.Create);
-        if (result.HasError)
-        {
-            Assert.That(false, Is.False);
-        }
+
+        Assert.That(result.IsSuccess, Is.True);
 
         this.model = result.Data;
     }
@@ -57,7 +55,7 @@ public class TestPizzaeV1DataAccess : QueryTestBase
     {
         this.model.Name = "Test";
         var response = await this.handler.Update(this.model.Id, PizzaTestData.Update);
-        Assert.That(response != null && !response.HasError, Is.True);
+        Assert.That(response != null && response.IsSuccess, Is.True);
 
         var outcome = response.Data.Name.Equals(PizzaTestData.Update.Name);
         Assert.That(outcome, Is.True);
@@ -67,6 +65,6 @@ public class TestPizzaeV1DataAccess : QueryTestBase
     public async Task DeleteAsync()
     {
         var response = await this.handler.Delete(this.model.Id);
-        Assert.That(response != null && !response.HasError, Is.True);
+        Assert.That(response != null && response.IsSuccess, Is.True);
     }
 }

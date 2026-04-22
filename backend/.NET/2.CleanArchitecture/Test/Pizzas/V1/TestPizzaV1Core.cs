@@ -27,7 +27,7 @@ public class TestPizzaV1Core : QueryTestBase
         var sutCreate = new CreatePizzaCommandHandler(this.databaseContext);
         var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
 
-        if (resultCreate.HasError)
+        if (!resultCreate.IsSuccess)
         {
             Assert.That(false, Is.False);
         }
@@ -71,7 +71,7 @@ public class TestPizzaV1Core : QueryTestBase
                 }
             }, CancellationToken.None);
 
-        Assert.That(resultUpdate.HasError, Is.False);
+        Assert.That(resultUpdate.IsSuccess, Is.True);
     }
 
     [Test]
@@ -84,6 +84,6 @@ public class TestPizzaV1Core : QueryTestBase
                 Id = this.model.Id
             }, CancellationToken.None);
 
-        Assert.That(outcomeDelete.HasError, Is.False);
+        Assert.That(outcomeDelete.IsSuccess, Is.True);
     }
 }

@@ -3,7 +3,7 @@
 using Core.Pizzas.V1.Commands;
 using Core.Pizzas.V1.Models;
 
-public class CreatePizzaEndpoint(Dispatcher dispatcher)
+public class CreatePizzaEndpoint(Dispatcher dispatcher) : IEndpoint
 {
     public async Task<IResult> Create(CreatePizzaCommand command, CancellationToken cancellationToken)
         => ApiMinimalResultHelper.Outcome(await dispatcher.Send(command, cancellationToken));

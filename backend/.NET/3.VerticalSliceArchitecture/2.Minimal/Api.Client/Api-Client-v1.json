@@ -131,7 +131,38 @@
         }
       }
     },
-    "/v1/pizzassearch": {
+    "/v1/pizzas/{pizzaId}/image": {
+      "get": {
+        "tags": [
+          "Pizzas"
+        ],
+        "operationId": "GetPizzaImage",
+        "parameters": [
+          {
+            "name": "pizzaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "304": {
+            "description": ""
+          },
+          "404": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/pizzas/Search": {
       "post": {
         "tags": [
           "Pizzas"
@@ -146,7 +177,6 @@
               }
             }
           },
-          "required": true,
           "x-position": 1
         },
         "responses": {
@@ -343,23 +373,63 @@
   "components": {
     "schemas": {
       "ResultOfPizzaModel": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResultBase"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "IsSuccess": {
+            "type": "boolean"
           },
-          {
+          "ErrorResult": {
+            "$ref": "#/components/schemas/ErrorResults"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ValidationErrors": {
             "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "Data": {
-                "$ref": "#/components/schemas/PizzaModel"
-              },
-              "Count": {
-                "type": "integer",
-                "format": "int32"
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
+          },
+          "Message": {
+            "type": "string",
+            "nullable": true
+          },
+          "Data": {
+            "$ref": "#/components/schemas/PizzaModel"
+          },
+          "Count": {
+            "type": "integer",
+            "format": "int32"
           }
+        }
+      },
+      "ErrorResults": {
+        "type": "string",
+        "description": "",
+        "x-enumNames": [
+          "None",
+          "ValidationError",
+          "NotFound",
+          "GeneralError"
+        ],
+        "x-enum-descriptions": [
+          "None",
+          "Validation Error",
+          "Not Found",
+          "Error"
+        ],
+        "enum": [
+          "None",
+          "ValidationError",
+          "NotFound",
+          "GeneralError"
         ]
       },
       "PizzaModel": {
@@ -383,60 +453,6 @@
             "nullable": true
           }
         }
-      },
-      "ResultBase": {
-        "type": "object",
-        "x-abstract": true,
-        "additionalProperties": false,
-        "properties": {
-          "HasError": {
-            "type": "boolean"
-          },
-          "ErrorResult": {
-            "$ref": "#/components/schemas/ErrorResults"
-          },
-          "Message": {
-            "type": "string",
-            "nullable": true
-          },
-          "Errors": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "ValidationErrors": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      },
-      "ErrorResults": {
-        "type": "integer",
-        "description": "",
-        "x-enumNames": [
-          "None",
-          "ValidationError",
-          "NotFound",
-          "GeneralError"
-        ],
-        "x-enum-descriptions": [
-          "None",
-          "Validation Error",
-          "Not Found",
-          "Error"
-        ],
-        "enum": [
-          0,
-          1,
-          2,
-          3
-        ]
       },
       "ValidationErrorResult": {
         "allOf": [
@@ -462,13 +478,51 @@
       "Result": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/ResultBase"
+            "$ref": "#/components/schemas/ResultOfObject"
           },
           {
             "type": "object",
             "additionalProperties": false
           }
         ]
+      },
+      "ResultOfObject": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "IsSuccess": {
+            "type": "boolean"
+          },
+          "ErrorResult": {
+            "$ref": "#/components/schemas/ErrorResults"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ValidationErrors": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "Message": {
+            "type": "string",
+            "nullable": true
+          },
+          "Data": {
+            "nullable": true
+          },
+          "Count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
       },
       "ErrorResult": {
         "allOf": [
@@ -501,27 +555,45 @@
         }
       },
       "ResultOfIEnumerableOfPizzaModel": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResultBase"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "IsSuccess": {
+            "type": "boolean"
           },
-          {
+          "ErrorResult": {
+            "$ref": "#/components/schemas/ErrorResults"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ValidationErrors": {
             "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "Data": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/PizzaModel"
-                }
-              },
-              "Count": {
-                "type": "integer",
-                "format": "int32"
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
+          },
+          "Message": {
+            "type": "string",
+            "nullable": true
+          },
+          "Data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PizzaModel"
+            }
+          },
+          "Count": {
+            "type": "integer",
+            "format": "int32"
           }
-        ]
+        }
       },
       "GetAllPizzasQuery": {
         "allOf": [
@@ -545,13 +617,20 @@
         "additionalProperties": false,
         "properties": {
           "OrderBy": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "SortDirection": {
-            "$ref": "#/components/schemas/SortDirection"
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/SortDirection"
+              }
+            ]
           },
           "Ordering": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "PagingArgs": {
             "nullable": true,
@@ -645,29 +724,47 @@
         }
       },
       "ResultOfOrderModel": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResultBase"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "IsSuccess": {
+            "type": "boolean"
           },
-          {
+          "ErrorResult": {
+            "$ref": "#/components/schemas/ErrorResults"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ValidationErrors": {
             "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "Data": {
-                "nullable": true,
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/OrderModel"
-                  }
-                ]
-              },
-              "Count": {
-                "type": "integer",
-                "format": "int32"
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
+          },
+          "Message": {
+            "type": "string",
+            "nullable": true
+          },
+          "Data": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/OrderModel"
+              }
+            ]
+          },
+          "Count": {
+            "type": "integer",
+            "format": "int32"
           }
-        ]
+        }
       },
       "OrderModel": {
         "type": "object",
@@ -739,24 +836,42 @@
         }
       },
       "ResultOfOrderStatus": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ResultBase"
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "IsSuccess": {
+            "type": "boolean"
           },
-          {
+          "ErrorResult": {
+            "$ref": "#/components/schemas/ErrorResults"
+          },
+          "Errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ValidationErrors": {
             "type": "object",
-            "additionalProperties": false,
-            "properties": {
-              "Data": {
-                "$ref": "#/components/schemas/OrderStatus"
-              },
-              "Count": {
-                "type": "integer",
-                "format": "int32"
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
               }
             }
+          },
+          "Message": {
+            "type": "string",
+            "nullable": true
+          },
+          "Data": {
+            "$ref": "#/components/schemas/OrderStatus"
+          },
+          "Count": {
+            "type": "integer",
+            "format": "int32"
           }
-        ]
+        }
       }
     }
   }

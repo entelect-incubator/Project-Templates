@@ -5,6 +5,7 @@
 		<CodeAnalysisRuleSet>$(ProjectDir)..\StyleCopRuleSet.ruleset</CodeAnalysisRuleSet>
 
 		<IsPackable>false</IsPackable>
+		<DefineConstants>ORDER_TYPES_DOMAIN</DefineConstants>
 
 		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
 	</PropertyGroup>
@@ -28,6 +29,15 @@
 
 	<ItemGroup>
 	  <Folder Include="TestResults\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="..\..\SharedTestData\Orders\V1\OrderTestDataMother.cs">
+			<Link>SharedTestData\Orders\V1\OrderTestDataMother.cs</Link>
+		</Compile>
+		<Compile Include="..\..\SharedTests\Orders\V1\OrderTests.cs">
+			<Link>SharedTests\Orders\V1\OrderTests.cs</Link>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>

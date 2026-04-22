@@ -1,7 +1,10 @@
 ﻿global using System;
 global using System.Threading;
 global using System.Threading.Tasks;
+global using Bogus;
 global using Common;
+global using DatabaseContext = DataAccess.DatabaseContext;
 global using Microsoft.Extensions.Configuration;
 global using NUnit.Framework;
+global using OrderStatus = Common.V1.Orders.OrderStatus;
 global using Test.Setup;

@@ -3,11 +3,7 @@
  * Uses centralized theme variables for consistency
  */
 
-.pizza-menu-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-  padding: var(--spacing-xl) var(--spacing-md);
-}
+@import './PizzaMenuPage.grid.scss';
 
 // Header
 .pizza-header {

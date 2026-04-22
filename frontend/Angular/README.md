@@ -1,52 +1,86 @@
-# PizzaOrderingApp
+# Pezza Pizza Ordering App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+A modern Angular 21 pizza ordering application with .NET Aspire integration.
 
-## Development server
+## 📚 Documentation
 
-To start a local development server, run:
+| Document                                                   | Description                                        |
+| ---------------------------------------------------------- | -------------------------------------------------- |
+| [Angular Style Guide](./docs/ANGULAR_STYLE_GUIDE.md)       | Coding standards, SOLID principles, best practices |
+| [Architecture Overview](./docs/ARCHITECTURE_OVERVIEW.md)   | Application structure and design patterns          |
+| [Aspire Setup](./docs/ASPIRE_SETUP.md)                     | .NET Aspire development environment                |
+| [AI Guide](./docs/AI_GUIDE.md)                             | AI-assisted development guidelines                 |
+| [Angular Implementation](./docs/ANGULAR_IMPLEMENTATION.md) | Feature implementation details                     |
+| [Coding Standards](./CODING_STANDARDS.md)                  | General coding standards                           |
+
+## 🚀 Quick Start
+
+### Development Server
 
 ```bash
+# Standard Angular development
 ng serve
+
+# With .NET Aspire (includes backend services)
+npm run aspire
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open [http://localhost:4200](http://localhost:4200) in your browser.
 
-## Code scaffolding
+## 🏗️ Project Structure
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+src/
+├── app/
+│   ├── core/              # Singletons, guards, interceptors
+│   ├── shared/            # Reusable components, services
+│   │   ├── components/    # UI components (header, footer, hero, toast-banner)
+│   │   └── services/      # Shared services (theme, toast)
+│   ├── features/          # Feature modules
+│   │   ├── pizza/         # Pizza listing and details
+│   │   └── order/         # Cart and ordering
+│   └── generated/         # Auto-generated API clients
+├── assets/                # Static assets
+└── styles.scss            # Global styles with Tailwind
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 🛠️ Tech Stack
+
+- **Angular 21** - Standalone components, Signals, Control flow
+- **Tailwind CSS v4** - Utility-first styling
+- **.NET Aspire** - Cloud-native development
+- **OpenAPI Generator** - Type-safe API clients
+
+## 📝 Code Generation
 
 ```bash
-ng generate --help
+# Generate API clients from OpenAPI spec
+npm run generate:api
 ```
 
-## Building
-
-To build the project run:
+## 🧪 Testing
 
 ```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
+# Unit tests
 ng test
+
+# E2E tests
+ng e2e
 ```
 
-## Running end-to-end tests
+## 🔧 Building
 
-For end-to-end (e2e) testing, run:
+```bash
+# Production build
+ng build
+
+# Build artifacts → dist/
+```
+
+---
+
+For detailed development guidelines, see the [Angular Style Guide](./docs/ANGULAR_STYLE_GUIDE.md).
+
 
 ```bash
 ng e2e

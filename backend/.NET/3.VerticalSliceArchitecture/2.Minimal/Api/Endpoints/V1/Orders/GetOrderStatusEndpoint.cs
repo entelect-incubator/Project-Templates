@@ -3,7 +3,7 @@ namespace Api.Endpoints.V1.Orders;
 using Core.Orders.V1.Models;
 using Core.Orders.V1.Queries;
 
-public class GetOrderStatusEndpoint(Dispatcher dispatcher)
+public class GetOrderStatusEndpoint(Dispatcher dispatcher) : IEndpoint
 {
     public async Task<IResult> GetStatus(GetOrderStatusQuery query, CancellationToken cancellationToken)
         => ApiMinimalResultHelper.Outcome(await dispatcher.Query(query, cancellationToken));

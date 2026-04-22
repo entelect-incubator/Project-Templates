@@ -1,5 +1,6 @@
 namespace Api;
 
+using Api.Services;
 using Api.StartupApp.App;
 using Api.StartupApp.Services;
 using Core;
@@ -23,6 +24,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<DatabaseContext>(builder => builder.UseInMemoryDatabase(DatabaseName));
+
+        services.AddSingleton<PizzaImageService>();
 
         services.AddCommon();
         services.AddSecurity();

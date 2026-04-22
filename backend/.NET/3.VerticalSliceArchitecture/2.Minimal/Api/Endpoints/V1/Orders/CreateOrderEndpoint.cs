@@ -3,7 +3,7 @@ namespace Api.Endpoints.V1.Orders;
 using Core.Orders.V1.Commands;
 using Core.Orders.V1.Models;
 
-public class CreateOrderEndpoint(Dispatcher dispatcher)
+public class CreateOrderEndpoint(Dispatcher dispatcher) : IEndpoint
 {
     public async Task<IResult> Create(CreateOrderCommand command, CancellationToken cancellationToken)
         => ApiMinimalResultHelper.Outcome(await dispatcher.Send(command, cancellationToken));

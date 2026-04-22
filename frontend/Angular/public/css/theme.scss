@@ -1,0 +1,162 @@
+// ============================================
+// THEME SWITCHER SYSTEM
+// ============================================
+
+@import 'variables';
+@import 'mixins';
+
+// ============================================
+// Dark Theme (Default)
+// ============================================
+
+:root {
+  color-scheme: dark;
+
+  // Primary Colors
+  --color-primary: #{$primary};
+  --color-primary-light: #e74c62;
+  --color-primary-dark: #a8233d;
+
+  // Secondary Colors
+  --color-secondary: #{$secondary};
+  --color-secondary-light: #fed66d;
+  --color-secondary-dark: #f0b500;
+
+  // Background Colors
+  --color-bg: #{$dark-bg};
+  --color-bg-card: #{$dark-card};
+  --color-bg-input: #{$dark-input};
+
+  // Text Colors
+  --color-text: #{$light-text};
+  --color-text-muted: #{$muted-text};
+  --color-text-secondary: #888888;
+
+  // Border Colors
+  --color-border: #{$border-color};
+
+  // Gradients
+  --gradient-space: radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.2)),
+    radial-gradient(2px 2px at 60px 70px, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.3)),
+    radial-gradient(1px 1px at 50px 50px, rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.2));
+}
+
+// ============================================
+// Light Theme
+// ============================================
+
+html[data-theme='light'] {
+  color-scheme: light;
+
+  // Primary Colors
+  --color-primary: #{$light-primary};
+  --color-primary-light: #e74c62;
+  --color-primary-dark: #a8233d;
+
+  // Secondary Colors
+  --color-secondary: #{$light-secondary};
+  --color-secondary-light: #fed66d;
+  --color-secondary-dark: #f0b500;
+
+  // Background Colors
+  --color-bg: #{$light-bg};
+  --color-bg-card: #{$light-card};
+  --color-bg-input: #{$light-input};
+
+  // Text Colors
+  --color-text: #{$light-text};
+  --color-text-muted: #{$light-muted-text};
+  --color-text-secondary: #999999;
+
+  // Border Colors
+  --color-border: #{$light-border-color};
+
+  // Gradients
+  --gradient-space: none;
+}
+
+// ============================================
+// Base Styles with Theme Variables
+// ============================================
+
+html {
+  scroll-behavior: smooth;
+  font-family: $font-sans;
+}
+
+body {
+  background-color: var(--color-bg) !important;
+  background-image: var(--gradient-space);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  color: var(--color-text) !important;
+  position: relative;
+
+  @include transition();
+}
+
+// ============================================
+// Theme Switcher Button
+// ============================================
+
+.theme-switcher {
+  position: fixed;
+  top: $spacing-lg;
+  right: $spacing-lg;
+  z-index: 1000;
+  @include flex-center;
+  gap: $spacing-md;
+
+  button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+    background-color: var(--color-bg-card);
+    color: var(--color-primary);
+    cursor: pointer;
+    @include flex-center;
+    font-size: 1.25rem;
+    @include transition;
+    @include glow(var(--color-primary), 0.3);
+
+    &:hover {
+      background-color: var(--color-primary);
+      color: white;
+      transform: scale(1.1) rotate(20deg);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    @include media-sm {
+      width: 44px;
+      height: 44px;
+      font-size: 1.1rem;
+    }
+  }
+
+  .theme-label {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-weight: 500;
+
+    @include media-sm {
+      display: none;
+    }
+  }
+}
+
+// ============================================
+// Space Background Pattern
+// ============================================
+
+.space-bg-dark,
+section {
+  background-color: var(--color-bg) !important;
+  background-image: var(--gradient-space);
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  @include transition;
+}

@@ -1080,6 +1080,22 @@
           }
         }
       },
+      "OpenTelemetry.Instrumentation.Runtime/1.11.1": {
+        "type": "package",
+        "dependencies": {
+          "OpenTelemetry.Api": "[1.11.2, 2.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/OpenTelemetry.Instrumentation.Runtime.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/OpenTelemetry.Instrumentation.Runtime.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Polly/7.2.4": {
         "type": "package",
         "compile": {
@@ -2693,6 +2709,25 @@
         "opentelemetry.instrumentation.http.nuspec"
       ]
     },
+    "OpenTelemetry.Instrumentation.Runtime/1.11.1": {
+      "sha512": "fSAeBd8SEiWGAeCV9+p4y3QaUEn+1qOhp+VEOAEIQl2lh2j5rUM0sPRiI6PBhPjmWRn+Cm6heqXx5dsQTpBBXw==",
+      "type": "package",
+      "path": "opentelemetry.instrumentation.runtime/1.11.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "lib/net462/OpenTelemetry.Instrumentation.Runtime.dll",
+        "lib/net462/OpenTelemetry.Instrumentation.Runtime.xml",
+        "lib/net8.0/OpenTelemetry.Instrumentation.Runtime.dll",
+        "lib/net8.0/OpenTelemetry.Instrumentation.Runtime.xml",
+        "lib/netstandard2.0/OpenTelemetry.Instrumentation.Runtime.dll",
+        "lib/netstandard2.0/OpenTelemetry.Instrumentation.Runtime.xml",
+        "opentelemetry-icon-color.png",
+        "opentelemetry.instrumentation.runtime.1.11.1.nupkg.sha512",
+        "opentelemetry.instrumentation.runtime.nuspec"
+      ]
+    },
     "Polly/7.2.4": {
       "sha512": "bw00Ck5sh6ekduDE3mnCo1ohzuad946uslCDEENu3091+6UKnBuKLo4e+yaNcCzXxOZCXWY2gV4a35+K1d4LDA==",
       "type": "package",
@@ -2933,6 +2968,7 @@
       "OpenTelemetry.Instrumentation.AspNetCore >= 1.13.0",
       "OpenTelemetry.Instrumentation.EntityFrameworkCore >= 1.10.0-beta.1",
       "OpenTelemetry.Instrumentation.Http >= 1.13.0",
+      "OpenTelemetry.Instrumentation.Runtime >= 1.11.1",
       "Serilog.Enrichers.Correlate >= 1.0.0",
       "Serilog.Sinks.Async >= 2.1.0",
       "Serilog.Sinks.Console >= 6.1.1",
@@ -2958,7 +2994,6 @@
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Dev\\Incubator\\.NET-Template\\backend\\.NET\\3.VerticalSliceArchitecture\\2.Minimal\\NuGet.Config",
         "C:\\Users\\stian.leroux\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -2987,7 +3022,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net10.0": {
@@ -3057,6 +3092,10 @@
             "target": "Package",
             "version": "[1.13.0, )"
           },
+          "OpenTelemetry.Instrumentation.Runtime": {
+            "target": "Package",
+            "version": "[1.11.1, )"
+          },
           "Serilog.Enrichers.Correlate": {
             "target": "Package",
             "version": "[1.0.0, )"
@@ -3100,7 +3139,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.100/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

@@ -5,15 +5,15 @@
  * Handles order creation, status updates, and polling
  */
 
-import {
-  cartItems,
-  clearOrderError,
-  customerInfo,
-  setCurrentOrder,
-  setOrderError,
-  setOrderLoading,
-  updateOrderStatus,
-} from '../store/cartStore';
+// import {
+//   cartItems,
+//   clearOrderError,
+//   customerInfo,
+//   setCurrentOrder,
+//   setOrderError,
+//   setOrderLoading,
+//   updateOrderStatus,
+// } from '../store/cartStore';
 
 // Since we're using the generated client, we need to create a wrapper
 // The actual client will be imported from @/api/generated
@@ -34,74 +34,30 @@ export const createOrderService = (): IOrderService => {
 
   return {
     /**
-     * Create a new order
+     * Create a new order (stubbed for now)
      */
     async createOrder() {
-      try {
-        setOrderLoading(true);
-        clearOrderError();
+      const mockResponse = {
+        id: Math.floor(Math.random() * 10000),
+        status: 'pending',
+      };
 
-        const customer = customerInfo.value;
-        const items = cartItems.value;
-
-        if (!customer) {
-          throw new Error('Customer information not set');
-        }
-
-        if (items.length === 0) {
-          throw new Error('Cart is empty');
-        }
-
-        // Call the generated API client
-        // This will be: const apiClient = new PizzaApiClient();
-        // const response = await apiClient.create_order(new CreateOrderCommand({ ... }));
-
-        // For now, return a mock response
-        const mockResponse = {
-          id: Math.floor(Math.random() * 10000),
-          status: 'pending',
-        };
-
-        setCurrentOrder({
-          id: mockResponse.id,
-          status: 'pending',
-          createdAt: new Date().toISOString(),
-          customeName: customer.name,
-        });
-
-        return mockResponse;
-      } catch (error) {
-        const message = error instanceof Error ? error.message : 'Failed to create order';
-        setOrderError(message);
-        throw error;
-      } finally {
-        setOrderLoading(false);
-      }
+      return mockResponse;
     },
 
     /**
      * Get order status
      */
     async getOrderStatus(_orderId: number) {
-      try {
-        // Call the generated API client
-        // This will be: const apiClient = new PizzaApiClient();
-        // const response = await apiClient.get_order_status(orderId);
+      const statuses: Array<'pending' | 'confirmed' | 'preparing' | 'ready' | 'completed'> = [
+        'pending',
+        'confirmed',
+        'preparing',
+        'ready',
+        'completed',
+      ];
 
-        // For now, return mock status
-        const statuses: Array<'pending' | 'confirmed' | 'preparing' | 'ready' | 'completed'> = [
-          'pending',
-          'confirmed',
-          'preparing',
-          'ready',
-          'completed',
-        ];
-        return statuses[Math.floor(Math.random() * statuses.length)];
-      } catch (error) {
-        const message = error instanceof Error ? error.message : 'Failed to fetch order status';
-        setOrderError(message);
-        throw error;
-      }
+      return statuses[Math.floor(Math.random() * statuses.length)];
     },
 
     /**
@@ -112,9 +68,8 @@ export const createOrderService = (): IOrderService => {
       const interval = setInterval(async () => {
         try {
           const status = await this.getOrderStatus(orderId);
-          updateOrderStatus(status);
+          console.debug('Polled order status', status);
 
-          // Stop polling when order is completed
           if (status === 'completed') {
             clearInterval(interval);
           }

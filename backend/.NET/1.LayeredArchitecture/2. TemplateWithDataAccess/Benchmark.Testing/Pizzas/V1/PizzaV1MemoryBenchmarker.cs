@@ -31,7 +31,7 @@ public class PizzaV1MemoryBenchmarked : QueryTestBase
         this.handler = new PizzaDataAccess(this.Context);
 
         var saveResult = await this.handler.Save(PizzaTestData.Create);
-        if (!saveResult.HasError)
+        if (saveResult.IsSuccess)
         {
             var getResult = await this.handler.Get(saveResult.Data.Id);
         }
@@ -43,7 +43,7 @@ public class PizzaV1MemoryBenchmarked : QueryTestBase
         this.handler = new PizzaDataAccess(this.Context);
 
         var result = await this.handler.Save(PizzaTestData.Create);
-        if (!result.HasError)
+        if (result.IsSuccess)
         {
             var model = await this.handler.Get(result.Data.Id);
         }
@@ -55,10 +55,10 @@ public class PizzaV1MemoryBenchmarked : QueryTestBase
         this.handler = new PizzaDataAccess(this.Context);
 
         var result = await this.handler.Save(PizzaTestData.Create);
-        if (!result.HasError)
+        if (result.IsSuccess)
         {
             var getResult = await this.handler.Get(result.Data.Id);
-            if (!getResult.HasError)
+            if (getResult.IsSuccess)
             {
                 var updateResult = await this.handler.Update(getResult.Data.Id, new UpdatePizzaModel
                 {
@@ -74,10 +74,10 @@ public class PizzaV1MemoryBenchmarked : QueryTestBase
         this.handler = new PizzaDataAccess(this.Context);
 
         var result = await this.handler.Save(PizzaTestData.Create);
-        if (!result.HasError)
+        if (result.IsSuccess)
         {
             var getResult = await this.handler.Get(result.Data.Id);
-            if (!getResult.HasError)
+            if (getResult.IsSuccess)
             {
                 var deleteResult = await this.handler.Delete(getResult.Data.Id);
             }

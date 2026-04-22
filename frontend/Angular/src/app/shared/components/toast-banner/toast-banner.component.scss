@@ -1,0 +1,204 @@
+/**
+ * Toast Banner Component Styles
+ * Banner-style notifications - centered, responsive, accessible
+ * @see https://angular.dev/style-guide#style-05-04
+ */
+
+:host {
+  position: fixed;
+  top: 80px; /* Below header */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2rem);
+  max-width: 56rem; /* 4xl */
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast-container {
+  @apply flex flex-col gap-3;
+  @apply pointer-events-none;
+}
+
+.toast-banner {
+  @apply w-full;
+  @apply rounded-xl shadow-2xl;
+  @apply border-l-4;
+  @apply backdrop-blur-sm;
+  @apply pointer-events-auto;
+  @apply transform transition-all duration-300 ease-out;
+  @apply animate-slideDown;
+
+  /* Base styling */
+  background-color: rgba(255, 255, 255, 0.95);
+
+  :host-context(.dark) & {
+    background-color: rgba(31, 41, 55, 0.95);
+  }
+
+  /* Type variants */
+  &--success {
+    @apply border-l-green-500;
+
+    .toast-icon {
+      @apply bg-green-100 text-green-600;
+
+      :host-context(.dark) & {
+        @apply bg-green-900/50 text-green-400;
+      }
+    }
+  }
+
+  &--error {
+    @apply border-l-red-500;
+
+    .toast-icon {
+      @apply bg-red-100 text-red-600;
+
+      :host-context(.dark) & {
+        @apply bg-red-900/50 text-red-400;
+      }
+    }
+  }
+
+  &--warning {
+    @apply border-l-yellow-500;
+
+    .toast-icon {
+      @apply bg-yellow-100 text-yellow-600;
+
+      :host-context(.dark) & {
+        @apply bg-yellow-900/50 text-yellow-400;
+      }
+    }
+  }
+
+  &--info {
+    @apply border-l-blue-500;
+
+    .toast-icon {
+      @apply bg-blue-100 text-blue-600;
+
+      :host-context(.dark) & {
+        @apply bg-blue-900/50 text-blue-400;
+      }
+    }
+  }
+
+  /* Dismissing animation */
+  &--dismissing {
+    @apply opacity-0 -translate-y-4;
+  }
+}
+
+.toast-content {
+  @apply flex items-center gap-4;
+  @apply px-4 py-3 md:px-6 md:py-4;
+}
+
+.toast-icon {
+  @apply flex-shrink-0;
+  @apply w-8 h-8 md:w-10 md:h-10;
+  @apply flex items-center justify-center;
+  @apply rounded-full;
+  @apply text-lg md:text-xl font-bold;
+}
+
+.toast-message {
+  @apply flex-1;
+  @apply text-sm md:text-base font-medium;
+  @apply text-gray-800;
+
+  :host-context(.dark) & {
+    @apply text-gray-100;
+  }
+}
+
+.toast-action {
+  @apply flex-shrink-0;
+  @apply px-4 py-2;
+  @apply rounded-lg;
+  @apply text-sm font-semibold;
+  @apply bg-gray-100 hover:bg-gray-200;
+  @apply text-gray-700;
+  @apply transition-colors duration-200;
+  @apply cursor-pointer border-none;
+
+  :host-context(.dark) & {
+    @apply bg-gray-700 hover:bg-gray-600;
+    @apply text-gray-200;
+  }
+
+  &:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+.toast-dismiss {
+  @apply flex-shrink-0;
+  @apply w-8 h-8 md:w-10 md:h-10;
+  @apply flex items-center justify-center;
+  @apply rounded-full;
+  @apply text-xl font-bold;
+  @apply text-gray-400 hover:text-gray-600;
+  @apply hover:bg-gray-100;
+  @apply transition-colors duration-200;
+  @apply cursor-pointer border-none bg-transparent;
+
+  :host-context(.dark) & {
+    @apply text-gray-500 hover:text-gray-300;
+    @apply hover:bg-gray-700;
+  }
+
+  &:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary;
+  }
+}
+
+.toast-progress {
+  @apply h-1;
+  @apply bg-current opacity-20;
+  @apply rounded-b-xl;
+  @apply origin-left;
+  animation: progress linear forwards;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    @apply opacity-0 -translate-y-4;
+  }
+  to {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* Animation utility class */
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  :host {
+    @apply top-2;
+    @apply w-[calc(100%-1rem)];
+  }
+
+  .toast-content {
+    @apply gap-3 px-3 py-2;
+  }
+
+  .toast-action {
+    @apply px-3 py-1.5;
+  }
+}

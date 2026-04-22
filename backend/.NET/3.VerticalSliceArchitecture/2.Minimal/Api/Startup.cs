@@ -1,9 +1,8 @@
 ﻿namespace Api;
 
 using Api.Endpoints;
-using Api.Endpoints.V1.Orders;
-using Api.Endpoints.V1.Pizzas;
 using Api.Infrastructure;
+using Api.Services;
 using Common.StartupApp.App;
 using Common.StartupApp.Services;
 using Core;
@@ -18,12 +17,12 @@ public static class Startup
         .AddCommon()
         .AddSecurity()
         .AddApplication()
-        .AddTransient<SearchPizzaEndpoint>()
-        .AddTransient<CreatePizzaEndpoint>()
-        .AddTransient<UpdatePizzaEndpoint>()
-        .AddTransient<CreateOrderEndpoint>()
-        .AddTransient<CompleteOrderEndpoint>()
-        .AddTransient<GetOrderStatusEndpoint>();
+        .AddSingleton<PizzaImageService>()
+        .Scan(scan => scan
+            .FromAssemblyOf<IEndpoint>()
+            .AddClasses(classes => classes.AssignableTo<IEndpoint>())
+            .AsSelf()
+            .WithTransientLifetime());
 
     public static void RegisterMiddlewares(this WebApplication app)
     {

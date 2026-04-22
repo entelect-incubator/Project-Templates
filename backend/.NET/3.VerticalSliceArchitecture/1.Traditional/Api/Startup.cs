@@ -1,5 +1,6 @@
 namespace Api;
 
+using Api.Services;
 using Api.StartupApp.App;
 using Api.StartupApp.Services;
 using Features;
@@ -22,6 +23,7 @@ public class Startup
         services.AddCommon();
         services.AddSecurity();
         services.AddApplication();
+        services.AddSingleton<PizzaImageService>();
     }
 
     public void Configure(IApplicationBuilder app)

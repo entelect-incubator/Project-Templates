@@ -1,10 +1,10 @@
 ﻿namespace Benchmark.Testing.Pizzas.V1;
 
 using Common.V1.Pizzas.Models;
+using Benchmark.Testing.Setup;
+using Benchmark.Testing.Setup.TestData.Pizza.V1;
 using Core.Pizzas.V1.Commands;
 using Core.Pizzas.V1.Queries;
-using Test.Setup;
-using Test.Setup.TestData.Pizza.V1;
 
 [MemoryDiagnoser]
 [SimpleJob(RuntimeMoniker.Net80, baseline: true)]
@@ -27,9 +27,9 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
     public async Task TestCreate()
     {
         var sutCreate = new CreatePizzaCommandHandler(this.Context);
-        var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
+        var resultCreate = await sutCreate.Handle(PizzaTestData.GetCreateCommand(), CancellationToken.None);
 
-        if (!resultCreate.HasError)
+        if (resultCreate.IsSuccess)
         {
             var sutGet = new GetPizzaQueryHandler(this.Context);
             var resultGet = await sutGet.Handle(new GetPizzaQuery { Id = resultCreate.Data.Id }, CancellationToken.None);
@@ -40,9 +40,9 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
     public async Task TestGet()
     {
         var sutCreate = new CreatePizzaCommandHandler(this.Context);
-        var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
+        var resultCreate = await sutCreate.Handle(PizzaTestData.GetCreateCommand(), CancellationToken.None);
 
-        if (!resultCreate.HasError)
+        if (resultCreate.IsSuccess)
         {
             var sutGet = new GetPizzaQueryHandler(this.Context);
             var resultGet = await sutGet.Handle(new GetPizzaQuery { Id = resultCreate.Data.Id }, CancellationToken.None);
@@ -53,9 +53,9 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
     public async Task TestUpdate()
     {
         var sutCreate = new CreatePizzaCommandHandler(this.Context);
-        var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
+        var resultCreate = await sutCreate.Handle(PizzaTestData.GetCreateCommand(), CancellationToken.None);
 
-        if (!resultCreate.HasError)
+        if (resultCreate.IsSuccess)
         {
             var sutUpdate = new UpdatePizzaCommandHandler(this.Context);
             var resultUpdate = await sutUpdate.Handle(
@@ -74,9 +74,9 @@ public class PizzaV1MemoryBenchmarker : QueryTestBase
     public async Task TestDelete()
     {
         var sutCreate = new CreatePizzaCommandHandler(this.Context);
-        var resultCreate = await sutCreate.Handle(PizzaTestData.Create, CancellationToken.None);
+        var resultCreate = await sutCreate.Handle(PizzaTestData.GetCreateCommand(), CancellationToken.None);
 
-        if (!resultCreate.HasError)
+        if (resultCreate.IsSuccess)
         {
 
             var sutDelete = new DeletePizzaCommandHandler(this.Context);

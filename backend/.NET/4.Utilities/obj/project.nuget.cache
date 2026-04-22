@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bWCQOg23EII=",
+  "dgSpecHash": "JyiWdcvpyb0=",
   "success": true,
   "projectFilePath": "C:\\Dev\\Incubator\\.NET-Template\\backend\\.NET\\4.Utilities\\Utilities.csproj",
   "expectedPackageFiles": [
@@ -65,6 +65,7 @@
     "C:\\Users\\stian.leroux\\.nuget\\packages\\opentelemetry.instrumentation.aspnetcore\\1.13.0\\opentelemetry.instrumentation.aspnetcore.1.13.0.nupkg.sha512",
     "C:\\Users\\stian.leroux\\.nuget\\packages\\opentelemetry.instrumentation.entityframeworkcore\\1.10.0-beta.1\\opentelemetry.instrumentation.entityframeworkcore.1.10.0-beta.1.nupkg.sha512",
     "C:\\Users\\stian.leroux\\.nuget\\packages\\opentelemetry.instrumentation.http\\1.13.0\\opentelemetry.instrumentation.http.1.13.0.nupkg.sha512",
+    "C:\\Users\\stian.leroux\\.nuget\\packages\\opentelemetry.instrumentation.runtime\\1.11.1\\opentelemetry.instrumentation.runtime.1.11.1.nupkg.sha512",
     "C:\\Users\\stian.leroux\\.nuget\\packages\\polly\\7.2.4\\polly.7.2.4.nupkg.sha512",
     "C:\\Users\\stian.leroux\\.nuget\\packages\\polly.extensions.http\\3.0.0\\polly.extensions.http.3.0.0.nupkg.sha512",
     "C:\\Users\\stian.leroux\\.nuget\\packages\\serilog\\4.2.0\\serilog.4.2.0.nupkg.sha512",

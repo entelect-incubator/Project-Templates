@@ -2,6 +2,7 @@ namespace Api;
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using OpenTelemetry.Logs;
 using Serilog;
 using Utilities.Logging.Static;
 
@@ -14,5 +15,11 @@ public class Program
     }
 
     public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(b => b.UseStartup<Startup>()).UseSerilog();
+        .ConfigureLogging(logging =>
+        {
+            logging.AddOpenTelemetry(otel =>
+                otel.AddOtlpExporter(options => options.Endpoint = new Uri("https://localhost:21007")));
+        })
+        .ConfigureWebHostDefaults(b => b.UseStartup<Startup>())
+        .UseSerilog();
 }

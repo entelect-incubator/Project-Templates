@@ -1,0 +1,52 @@
+<!-- 
+  Toast Banner Component Template
+  Accessible, responsive banner-style notifications
+  @see https://angular.dev/style-guide#style-05-04
+-->
+
+@if (toasts().length > 0) {
+<div class="toast-container" role="region" aria-label="Notifications" aria-live="polite">
+  @for (toast of toasts(); track toast.id) {
+  <div
+    class="toast-banner"
+    [class]="'toast-banner--' + toast.type"
+    [class.toast-banner--dismissing]="toast.dismissing"
+    role="alert"
+    [attr.aria-live]="toast.type === 'error' ? 'assertive' : 'polite'"
+  >
+    <div class="toast-content">
+      <!-- Icon -->
+      <span class="toast-icon" aria-hidden="true">
+        @switch (toast.type) { @case ('success') { ✓ } @case ('error') { ✕ } @case ('warning') { ⚠ }
+        @case ('info') { ℹ } }
+      </span>
+
+      <!-- Message -->
+      <span class="toast-message">{{ toast.message }}</span>
+
+      <!-- Action Button (optional) -->
+      @if (toast.action) {
+      <button type="button" class="toast-action" (click)="onAction(toast)">
+        {{ toast.action }}
+      </button>
+      }
+
+      <!-- Dismiss Button -->
+      <button
+        type="button"
+        class="toast-dismiss"
+        (click)="dismiss(toast.id)"
+        [attr.aria-label]="'Dismiss ' + toast.type + ' notification'"
+      >
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+
+    <!-- Progress Bar (auto-dismiss timer) -->
+    @if (toast.duration && toast.duration > 0) {
+    <div class="toast-progress" [style.animation-duration.ms]="toast.duration"></div>
+    }
+  </div>
+  }
+</div>
+}

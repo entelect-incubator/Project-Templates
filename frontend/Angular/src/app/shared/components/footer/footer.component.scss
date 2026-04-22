@@ -1,0 +1,112 @@
+/**
+ * Footer Component Styles
+ * @see https://angular.dev/style-guide#style-05-04
+ */
+
+:host {
+  @apply block;
+}
+
+.footer-container {
+  @apply py-12 border-t;
+  @apply transition-colors duration-300;
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.footer-content {
+  @apply max-w-7xl mx-auto px-4 md:px-6 lg:px-8;
+}
+
+.footer-grid {
+  @apply grid grid-cols-1 md:grid-cols-3 gap-8 mb-8;
+}
+
+/* Brand Section */
+.footer-brand {
+  @apply text-center md:text-left;
+}
+
+.brand-wrapper {
+  @apply flex items-center justify-center md:justify-start gap-3 mb-4;
+}
+
+.brand-logo {
+  @apply h-10;
+}
+
+.brand-name {
+  @apply font-cookie text-2xl;
+  color: var(--color-text);
+}
+
+.brand-tagline {
+  color: var(--color-text-muted);
+}
+
+/* Navigation Section */
+.footer-nav {
+  @apply text-center;
+}
+
+.nav-title {
+  @apply text-lg font-bold mb-4;
+  color: var(--color-text);
+}
+
+.nav-list {
+  @apply space-y-2 list-none p-0 m-0;
+}
+
+.nav-link {
+  @apply hover:text-primary-500 transition-colors no-underline;
+  color: var(--color-text-muted);
+
+  &:focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary rounded;
+  }
+}
+
+/* Contact Section */
+.footer-contact {
+  @apply text-center md:text-right not-italic;
+}
+
+.contact-title {
+  @apply text-lg font-bold mb-4;
+  color: var(--color-text);
+}
+
+.contact-list {
+  @apply space-y-2 list-none p-0 m-0;
+  color: var(--color-text-muted);
+
+  li {
+    @apply flex items-center justify-center md:justify-end gap-2;
+  }
+
+  a {
+    @apply hover:text-primary-500 transition-colors no-underline;
+    color: inherit;
+
+    &:focus-visible {
+      @apply outline-2 outline-offset-2 outline-primary rounded;
+    }
+  }
+}
+
+/* Bottom Bar */
+.footer-bottom {
+  @apply pt-8 border-t text-center;
+  border-color: var(--color-border);
+}
+
+.copyright {
+  @apply mb-2;
+  color: var(--color-text);
+}
+
+.tagline {
+  @apply text-sm;
+  color: var(--color-text-muted);
+}

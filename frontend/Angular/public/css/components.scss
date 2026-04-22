@@ -1,0 +1,311 @@
+// ============================================
+// CARD & LAYOUT COMPONENTS
+// ============================================
+
+@import 'variables';
+@import 'mixins';
+
+// ============================================
+// Card Styling
+// ============================================
+
+.card {
+  background-color: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border) !important;
+  color: var(--color-text) !important;
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  @include transition;
+  box-shadow: $shadow-md;
+
+  h2,
+  h3 {
+    color: var(--color-text) !important;
+    @include transition;
+  }
+
+  p {
+    color: var(--color-text-muted) !important;
+  }
+
+  &:hover {
+    border-color: var(--color-primary) !important;
+    box-shadow: $shadow-lg, 0 0 20px rgba(220, 51, 72, 0.2);
+  }
+}
+
+.card-hover {
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+// ============================================
+// Grid & Layout
+// ============================================
+
+.grid-responsive {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+
+  @include media-sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-xl {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.container-responsive {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+
+  @include media-lg {
+    padding: 0 $spacing-2xl;
+  }
+}
+
+// ============================================
+// Form Elements
+// ============================================
+
+input[type='text'],
+input[type='email'],
+textarea {
+  background-color: var(--color-bg-input) !important;
+  color: var(--color-text) !important;
+  border: 1px solid var(--color-border) !important;
+  @include transition;
+
+  &:focus {
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 10px rgba(220, 51, 72, 0.3) !important;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--color-text-secondary) !important;
+  }
+}
+
+input[type='checkbox'] {
+  background-color: var(--color-bg-input) !important;
+  border-color: var(--color-primary) !important;
+  cursor: pointer;
+  @include transition;
+
+  &:checked {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+  }
+
+  &:focus {
+    box-shadow: 0 0 10px rgba(220, 51, 72, 0.3) !important;
+  }
+}
+
+.label {
+  color: var(--color-text) !important;
+  font-weight: 500;
+  @include transition;
+}
+
+.input-field {
+  background-color: var(--color-bg-input) !important;
+  color: var(--color-text) !important;
+  border: 2px solid var(--color-border) !important;
+  @include transition;
+
+  &:focus {
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 15px rgba(220, 51, 72, 0.4) !important;
+  }
+}
+
+// ============================================
+// Buttons
+// ============================================
+
+.btn {
+  @include transition;
+  font-weight: 600;
+  border-radius: $radius-lg;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    @include transition;
+  }
+
+  &:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  @include glow(var(--color-primary), 0.3);
+
+  &:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: #000;
+  @include glow(var(--color-secondary), 0.3);
+
+  &:hover {
+    background-color: var(--color-secondary-dark);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+
+  &:hover {
+    background-color: var(--color-primary);
+    color: white;
+  }
+}
+
+// ============================================
+// Text Elements
+// ============================================
+
+.text-gray-900 {
+  color: var(--color-text) !important;
+}
+
+.text-gray-600 {
+  color: var(--color-text-muted) !important;
+}
+
+.text-gray-700 {
+  color: var(--color-text) !important;
+}
+
+.text-gray-400 {
+  color: var(--color-text-muted) !important;
+}
+
+.text-gray-500 {
+  color: var(--color-text-secondary) !important;
+}
+
+.text-orange-500 {
+  color: var(--color-primary) !important;
+}
+
+// ============================================
+// Background Elements
+// ============================================
+
+.bg-white {
+  background-color: var(--color-bg) !important;
+}
+
+.bg-gray-50 {
+  background-color: var(--color-bg-input) !important;
+}
+
+.bg-gray-100 {
+  background-color: var(--color-bg-card) !important;
+}
+
+// ============================================
+// Section Title
+// ============================================
+
+.section-title {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  font-weight: 700;
+}
+
+// ============================================
+// Alert Messages
+// ============================================
+
+.alert {
+  padding: $spacing-lg;
+  border-radius: $radius-lg;
+  border-left: 4px solid;
+  background-color: var(--color-bg-card) !important;
+  color: var(--color-text) !important;
+  @include transition;
+
+  &.alert-success {
+    border-left-color: #10b981;
+    background-color: rgba(16, 185, 129, 0.1) !important;
+  }
+
+  &.alert-danger {
+    border-left-color: var(--color-primary);
+    background-color: rgba(220, 51, 72, 0.1) !important;
+  }
+
+  &.alert-warning {
+    border-left-color: var(--color-secondary);
+    background-color: rgba(254, 200, 68, 0.1) !important;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+// ============================================
+// Utility Classes
+// ============================================
+
+.group {
+  position: relative;
+
+  &-hover {
+    &:hover {
+      & > * {
+        @include transition;
+      }
+    }
+  }
+}

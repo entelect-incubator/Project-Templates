@@ -5,9 +5,6 @@
     "title": ".NET Clean Architecture API",
     "version": "v1"
   },
-  "produces": [
-    "application/json; api-version=1.0"
-  ],
   "paths": {
     "/Order": {
       "post": {
@@ -22,6 +19,9 @@
           "application/json; api-version=1.0",
           "text/json; api-version=1.0",
           "application/*+json; api-version=1.0"
+        ],
+        "produces": [
+          "application/json; api-version=1.0"
         ],
         "parameters": [
           {
@@ -60,6 +60,9 @@
         "summary": "Complete Order.",
         "description": "Order completion request:\nPOST /Order/{id}/complete",
         "operationId": "Order_Complete",
+        "produces": [
+          "application/json; api-version=1.0"
+        ],
         "parameters": [
           {
             "type": "integer",
@@ -95,6 +98,9 @@
         ],
         "summary": "Get Order Status.",
         "operationId": "Order_GetStatus",
+        "produces": [
+          "application/json; api-version=1.0"
+        ],
         "parameters": [
           {
             "type": "integer",
@@ -123,6 +129,39 @@
         }
       }
     },
+    "/v1/pizzas/{pizzaId}/image": {
+      "get": {
+        "tags": [
+          "Pizza"
+        ],
+        "operationId": "Pizza_GetImage",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "pizzaId",
+            "in": "path",
+            "required": true,
+            "format": "int32",
+            "x-nullable": false
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "header",
+            "x-nullable": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "x-nullable": true,
+            "description": "",
+            "schema": {
+              "type": "file"
+            }
+          }
+        }
+      }
+    },
     "/Pizza/{id}": {
       "get": {
         "tags": [
@@ -130,6 +169,9 @@
         ],
         "summary": "Get Pizza by Id.",
         "operationId": "Pizza_Get",
+        "produces": [
+          "application/json; api-version=1.0"
+        ],
         "parameters": [
           {
             "type": "integer",
@@ -169,6 +211,9 @@
           "application/json; api-version=1.0",
           "text/json; api-version=1.0",
           "application/*+json; api-version=1.0"
+        ],
+        "produces": [
+          "application/json; api-version=1.0"
         ],
         "parameters": [
           {
@@ -213,6 +258,9 @@
         ],
         "summary": "Remove Pizza by Id.",
         "operationId": "Pizza_Delete",
+        "produces": [
+          "application/json; api-version=1.0"
+        ],
         "parameters": [
           {
             "type": "integer",
@@ -253,6 +301,9 @@
           "application/json; api-version=1.0",
           "text/json; api-version=1.0",
           "application/*+json; api-version=1.0"
+        ],
+        "produces": [
+          "application/json; api-version=1.0"
         ],
         "parameters": [
           {
@@ -297,6 +348,9 @@
           "text/json; api-version=1.0",
           "application/*+json; api-version=1.0"
         ],
+        "produces": [
+          "application/json; api-version=1.0"
+        ],
         "parameters": [
           {
             "name": "command",
@@ -329,25 +383,68 @@
   },
   "definitions": {
     "ResultOfOrderModel": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResultBase"
+      "type": "object",
+      "required": [
+        "IsSuccess",
+        "ErrorResult",
+        "Errors",
+        "ValidationErrors",
+        "Count"
+      ],
+      "properties": {
+        "IsSuccess": {
+          "type": "boolean"
         },
-        {
+        "ErrorResult": {
+          "$ref": "#/definitions/ErrorResults"
+        },
+        "Errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ValidationErrors": {
           "type": "object",
-          "required": [
-            "Count"
-          ],
-          "properties": {
-            "Data": {
-              "$ref": "#/definitions/OrderModel"
-            },
-            "Count": {
-              "type": "integer",
-              "format": "int32"
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Data": {
+          "$ref": "#/definitions/OrderModel"
+        },
+        "Count": {
+          "type": "integer",
+          "format": "int32"
         }
+      }
+    },
+    "ErrorResults": {
+      "type": "string",
+      "description": "",
+      "x-enumNames": [
+        "None",
+        "ValidationError",
+        "NotFound",
+        "GeneralError"
+      ],
+      "x-enum-descriptions": [
+        "None",
+        "Validation Error",
+        "Not Found",
+        "Error"
+      ],
+      "enum": [
+        "None",
+        "ValidationError",
+        "NotFound",
+        "GeneralError"
       ]
     },
     "OrderModel": {
@@ -395,64 +492,6 @@
         3
       ]
     },
-    "ResultBase": {
-      "type": "object",
-      "x-abstract": true,
-      "required": [
-        "HasError",
-        "ErrorResult",
-        "Errors",
-        "ValidationErrors"
-      ],
-      "properties": {
-        "HasError": {
-          "type": "boolean"
-        },
-        "ErrorResult": {
-          "$ref": "#/definitions/ErrorResults"
-        },
-        "Message": {
-          "type": "string"
-        },
-        "Errors": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "ValidationErrors": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
-    "ErrorResults": {
-      "type": "integer",
-      "description": "",
-      "x-enumNames": [
-        "None",
-        "ValidationError",
-        "NotFound",
-        "GeneralError"
-      ],
-      "x-enum-descriptions": [
-        "None",
-        "Validation Error",
-        "Not Found",
-        "Error"
-      ],
-      "enum": [
-        0,
-        1,
-        2,
-        3
-      ]
-    },
     "CreateOrderCommand": {
       "type": "object",
       "required": [
@@ -485,49 +524,91 @@
       }
     },
     "ResultOfOrderStatus": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResultBase"
+      "type": "object",
+      "required": [
+        "IsSuccess",
+        "ErrorResult",
+        "Errors",
+        "ValidationErrors",
+        "Data",
+        "Count"
+      ],
+      "properties": {
+        "IsSuccess": {
+          "type": "boolean"
         },
-        {
+        "ErrorResult": {
+          "$ref": "#/definitions/ErrorResults"
+        },
+        "Errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ValidationErrors": {
           "type": "object",
-          "required": [
-            "Data",
-            "Count"
-          ],
-          "properties": {
-            "Data": {
-              "$ref": "#/definitions/OrderStatus"
-            },
-            "Count": {
-              "type": "integer",
-              "format": "int32"
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Data": {
+          "$ref": "#/definitions/OrderStatus"
+        },
+        "Count": {
+          "type": "integer",
+          "format": "int32"
         }
-      ]
+      }
     },
     "ResultOfPizzaModel": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResultBase"
+      "type": "object",
+      "required": [
+        "IsSuccess",
+        "ErrorResult",
+        "Errors",
+        "ValidationErrors",
+        "Count"
+      ],
+      "properties": {
+        "IsSuccess": {
+          "type": "boolean"
         },
-        {
+        "ErrorResult": {
+          "$ref": "#/definitions/ErrorResults"
+        },
+        "Errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ValidationErrors": {
           "type": "object",
-          "required": [
-            "Count"
-          ],
-          "properties": {
-            "Data": {
-              "$ref": "#/definitions/PizzaModel"
-            },
-            "Count": {
-              "type": "integer",
-              "format": "int32"
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Data": {
+          "$ref": "#/definitions/PizzaModel"
+        },
+        "Count": {
+          "type": "integer",
+          "format": "int32"
         }
-      ]
+      }
     },
     "PizzaModel": {
       "type": "object",
@@ -553,29 +634,50 @@
       }
     },
     "ResultOfIEnumerableOfPizzaModel": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResultBase"
+      "type": "object",
+      "required": [
+        "IsSuccess",
+        "ErrorResult",
+        "Errors",
+        "ValidationErrors",
+        "Count"
+      ],
+      "properties": {
+        "IsSuccess": {
+          "type": "boolean"
         },
-        {
+        "ErrorResult": {
+          "$ref": "#/definitions/ErrorResults"
+        },
+        "Errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ValidationErrors": {
           "type": "object",
-          "required": [
-            "Count"
-          ],
-          "properties": {
-            "Data": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PizzaModel"
-              }
-            },
-            "Count": {
-              "type": "integer",
-              "format": "int32"
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
             }
           }
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PizzaModel"
+          }
+        },
+        "Count": {
+          "type": "integer",
+          "format": "int32"
         }
-      ]
+      }
     },
     "GetAllPizzasQuery": {
       "type": "object",
@@ -612,11 +714,6 @@
     },
     "BaseSearchModel": {
       "type": "object",
-      "required": [
-        "OrderBy",
-        "SortDirection",
-        "Ordering"
-      ],
       "properties": {
         "OrderBy": {
           "type": "string"
@@ -722,12 +819,53 @@
     "Result": {
       "allOf": [
         {
-          "$ref": "#/definitions/ResultBase"
+          "$ref": "#/definitions/ResultOfObject"
         },
         {
           "type": "object"
         }
       ]
+    },
+    "ResultOfObject": {
+      "type": "object",
+      "required": [
+        "IsSuccess",
+        "ErrorResult",
+        "Errors",
+        "ValidationErrors",
+        "Count"
+      ],
+      "properties": {
+        "IsSuccess": {
+          "type": "boolean"
+        },
+        "ErrorResult": {
+          "$ref": "#/definitions/ErrorResults"
+        },
+        "Errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ValidationErrors": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "Message": {
+          "type": "string"
+        },
+        "Data": {},
+        "Count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     }
   }
 }

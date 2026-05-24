@@ -38,14 +38,14 @@ var api = builder.AddProject<Api>("Api")
 
 ## What Changed
 
-| Aspect | Before | After |
-|--------|--------|-------|
-| HttpEndpoint config | ? Present | ? Removed |
+| Aspect               | Before    | After     |
+| -------------------- | --------- | --------- |
+| HttpEndpoint config  | ? Present | ? Removed |
 | HttpsEndpoint config | ? Present | ? Removed |
 | Environment variable | ? Present | ? Removed |
-| ClientGenerator ref | ? Present | ? Removed |
-| .NET Version Target | .NET 10 | .NET 9 |
-| Lines of Code | 17 | 16 |
+| ClientGenerator ref  | ? Present | ? Removed |
+| .NET Version Target  | .NET 10   | .NET 9    |
+| Lines of Code        | 17        | 16        |
 
 ---
 
@@ -61,7 +61,7 @@ var api = builder.AddProject<Api>("Api")
 ## Build Status
 
 ```
-? AspireHost builds successfully (net9.0)
+? AspireHost builds successfully (net10.0)
 ? Api builds successfully (net10.0)
 ? Core builds successfully (net10.0)
 ? All dependencies resolve
